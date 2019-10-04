@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/pages/inbox/widgets/register/register_widget.dart';
 import 'package:pocket_gtd/app/shared/enums/task_type.dart';
+import 'package:unicorndial/unicorndial.dart';
 
 class InboxPage extends StatefulWidget {
   @override
@@ -16,37 +17,63 @@ class _InboxPageState extends State<InboxPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      floatingActionButton: FabCircularMenu(
-          child: Container(),
-          ringWidth: 80, // Replace this with your content
-          ringDiameter: 200,
-          fabColor: Colors.blueGrey,
-          ringColor: Colors.blueGrey,
-          fabOpenIcon: Icon(Icons.add),
-          options: <Widget>[
-            IconButton(
-                icon: Icon(MdiIcons.noteText),
-                color: Colors.white,
-                alignment: Alignment.center,
-                onPressed: () => _showAlert(context, TaskType.TASK)),
-            IconButton(
-                icon: Icon(Icons.computer),
-                color: Colors.white,
-                onPressed: () {
-                  print('Pressed!');
-                }),
-            IconButton(
-                icon: Icon(Icons.event),
-                color: Colors.white,
-                onPressed: () {
-                  print('Pressed!');
-                }),
-            IconButton(
-                icon: Icon(MdiIcons.fileOutline),
-                color: Colors.white,
-                onPressed: () {
-                  print('Pressed!');
-                })
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.blueGrey),
+        actionsIconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      drawer: Drawer(),
+      floatingActionButton: UnicornDialer(
+          orientation: UnicornOrientation.VERTICAL,
+          parentButton: Icon(Icons.add),
+          childButtons: <UnicornButton>[
+            UnicornButton(
+                hasLabel: true,
+                labelText: "Task",
+                labelBackgroundColor: Colors.transparent,
+                labelHasShadow: false,
+                currentButton: FloatingActionButton(
+                  heroTag: "task",
+                  mini: true,
+                  child: Icon(MdiIcons.noteText),
+                  onPressed: () => _showAlert(context, TaskType.TASK),
+                )),
+            UnicornButton(
+                hasLabel: true,
+                labelText: "Project",
+                labelBackgroundColor: Colors.transparent,
+                labelHasShadow: false,
+                currentButton: FloatingActionButton(
+                  heroTag: "project",
+                  mini: true,
+                  child: Icon(Icons.computer),
+                  onPressed: () {},
+                )),
+            UnicornButton(
+                hasLabel: true,
+                labelText: "Event",
+                labelBackgroundColor: Colors.transparent,
+                labelHasShadow: false,
+                currentButton: FloatingActionButton(
+                  heroTag: "event",
+                  mini: true,
+                  child: Icon(Icons.event),
+                  onPressed: () {},
+                )),
+            UnicornButton(
+                hasLabel: true,
+                labelText: "Reference",
+                labelBackgroundColor: Colors.transparent,
+                labelHasShadow: false,
+                currentButton: FloatingActionButton(
+                  heroTag: "reference",
+                  mini: true,
+                  child: Icon(MdiIcons.fileOutline),
+                  onPressed: () {},
+                )),
           ]),
       body: Column(
         children: <Widget>[],

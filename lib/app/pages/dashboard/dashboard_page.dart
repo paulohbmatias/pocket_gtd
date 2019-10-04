@@ -1,6 +1,7 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/pages/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/pages/inbox/inbox_module.dart';
@@ -42,6 +43,6 @@ class _DashboardPageState extends State<DashboardPage> {
   List<Widget> get pages => [
         InboxModule(),
         Container(),
-        Container(),
+        BoxesModule(),
       ];
 }
