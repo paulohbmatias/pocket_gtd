@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pocket_gtd/shared/models/box_model.dart';
 import 'package:pocket_gtd/shared/models/task_model.dart';
@@ -10,11 +11,11 @@ import 'package:sembast/sembast_io.dart';
 
 class TaskRepositoryImpl implements TaskRepository {
   final BoxModel box;
-  StoreRef store;
+  String storeName;
   Database _db;
 
-  TaskRepositoryImpl(this.box) {
-    this.store = intMapStoreFactory.store('boxes/${box.id}');
+  TaskRepositoryImpl({@required this.box, @required this.storeName}) {
+    storeName = 'boxes/${box.id}';
   }
 
   Future<Database> get db async {
@@ -22,6 +23,7 @@ class TaskRepositoryImpl implements TaskRepository {
       return _db;
     else {
       _db = await _initDB();
+      var store = intMapStoreFactory.store(storeName);
       await store.record(0).put(_db, {});
       await store.record(0).delete(_db);
       return _db;
@@ -39,30 +41,48 @@ class TaskRepositoryImpl implements TaskRepository {
   @override
   @override
   Future<int> save(TaskModel task) async {
-    Database dbTask = await db;
-    var key = await store.add(dbTask, task.toJson());
+    Database dbTasks = await db;
+    var store = intMapStoreFactory.store(storeName);
+    var key = await store.add(dbTasks, task.toJson());
     return key != null ? int.parse(key.toString()) : null;
   }
 
   @override
-  Future<bool> update(TaskModel task) async {
-    Database dbTask = await db;
-    int updateds = await store.update(dbTask, task.toJson(),
+  Future<int> update(TaskModel task) async {
+    Database dbTasks = await db;
+    var store = intMapStoreFactory.store(storeName);
+    int updates = await store.update(dbTasks, task.toJson(),
         finder: Finder(filter: Filter.byKey(task.id)));
-    return updateds >= 1;
+    return updates;
   }
 
-  Future<bool> delete(TaskModel task) async {
-    Database dbTask = await db;
-    int updateds = await store.delete(dbTask,
+  Future<int> delete(TaskModel task) async {
+    Database dbTasks = await db;
+    var store = intMapStoreFactory.store(storeName);
+    int updates = await store.delete(dbTasks,
         finder: Finder(filter: Filter.byKey(task.id)));
-    return updateds >= 1;
+    return updates;
   }
 
   @override
   Future<List<TaskModel>> getAll() async {
+    Database dbTasks = await db;
+    var store = intMapStoreFactory.store(storeName);
+    List<RecordSnapshot<dynamic, dynamic>> result = await store.find(dbTasks);
+    List<TaskModel> tasks = List();
+    result.forEach((mapTasks){
+      TaskModel task = TaskModel.fromDatabase(mapTasks.value);
+      box.id = mapTasks.key;
+      tasks.add(task);
+    });
+    return tasks;
+  }
+
+  @override
+  Future<int> deleteAll() async {
     Database dbTask = await db;
-    List<RecordSnapshot<dynamic, dynamic>> tasks = await store.find(dbTask);
-    return tasks.map((task) => TaskModel.fromDatabase(task));
+    var store = intMapStoreFactory.store(storeName);
+    int deletes = await store.delete(dbTask);
+    return deletes;
   }
 }

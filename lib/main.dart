@@ -3,15 +3,16 @@ import 'package:pocket_gtd/modules/dashboard/dashboard_provider.dart';
 import 'package:pocket_gtd/shared/repositories/box_repository.dart';
 import 'package:pocket_gtd/shared/repositories/impl/box_repository_impl.dart';
 
+import 'generated/i18n.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
-  testGetAll()async{
+  testGetAll() async {
     BoxRepository boxRepository = BoxRepositoryImpl();
 
-      var boxes = await boxRepository.getAll();
-      print(boxes);
+    var boxes = await boxRepository.getAll();
+    print(boxes);
   }
 
   @override
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
     testGetAll();
     return MaterialApp(
       title: 'Pocket GTD',
+      localizationsDelegates: [S.delegate],
+      supportedLocales: S.delegate.supportedLocales,
+      localeResolutionCallback: S.delegate.resolution(fallback: Locale('en')),
       theme: ThemeData.dark(),
       home: DashboardProvider(),
     );

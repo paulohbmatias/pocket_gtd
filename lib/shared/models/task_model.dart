@@ -15,7 +15,7 @@ class TaskModel {
         : null;
   }
   
-  TaskModel.fromDatabase(RecordSnapshot<dynamic, dynamic> map) {
+  TaskModel.fromDatabase(var map) {
     this.id = map['id'];
     this.title = map['title'];
     this.description = map['description'];
