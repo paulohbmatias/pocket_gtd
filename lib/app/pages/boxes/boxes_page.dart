@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_gtd/app/pages/boxes/widgets/register/register_widget.dart';
 
 class BoxesPage extends StatefulWidget {
   @override
@@ -14,9 +15,13 @@ class _BoxesPageState extends State<BoxesPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){},
+        onPressed: () => _showAlert(context),
       ),
     );
+  }
+
+  void _showAlert(BuildContext context) {
+    showDialog(context: context, builder: (context) => RegisterWidget());
   }
 }
   
