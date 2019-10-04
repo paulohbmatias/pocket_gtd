@@ -1,0 +1,3 @@
+enum TaskType{
+  EVENT, REFERENCE, PROJECT, TASK
+}
