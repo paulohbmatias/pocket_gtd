@@ -1,8 +1,19 @@
-import 'package:sembast/sembast.dart';
+import 'package:hive/hive.dart';
+part 'hive/task_model.g.dart';
 
+@HiveType()
 class TaskModel {
+
+  @HiveField(0)
   int id;
-  String title, description;
+
+  @HiveField(1)
+  String title;
+
+  @HiveField(2)
+  String description;
+
+  @HiveField(3)
   DateTime deadline;
 
   TaskModel.fromMap(Map<dynamic, dynamic> map) {
@@ -32,4 +43,6 @@ class TaskModel {
         'deadline':
             this.deadline != null ? this.deadline.millisecondsSinceEpoch : null
       };
+
+  TaskModel(this.id, this.title, this.description, this.deadline);
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/generated/i18n.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -9,11 +8,11 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             RaisedButton(
-              child: Text(S.of(context).login),
+              child: Text("Login"),
               onPressed: () {},
             ),
             RaisedButton(
-              child: Text(S.of(context).sign_up),
+              child: Text("Sign Up"),
               onPressed: () {},
             )
           ],

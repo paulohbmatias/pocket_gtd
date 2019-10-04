@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:pocket_gtd/generated/i18n.dart';
 import 'package:pocket_gtd/modules/dashboard/dashboard_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:unicorndial/unicorndial.dart';
@@ -22,9 +21,9 @@ class DashboardPage extends StatelessWidget {
           childButtons: <UnicornButton>[
             UnicornButton(
                 hasLabel: true,
-                labelText: S.of(context).task,
+                labelText: "Task",
                 currentButton: FloatingActionButton(
-                  heroTag: S.of(context).train,
+                  heroTag: "task",
                   backgroundColor: Colors.redAccent,
                   mini: true,
                   child: Icon(Icons.train),
@@ -32,9 +31,9 @@ class DashboardPage extends StatelessWidget {
                 )),
             UnicornButton(
                 hasLabel: true,
-                labelText: S.of(context).project,
+                labelText: "Project",
                 currentButton: FloatingActionButton(
-                  heroTag: S.of(context).train,
+                  heroTag: "project",
                   backgroundColor: Colors.redAccent,
                   mini: true,
                   child: Icon(Icons.train),
@@ -42,9 +41,9 @@ class DashboardPage extends StatelessWidget {
                 )),
             UnicornButton(
                 hasLabel: true,
-                labelText: S.of(context).event,
+                labelText: "Event",
                 currentButton: FloatingActionButton(
-                  heroTag: S.of(context).train,
+                  heroTag: "event",
                   backgroundColor: Colors.redAccent,
                   mini: true,
                   child: Icon(Icons.train),
@@ -52,9 +51,9 @@ class DashboardPage extends StatelessWidget {
                 )),
             UnicornButton(
                 hasLabel: true,
-                labelText: S.of(context).reference,
+                labelText: "Reference",
                 currentButton: FloatingActionButton(
-                  heroTag: S.of(context).train,
+                  heroTag: "reference",
                   backgroundColor: Colors.redAccent,
                   mini: true,
                   child: Icon(Icons.train),
@@ -67,11 +66,11 @@ class DashboardPage extends StatelessWidget {
           builder: (_, snapshot) => BottomNavigationBar(
                 items: <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.inbox), title: Text(S.of(context).inbox)),
+                      icon: Icon(Icons.inbox), title: Text("inbox")),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.view_list), title: Text(S.of(context).next_actions)),
+                      icon: Icon(Icons.view_list), title: Text("Next actions")),
                   BottomNavigationBarItem(
-                      icon: Icon(MdiIcons.inboxMultiple), title: Text(S.of(context).boxes)),
+                      icon: Icon(MdiIcons.inboxMultiple), title: Text("Boxes")),
                 ],
                 currentIndex: snapshot.data,
                 onTap: bloc.changePage,

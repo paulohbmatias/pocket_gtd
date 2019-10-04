@@ -1,10 +1,17 @@
-import 'dart:collection';
+import 'package:hive/hive.dart';
+part 'hive/box_model.g.dart';
 
-import 'package:sembast/sembast.dart';
-
+@HiveType()
 class BoxModel {
+
+  @HiveField(0)
   int id;
-  String title, description;
+
+  @HiveField(1)
+  String title;
+
+  @HiveField(2)
+  String description;
 
   BoxModel.fromMap(Map<String, dynamic> map) {
     this.id = map['id'];
@@ -23,4 +30,6 @@ class BoxModel {
     'title': this.title,
     'description': this.description
   };
+
+  BoxModel(this.id, this.title, this.description);
 }
