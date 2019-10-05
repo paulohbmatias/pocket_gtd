@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part 'task_model.g.dart';
+part 'hive/task_model.g.dart';
 
 @HiveType()
 class TaskModel {
@@ -8,16 +8,20 @@ class TaskModel {
   int id;
 
   @HiveField(1)
-  String title;
+  int idLocal;
 
   @HiveField(2)
-  String description;
+  String title;
 
   @HiveField(3)
+  String description;
+
+  @HiveField(4)
   DateTime deadline;
 
   TaskModel.fromMap(Map<dynamic, dynamic> map) {
     this.id = map['id'];
+    this.idLocal = map['idLocal'];
     this.title = map['title'];
     this.description = map['description'];
     this.deadline = map['deadline'] != null
@@ -28,6 +32,7 @@ class TaskModel {
   
   TaskModel.fromDatabase(var map) {
     this.id = map['id'];
+    this.idLocal = map['idLocal'];
     this.title = map['title'];
     this.description = map['description'];
     this.deadline = map['deadline'] != null
@@ -38,11 +43,12 @@ class TaskModel {
 
   Map<String, dynamic> toJson() => {
         'id': this.id,
+        'idLocal': this.idLocal,
         'title': this.title,
         'description': this.description,
         'deadline':
             this.deadline != null ? this.deadline.millisecondsSinceEpoch : null
       };
 
-  TaskModel(this.id, this.title, this.description, this.deadline);
+  TaskModel(this.id, this.idLocal, this.title, this.description, this.deadline);
 }

@@ -3,7 +3,6 @@ import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
 
 class BoxRepositoryImpl implements BoxRepository {
-
   Box _box;
   final String storeName = "boxes";
 
@@ -22,34 +21,58 @@ class BoxRepositoryImpl implements BoxRepository {
 
   @override
   Future<int> save(BoxModel box) async {
-    Box boxBoxes = await getBox();
-    int key = await boxBoxes.add(box);
-    box.id = key;
-    await boxBoxes.putAt(box.id, box);
-    return key != null ? key : null;
+    try {
+      Box boxBoxes = await getBox();
+      int key = await boxBoxes.add(box);
+      box.idLocal = key;
+      await boxBoxes.putAt(box.idLocal, box);
+      return box.idLocal;
+    } catch (e) {
+      return null;
+    }
   }
 
   @override
-  Future<void> update(BoxModel box) async {
-    Box boxBoxes = await getBox();
-    await boxBoxes.putAt(box.id, box);
+  Future<bool> update(BoxModel box) async {
+    try {
+      Box boxBoxes = await getBox();
+      await boxBoxes.putAt(box.idLocal, box);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   @override
-  Future<void> delete(BoxModel box) async {
-    Box boxBoxes = await getBox();
-    await boxBoxes.deleteAt(box.id);
+  Future<bool> delete(BoxModel box) async {
+    try {
+      Box boxBoxes = await getBox();
+      await boxBoxes.deleteAt(box.idLocal);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   @override
   Future<List<BoxModel>> getAll() async {
-    Box boxBoxes = await getBox();
-    return boxBoxes.values.cast<BoxModel>().toList(growable: false);
+    try {
+      Box boxBoxes = await getBox();
+      return boxBoxes.values.cast<BoxModel>().toList(growable: false);
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 
   @override
-  Future<void> deleteAll() async {
-    Box boxBoxes = await getBox();
-    await boxBoxes.deleteFromDisk();
+  Future<bool> deleteAll() async {
+    try {
+      Box boxBoxes = await getBox();
+      await boxBoxes.deleteFromDisk();
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

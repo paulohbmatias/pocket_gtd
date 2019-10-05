@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part 'box_model.g.dart';
+part 'hive/box_model.g.dart';
 
 @HiveType()
 class BoxModel {
@@ -8,13 +8,17 @@ class BoxModel {
   int id;
 
   @HiveField(1)
-  String title;
+  int idLocal;
 
   @HiveField(2)
+  String title;
+
+  @HiveField(3)
   String description;
 
   BoxModel.fromMap(Map<String, dynamic> map) {
     this.id = map['id'];
+    this.idLocal = map['idLocal'];
     this.title = map['title'];
     this.description = map['description'];
   }
@@ -27,9 +31,10 @@ class BoxModel {
   
   toJson() => {
     'id': this.id,
+    'idLocal': this.idLocal,
     'title': this.title,
     'description': this.description
   };
 
-  BoxModel(this.id, this.title, this.description);
+  BoxModel(this.id, this.idLocal, this.title, this.description);
 }

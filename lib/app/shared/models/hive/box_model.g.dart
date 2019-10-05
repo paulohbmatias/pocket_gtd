@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'box_model.dart';
+part of '../box_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -15,20 +15,23 @@ class BoxModelAdapter extends TypeAdapter<BoxModel> {
     };
     return BoxModel(
       fields[0] as int,
-      fields[1] as String,
+      fields[1] as int,
       fields[2] as String,
+      fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, BoxModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.title)
+      ..write(obj.idLocal)
       ..writeByte(2)
+      ..write(obj.title)
+      ..writeByte(3)
       ..write(obj.description);
   }
 }
