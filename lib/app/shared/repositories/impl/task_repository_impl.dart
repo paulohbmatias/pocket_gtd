@@ -4,7 +4,7 @@ import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
 
 class TaskRepositoryImpl implements TaskRepository {
   final int boxID;
-  final prefix = "boxes/";
+  final prefix = "boxes_";
 
   TaskRepositoryImpl(this.boxID);
 
@@ -22,15 +22,15 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<bool> save(TaskModel task, {Box boxToSave}) async {
+  Future<int> save(TaskModel task, {Box boxToSave}) async {
     try {
       Box boxTasks = boxToSave == null ? await getBox() : boxToSave;
       int key = await boxTasks.add(task);
       task.idLocal = key;
       await boxTasks.putAt(task.idLocal, task);
-      return true;
+      return task.idLocal;
     } catch (e) {
-      return false;
+      return null;
     }
   }
 
@@ -59,7 +59,7 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<List<TaskModel>> getAll() async {
     try {
       Box boxTasks = await getBox();
-      return boxTasks.values.cast<TaskModel>().toList(growable: false);
+      return boxTasks.values.cast<TaskModel>().toList();
     } catch (e) {
       print(e);
       return null;
@@ -84,8 +84,9 @@ class TaskRepositoryImpl implements TaskRepository {
       await boxFrom.deleteAt(task.idLocal);
       Box boxTo = await getBox(id: to);
       await save(task, boxToSave: boxTo);
-      return false;
+      return true;
     } catch (e) {
+      print(e);
       return false;
     }
   }

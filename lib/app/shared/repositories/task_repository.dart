@@ -2,7 +2,7 @@
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 
 abstract class TaskRepository{
-  Future<bool> save(TaskModel task);
+  Future<int> save(TaskModel task);
   Future<bool> update(TaskModel task);
   Future<bool> delete(TaskModel task);
   Future<bool> deleteAll();
