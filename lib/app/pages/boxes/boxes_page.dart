@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_gtd/app/pages/boxes/widgets/list_boxes/list_boxes_widget.dart';
 import 'package:pocket_gtd/app/pages/boxes/widgets/register/register_widget.dart';
 
 class BoxesPage extends StatefulWidget {
@@ -10,9 +11,7 @@ class _BoxesPageState extends State<BoxesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[],
-      ),
+      body: ListBoxesWidget(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => _showAlert(context),

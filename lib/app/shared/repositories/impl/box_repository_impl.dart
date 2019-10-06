@@ -1,8 +1,9 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:hive/hive.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
 
-class BoxRepositoryImpl implements BoxRepository {
+class BoxRepositoryImpl extends BlocBase implements BoxRepository {
   Box _box;
   final String storeName = "boxes";
 
@@ -60,7 +61,6 @@ class BoxRepositoryImpl implements BoxRepository {
       Box boxBoxes = await getBox();
       return boxBoxes.values.cast<BoxModel>().toList(growable: false);
     } catch (e) {
-      print(e);
       return null;
     }
   }
@@ -74,5 +74,22 @@ class BoxRepositoryImpl implements BoxRepository {
     } catch (e) {
       return false;
     }
+  }
+
+  @override
+  Future<Stream<List<BoxModel>>> listenBoxes() async {
+    try {
+      Box boxBoxes = await getBox();
+      return boxBoxes.watch().map<List<BoxModel>>(
+          (event) => boxBoxes.values.cast<BoxModel>().toList(growable: false));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  void dispose() {
+    _box.close();
+    super.dispose();
   }
 }

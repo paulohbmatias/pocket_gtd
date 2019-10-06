@@ -16,15 +16,16 @@ class RegisterWidget extends StatelessWidget {
           child: Text(S.of(context).cancel),
         ),
         StreamBuilder<bool>(
-          stream: bloc.isValidFields(context),
-          initialData: false,
-          builder: (context, snapshot) {
-            return FlatButton(
-              onPressed: snapshot.hasData && snapshot.data ? (){} : null,
-              child: Text(S.of(context).save),
-            );
-          }
-        )
+            stream: bloc.isValidFields(context),
+            initialData: false,
+            builder: (context, snapshot) {
+              return FlatButton(
+                onPressed: snapshot.hasData && snapshot.data
+                    ? () => bloc.saveBox(context)
+                    : null,
+                child: Text(S.of(context).save),
+              );
+            })
       ],
       title: Text(S.of(context).create_box),
       content: Column(
