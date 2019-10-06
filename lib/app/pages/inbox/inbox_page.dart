@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/pages/inbox/widgets/register/register_widget.dart';
 import 'package:pocket_gtd/app/shared/enums/task_type.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
 import 'package:unicorndial/unicorndial.dart';
 
 class InboxPage extends StatefulWidget {
@@ -32,7 +33,7 @@ class _InboxPageState extends State<InboxPage> {
           childButtons: <UnicornButton>[
             UnicornButton(
                 hasLabel: true,
-                labelText: "Task",
+                labelText: S.of(context).task,
                 labelBackgroundColor: Colors.transparent,
                 labelHasShadow: false,
                 currentButton: FloatingActionButton(
@@ -43,7 +44,7 @@ class _InboxPageState extends State<InboxPage> {
                 )),
             UnicornButton(
                 hasLabel: true,
-                labelText: "Project",
+                labelText: S.of(context).project,
                 labelBackgroundColor: Colors.transparent,
                 labelHasShadow: false,
                 currentButton: FloatingActionButton(
@@ -54,7 +55,7 @@ class _InboxPageState extends State<InboxPage> {
                 )),
             UnicornButton(
                 hasLabel: true,
-                labelText: "Event",
+                labelText: S.of(context).event,
                 labelBackgroundColor: Colors.transparent,
                 labelHasShadow: false,
                 currentButton: FloatingActionButton(
@@ -65,7 +66,7 @@ class _InboxPageState extends State<InboxPage> {
                 )),
             UnicornButton(
                 hasLabel: true,
-                labelText: "Reference",
+                labelText: S.of(context).reference,
                 labelBackgroundColor: Colors.transparent,
                 labelHasShadow: false,
                 currentButton: FloatingActionButton(

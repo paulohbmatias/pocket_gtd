@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/pages/inbox/inbox_module.dart';
 import 'package:pocket_gtd/app/pages/inbox/widgets/register/register_bloc.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
 
 class RegisterWidget extends StatelessWidget {
 
@@ -15,26 +16,26 @@ class RegisterWidget extends StatelessWidget {
       actions: <Widget>[
         FlatButton(
           onPressed: () => bloc.cancelDialog(context),
-          child: Text("Cancel"),
+          child: Text(S.of(context).cancel),
         ),
         FlatButton(
           onPressed: (){},
-          child: Text("Save"),
+          child: Text(S.of(context).save),
         )
       ],
-      title: Text("Register task"),
+      title: Text(S.of(context).register_task),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           TextField(
-            decoration: InputDecoration(hintText: "Title"),
+            decoration: InputDecoration(hintText: S.of(context).title),
           ),
           TextField(
-            decoration: InputDecoration(hintText: "Description"),
+            decoration: InputDecoration(hintText: S.of(context).description),
           ),
           TextField(
             decoration: InputDecoration(
-                hintText: "Description", icon: Icon(Icons.event)),
+                hintText: S.of(context).deadline, icon: Icon(Icons.event)),
           )
         ],
       ),

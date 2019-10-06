@@ -18,6 +18,7 @@ environment:
 
 dependencies:
   bloc_pattern: ^2.3.4
+  intl:
   flutter:
     sdk: flutter
 
