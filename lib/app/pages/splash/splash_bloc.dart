@@ -65,7 +65,6 @@ class SplashBloc extends BlocBase {
         S.of(context).actions_to_perform_at_a_specific_time));
   }
 
-  //dispose will be called automatically by closing its streams
   @override
   void dispose() {
     super.dispose();
