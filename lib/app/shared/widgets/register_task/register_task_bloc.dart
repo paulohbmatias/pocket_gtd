@@ -1,9 +1,8 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-class RegisterBloc extends BlocBase {
-
+class RegisterTaskBloc extends BlocBase {
 
   BehaviorSubject<String> _title = BehaviorSubject();
   BehaviorSubject<String> _description = BehaviorSubject();
@@ -27,6 +26,4 @@ class RegisterBloc extends BlocBase {
     _deadline.close();
     super.dispose();
   }
-
 }
-  

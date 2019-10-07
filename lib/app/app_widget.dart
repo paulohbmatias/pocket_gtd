@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
-import 'package:pocket_gtd/app/pages/home/home_module.dart';
+import 'package:pocket_gtd/app/pages/splash/splash_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class AppWidget extends StatelessWidget {
@@ -10,12 +9,12 @@ class AppWidget extends StatelessWidget {
       title: 'Pocket GTD',
       localizationsDelegates: [S.delegate],
       supportedLocales: S.delegate.supportedLocales,
-      localeResolutionCallback: S.delegate.resolution(fallback: new Locale("en", "")),
+      localeResolutionCallback:
+          S.delegate.resolution(fallback: new Locale("en", "")),
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: DashboardModule(),
+      home: SplashModule()
     );
   }
 }
-  

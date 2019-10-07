@@ -11,5 +11,6 @@ class DashboardBloc extends BlocBase {
   @override
   void dispose() {
     _page.close();
+    super.dispose();
   }
 }

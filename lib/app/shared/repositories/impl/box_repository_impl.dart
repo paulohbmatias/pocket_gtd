@@ -4,20 +4,19 @@ import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
 
 class BoxRepositoryImpl extends BlocBase implements BoxRepository {
-  Box _box;
   final String storeName = "boxes";
 
-  Future<Box> getBox() async {
-    if (_box != null)
-      return await Hive.openBox(storeName);
-    else {
-      _box = await _initBox();
-      return _box;
-    }
+  Future<Box> getBox({int id}) async {
+    return await _initBox(id: id);
   }
 
-  Future<Box> _initBox() async {
-    return await Hive.openBox(storeName);
+  Future<Box> _initBox({int id}) async {
+    String name = id == null ? storeName : "boxes_$id";
+    if (Hive.isBoxOpen(name)) {
+      return Hive.box(name);
+    } else {
+      return await Hive.openBox(name);
+    }
   }
 
   @override
@@ -26,7 +25,7 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
       Box boxBoxes = await getBox();
       int key = await boxBoxes.add(box);
       box.idLocal = key;
-      await boxBoxes.putAt(box.idLocal, box);
+      await boxBoxes.put(box.idLocal, box);
       return box.idLocal;
     } catch (e) {
       return null;
@@ -34,10 +33,21 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
   }
 
   @override
+  Future<bool> saveAt(BoxModel box) async{
+    try {
+      Box boxBoxes = await getBox();
+      await boxBoxes.put(box.idLocal, box);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
   Future<bool> update(BoxModel box) async {
     try {
       Box boxBoxes = await getBox();
-      await boxBoxes.putAt(box.idLocal, box);
+      await boxBoxes.put(box.idLocal, box);
       return true;
     } catch (e) {
       return false;
@@ -48,7 +58,7 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
   Future<bool> delete(BoxModel box) async {
     try {
       Box boxBoxes = await getBox();
-      await boxBoxes.deleteAt(box.idLocal);
+      await boxBoxes.delete(box.idLocal);
       return true;
     } catch (e) {
       return false;
@@ -77,6 +87,12 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
   }
 
   @override
+  Future<int> getLength(int boxID) async {
+    Box boxBoxes = await getBox(id: boxID);
+    return boxBoxes.values.length;
+  }
+
+  @override
   Future<Stream<List<BoxModel>>> listenBoxes() async {
     try {
       Box boxBoxes = await getBox();
@@ -89,7 +105,6 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
 
   @override
   void dispose() {
-    _box.close();
     super.dispose();
   }
 }

@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/app/pages/inbox/inbox_module.dart';
-import 'package:pocket_gtd/app/pages/inbox/widgets/register/register_bloc.dart';
+import 'package:pocket_gtd/app/app_module.dart';
+import 'package:pocket_gtd/app/shared/widgets/register_task/register_task_bloc.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
-class RegisterWidget extends StatelessWidget {
-
-  final bloc = InboxModule.to.getBloc<RegisterBloc>();
+class RegisterTaskWidget extends StatelessWidget {
+  final bloc = AppModule.to.getBloc<RegisterTaskBloc>();
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       actions: <Widget>[
         FlatButton(
           onPressed: () => bloc.cancelDialog(context),
           child: Text(S.of(context).cancel),
         ),
         FlatButton(
-          onPressed: (){},
+          onPressed: () {},
           child: Text(S.of(context).save),
         )
       ],

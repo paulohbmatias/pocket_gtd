@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 part 'hive/box_model.g.dart';
 
 @HiveType()
@@ -16,6 +17,8 @@ class BoxModel {
   @HiveField(3)
   String description;
 
+  int length;
+
   BoxModel.fromMap(Map<String, dynamic> map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];
@@ -28,7 +31,28 @@ class BoxModel {
     this.title = map['title'];
     this.description = map['description'];
   }
-  
+
+  static int getIdFromEnum(InitialBoxesEnum initialBoxesEnum){
+    switch(initialBoxesEnum){
+
+      case InitialBoxesEnum.INBOX:
+        return 0;
+      case InitialBoxesEnum.NEXT_ACTIONS:
+        return 1;
+      case InitialBoxesEnum.ONE_DAY_MAYBE:
+        return 2;
+      case InitialBoxesEnum.REFERENCES:
+        return 3;
+        break;
+      case InitialBoxesEnum.SCHEDULED:
+        return 4;
+      case InitialBoxesEnum.DELEGATES:
+        return 5;
+      default:
+        return 0;
+    }
+  }
+
   toJson() => {
     'id': this.id,
     'idLocal': this.idLocal,

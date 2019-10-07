@@ -21,19 +21,32 @@ class S implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
+  String get actions_may_be_done_someday => "Actions that may be done someday";
+  String get actions_to_perform_at_a_specific_time => "Actions to perform at a specific time";
   String get cancel => "Cancel";
+  String get confirm_delete_box => "Do you really want to delete this box?";
   String get create_box => "Create box";
   String get deadline => "Deadline";
   String get description => "Description";
   String get event => "Event";
+  String get inbox => "Inbox";
+  String get inbox_for_tasks => "Inbox for tasks";
+  String get next_actions => "Next actions";
+  String get next_actions_to_perform => "Next actions to perform";
+  String get one_day_maybe => "One day/ Maybe";
   String get project => "Project";
   String get reference => "Reference";
+  String get references => "References";
+  String get references_for_future_consultations => "References for future consultations";
   String get register_task => "Register task";
   String get save => "Save";
+  String get scheduled => "Scheduled";
   String get task => "Task";
   String get test => "Deadline";
   String get title => "Title";
   String error_cant_be_empty(String prefix) => "$prefix can't be empty";
+  String files_x(String numberFiles) => "Files: $numberFiles";
+  String this_box_contains(String numberFiles) => "This box contains $numberFiles files";
 }
 
 class $pt extends S {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/pages/tasks/tasks_page.dart';
 
 class TasksModule extends ModuleWidget {
-  int boxID;
+  final int boxID;
   TasksModule(this.boxID);
 
   @override

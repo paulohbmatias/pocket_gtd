@@ -1,16 +1,12 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
-import 'package:pocket_gtd/app/app_module.dart';
+import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ListBoxesBloc extends BlocBase {
 
-  final BoxRepository boxRepository = AppModule.to.getDependency<BoxRepository>();
-
-  ListBoxesBloc(){
-    listenBoxes();
-  }
+  final BoxRepository boxRepository = BoxesModule.to.getDependency<BoxRepository>();
 
   List<BoxModel> listBoxes = List();
 
@@ -20,17 +16,29 @@ class ListBoxesBloc extends BlocBase {
 
   Function(List<BoxModel>) get changeBoxList => _boxes.sink.add;
 
-  void listenBoxes() async{
+  Future<int> getBoxLength(int boxID) {
+    return boxRepository.getLength(boxID);
+  }
+
+  Future<List<BoxModel>> getBoxes() => boxRepository.getAll();
+
+  Future<Stream<List<BoxModel>>> listenBoxes() async{
     listBoxes = await boxRepository.getAll();
-    changeBoxList(listBoxes);
+    changeBoxList(await boxRepository.getAll());
     (await boxRepository.listenBoxes()).listen((list){
       changeBoxList(list);
     });
+    return boxes;
+  }
+
+  Future<void> removeBox(BoxModel boxModel) async{
+    await boxRepository.delete(boxModel);
   }
 
   @override
   void dispose() {
     _boxes.close();
+    boxRepository.dispose();
     super.dispose();
   }
 }

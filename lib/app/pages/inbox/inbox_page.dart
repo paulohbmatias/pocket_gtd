@@ -1,8 +1,7 @@
-import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:pocket_gtd/app/pages/inbox/widgets/register/register_widget.dart';
 import 'package:pocket_gtd/app/shared/enums/task_type.dart';
+import 'package:pocket_gtd/app/shared/widgets/register_task/register_task_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 import 'package:unicorndial/unicorndial.dart';
 
@@ -83,6 +82,6 @@ class _InboxPageState extends State<InboxPage> {
   }
 
   void _showAlert(BuildContext context, TaskType taskType) {
-    showDialog(context: context, builder: (context) => RegisterWidget());
+    showDialog(context: context, builder: (context) => RegisterTaskModule(null));
   }
 }

@@ -4,6 +4,7 @@ import 'package:pocket_gtd/app/pages/boxes/boxes_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/pages/boxes/boxes_page.dart';
+import 'package:pocket_gtd/app/shared/repositories/impl/box_repository_impl.dart';
 
 class BoxesModule extends ModuleWidget {
   @override
@@ -14,7 +15,9 @@ class BoxesModule extends ModuleWidget {
       ];
 
   @override
-  List<Dependency> get dependencies => [];
+  List<Dependency> get dependencies => [
+    Dependency((i) => BoxRepositoryImpl()),
+  ];
 
   @override
   Widget get view => BoxesPage();

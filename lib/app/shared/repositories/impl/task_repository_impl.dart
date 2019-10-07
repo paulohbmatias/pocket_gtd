@@ -1,19 +1,17 @@
 import 'package:hive/hive.dart';
+import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
 
 class TaskRepositoryImpl implements TaskRepository {
-  final int boxID;
   final prefix = "boxes_";
 
-  TaskRepositoryImpl(this.boxID);
-
-  Future<Box> getBox({int id}) async {
-    return await _initBox();
+  Future<Box> getBox(int id) async {
+    return await _initBox(id);
   }
 
-  Future<Box> _initBox({int id}) async {
-    String name = "$prefix${id ?? boxID}";
+  Future<Box> _initBox(int id) async {
+    String name = "$prefix$id}";
     if (Hive.isBoxOpen(name)) {
       return Hive.box(name);
     } else {
@@ -22,9 +20,9 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<int> save(TaskModel task, {Box boxToSave}) async {
+  Future<int> save(TaskModel task, BoxModel box) async {
     try {
-      Box boxTasks = boxToSave == null ? await getBox() : boxToSave;
+      Box boxTasks = await getBox(box.idLocal);
       int key = await boxTasks.add(task);
       task.idLocal = key;
       await boxTasks.putAt(task.idLocal, task);
@@ -35,9 +33,9 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<bool> update(TaskModel task) async {
+  Future<bool> update(TaskModel task, BoxModel box) async {
     try {
-      Box boxTasks = await getBox();
+      Box boxTasks = await getBox(box.idLocal);
       await boxTasks.putAt(task.idLocal, task);
       return true;
     } catch (e) {
@@ -45,9 +43,9 @@ class TaskRepositoryImpl implements TaskRepository {
     }
   }
 
-  Future<bool> delete(TaskModel task) async {
+  Future<bool> delete(TaskModel task, BoxModel box) async {
     try {
-      Box boxTasks = await getBox();
+      Box boxTasks = await getBox(box.idLocal);
       await boxTasks.deleteAt(task.idLocal);
       return true;
     } catch (e) {
@@ -56,9 +54,9 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<List<TaskModel>> getAll() async {
+  Future<List<TaskModel>> getAll(BoxModel box) async {
     try {
-      Box boxTasks = await getBox();
+      Box boxTasks = await getBox(box.idLocal);
       return boxTasks.values.cast<TaskModel>().toList();
     } catch (e) {
       print(e);
@@ -67,9 +65,9 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<bool> deleteAll() async {
+  Future<bool> deleteAll(BoxModel box) async {
     try {
-      Box boxTasks = await getBox();
+      Box boxTasks = await getBox(box.idLocal);
       await boxTasks.deleteFromDisk();
       return true;
     } catch (e) {
@@ -78,16 +76,16 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<bool> moveTask(int from, int to, TaskModel task) async {
+  Future<bool> moveTask(BoxModel from, BoxModel to, TaskModel task) async {
     try {
-      Box boxFrom = await getBox(id: from);
-      await boxFrom.deleteAt(task.idLocal);
-      Box boxTo = await getBox(id: to);
-      await save(task, boxToSave: boxTo);
+      await delete(task, from);
+      await save(task, to);
       return true;
     } catch (e) {
       print(e);
       return false;
     }
   }
+
+
 }

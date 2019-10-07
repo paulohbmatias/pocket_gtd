@@ -1,12 +1,10 @@
-  import 'package:pocket_gtd/app/pages/inbox/widgets/register/register_bloc.dart';
-  import 'package:pocket_gtd/app/pages/inbox/inbox_bloc.dart';
-  import 'package:bloc_pattern/bloc_pattern.dart';
-  import 'package:flutter/material.dart';
+import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/pages/inbox/inbox_page.dart';
-  
-  class InboxModule extends ModuleWidget {
+
+class InboxModule extends ModuleWidget {
   @override
-  List<Bloc> get blocs => [Bloc((i) => RegisterBloc()),Bloc((i) => InboxBloc()),];
+  List<Bloc> get blocs => [];
 
   @override
   List<Dependency> get dependencies => [];
@@ -15,6 +13,4 @@ import 'package:pocket_gtd/app/pages/inbox/inbox_page.dart';
   Widget get view => InboxPage();
 
   static Inject get to => Inject<InboxModule>.of();
-
 }
-  
