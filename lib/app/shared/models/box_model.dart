@@ -34,20 +34,20 @@ class BoxModel {
 
   static int getIdFromEnum(InitialBoxesEnum initialBoxesEnum){
     switch(initialBoxesEnum){
-
       case InitialBoxesEnum.INBOX:
         return 0;
       case InitialBoxesEnum.NEXT_ACTIONS:
         return 1;
-      case InitialBoxesEnum.ONE_DAY_MAYBE:
+      case InitialBoxesEnum.PROJECTS:
         return 2;
-      case InitialBoxesEnum.REFERENCES:
+      case InitialBoxesEnum.ONE_DAY_MAYBE:
         return 3;
-        break;
-      case InitialBoxesEnum.SCHEDULED:
+      case InitialBoxesEnum.REFERENCES:
         return 4;
-      case InitialBoxesEnum.DELEGATES:
+      case InitialBoxesEnum.SCHEDULED:
         return 5;
+      case InitialBoxesEnum.WAITING:
+        return 6;
       default:
         return 0;
     }

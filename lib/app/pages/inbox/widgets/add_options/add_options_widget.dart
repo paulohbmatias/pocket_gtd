@@ -1,13 +1,49 @@
+import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:pocket_gtd/app/shared/enums/task_type.dart';
-import 'package:pocket_gtd/app/shared/widgets/register_task/register_task_module.dart';
+import 'package:pocket_gtd/app/pages/inbox/inbox_module.dart';
+import 'package:pocket_gtd/app/pages/inbox/widgets/add_options/add_options_bloc.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 import 'package:unicorndial/unicorndial.dart';
 
 class AddOptionsWidget extends StatelessWidget {
+
+  final bloc = InboxModule.to.bloc<AddOptionsBloc>();
+
   @override
   Widget build(BuildContext context) {
+    return FabCircularMenu(
+        fabOpenIcon: Icon(Icons.add),
+        ringColor: Colors.blueGrey,
+        ringDiameter: 200,
+        child: Container(),
+        options: <Widget>[
+          IconButton(
+              icon: Icon(
+                MdiIcons.folderOpen,
+                color: Colors.white,
+                size: 32,
+              ),
+              onPressed: () {
+                print('Pressed!');
+              }),
+          IconButton(
+              icon: Icon(
+                MdiIcons.packageVariant,
+                color: Colors.white,
+                size: 32,
+              ),
+              onPressed: () {
+                print('Pressed!');
+              }),
+          IconButton(
+              icon: Icon(
+                MdiIcons.noteText,
+                color: Colors.white,
+                size: 32,
+              ),
+              onPressed: () => bloc.addTask(context)),
+        ]);
     return UnicornDialer(
         orientation: UnicornOrientation.VERTICAL,
         parentButton: Icon(Icons.add),
@@ -21,7 +57,7 @@ class AddOptionsWidget extends StatelessWidget {
                 heroTag: "task",
                 mini: true,
                 child: Icon(MdiIcons.noteText),
-                onPressed: () => _showAlert(context, TaskType.TASK),
+                onPressed: () {},
               )),
           UnicornButton(
               hasLabel: true,
@@ -57,9 +93,5 @@ class AddOptionsWidget extends StatelessWidget {
                 onPressed: () {},
               )),
         ]);
-  }
-
-  void _showAlert(BuildContext context, TaskType taskType) {
-    showDialog(context: context, builder: (context) => RegisterTaskModule(null));
   }
 }

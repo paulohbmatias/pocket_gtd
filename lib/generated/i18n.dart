@@ -44,6 +44,8 @@ class S implements WidgetsLocalizations {
   String get task => "Task";
   String get test => "Deadline";
   String get title => "Title";
+  String get waiting => "Waiting";
+  String get waiting_for_others => "Waiting for others";
   String error_cant_be_empty(String prefix) => "$prefix can't be empty";
   String files_x(String numberFiles) => "Files: $numberFiles";
   String this_box_contains(String numberFiles) => "This box contains $numberFiles files";

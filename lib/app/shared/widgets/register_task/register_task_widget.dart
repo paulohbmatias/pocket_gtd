@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/app_module.dart';
+import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/widgets/register_task/register_task_bloc.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
@@ -21,21 +23,48 @@ class RegisterTaskWidget extends StatelessWidget {
         )
       ],
       title: Text(S.of(context).register_task),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          TextField(
-            decoration: InputDecoration(hintText: S.of(context).title),
-          ),
-          TextField(
-            decoration: InputDecoration(hintText: S.of(context).description),
-          ),
-          TextField(
-            decoration: InputDecoration(
-                hintText: S.of(context).deadline, icon: Icon(Icons.event)),
-          )
-        ],
-      ),
+      content: FutureBuilder<List<BoxModel>>(
+          future: bloc.getBoxes(),
+          builder: (context, snapshot) {
+            return snapshot.hasData
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      TextField(
+                        decoration:
+                            InputDecoration(hintText: S.of(context).title),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                            hintText: S.of(context).description),
+                      ),
+                      StreamBuilder<BoxModel>(
+                          stream: bloc.box,
+                          initialData: snapshot.data.first,
+                          builder: (context, boxSelected) {
+                            return DropdownButton<BoxModel>(
+                              value: boxSelected.data,
+                              onChanged: bloc.changeBox,
+                              items: snapshot.data
+                                  .map<DropdownMenuItem<BoxModel>>(
+                                      (value) => DropdownMenuItem(
+                                          value: value,
+                                          child: ListTile(
+                                            leading: Icon(MdiIcons.package),
+                                            title: Text(value.title),
+                                          )))
+                                  .toList(),
+                            );
+                          }),
+                      TextField(
+                        decoration: InputDecoration(
+                            hintText: S.of(context).deadline,
+                            icon: Icon(Icons.event)),
+                      )
+                    ],
+                  )
+                : Center(child: CircularProgressIndicator());
+          }),
     );
   }
 }

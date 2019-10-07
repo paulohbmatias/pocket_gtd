@@ -24,5 +24,7 @@
   "references": "References",
   "references_for_future_consultations": "References for future consultations",
   "scheduled": "Scheduled",
-  "actions_to_perform_at_a_specific_time": "Actions to perform at a specific time"
+  "actions_to_perform_at_a_specific_time": "Actions to perform at a specific time",
+  "waiting": "Waiting",
+  "waiting_for_others": "Waiting for others"
 }

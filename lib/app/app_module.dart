@@ -1,3 +1,4 @@
+import 'package:pocket_gtd/app/shared/repositories/impl/task_repository_impl.dart';
 import 'package:pocket_gtd/app/shared/widgets/register_task/register_task_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class AppModule extends ModuleWidget {
   @override
   List<Dependency> get dependencies => [
         Dependency((i) => BoxRepositoryImpl()),
+        Dependency((i) => TaskRepositoryImpl()),
       ];
 
   @override

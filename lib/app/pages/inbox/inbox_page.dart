@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/pages/inbox/widgets/add_options/add_options_widget.dart';
-import 'package:pocket_gtd/app/shared/enums/task_type.dart';
-import 'package:pocket_gtd/app/shared/widgets/register_task/register_task_module.dart';
-import 'package:pocket_gtd/generated/i18n.dart';
-import 'package:unicorndial/unicorndial.dart';
 
 class InboxPage extends StatefulWidget {
   @override

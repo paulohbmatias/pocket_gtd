@@ -63,6 +63,11 @@ class SplashBloc extends BlocBase {
         BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED),
         S.of(context).scheduled,
         S.of(context).actions_to_perform_at_a_specific_time));
+    await boxRepository.saveAt(BoxModel(
+        null,
+        BoxModel.getIdFromEnum(InitialBoxesEnum.WAITING),
+        S.of(context).waiting,
+        S.of(context).waiting_for_others));
   }
 
   @override
