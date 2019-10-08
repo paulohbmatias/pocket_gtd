@@ -40,10 +40,12 @@ class RegisterTaskWidget extends StatelessWidget {
                 TextField(
                   decoration:
                   InputDecoration(hintText: S.of(context).title),
+                  onChanged: bloc.changeTitle,
                 ),
                 TextField(
                   decoration: InputDecoration(
                       hintText: S.of(context).content),
+                  onChanged: bloc.changeDescription,
                 ),
                 FutureBuilder<List<BoxModel>>(
                     future: bloc.getBoxes(),

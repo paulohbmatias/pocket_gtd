@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/pages/inbox/widgets/add_options/add_options_widget.dart';
+import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
+import 'package:pocket_gtd/app/shared/models/box_model.dart';
+import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
 
 class InboxPage extends StatefulWidget {
   @override
@@ -23,9 +26,7 @@ class _InboxPageState extends State<InboxPage> {
       ),
       drawer: Drawer(),
       floatingActionButton: AddOptionsWidget(),
-      body: Column(
-        children: <Widget>[],
-      ),
+      body: ListTasksModule(BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX), null, null)),
     );
   }
 }

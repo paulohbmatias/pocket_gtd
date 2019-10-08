@@ -8,5 +8,6 @@ abstract class TaskRepository{
   Future<bool> delete(TaskModel task, BoxModel box);
   Future<bool> deleteAll(BoxModel box);
   Future<List<TaskModel>> getAll(BoxModel box);
+  Future<Stream<List<TaskModel>>> listenTasks(BoxModel box);
   Future<bool> moveTask(BoxModel from, BoxModel to, TaskModel task);
 }

@@ -67,6 +67,17 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
+  Future<Stream<List<TaskModel>>> listenTasks(BoxModel box) async {
+    try {
+      Box boxTasks = await getBox(box.idLocal);
+      return boxTasks.watch().map<List<TaskModel>>(
+              (event) => boxTasks.values.cast<TaskModel>().toList(growable: false));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
   Future<bool> deleteAll(BoxModel box) async {
     try {
       Box boxTasks = await getBox(box.idLocal);
