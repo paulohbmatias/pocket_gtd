@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/app_module.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
+import 'package:pocket_gtd/app/shared/utils/DisableFocusNode.dart';
 import 'package:pocket_gtd/app/shared/widgets/register_task/register_task_bloc.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
@@ -27,8 +28,8 @@ class RegisterTaskWidget extends StatelessWidget {
           future: bloc.getBoxes(),
           builder: (context, snapshot) {
             return snapshot.hasData
-                ? Column(
-                    mainAxisSize: MainAxisSize.min,
+                ? ListView(
+              shrinkWrap: true,
                     children: <Widget>[
                       TextField(
                         decoration:
@@ -44,23 +45,46 @@ class RegisterTaskWidget extends StatelessWidget {
                           builder: (context, boxSelected) {
                             return DropdownButton<BoxModel>(
                               value: boxSelected.data,
+                              elevation: 0,
+                              isExpanded: true,
                               onChanged: bloc.changeBox,
+                              iconSize: 32,
+                              icon: Icon(MdiIcons.package),
                               items: snapshot.data
                                   .map<DropdownMenuItem<BoxModel>>(
                                       (value) => DropdownMenuItem(
                                           value: value,
-                                          child: ListTile(
-                                            leading: Icon(MdiIcons.package),
-                                            title: Text(value.title),
-                                          )))
+                                          child: Text(value.title)))
                                   .toList(),
                             );
                           }),
-                      TextField(
-                        decoration: InputDecoration(
-                            hintText: S.of(context).deadline,
-                            icon: Icon(Icons.event)),
-                      )
+                      StreamBuilder<String>(
+                          stream: bloc.deadline,
+                          initialData: "Date of birth",
+                          builder: (context, snapshot){
+                            return TextField(
+                              onTap: () async{
+                                DateTime picked = await showDatePicker(
+                                    context: context,
+                                    initialDate: new DateTime.now(),
+                                    firstDate: new DateTime(2018),
+                                    lastDate: new DateTime(2020)
+                                );
+                                if(picked != null) bloc.changeDeadline(picked);
+                              },
+                              keyboardType: TextInputType.datetime,
+                              decoration: InputDecoration(
+                                labelText: snapshot.data,
+                                errorText: snapshot.error,
+                                suffixIcon: Icon(Icons.calendar_today),
+                              ),
+                              enabled: true,
+                              autofocus: false,
+                              enableInteractiveSelection: false,
+                              focusNode: DisabledFocusNode(),
+                            );
+                          }
+                      ),
                     ],
                   )
                 : Center(child: CircularProgressIndicator());

@@ -35,7 +35,7 @@ class SplashBloc extends BlocBase {
 
   Future<bool> isTheFirstTime() => PreferencesApp.isTheFirstTime();
 
-  Future<void> setTheFirstTime() async => PreferencesApp.setIsTheFirstTime(true);
+  Future<void> setTheFirstTime() async => PreferencesApp.setIsTheFirstTime(false);
 
   Future<void> createInitialBoxes(BuildContext context) async {
     await boxRepository.saveAt(BoxModel(

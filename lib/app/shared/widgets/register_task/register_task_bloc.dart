@@ -24,7 +24,7 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
   Observable<String> description(BuildContext context) =>
       _description.stream.transform(validateDescriptionFromStream(context));
 
-  Observable<DateTime> get deadline => _deadline.stream;
+  Observable<String> get deadline => _deadline.stream.transform(validateDate());
 
   Observable<BoxModel> get box => _box.stream;
 
@@ -53,12 +53,12 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
     Navigator.of(context).pop();
   }
 
-  void saveBox(BuildContext context) async {
+  void saveTask(BuildContext context) async {
     changeIsLoading(true);
     try {
       TaskModel taskModel = TaskModel(
           null, null, _title.value, _description.value, _deadline.value);
-//      await taskRepository.save(taskModel, );
+      await taskRepository.save(taskModel, _box.value);
       Navigator.of(context).pop();
     } catch (e) {
       print(e);

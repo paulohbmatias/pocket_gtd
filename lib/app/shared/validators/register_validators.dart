@@ -1,9 +1,18 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 mixin RegisterValidators {
+  StreamTransformer<DateTime, String> validateDate() =>
+      StreamTransformer<DateTime, String>.fromHandlers(
+          handleData: (date, sink) {
+        if (date != null)
+          sink.add("${(date.day).toString().padLeft(2, "0")}/"
+              "${(date.month).toString().padLeft(2, "0")}/${date.year}");
+        else
+          sink.addError("Required field");
+      });
+
   StreamTransformer<String, String> validateTitleFromStream(
           BuildContext context) =>
       StreamTransformer.fromHandlers(handleData: (title, sink) {
