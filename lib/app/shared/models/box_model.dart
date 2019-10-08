@@ -15,7 +15,7 @@ class BoxModel {
   String title;
 
   @HiveField(3)
-  String description;
+  String content;
 
   int length;
 
@@ -23,13 +23,13 @@ class BoxModel {
     this.id = map['id'];
     this.idLocal = map['idLocal'];
     this.title = map['title'];
-    this.description = map['description'];
+    this.content = map['content'];
   }
 
   BoxModel.fromDatabase(var map) {
     this.id = map['id'];
     this.title = map['title'];
-    this.description = map['description'];
+    this.content = map['content'];
   }
 
   static int getIdFromEnum(InitialBoxesEnum initialBoxesEnum){
@@ -57,8 +57,8 @@ class BoxModel {
     'id': this.id,
     'idLocal': this.idLocal,
     'title': this.title,
-    'description': this.description
+    'content': this.content
   };
 
-  BoxModel(this.id, this.idLocal, this.title, this.description);
+  BoxModel(this.id, this.idLocal, this.title, this.content);
 }

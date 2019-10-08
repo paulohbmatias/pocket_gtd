@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
-import 'package:pocket_gtd/app/pages/boxes/widgets/register/register_bloc.dart';
+import 'package:pocket_gtd/app/shared/pages/register/register_module.dart';
+import 'package:pocket_gtd/app/shared/pages/register/widgets/register_box/register_box_bloc.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
-
-class RegisterWidget extends StatelessWidget {
-  final bloc = BoxesModule.to.bloc<RegisterBloc>();
+class RegisterBoxWidget extends StatelessWidget {
+  final bloc = RegisterModule.to.bloc<RegisterBoxBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class RegisterWidget extends StatelessWidget {
               builder: (context, snapshot) {
                 return TextField(
                   decoration:
-                      InputDecoration(hintText: S.of(context).description),
+                  InputDecoration(hintText: S.of(context).content),
                   onChanged: bloc.changeDescription,
                 );
               }),
@@ -53,3 +52,4 @@ class RegisterWidget extends StatelessWidget {
     );
   }
 }
+  

@@ -1,3 +1,3 @@
-enum TaskType{
-  EVENT, REFERENCE, PROJECT, TASK
+enum AddOptionsEnum{
+  TASK, BOX, REFERENCE,
 }

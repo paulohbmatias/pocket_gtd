@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_gtd/app/pages/boxes/boxes_bloc.dart';
+import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/pages/boxes/widgets/list_boxes/list_boxes_widget.dart';
-import 'package:pocket_gtd/app/pages/boxes/widgets/register/register_widget.dart';
 
 class BoxesPage extends StatefulWidget {
   @override
@@ -8,19 +9,15 @@ class BoxesPage extends StatefulWidget {
 }
 
 class _BoxesPageState extends State<BoxesPage> {
+
+  final bloc = BoxesModule.to.bloc<BoxesBloc>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListBoxesWidget(),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _showAlert(context),
-      ),
     );
   }
 
-  void _showAlert(BuildContext context) {
-    showDialog(context: context, builder: (context) => RegisterWidget());
-  }
 }
   

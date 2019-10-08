@@ -14,7 +14,7 @@ class TaskModel {
   String title;
 
   @HiveField(3)
-  String description;
+  String content;
 
   @HiveField(4)
   DateTime deadline;
@@ -23,7 +23,7 @@ class TaskModel {
     this.id = map['id'];
     this.idLocal = map['idLocal'];
     this.title = map['title'];
-    this.description = map['description'];
+    this.content = map['content'];
     this.deadline = map['deadline'] != null
         ? DateTime.fromMillisecondsSinceEpoch(
             int.parse(map['deadline'].toString()))
@@ -34,7 +34,7 @@ class TaskModel {
     this.id = map['id'];
     this.idLocal = map['idLocal'];
     this.title = map['title'];
-    this.description = map['description'];
+    this.content = map['content'];
     this.deadline = map['deadline'] != null
         ? DateTime.fromMillisecondsSinceEpoch(
             int.parse(map['deadline'].toString()))
@@ -45,10 +45,10 @@ class TaskModel {
         'id': this.id,
         'idLocal': this.idLocal,
         'title': this.title,
-        'description': this.description,
+        'content': this.content,
         'deadline':
             this.deadline != null ? this.deadline.millisecondsSinceEpoch : null
       };
 
-  TaskModel(this.id, this.idLocal, this.title, this.description, this.deadline);
+  TaskModel(this.id, this.idLocal, this.title, this.content, this.deadline);
 }

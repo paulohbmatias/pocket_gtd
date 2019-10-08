@@ -73,7 +73,6 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators{
     changeDescription("");
   }
 
-  //dispose will be called automatically by closing its streams
   @override
   void dispose() {
     _title.close();

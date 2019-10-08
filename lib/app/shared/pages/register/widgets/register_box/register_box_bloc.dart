@@ -6,7 +6,7 @@ import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
 import 'package:pocket_gtd/app/shared/validators/register_validators.dart';
 import 'package:rxdart/rxdart.dart';
 
-class RegisterBloc extends BlocBase with RegisterValidators {
+class RegisterBoxBloc extends BlocBase with RegisterValidators{
   BoxRepository boxRepository = AppModule.to.getDependency<BoxRepository>();
 
   BehaviorSubject<String> _title = BehaviorSubject();
@@ -25,8 +25,8 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       Observable.combineLatest2<String, String, bool>(
           title(context), description(context), (email, password) {
         return validateTitleFromString(context, _title.value).isEmpty &&
-                validateDescriptionFromString(context, _description.value)
-                    .isEmpty
+            validateDescriptionFromString(context, _description.value)
+                .isEmpty
             ? true
             : false;
       });
@@ -40,18 +40,18 @@ class RegisterBloc extends BlocBase with RegisterValidators {
     Navigator.of(context).pop();
   }
 
-  void saveBox(BuildContext context) async{
+  void saveBox(BuildContext context) async {
     changeIsLoading(true);
-    try{
-      BoxModel boxModel = BoxModel(null, null, _title.value, _description.value);
+    try {
+      BoxModel boxModel =
+      BoxModel(null, null, _title.value, _description.value);
       await boxRepository.save(boxModel);
       Navigator.of(context).pop();
-    }catch(e){
+    } catch (e) {
       print(e);
-    } finally{
+    } finally {
       changeIsLoading(false);
     }
-
   }
 
   _cleanFields() {
@@ -68,3 +68,4 @@ class RegisterBloc extends BlocBase with RegisterValidators {
     super.dispose();
   }
 }
+  

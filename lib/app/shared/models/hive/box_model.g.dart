@@ -32,6 +32,6 @@ class BoxModelAdapter extends TypeAdapter<BoxModel> {
       ..writeByte(2)
       ..write(obj.title)
       ..writeByte(3)
-      ..write(obj.description);
+      ..write(obj.content);
   }
 }

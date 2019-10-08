@@ -33,7 +33,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..writeByte(2)
       ..write(obj.title)
       ..writeByte(3)
-      ..write(obj.description)
+      ..write(obj.content)
       ..writeByte(4)
       ..write(obj.deadline);
   }

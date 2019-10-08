@@ -6,11 +6,8 @@ mixin RegisterValidators {
   StreamTransformer<DateTime, String> validateDate() =>
       StreamTransformer<DateTime, String>.fromHandlers(
           handleData: (date, sink) {
-        if (date != null)
-          sink.add("${(date.day).toString().padLeft(2, "0")}/"
-              "${(date.month).toString().padLeft(2, "0")}/${date.year}");
-        else
-          sink.addError("Required field");
+            sink.add("${(date.day).toString().padLeft(2, "0")}/"
+                "${(date.month).toString().padLeft(2, "0")}/${date.year}");
       });
 
   StreamTransformer<String, String> validateTitleFromStream(
@@ -36,7 +33,7 @@ mixin RegisterValidators {
       _isEmpty(context, title, S.of(context).title);
 
   String validateDescriptionFromString(BuildContext context, String title) =>
-      _isEmpty(context, title, S.of(context).description);
+      _isEmpty(context, title, S.of(context).content);
 
   String _isEmpty(BuildContext context, String email, String prefix) {
     if (email.isEmpty)

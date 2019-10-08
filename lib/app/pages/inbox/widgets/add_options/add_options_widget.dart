@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/pages/inbox/inbox_module.dart';
 import 'package:pocket_gtd/app/pages/inbox/widgets/add_options/add_options_bloc.dart';
-import 'package:pocket_gtd/generated/i18n.dart';
-import 'package:unicorndial/unicorndial.dart';
+import 'package:pocket_gtd/app/shared/enums/task_type.dart';
 
 class AddOptionsWidget extends StatelessWidget {
 
@@ -15,6 +14,7 @@ class AddOptionsWidget extends StatelessWidget {
     return FabCircularMenu(
         fabOpenIcon: Icon(Icons.add),
         ringColor: Colors.blueGrey,
+        fabMargin: EdgeInsets.all(8),
         ringDiameter: 200,
         child: Container(),
         options: <Widget>[
@@ -25,7 +25,7 @@ class AddOptionsWidget extends StatelessWidget {
                 size: 32,
               ),
               onPressed: () {
-                print('Pressed!');
+                bloc.add(context, AddOptionsEnum.REFERENCE);
               }),
           IconButton(
               icon: Icon(
@@ -33,65 +33,14 @@ class AddOptionsWidget extends StatelessWidget {
                 color: Colors.white,
                 size: 32,
               ),
-              onPressed: () {
-                print('Pressed!');
-              }),
+              onPressed: () => bloc.add(context, AddOptionsEnum.BOX)),
           IconButton(
               icon: Icon(
                 MdiIcons.noteText,
                 color: Colors.white,
                 size: 32,
               ),
-              onPressed: () => bloc.addTask(context)),
-        ]);
-    return UnicornDialer(
-        orientation: UnicornOrientation.VERTICAL,
-        parentButton: Icon(Icons.add),
-        childButtons: <UnicornButton>[
-          UnicornButton(
-              hasLabel: true,
-              labelText: S.of(context).task,
-              labelBackgroundColor: Colors.transparent,
-              labelHasShadow: false,
-              currentButton: FloatingActionButton(
-                heroTag: "task",
-                mini: true,
-                child: Icon(MdiIcons.noteText),
-                onPressed: () {},
-              )),
-          UnicornButton(
-              hasLabel: true,
-              labelText: S.of(context).project,
-              labelBackgroundColor: Colors.transparent,
-              labelHasShadow: false,
-              currentButton: FloatingActionButton(
-                heroTag: "project",
-                mini: true,
-                child: Icon(Icons.computer),
-                onPressed: () {},
-              )),
-          UnicornButton(
-              hasLabel: true,
-              labelText: S.of(context).event,
-              labelBackgroundColor: Colors.transparent,
-              labelHasShadow: false,
-              currentButton: FloatingActionButton(
-                heroTag: "event",
-                mini: true,
-                child: Icon(Icons.event),
-                onPressed: () {},
-              )),
-          UnicornButton(
-              hasLabel: true,
-              labelText: S.of(context).reference,
-              labelBackgroundColor: Colors.transparent,
-              labelHasShadow: false,
-              currentButton: FloatingActionButton(
-                heroTag: "reference",
-                mini: true,
-                child: Icon(MdiIcons.fileOutline),
-                onPressed: () {},
-              )),
+              onPressed: () => bloc.add(context, AddOptionsEnum.TASK)),
         ]);
   }
 }
