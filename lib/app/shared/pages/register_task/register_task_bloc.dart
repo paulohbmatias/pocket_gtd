@@ -1,6 +1,7 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/app_module.dart';
+import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
@@ -8,7 +9,7 @@ import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
 import 'package:pocket_gtd/app/shared/validators/register_validators.dart';
 import 'package:rxdart/rxdart.dart';
 
-class RegisterTaskBloc extends BlocBase with RegisterValidators {
+class RegisterTaskBloc extends BlocBase with RegisterValidators{
   TaskRepository taskRepository = AppModule.to.getDependency<TaskRepository>();
   BoxRepository boxRepository = AppModule.to.getDependency<BoxRepository>();
 
@@ -34,8 +35,8 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
       Observable.combineLatest2<String, String, bool>(
           title(context), description(context), (email, password) {
         return validateTitleFromString(context, _title.value).isEmpty &&
-                validateDescriptionFromString(context, _description.value)
-                    .isEmpty
+            validateDescriptionFromString(context, _description.value)
+                .isEmpty
             ? true
             : false;
       });
@@ -58,7 +59,7 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
     try {
       TaskModel taskModel = TaskModel(
           null, null, _title.value, _description.value, _deadline.value);
-      await taskRepository.save(taskModel, _box.value);
+      await taskRepository.save(taskModel, _box.value ?? BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX), null, null));
       Navigator.of(context).pop();
     } catch (e) {
       print(e);
@@ -83,3 +84,4 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
     super.dispose();
   }
 }
+  

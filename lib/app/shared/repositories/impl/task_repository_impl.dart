@@ -11,7 +11,7 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   Future<Box> _initBox(int id) async {
-    String name = "$prefix$id}";
+    String name = "$prefix$id";
     if (Hive.isBoxOpen(name)) {
       return Hive.box(name);
     } else {
@@ -25,9 +25,11 @@ class TaskRepositoryImpl implements TaskRepository {
       Box boxTasks = await getBox(box.idLocal);
       int key = await boxTasks.add(task);
       task.idLocal = key;
-      await boxTasks.putAt(task.idLocal, task);
+      await boxTasks.put(task.idLocal, task);
+      boxTasks.values;
       return task.idLocal;
     } catch (e) {
+      print(e);
       return null;
     }
   }
@@ -36,7 +38,7 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<bool> update(TaskModel task, BoxModel box) async {
     try {
       Box boxTasks = await getBox(box.idLocal);
-      await boxTasks.putAt(task.idLocal, task);
+      await boxTasks.put(task.idLocal, task);
       return true;
     } catch (e) {
       return false;
@@ -46,7 +48,7 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<bool> delete(TaskModel task, BoxModel box) async {
     try {
       Box boxTasks = await getBox(box.idLocal);
-      await boxTasks.deleteAt(task.idLocal);
+      await boxTasks.delete(task.idLocal);
       return true;
     } catch (e) {
       return false;

@@ -89,6 +89,7 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
   @override
   Future<int> getLength(int boxID) async {
     Box boxBoxes = await getBox(id: boxID);
+    print(boxBoxes.values);
     return boxBoxes.values.length;
   }
 
