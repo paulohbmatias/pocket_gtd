@@ -2,6 +2,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
+import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
@@ -25,7 +26,7 @@ class ListBoxesBloc extends BlocBase {
 
   void openBox(BuildContext context, BoxModel box) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => ListTasksModule(box)));
+        .push(MaterialPageRoute(builder: (context) => ListTasksModule(box, null)));
   }
 
   Future<List<BoxModel>> getBoxes() => boxRepository.getAll();

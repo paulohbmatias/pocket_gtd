@@ -1,0 +1,3 @@
+enum ListTypeEnum{
+  INBOX, NEXT_ACTIONS, REFERENCES, BOXES
+}

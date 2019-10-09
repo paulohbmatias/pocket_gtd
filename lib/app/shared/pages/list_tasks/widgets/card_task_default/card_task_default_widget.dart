@@ -26,7 +26,6 @@ class CardTaskDefaultWidget extends StatelessWidget {
               FlatButton(onPressed: (){}, child: Text("Delete")),
               FlatButton(onPressed: (){}, child: Text("Edit")),
               FlatButton(onPressed: (){}, child: Text("Move")),
-
             ],
           ),
         )
