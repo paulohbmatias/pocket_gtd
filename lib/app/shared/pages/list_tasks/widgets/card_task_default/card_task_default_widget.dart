@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
@@ -10,15 +11,24 @@ class CardTaskDefaultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: Text(task.title),
-      initiallyExpanded: true,
       leading: Icon(MdiIcons.noteText, size: 32),
       children: <Widget>[
-        Align(
+        Container(
+          margin: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(8),
           alignment: Alignment.centerLeft,
           child: Text(task.content),
         ),
-        ListTile(
-          trailing: FlatButton(onPressed: (){}, child: Text("Save")),
+        Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              FlatButton(onPressed: (){}, child: Text("Delete")),
+              FlatButton(onPressed: (){}, child: Text("Edit")),
+              FlatButton(onPressed: (){}, child: Text("Move")),
+
+            ],
+          ),
         )
         
       ],

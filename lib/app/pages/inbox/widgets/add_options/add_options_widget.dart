@@ -13,7 +13,7 @@ class AddOptionsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FabCircularMenu(
         fabOpenIcon: Icon(Icons.add),
-        ringColor: Colors.blueGrey,
+        ringColor: Theme.of(context).primaryColor,
         fabMargin: EdgeInsets.all(8),
         ringDiameter: 200,
         child: Container(),
@@ -24,9 +24,7 @@ class AddOptionsWidget extends StatelessWidget {
                 color: Colors.white,
                 size: 32,
               ),
-              onPressed: () {
-                bloc.add(context, AddOptionsEnum.REFERENCE);
-              }),
+              onPressed: () => bloc.add(context, AddOptionsEnum.REFERENCE)),
           IconButton(
               icon: Icon(
                 MdiIcons.packageVariant,

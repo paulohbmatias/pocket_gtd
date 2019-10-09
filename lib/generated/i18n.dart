@@ -23,6 +23,7 @@ class S implements WidgetsLocalizations {
 
   String get actions_may_be_done_someday => "Actions that may be done someday";
   String get actions_to_perform_at_a_specific_time => "Actions to perform at a specific time";
+  String get boxes => "Boxes";
   String get cancel => "Cancel";
   String get confirm_delete_box => "Do you really want to delete this box?";
   String get content => "Content";

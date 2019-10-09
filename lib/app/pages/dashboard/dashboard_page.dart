@@ -4,6 +4,7 @@ import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/pages/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/pages/inbox/inbox_module.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -24,13 +25,14 @@ class _DashboardPageState extends State<DashboardPage> {
           stream: bloc.page,
           initialData: 1,
           builder: (_, snapshot) => BottomNavigationBar(
+            selectedLabelStyle: TextStyle(color: Theme.of(context).primaryColor),
+            unselectedLabelStyle: TextStyle(color: Theme.of(context).unselectedWidgetColor),
+                showUnselectedLabels: true,
                 items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.inbox), title: Text("inbox")),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.view_list), title: Text("Next actions")),
-                  BottomNavigationBarItem(
-                      icon: Icon(MdiIcons.inboxMultiple), title: Text("Boxes")),
+                  bottomItem(Icons.inbox, S.of(context).inbox),
+                  bottomItem(Icons.view_list, S.of(context).next_actions),
+                  bottomItem(Icons.folder_open, S.of(context).references),
+                  bottomItem(MdiIcons.inboxMultiple, S.of(context).boxes),
                 ],
                 currentIndex: snapshot.data,
                 onTap: bloc.changePage,
@@ -38,8 +40,22 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
+  BottomNavigationBarItem bottomItem(IconData icon, String title) {
+    return BottomNavigationBarItem(
+        icon: Icon(
+          icon,
+          color: Theme.of(context).unselectedWidgetColor,
+        ),
+        activeIcon: Icon(icon, color: Theme.of(context).primaryColor),
+        title: Text(
+          title,
+
+        ));
+  }
+
   List<Widget> get pages => [
         InboxModule(),
+        Container(),
         Container(),
         BoxesModule(),
       ];
