@@ -17,7 +17,7 @@ class _InboxPageState extends State<InboxPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.blueGrey),
+        iconTheme: IconThemeData(color: Theme.of(context).secondaryHeaderColor),
         actionsIconTheme: IconThemeData(
           color: Colors.black,
         ),
@@ -25,7 +25,7 @@ class _InboxPageState extends State<InboxPage> {
         elevation: 0,
       ),
       drawer: Drawer(),
-      floatingActionButton: AddOptionsWidget(),
+//      floatingActionButton: AddOptionsWidget(),
       body: ListTasksModule(BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX), null, null)),
     );
   }

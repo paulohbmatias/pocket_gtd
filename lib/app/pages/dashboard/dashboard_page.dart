@@ -25,9 +25,9 @@ class _DashboardPageState extends State<DashboardPage> {
           stream: bloc.page,
           initialData: 1,
           builder: (_, snapshot) => BottomNavigationBar(
-            selectedLabelStyle: TextStyle(color: Theme.of(context).primaryColor),
-            unselectedLabelStyle: TextStyle(color: Theme.of(context).unselectedWidgetColor),
-                showUnselectedLabels: true,
+                unselectedItemColor: Theme.of(context).unselectedWidgetColor,
+            selectedItemColor: Theme.of(context).primaryColor,
+            showUnselectedLabels: true,
                 items: <BottomNavigationBarItem>[
                   bottomItem(Icons.inbox, S.of(context).inbox),
                   bottomItem(Icons.view_list, S.of(context).next_actions),
@@ -44,12 +44,10 @@ class _DashboardPageState extends State<DashboardPage> {
     return BottomNavigationBarItem(
         icon: Icon(
           icon,
-          color: Theme.of(context).unselectedWidgetColor,
+          semanticLabel: "LLL",
         ),
-        activeIcon: Icon(icon, color: Theme.of(context).primaryColor),
         title: Text(
           title,
-
         ));
   }
 

@@ -10,6 +10,12 @@ class ListTasksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListDefaultWidget();
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Theme.of(context).unselectedWidgetColor),
+        ),
+        body: ListDefaultWidget());
   }
 }
