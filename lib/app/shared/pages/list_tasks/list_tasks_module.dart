@@ -26,7 +26,7 @@ class ListTasksModule extends ModuleWidget {
         Bloc((i) => CardTaskInboxBloc()),
         Bloc((i) => ListReferencesBloc()),
         Bloc((i) => ListNextActionsBloc()),
-        Bloc((i) => ListInboxBloc()),
+        Bloc((i) => ListInboxBloc(box)),
         Bloc((i) => CardTaskDefaultBloc()),
         Bloc((i) => ListDefaultBloc(this.box)),
         Bloc((i) => ListTasksBloc()),

@@ -16,11 +16,6 @@ class ListTasksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          iconTheme: IconThemeData(color: Theme.of(context).primaryColorDark),
-        ),
         body: Builder(builder: (context) {
           switch(listType){
             case ListTypeEnum.INBOX:
