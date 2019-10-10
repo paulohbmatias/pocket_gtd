@@ -12,7 +12,8 @@ class AddOptionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FabCircularMenu(
-        fabOpenIcon: Icon(Icons.add, color: Colors.white,),
+        fabOpenIcon: const Icon(Icons.add, color: Colors.white,),
+        fabCloseIcon: const Icon(Icons.close, color: Colors.white,),
         ringColor: Theme.of(context).primaryColor,
         fabMargin: EdgeInsets.all(8),
         ringDiameter: 200,
