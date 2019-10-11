@@ -9,6 +9,9 @@ class AddOptionsWidget extends StatelessWidget {
 
   final bloc = InboxModule.to.bloc<AddOptionsBloc>();
 
+
+  AddOptionsWidget({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return FabCircularMenu(

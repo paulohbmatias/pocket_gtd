@@ -26,7 +26,7 @@ class ListBoxesBloc extends BlocBase {
 
   void openBox(BuildContext context, BoxModel box) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => ListTasksModule(box, null)));
+        .push(MaterialPageRoute(builder: (context) => ListTasksModule(box, ListTypeEnum.DEFAULT)));
   }
 
   Future<List<BoxModel>> getBoxes() => boxRepository.getAll();

@@ -1,3 +1,4 @@
+import 'package:pocket_gtd/app/pages/inbox/inbox_bloc.dart';
 import 'package:pocket_gtd/app/pages/inbox/widgets/add_options/add_options_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ class InboxModule extends ModuleWidget {
   @override
   List<Bloc> get blocs => [
         Bloc((i) => AddOptionsBloc()),
+        Bloc((i) => InboxBloc()),
       ];
 
   @override
