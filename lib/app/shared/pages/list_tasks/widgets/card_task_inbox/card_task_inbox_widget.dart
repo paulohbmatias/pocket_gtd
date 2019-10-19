@@ -29,9 +29,24 @@ class CardTaskInboxWidget extends StatelessWidget {
                     "Delete",
                     style: TextStyle(color: Theme.of(context).accentColor),
                   )),
-              FlatButton(onPressed: () {}, child: Text("Edit")),
-              FlatButton(onPressed: () {}, child: Text("Move")),
-              FlatButton(onPressed: () {}, child: Text("Analyze")),
+              FlatButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Edit",
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  )),
+              FlatButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Move",
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  )),
+              FlatButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Analyze",
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  )),
             ],
           ),
         )

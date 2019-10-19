@@ -5,6 +5,8 @@ import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/pages/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/pages/inbox/inbox_module.dart';
+import 'package:pocket_gtd/app/pages/next_actions/next_actions_module.dart';
+import 'package:pocket_gtd/app/pages/references/references_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -65,8 +67,8 @@ class _DashboardPageState extends State<DashboardPage> {
 
   List<Widget> get pages => [
         InboxModule(),
-        Container(),
-        Container(),
+        NextActionsModule(),
+        ReferencesModule(),
         BoxesModule(),
       ];
 }
