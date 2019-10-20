@@ -1,3 +1,4 @@
+import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/default_task_details/default_task_details_bloc.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/inbox_tasks_details/inbox_tasks_details_bloc.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/list_default/list_default_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
@@ -19,6 +20,7 @@ class ListTasksModule extends ModuleWidget {
 
   @override
   List<Bloc> get blocs => [
+        Bloc((i) => DefaultTaskDetailsBloc()),
         Bloc((i) => InboxTasksDetailsBloc()),
         Bloc((i) => ListDefaultBloc(box)),
         Bloc((i) => CardReferencesBloc()),
