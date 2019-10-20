@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/default_task_details/default_task_details_widget.dart';
 class CardTaskDefaultWidget extends StatelessWidget {
   final TaskModel task;
+  final ListTypeEnum listType;
 
-  CardTaskDefaultWidget(this.task);
+  CardTaskDefaultWidget(this.listType, this.task);
 
   @override
   Widget build(BuildContext context) {
