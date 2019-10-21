@@ -10,6 +10,11 @@ import 'package:pocket_gtd/app/pages/references/references_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class DashboardPage extends StatefulWidget {
+
+  final int page;
+
+  DashboardPage({this.page = 0});
+
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
@@ -17,6 +22,7 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   DashboardBloc bloc = DashboardModule.to.getBloc<DashboardBloc>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,25 +38,25 @@ class _DashboardPageState extends State<DashboardPage> {
       drawer: Drawer(),
       body: StreamBuilder<int>(
         stream: bloc.page,
-        initialData: 0,
+        initialData: widget.page ?? 0,
         builder: (_, snapshot) => pages[snapshot.data],
       ),
       bottomNavigationBar: StreamBuilder<int>(
           stream: bloc.page,
-          initialData: 1,
+          initialData: widget.page ?? 0,
           builder: (_, snapshot) => BottomNavigationBar(
-            unselectedItemColor: Theme.of(context).unselectedWidgetColor,
-            selectedItemColor: Theme.of(context).primaryColor,
-            showUnselectedLabels: true,
-            items: <BottomNavigationBarItem>[
-              bottomItem(Icons.inbox, S.of(context).inbox),
-              bottomItem(Icons.view_list, S.of(context).next_actions),
-              bottomItem(Icons.folder_open, S.of(context).references),
-              bottomItem(MdiIcons.inboxMultiple, S.of(context).boxes),
-            ],
-            currentIndex: snapshot.data,
-            onTap: bloc.changePage,
-          )),
+                unselectedItemColor: Theme.of(context).unselectedWidgetColor,
+                selectedItemColor: Theme.of(context).primaryColor,
+                showUnselectedLabels: true,
+                items: <BottomNavigationBarItem>[
+                  bottomItem(Icons.inbox, S.of(context).inbox),
+                  bottomItem(Icons.view_list, S.of(context).next_actions),
+                  bottomItem(Icons.folder_open, S.of(context).references),
+                  bottomItem(MdiIcons.inboxMultiple, S.of(context).boxes),
+                ],
+                currentIndex: snapshot.data,
+                onTap: bloc.changePage,
+              )),
     );
   }
 
@@ -58,7 +64,6 @@ class _DashboardPageState extends State<DashboardPage> {
     return BottomNavigationBarItem(
         icon: Icon(
           icon,
-          semanticLabel: "LLL",
         ),
         title: Text(
           title,

@@ -25,10 +25,12 @@ class S implements WidgetsLocalizations {
   String get actions_to_perform_at_a_specific_time => "Actions to perform at a specific time";
   String get boxes => "Boxes";
   String get cancel => "Cancel";
+  String get completed_tasks => "completed tasks";
   String get confirm_delete_box => "Do you really want to delete this box?";
   String get content => "Content";
   String get create_box => "Create box";
   String get deadline => "Deadline";
+  String get done => "Done";
   String get event => "Event";
   String get inbox => "Inbox";
   String get inbox_for_tasks => "Inbox for tasks";
@@ -36,6 +38,7 @@ class S implements WidgetsLocalizations {
   String get next_actions_to_perform => "Next actions to perform";
   String get one_day_maybe => "One day/ Maybe";
   String get project => "Project";
+  String get projects => "Projects";
   String get reference => "Reference";
   String get references => "References";
   String get references_for_future_consultations => "References for future consultations";
@@ -44,7 +47,9 @@ class S implements WidgetsLocalizations {
   String get save => "Save";
   String get scheduled => "Scheduled";
   String get task => "Task";
+  String get task_marked_completed => "Task Marked Completed";
   String get test => "Deadline";
+  String get this_box_contains_your_personal_projects => "This box contains your personal projects.";
   String get title => "Title";
   String get waiting => "Waiting";
   String get waiting_for_others => "Waiting for others";

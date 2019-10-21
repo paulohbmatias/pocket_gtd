@@ -2,7 +2,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:rxdart/rxdart.dart';
 
 class DashboardBloc extends BlocBase {
-  BehaviorSubject<int> _page = BehaviorSubject.seeded(0);
+  BehaviorSubject<int> _page = BehaviorSubject();
 
   Observable<int> get page => _page.stream;
 

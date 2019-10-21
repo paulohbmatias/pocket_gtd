@@ -9,7 +9,7 @@ import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
 import 'package:pocket_gtd/app/shared/validators/register_validators.dart';
 import 'package:rxdart/rxdart.dart';
 
-class RegisterTaskBloc extends BlocBase with RegisterValidators{
+class RegisterTaskBloc extends BlocBase with RegisterValidators {
   TaskRepository taskRepository = AppModule.to.getDependency<TaskRepository>();
   BoxRepository boxRepository = AppModule.to.getDependency<BoxRepository>();
 
@@ -35,8 +35,8 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators{
       Observable.combineLatest2<String, String, bool>(
           title(context), description(context), (email, password) {
         return validateTitleFromString(context, _title.value).isEmpty &&
-            validateDescriptionFromString(context, _description.value)
-                .isEmpty
+                validateDescriptionFromString(context, _description.value)
+                    .isEmpty
             ? true
             : false;
       });
@@ -47,7 +47,13 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators{
   Function(BoxModel) get changeBox => _box.sink.add;
   Function(bool) get changeIsLoading => _isLoading.sink.add;
 
-  Future<List<BoxModel>> getBoxes() => boxRepository.getAll();
+  Future<List<BoxModel>> getBoxes() async =>
+      (await boxRepository.getAll()).where((box) {
+        return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.DONE) &&
+            box.idLocal !=
+                BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES) &&
+            box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.DONE);
+      }).toList();
 
   void cancelDialog(BuildContext context) async {
     _cleanFields();
@@ -59,7 +65,11 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators{
     try {
       TaskModel taskModel = TaskModel(
           null, null, _title.value, _description.value, _deadline.value);
-      await taskRepository.save(taskModel, _box.value ?? BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX), null, null));
+      await taskRepository.save(
+          taskModel,
+          _box.value ??
+              BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX),
+                  null, null));
       Navigator.of(context).pop();
     } catch (e) {
       print(e);
@@ -83,4 +93,3 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators{
     super.dispose();
   }
 }
-  

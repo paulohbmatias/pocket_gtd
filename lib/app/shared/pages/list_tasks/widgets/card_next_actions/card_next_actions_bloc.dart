@@ -1,6 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 
-class InboxTasksDetailsBloc extends BlocBase {
+class CardNextActionsBloc extends BlocBase {
   //dispose will be called automatically by closing its streams
   @override
   void dispose() {

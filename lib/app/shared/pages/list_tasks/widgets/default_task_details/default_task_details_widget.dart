@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
+import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
+import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
+import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/list_default/list_default_bloc.dart';
 
 class DefaultTaskDetailsWidget extends StatelessWidget {
   final TaskModel task;
+  final bloc = ListTasksModule.to.bloc<ListDefaultBloc>();
 
   DefaultTaskDetailsWidget(this.task);
 
@@ -30,12 +35,27 @@ class DefaultTaskDetailsWidget extends StatelessWidget {
               "Move",
               style: TextStyle(color: Theme.of(context).accentColor),
             )),
-        FlatButton(
-            onPressed: () {},
-            child: Text(
-              "Analyze",
-              style: TextStyle(color: Theme.of(context).accentColor),
-            )),
+        Builder(builder: (context){
+          if (bloc.box.idLocal == BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX)){
+            return FlatButton(
+                onPressed: () {},
+                child: Text(
+                  "Analyze",
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                ));
+          }else if(bloc.box.idLocal == BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS)){
+            return FlatButton(
+                onPressed: () async{
+                  await bloc.done(task);
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "Done",
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                ));
+          }
+          return Container();
+        })
       ],
       title: Row(
         children: <Widget>[

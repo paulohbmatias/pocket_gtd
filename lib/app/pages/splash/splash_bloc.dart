@@ -50,6 +50,11 @@ class SplashBloc extends BlocBase {
         S.of(context).next_actions_to_perform));
     await boxRepository.saveAt(BoxModel(
         null,
+        BoxModel.getIdFromEnum(InitialBoxesEnum.PROJECTS),
+        S.of(context).projects,
+        S.of(context).this_box_contains_your_personal_projects));
+    await boxRepository.saveAt(BoxModel(
+        null,
         BoxModel.getIdFromEnum(InitialBoxesEnum.ONE_DAY_MAYBE),
         S.of(context).one_day_maybe,
         S.of(context).actions_may_be_done_someday));
@@ -68,6 +73,11 @@ class SplashBloc extends BlocBase {
         BoxModel.getIdFromEnum(InitialBoxesEnum.WAITING),
         S.of(context).waiting,
         S.of(context).waiting_for_others));
+    await boxRepository.saveAt(BoxModel(
+        null,
+        BoxModel.getIdFromEnum(InitialBoxesEnum.DONE),
+        S.of(context).done,
+        S.of(context).completed_tasks));
   }
 
   @override

@@ -28,5 +28,10 @@
   "scheduled": "Scheduled",
   "actions_to_perform_at_a_specific_time": "Actions to perform at a specific time",
   "waiting": "Waiting",
-  "waiting_for_others": "Waiting for others"
+  "waiting_for_others": "Waiting for others",
+  "done": "Done",
+  "completed_tasks": "completed tasks",
+  "projects": "Projects",
+  "this_box_contains_your_personal_projects": "This box contains your personal projects.",
+  "task_marked_completed": "Task Marked Completed"
 }

@@ -3,7 +3,7 @@ import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 part 'hive/box_model.g.dart';
 
 @HiveType()
-class BoxModel {
+class BoxModel extends HiveObject{
 
   @HiveField(0)
   int id;
@@ -18,6 +18,8 @@ class BoxModel {
   String content;
 
   int length;
+
+  BoxModel(this.id, this.idLocal, this.title, this.content);
 
   BoxModel.fromMap(Map<String, dynamic> map) {
     this.id = map['id'];
@@ -48,6 +50,8 @@ class BoxModel {
         return 5;
       case InitialBoxesEnum.WAITING:
         return 6;
+      case InitialBoxesEnum.DONE:
+        return 7;
       default:
         return 0;
     }
@@ -60,5 +64,4 @@ class BoxModel {
     'content': this.content
   };
 
-  BoxModel(this.id, this.idLocal, this.title, this.content);
 }

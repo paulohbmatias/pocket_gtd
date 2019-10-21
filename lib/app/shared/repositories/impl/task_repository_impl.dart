@@ -26,7 +26,18 @@ class TaskRepositoryImpl implements TaskRepository {
       int key = await boxTasks.add(task);
       task.idLocal = key;
       await boxTasks.put(task.idLocal, task);
-      boxTasks.values;
+      return task.idLocal;
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  @override
+  Future<int> saveAt(TaskModel task, BoxModel box) async{
+    try {
+      Box boxTasks = await getBox(box.idLocal);
+      await boxTasks.put(task.idLocal, task);
       return task.idLocal;
     } catch (e) {
       print(e);

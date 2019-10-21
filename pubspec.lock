@@ -220,7 +220,7 @@ packages:
       name: hive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.1"
   hive_flutter:
     dependency: "direct main"
     description:
@@ -438,13 +438,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.22.3"
-  sembast:
-    dependency: "direct main"
-    description:
-      name: sembast
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1+2"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -513,13 +506,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-  synchronized:
-    dependency: transitive
-    description:
-      name: synchronized
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0+1"
   term_glyph:
     dependency: transitive
     description:
@@ -584,5 +570,5 @@ packages:
     source: hosted
     version: "2.2.0"
 sdks:
-  dart: ">2.4.0 <3.0.0"
+  dart: ">=2.5.0 <3.0.0"
   flutter: ">=1.5.0 <2.0.0"

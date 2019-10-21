@@ -8,7 +8,6 @@ import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/list_default/list
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class ListDefaultWidget extends StatefulWidget {
-
   final ListTypeEnum listType;
 
   ListDefaultWidget(this.listType);
@@ -18,9 +17,10 @@ class ListDefaultWidget extends StatefulWidget {
 }
 
 class _ListDefaultWidgetState extends State<ListDefaultWidget> {
-
   final bloc = ListTasksModule.to.bloc<ListDefaultBloc>();
   Future<Stream<List<TaskModel>>> listTasks;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -28,70 +28,104 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
     super.initState();
   }
 
+  void showMessage(String message, TaskModel task) {
+    scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(message),
+      backgroundColor: Colors.green,
+      action: SnackBarAction(
+        onPressed: () => bloc.undo(task),
+        label: "Undo",
+      ),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Stream<List<TaskModel>>>(
-      future: listTasks,
-      builder: (context, snapshot){
-        return snapshot.hasData ? StreamBuilder<List<TaskModel>>(
-            stream: bloc.boxes,
-            initialData: <TaskModel>[],
-            builder: (context, snapshot) {
-              return Container(
-                margin: const EdgeInsets.all(8.0),
-                child: ListView(
-                  children: snapshot.data.map((task) {
-                    return Dismissible(
-                      key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
-                      confirmDismiss: (dismissible) async {
-                        bool result;
-                        await showDialog<bool>(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text(S.of(context).confirm_delete_box
+    return Scaffold(
+      key: scaffoldKey,
+      body: FutureBuilder<Stream<List<TaskModel>>>(
+        future: listTasks,
+        builder: (context, snapshot) {
+          return snapshot.hasData
+              ? StreamBuilder<List<TaskModel>>(
+                  stream: bloc.boxes,
+                  initialData: <TaskModel>[],
+                  builder: (context, snapshot) {
+                    return Container(
+                      margin: const EdgeInsets.all(8.0),
+                      child: ListView(
+                        children: snapshot.data.map((task) {
+                          return Dismissible(
+                            key: Key(DateTime.now()
+                                .millisecondsSinceEpoch
+                                .toString()),
+                            confirmDismiss: (dismissible) async {
+                              if (dismissible != DismissDirection.endToStart) {
+                                showMessage(
+                                    S.of(context).task_marked_completed, task);
+                                return true;
+                              }
+                              bool result;
+                              await showDialog<bool>(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: Text(
+                                            S.of(context).confirm_delete_box),
+                                        content: Text(S
+                                            .of(context)
+                                            .this_box_contains(
+                                                snapshot.data.toString())),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                              onPressed: () {
+                                                result = false;
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text("No")),
+                                          FlatButton(
+                                              onPressed: () {
+                                                result = true;
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text("Yes")),
+                                        ],
+                                      ));
+                              return result;
+                            },
+                            onDismissed: (dismissible) async {
+                              if (dismissible == DismissDirection.endToStart) {
+                                await bloc.removeTask(task);
+                              } else {
+                                await bloc.done(task);
+                              }
+                            },
+                            secondaryBackground: Container(
+                              color: Colors.red,
+                              padding: const EdgeInsets.all(16),
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                ),
                               ),
-                              content: Text(S.of(context).this_box_contains(snapshot.data.toString())),
-                              actions: <Widget>[
-                                FlatButton(
-                                    onPressed: () {
-                                      result = false;
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text("No")),
-                                FlatButton(
-                                    onPressed: () {
-                                      result = true;
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text("Yes")),
-                              ],
-                            ));
-                        return result;
-                      },
-                      onDismissed: (dismissible) async {
-                        await bloc.removeTask(task);
-                      },
-                      background: Container(
-                        color: Colors.red,
-                        padding: const EdgeInsets.all(16),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.white,
-                          ),
-                        ),
+                            ),
+                            direction:
+                                widget.listType != ListTypeEnum.NEXT_ACTIONS
+                                    ? DismissDirection.endToStart
+                                    : DismissDirection.horizontal,
+                            background: Container(
+                              color: Colors.green,
+                            ),
+                            child: CardTaskDefaultWidget(widget.listType, task),
+                          );
+                        }).toList(),
                       ),
-                      dragStartBehavior: DragStartBehavior.start,
-                      direction: DismissDirection.endToStart,
-                      child: CardTaskDefaultWidget(widget.listType, task),
                     );
-                  }).toList(),
-                ),
-              );
-            }) : Center(child: CircularProgressIndicator());
-      },
+                  })
+              : Center(child: CircularProgressIndicator());
+        },
+      ),
     );
   }
 }

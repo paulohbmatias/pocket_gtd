@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 part 'hive/task_model.g.dart';
 
 @HiveType()
-class TaskModel {
+class TaskModel extends HiveObject{
 
   @HiveField(0)
   int id;

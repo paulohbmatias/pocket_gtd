@@ -2,6 +2,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
+import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
@@ -24,12 +25,26 @@ class ListBoxesBloc extends BlocBase {
     return boxRepository.getLength(boxID);
   }
 
-  void openBox(BuildContext context, BoxModel box) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => ListTasksModule(box, ListTypeEnum.DEFAULT)));
+  void openBox(BuildContext context, BoxModel box) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+          maintainState: true,
+          builder: (context) => ListTasksModule(
+                box,
+                ListTypeEnum.DEFAULT,
+                pageToReturn: 3,
+              )),
+    );
   }
 
-  Future<List<BoxModel>> getBoxes() => boxRepository.getAll();
+  Future<List<BoxModel>> getBoxes() async =>
+      (await boxRepository.getAll()).where((box) {
+        return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
+            box.idLocal !=
+                BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES) &&
+            box.idLocal !=
+                BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
+      }).toList();
 
   Future<Stream<List<BoxModel>>> listenBoxes() async {
     listBoxes = await boxRepository.getAll();
