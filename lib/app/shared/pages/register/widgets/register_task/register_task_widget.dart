@@ -25,9 +25,9 @@ class RegisterTaskWidget extends StatelessWidget {
               builder: (context, snapshot) {
                 return FlatButton(
                   onPressed: snapshot.hasData && snapshot.data
-                      ? () => bloc.saveTask(context)
+                      ? () => bloc.task == null ? bloc.saveTask(context) : bloc.updateTask(context)
                       : null,
-                  child: Text(S.of(context).save),
+                  child: Text(bloc.task == null ? S.of(context).save : S.of(context).update),
                 );
               })
         ],

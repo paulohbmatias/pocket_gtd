@@ -10,8 +10,20 @@ import 'package:pocket_gtd/app/shared/validators/register_validators.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RegisterTaskBloc extends BlocBase with RegisterValidators {
-  TaskRepository taskRepository = AppModule.to.getDependency<TaskRepository>();
-  BoxRepository boxRepository = AppModule.to.getDependency<BoxRepository>();
+  final TaskModel task;
+
+  RegisterTaskBloc({this.task}) {
+    if (task != null) {
+      changeTitle(task.title);
+      changeDescription(task.content);
+      changeDeadline(task.deadline);
+    }
+  }
+
+  final TaskRepository taskRepository =
+      AppModule.to.getDependency<TaskRepository>();
+  final BoxRepository boxRepository =
+      AppModule.to.getDependency<BoxRepository>();
 
   BehaviorSubject<String> _title = BehaviorSubject();
   BehaviorSubject<String> _description = BehaviorSubject();
@@ -70,6 +82,21 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
           _box.value ??
               BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX),
                   null, null));
+      Navigator.of(context).pop();
+    } catch (e) {
+      print(e);
+    } finally {
+      changeIsLoading(false);
+    }
+  }
+
+  void updateTask(BuildContext context) async {
+    changeIsLoading(true);
+    try {
+      task.title = _title.value;
+      task.content = _description.value;
+      task.deadline = _deadline.value;
+      await task.save();
       Navigator.of(context).pop();
     } catch (e) {
       print(e);
