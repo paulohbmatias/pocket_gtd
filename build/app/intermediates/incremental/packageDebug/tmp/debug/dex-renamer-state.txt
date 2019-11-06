@@ -1,4 +1,0 @@
-#Wed Nov 06 01:50:20 BRT 2019
-base.0=/media/paulo/Data/Projects/Mobile/github.com/paulohbmatias/pocket_gtd/build/app/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
-renamed.0=classes.dex
