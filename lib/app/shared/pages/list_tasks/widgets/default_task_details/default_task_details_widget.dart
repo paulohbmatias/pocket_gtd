@@ -3,12 +3,12 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
+import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_bloc.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/list_default/list_default_bloc.dart';
 
 class DefaultTaskDetailsWidget extends StatelessWidget {
   final TaskModel task;
-  final bloc = ListTasksModule.to.bloc<ListDefaultBloc>();
+  final bloc = ListTasksModule.to.bloc<ListTasksBloc>();
 
   DefaultTaskDetailsWidget(this.task);
 
@@ -18,13 +18,16 @@ class DefaultTaskDetailsWidget extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       actions: <Widget>[
         FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              bloc.removeTask(task);
+              Navigator.of(context).pop();
+            },
             child: Text(
               "Delete",
               style: TextStyle(color: Theme.of(context).accentColor),
             )),
         FlatButton(
-            onPressed: () {},
+            onPressed: () => bloc.edit(context, task),
             child: Text(
               "Edit",
               style: TextStyle(color: Theme.of(context).accentColor),
@@ -87,8 +90,8 @@ class DefaultTaskDetailsWidget extends StatelessWidget {
                   children: <TextSpan>[
                     TextSpan(
                         text:
-                        "${task.deadline.day}/${task.deadline.month}"
-                            "/${task.deadline.year}",
+                        "${(task.deadline.day).toString().padLeft(2, "0")}/${(task.deadline.month).toString().padLeft(2, "0")}"
+                            "/${(task.deadline.year).toString().padLeft(2, "0")}",
                         style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),

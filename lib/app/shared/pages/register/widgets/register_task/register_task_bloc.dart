@@ -11,12 +11,21 @@ import 'package:rxdart/rxdart.dart';
 
 class RegisterTaskBloc extends BlocBase with RegisterValidators {
   final TaskModel task;
+  final bool isUpdate;
+  final titleController = TextEditingController();
+  final contentController = TextEditingController();
+  final deadlineController = TextEditingController();
 
-  RegisterTaskBloc({this.task}) {
+  RegisterTaskBloc({this.task, this.isUpdate = false}) {
     if (task != null) {
       changeTitle(task.title);
+      titleController.text = task.title;
       changeDescription(task.content);
-      changeDeadline(task.deadline);
+      contentController.text = task.content;
+      if(task.deadline != null){
+        deadlineController.text = transformDate(task.deadline);
+        changeDeadline(task.deadline);
+      }
     }
   }
 

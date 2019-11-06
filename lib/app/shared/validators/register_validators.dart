@@ -4,14 +4,13 @@ import 'package:pocket_gtd/generated/i18n.dart';
 
 mixin RegisterValidators {
   StreamTransformer<DateTime, String> validateDate() =>
-      StreamTransformer<DateTime, String>.fromHandlers(
-          handleData: (date, sink) {
-            sink.add("${(date.day).toString().padLeft(2, "0")}/"
-                "${(date.month).toString().padLeft(2, "0")}/${date.year}");
+      StreamTransformer<DateTime, String>.fromHandlers(handleData: (date, sink) {
+        sink.add(transformDate(date));
       });
+  String transformDate(DateTime date) => "${(date.day).toString().padLeft(2, "0")}/"
+      "${(date.month).toString().padLeft(2, "0")}/${date.year}";
 
-  StreamTransformer<String, String> validateTitleFromStream(
-          BuildContext context) =>
+  StreamTransformer<String, String> validateTitleFromStream(BuildContext context) =>
       StreamTransformer.fromHandlers(handleData: (title, sink) {
         String errorTitle = _isEmpty(context, title, S.of(context).title);
         if (errorTitle.isNotEmpty)
@@ -19,8 +18,7 @@ mixin RegisterValidators {
         else
           sink.add(title);
       });
-  StreamTransformer<String, String> validateDescriptionFromStream(
-          BuildContext context) =>
+  StreamTransformer<String, String> validateDescriptionFromStream(BuildContext context) =>
       StreamTransformer.fromHandlers(handleData: (title, sink) {
         String errorTitle = _isEmpty(context, title, S.of(context).title);
         if (errorTitle.isNotEmpty)
@@ -29,8 +27,7 @@ mixin RegisterValidators {
           sink.add(title);
       });
 
-  String validateTitleFromString(BuildContext context, String title) =>
-      _isEmpty(context, title, S.of(context).title);
+  String validateTitleFromString(BuildContext context, String title) => _isEmpty(context, title, S.of(context).title);
 
   String validateDescriptionFromString(BuildContext context, String title) =>
       _isEmpty(context, title, S.of(context).content);

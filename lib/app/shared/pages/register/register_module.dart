@@ -11,13 +11,14 @@ import 'package:flutter/material.dart';
 class RegisterModule extends ModuleWidget {
   final AddOptionsEnum type;
   final TaskModel task;
+  final bool isUpdate;
 
-  RegisterModule(this.type, {this.task});
+  RegisterModule(this.type, {this.task, this.isUpdate = false});
 
   @override
   List<Bloc> get blocs => [
         Bloc((i) => RegisterReferenceBloc()),
-        Bloc((i) => RegisterTaskBloc(task: task)),
+        Bloc((i) => RegisterTaskBloc(task: task, isUpdate: this.isUpdate)),
         Bloc((i) => RegisterBoxBloc()),
         Bloc((i) => RegisterBloc()),
       ];
