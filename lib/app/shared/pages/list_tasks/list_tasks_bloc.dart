@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/app_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
-import 'package:pocket_gtd/app/shared/enums/task_type.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/pages/register/register_module.dart';
@@ -37,7 +36,8 @@ class ListTasksBloc extends BlocBase {
     return boxes;
   }
 
-  void edit(BuildContext context, TaskModel task) {
+  void edit(BuildContext context, TaskModel task) async{
+    Navigator.of(context).pop();
     if(listType == ListTypeEnum.DEFAULT){
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => RegisterModule(listType, task: task, isUpdate: true)));

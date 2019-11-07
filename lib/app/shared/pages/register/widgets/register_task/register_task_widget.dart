@@ -46,6 +46,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                           hintText: S.of(context).content),
                       onChanged: bloc.changeDescription,
                     ),
+                    !bloc.isUpdate ?
                     FutureBuilder<List<BoxModel>>(
                         future: futureBoxes,
                         builder: (context, snapshot){
@@ -68,7 +69,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                                       .toList(),
                                 );
                               }) : Container();
-                        }),
+                        }) : Container(),
                     StreamBuilder<String>(
                         stream: bloc.deadline,
                         initialData: S.of(context).deadline,

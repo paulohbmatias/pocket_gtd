@@ -14,14 +14,12 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch(type){
-      case ListTypeEnum.DEFAULT:
-        return RegisterTaskWidget();
       case ListTypeEnum.BOXES:
         return RegisterBoxWidget();
       case ListTypeEnum.REFERENCES:
         return RegisterReferenceWidget();
       default:
-        return Container();
+        return RegisterTaskWidget();
     }
   }
 }
