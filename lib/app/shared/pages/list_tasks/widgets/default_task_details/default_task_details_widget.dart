@@ -33,7 +33,7 @@ class DefaultTaskDetailsWidget extends StatelessWidget {
               style: TextStyle(color: Theme.of(context).accentColor),
             )),
         FlatButton(
-            onPressed: () {},
+            onPressed: () => bloc.showOptionsBoxes(context, task),
             child: Text(
               "Move",
               style: TextStyle(color: Theme.of(context).accentColor),

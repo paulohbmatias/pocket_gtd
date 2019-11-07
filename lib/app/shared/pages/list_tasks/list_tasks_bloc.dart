@@ -5,6 +5,7 @@ import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
+import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/box_options/box_options_widget.dart';
 import 'package:pocket_gtd/app/shared/pages/register/register_module.dart';
 import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
 import 'package:rxdart/rxdart.dart';
@@ -36,15 +37,20 @@ class ListTasksBloc extends BlocBase {
     return boxes;
   }
 
-  void edit(BuildContext context, TaskModel task) async{
+  void edit(BuildContext context, TaskModel task) async {
     Navigator.of(context).pop();
-    if(listType == ListTypeEnum.DEFAULT){
+    if (listType == ListTypeEnum.DEFAULT) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => RegisterModule(listType, task: task, isUpdate: true)));
-    }else{
-      showDialog(context: context, builder: (context) => RegisterModule(listType, task: task, isUpdate: true,));
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) => RegisterModule(
+                listType,
+                task: task,
+                isUpdate: true,
+              ));
     }
-
   }
 
   Future<void> done(TaskModel task) async => await taskRepository.moveTask(
@@ -53,6 +59,9 @@ class ListTasksBloc extends BlocBase {
   Future<void> removeTask(TaskModel task) async {
     await taskRepository.delete(task, box);
   }
+
+  Future<void> showOptionsBoxes(BuildContext context, TaskModel task) async =>
+      showModalBottomSheet(context: context, builder: (context) => BoxOptionsWidget(task));
 
   Future<void> undo(TaskModel task) async {
     await taskRepository.delete(task, BoxModel.fromMap({'idLocal': BoxModel.getIdFromEnum(InitialBoxesEnum.DONE)}));
