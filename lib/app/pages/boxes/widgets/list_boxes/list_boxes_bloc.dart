@@ -47,10 +47,16 @@ class ListBoxesBloc extends BlocBase {
       }).toList();
 
   Future<Stream<List<BoxModel>>> listenBoxes() async {
-    listBoxes = await boxRepository.getAll();
-    changeBoxList(await boxRepository.getAll());
-    (await boxRepository.listenBoxes()).listen((list) {
-      changeBoxList(list);
+    listBoxes = await getBoxes();
+    changeBoxList(listBoxes);
+    (await boxRepository.listenBoxes())..listen((list) {
+      changeBoxList(list.where((box) {
+        return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
+            box.idLocal !=
+                BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES) &&
+            box.idLocal !=
+                BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
+      }));
     });
     return boxes;
   }

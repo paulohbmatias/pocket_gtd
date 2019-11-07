@@ -1,5 +1,3 @@
-import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/card_next_actions/card_next_actions_bloc.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/buttons_inbox/buttons_inbox_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
@@ -19,12 +17,10 @@ class ListTasksModule extends ModuleWidget {
 
   @override
   List<Bloc> get blocs => [
-        Bloc((i) => CardNextActionsBloc()),
-        Bloc((i) => ButtonsInboxBloc()),
         Bloc((i) => DefaultTaskDetailsBloc()),
         Bloc((i) => ListDefaultBloc()),
         Bloc((i) => CardTaskDefaultBloc()),
-        Bloc((i) => ListTasksBloc(box)),
+        Bloc((i) => ListTasksBloc(box, listType)),
       ];
 
   @override

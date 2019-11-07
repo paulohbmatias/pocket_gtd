@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/pages/inbox/inbox_module.dart';
 import 'package:pocket_gtd/app/pages/inbox/widgets/add_options/add_options_bloc.dart';
+import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/task_type.dart';
 import 'package:pocket_gtd/app/shared/widgets/fab_circular.dart';
 
@@ -33,21 +34,21 @@ class AddOptionsWidget extends StatelessWidget {
                 color: Colors.white,
                 size: 32,
               ),
-              onPressed: () => bloc.add(context, AddOptionsEnum.REFERENCE)),
+              onPressed: () => bloc.add(context, ListTypeEnum.REFERENCES)),
           IconButton(
               icon: Icon(
                 MdiIcons.packageVariant,
                 color: Colors.white,
                 size: 32,
               ),
-              onPressed: () => bloc.add(context, AddOptionsEnum.BOX)),
+              onPressed: () => bloc.add(context, ListTypeEnum.BOXES)),
           IconButton(
               icon: Icon(
                 MdiIcons.noteText,
                 color: Colors.white,
                 size: 32,
               ),
-              onPressed: () => bloc.add(context, AddOptionsEnum.TASK)),
+              onPressed: () => bloc.add(context, ListTypeEnum.DEFAULT)),
         ]);
   }
 }

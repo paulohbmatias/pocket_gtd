@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/shared/pages/register/register_module.dart';
 import 'package:pocket_gtd/app/shared/pages/register/widgets/register_reference/register_reference_bloc.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
-class RegisterReferenceWidget extends StatelessWidget {
+class RegisterReferenceWidget extends StatefulWidget {
+  @override
+  _RegisterReferenceWidgetState createState() => _RegisterReferenceWidgetState();
+}
+
+class _RegisterReferenceWidgetState extends State<RegisterReferenceWidget> {
   final bloc = RegisterModule.to.bloc<RegisterReferenceBloc>();
 
   @override
@@ -20,9 +25,9 @@ class RegisterReferenceWidget extends StatelessWidget {
             builder: (context, snapshot) {
               return FlatButton(
                 onPressed: snapshot.hasData && snapshot.data
-                    ? () => bloc.saveReference(context)
+                    ? () => bloc.isUpdate ? bloc.updateReference(context) : bloc.saveReference(context)
                     : null,
-                child: Text(S.of(context).save),
+                child: !bloc.isUpdate ? Text(S.of(context).save) : Text(S.of(context).update),
               );
             })
       ],
@@ -34,17 +39,19 @@ class RegisterReferenceWidget extends StatelessWidget {
               stream: bloc.title(context),
               builder: (context, snapshot) {
                 return TextField(
+                  controller: bloc.titleController,
                   decoration: InputDecoration(hintText: S.of(context).title),
                   onChanged: bloc.changeTitle,
                 );
               }),
           StreamBuilder<String>(
-              stream: bloc.description(context),
+              stream: bloc.content(context),
               builder: (context, snapshot) {
                 return TextField(
+                  controller: bloc.contentController,
                   decoration:
                   InputDecoration(hintText: S.of(context).content),
-                  onChanged: bloc.changeDescription,
+                  onChanged: bloc.changeContent,
                 );
               }),
         ],

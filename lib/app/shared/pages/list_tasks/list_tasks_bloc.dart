@@ -2,6 +2,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/app_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
+import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/task_type.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
@@ -11,6 +12,7 @@ import 'package:rxdart/rxdart.dart';
 
 class ListTasksBloc extends BlocBase {
   final BoxModel box;
+  final ListTypeEnum listType;
 
   final TaskRepository taskRepository = AppModule.to.getDependency<TaskRepository>();
 
@@ -18,7 +20,7 @@ class ListTasksBloc extends BlocBase {
 
   BehaviorSubject<List<TaskModel>> _tasks = BehaviorSubject();
 
-  ListTasksBloc(this.box);
+  ListTasksBloc(this.box, this.listType);
 
   Observable<List<TaskModel>> get boxes => _tasks.stream;
 
@@ -36,8 +38,13 @@ class ListTasksBloc extends BlocBase {
   }
 
   void edit(BuildContext context, TaskModel task) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => RegisterModule(AddOptionsEnum.TASK, task: task, isUpdate: true)));
+    if(listType == ListTypeEnum.DEFAULT){
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => RegisterModule(listType, task: task, isUpdate: true)));
+    }else{
+      showDialog(context: context, builder: (context) => RegisterModule(listType, task: task, isUpdate: true,));
+    }
+
   }
 
   Future<void> done(TaskModel task) async => await taskRepository.moveTask(

@@ -11,30 +11,46 @@ import 'package:rxdart/rxdart.dart';
 class RegisterReferenceBloc extends BlocBase with RegisterValidators{
   TaskRepository taskRepository = AppModule.to.getDependency<TaskRepository>();
 
+  final titleController = TextEditingController();
+  final contentController = TextEditingController();
+
+  final TaskModel task;
+  final bool isUpdate;
+
   BehaviorSubject<String> _title = BehaviorSubject();
-  BehaviorSubject<String> _description = BehaviorSubject();
+  BehaviorSubject<String> _content = BehaviorSubject();
+
+  RegisterReferenceBloc({this.task, this.isUpdate = false}){
+    if(this.task != null){
+      titleController.text = task.title;
+      contentController.text = task.content;
+      changeTitle(task.title);
+      changeContent(task.content);
+    }
+  }
+
   BehaviorSubject<bool> _isLoading = BehaviorSubject();
 
   Observable<String> title(BuildContext context) =>
       _title.stream.transform(validateTitleFromStream(context));
 
-  Observable<String> description(BuildContext context) =>
-      _description.stream.transform(validateDescriptionFromStream(context));
+  Observable<String> content(BuildContext context) =>
+      _content.stream.transform(validateDescriptionFromStream(context));
 
   Observable<bool> get isLoading => _isLoading.stream;
 
   Observable<bool> isValidFields(BuildContext context) =>
       Observable.combineLatest2<String, String, bool>(
-          title(context), description(context), (email, password) {
+          title(context), content(context), (email, password) {
         return validateTitleFromString(context, _title.value).isEmpty &&
-            validateDescriptionFromString(context, _description.value)
+            validateDescriptionFromString(context, _content.value)
                 .isEmpty
             ? true
             : false;
       });
 
   Function(String) get changeTitle => _title.sink.add;
-  Function(String) get changeDescription => _description.sink.add;
+  Function(String) get changeContent => _content.sink.add;
   Function(bool) get changeIsLoading => _isLoading.sink.add;
 
   void cancelDialog(BuildContext context) async {
@@ -42,11 +58,25 @@ class RegisterReferenceBloc extends BlocBase with RegisterValidators{
     Navigator.of(context).pop();
   }
 
+  void updateReference(BuildContext context) async {
+    changeIsLoading(true);
+    try {
+      task.title = _title.value;
+      task.content = _content.value;
+      await task.save();
+      Navigator.of(context).pop();
+    } catch (e) {
+      print(e);
+    } finally {
+      changeIsLoading(false);
+    }
+  }
+
   void saveReference(BuildContext context) async {
     changeIsLoading(true);
     try {
       TaskModel taskModel = TaskModel(
-          null, null, _title.value, _description.value, null);
+          null, null, _title.value, _content.value, null);
       await taskRepository.save(taskModel, BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES), null, null));
       Navigator.of(context).pop();
     } catch (e) {
@@ -58,14 +88,14 @@ class RegisterReferenceBloc extends BlocBase with RegisterValidators{
 
   _cleanFields() {
     changeTitle("");
-    changeDescription("");
+    changeContent("");
   }
 
   //dispose will be called automatically by closing its streams
   @override
   void dispose() {
     _title.close();
-    _description.close();
+    _content.close();
     _isLoading.close();
     super.dispose();
   }
