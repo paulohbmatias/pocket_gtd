@@ -14,7 +14,8 @@ class ListTasksBloc extends BlocBase {
   final BoxModel box;
   final ListTypeEnum listType;
 
-  final TaskRepository taskRepository = AppModule.to.getDependency<TaskRepository>();
+  final TaskRepository taskRepository =
+      AppModule.to.getDependency<TaskRepository>();
 
   List<TaskModel> listTasks = List();
 
@@ -40,8 +41,9 @@ class ListTasksBloc extends BlocBase {
   void edit(BuildContext context, TaskModel task) async {
     Navigator.of(context).pop();
     if (listType == ListTypeEnum.DEFAULT) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => RegisterModule(listType, task: task, isUpdate: true)));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>
+              RegisterModule(listType, task: task, isUpdate: true)));
     } else {
       showDialog(
           context: context,
@@ -54,17 +56,26 @@ class ListTasksBloc extends BlocBase {
   }
 
   Future<void> done(TaskModel task) async => await taskRepository.moveTask(
-      box, BoxModel.fromMap({'idLocal': BoxModel.getIdFromEnum(InitialBoxesEnum.DONE)}), task);
+      box,
+      BoxModel.fromMap(
+          {'idLocal': BoxModel.getIdFromEnum(InitialBoxesEnum.DONE)}),
+      task);
 
   Future<void> removeTask(TaskModel task) async {
     await taskRepository.delete(task, box);
   }
 
-  Future<void> showOptionsBoxes(BuildContext context, TaskModel task) async =>
-      showModalBottomSheet(context: context, builder: (context) => BoxOptionsWidget(task));
+  Future<void> showOptionsBoxes(BuildContext context, TaskModel task) async {
+    Navigator.of(context).pop();
+    await showModalBottomSheet(
+        context: context, builder: (context) => BoxOptionsWidget(task));
+  }
 
   Future<void> undo(TaskModel task) async {
-    await taskRepository.delete(task, BoxModel.fromMap({'idLocal': BoxModel.getIdFromEnum(InitialBoxesEnum.DONE)}));
+    await taskRepository.delete(
+        task,
+        BoxModel.fromMap(
+            {'idLocal': BoxModel.getIdFromEnum(InitialBoxesEnum.DONE)}));
     await taskRepository.saveAt(task, box);
   }
 

@@ -18,7 +18,7 @@ class BoxOptionsWidget extends StatelessWidget {
       builder: (context, snapshot){
         return snapshot.hasData ? ListView(
           children: snapshot.data.map<Widget>((item) => ListTile(
-            onTap: () => bloc.moveTo(task, item),
+            onTap: () => bloc.moveTo(context, task, item),
             title: Text(item.title),
           )).toList(),
         ) : Center(
