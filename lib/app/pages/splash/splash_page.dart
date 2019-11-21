@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pocket_gtd/app/pages/splash/splash_bloc.dart';
 import 'package:pocket_gtd/app/pages/splash/splash_module.dart';
 
@@ -16,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
     return FutureBuilder<void>(
         future: bloc.load(context),
         builder: (context, snapshot) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child: CupertinoActivityIndicator());
         });
   }
 }

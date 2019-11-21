@@ -1,4 +1,5 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
@@ -21,33 +22,33 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   DashboardBloc bloc = DashboardModule.to.getBloc<DashboardBloc>();
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      body: StreamBuilder<int>(
-        stream: bloc.page,
-        initialData: widget.page ?? 0,
-        builder: (_, snapshot) => pages[snapshot.data],
+    return CupertinoTabScaffold(
+      resizeToAvoidBottomInset: true,
+      tabBar: CupertinoTabBar(
+        items: <BottomNavigationBarItem>[
+          bottomItem(Icons.inbox, S.of(context).inbox),
+          bottomItem(Icons.view_list, S.of(context).next_actions),
+          bottomItem(Icons.folder_open, S.of(context).references),
+          bottomItem(MdiIcons.inboxMultiple, S.of(context).boxes),
+        ],
+        onTap: bloc.changePage,
       ),
-      bottomNavigationBar: StreamBuilder<int>(
-          stream: bloc.page,
-          initialData: widget.page ?? 0,
-          builder: (_, snapshot) => BottomNavigationBar(
-                unselectedItemColor: Theme.of(context).unselectedWidgetColor,
-                selectedItemColor: Theme.of(context).primaryColor,
-                showUnselectedLabels: true,
-                items: <BottomNavigationBarItem>[
-                  bottomItem(Icons.inbox, S.of(context).inbox),
-                  bottomItem(Icons.view_list, S.of(context).next_actions),
-                  bottomItem(Icons.folder_open, S.of(context).references),
-                  bottomItem(MdiIcons.inboxMultiple, S.of(context).boxes),
-                ],
-                currentIndex: snapshot.data,
-                onTap: bloc.changePage,
-              )),
+      tabBuilder: (BuildContext context, int index) {
+        return CupertinoPageScaffold(
+          child: CupertinoTabView(
+            builder: (BuildContext context) {
+              return StreamBuilder<int>(
+                stream: bloc.page,
+                initialData: widget.page ?? 0,
+                builder: (_, snapshot) => pages[snapshot.data],
+              );
+            },
+          ),
+        );
+      },
     );
   }
 
