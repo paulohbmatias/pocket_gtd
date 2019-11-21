@@ -15,11 +15,6 @@ class ListTasksPage extends StatelessWidget {
       return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => DashboardModule(page: pageToBack,))
-              );
-            }),
             elevation: 0,
             iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
           ),

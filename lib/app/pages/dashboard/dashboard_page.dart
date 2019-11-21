@@ -27,15 +27,6 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-        actionsIconTheme: IconThemeData(
-          color: Colors.black,
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      drawer: Drawer(),
       body: StreamBuilder<int>(
         stream: bloc.page,
         initialData: widget.page ?? 0,

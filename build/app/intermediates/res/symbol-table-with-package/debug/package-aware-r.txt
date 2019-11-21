@@ -1,0 +1,4 @@
+br.com.pocketgtd.pocket_gtd
+drawable launch_background
+mipmap ic_launcher
+style LaunchTheme

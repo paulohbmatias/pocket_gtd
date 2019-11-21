@@ -13,26 +13,26 @@ class AppWidget extends StatelessWidget {
       localeResolutionCallback:
           S.delegate.resolution(fallback: new Locale("en", "")),
       theme: ThemeData(
-        primarySwatch: MaterialColor(
-          0xff1c4b82,
-          <int, Color>{
-            50: Color(0xFFe4e9f0),
-            100: Color(0xFFbbc9da),
-            200: Color(0xFF8ea5c1),
-            300: Color(0xFF6081a8),
-            400: Color(0xFF3e6695),
-            500: Color(0xff1c4b82),
-            600: Color(0xFF19447a),
-            700: Color(0xFF143b6f),
-            800: Color(0xFF113365),
-            900: Color(0xFF092352),
-          },
-        ),
-        accentColor: MaterialAccentColor(0xFF87abff,  <int, Color>{
-          100: Color(0xFF87abff),
-          200: Color(0xFF5488ff),
-          400: Color(0xFF2164ff),
-          700: Color(0xFF0852ff),
+          primarySwatch: MaterialColor(
+            0XFF07689f,
+            <int, Color>{
+              50: Color(0xFFCAF4FA),
+              100: Color(0xFFCAF4FA),
+              200: Color(0xFF97E4F5),
+              300: Color(0xFF60C3E2),
+              400: Color(0xFF379AC5),
+              500: Color(0XFF07689f),
+              600: Color(0xFF055088),
+              700: Color(0xFF033C72),
+              800: Color(0xFF022A5C),
+              900: Color(0xFF011E4C),
+            },
+          ),
+        accentColor: MaterialAccentColor(0xFFFF7E67,  <int, Color>{
+          100: Color(0xFFDCF7FD),
+          200: Color(0xFFFFD9C2),
+          400: Color(0xFFFFA78D),
+          700: Color(0xB73334),
         }),
         primaryColorBrightness: Brightness.dark
       ),

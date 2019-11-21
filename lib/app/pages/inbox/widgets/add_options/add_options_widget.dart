@@ -16,16 +16,18 @@ class AddOptionsWidget extends StatelessWidget {
     return FabCircularMenu(
         buttonState: bloc.buttonOpen,
         fabOpenIcon: const Icon(
-          Icons.add,
+          Icons.menu,
           color: Colors.white,
         ),
         fabCloseIcon: const Icon(
           Icons.close,
           color: Colors.white,
         ),
+        fabColor: Theme.of(context).primaryColor,
         ringColor: Theme.of(context).primaryColor,
+        ringWidth: 100,
         fabMargin: EdgeInsets.all(8),
-        ringDiameter: 200,
+        ringDiameter: 300,
         child: Container(),
         options: <Widget>[
           IconButton(

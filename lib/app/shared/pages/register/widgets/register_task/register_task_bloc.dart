@@ -54,7 +54,8 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
 
   Observable<bool> isValidFields(BuildContext context) =>
       Observable.combineLatest2<String, String, bool>(
-          title(context), description(context), (email, password) {
+          title(context), description(context), (title, description) {
+            print(title);
         return validateTitleFromString(context, _title.value).isEmpty &&
                 validateDescriptionFromString(context, _description.value)
                     .isEmpty

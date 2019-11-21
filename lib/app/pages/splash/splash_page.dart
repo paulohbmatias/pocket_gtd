@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/pages/splash/splash_bloc.dart';
 import 'package:pocket_gtd/app/pages/splash/splash_module.dart';
 
@@ -17,9 +16,7 @@ class _SplashPageState extends State<SplashPage> {
     return FutureBuilder<void>(
         future: bloc.load(context),
         builder: (context, snapshot) {
-          return snapshot.connectionState == ConnectionState.done
-              ? DashboardModule()
-              : Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator());
         });
   }
 }

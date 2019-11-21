@@ -20,7 +20,6 @@ class CardTaskDefaultWidget extends StatelessWidget {
           children: <Widget>[
             ListTile(
               contentPadding: EdgeInsets.all(8),
-              leading: Icon(MdiIcons.noteText, size: 32),
               title: Text(task.title),
               subtitle: Text(task.content),
               onTap: () => showDetails(context, task),
