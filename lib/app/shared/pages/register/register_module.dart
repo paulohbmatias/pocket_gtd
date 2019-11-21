@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/pages/register/widgets/register_reference/register_reference_bloc.dart';
@@ -7,7 +8,6 @@ import 'package:pocket_gtd/app/shared/pages/register/widgets/register_box/regist
 import 'package:pocket_gtd/app/shared/pages/register/register_page.dart';
 import 'package:pocket_gtd/app/shared/pages/register/register_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
-import 'package:flutter/material.dart';
 
 class RegisterModule extends ModuleWidget {
   final ListTypeEnum type;

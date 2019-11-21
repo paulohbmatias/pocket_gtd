@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/task_type.dart';
 import 'package:pocket_gtd/app/shared/pages/register/widgets/register_box/register_box_widget.dart';

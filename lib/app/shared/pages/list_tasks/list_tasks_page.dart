@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/list_default/list_default_widget.dart';
 
@@ -12,16 +11,12 @@ class ListTasksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (listType == ListTypeEnum.DEFAULT)
-      return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-          ),
-          body: ListDefaultWidget(listType));
-    else
-      return Material(
+      return CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+        ),
         child: ListDefaultWidget(listType),
       );
+    else
+      return ListDefaultWidget(listType);
   }
 }

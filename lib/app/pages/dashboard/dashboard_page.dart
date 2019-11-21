@@ -38,15 +38,11 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       tabBuilder: (BuildContext context, int index) {
         return CupertinoPageScaffold(
-          child: CupertinoTabView(
-            builder: (BuildContext context) {
-              return StreamBuilder<int>(
-                stream: bloc.page,
-                initialData: widget.page ?? 0,
-                builder: (_, snapshot) => pages[snapshot.data],
-              );
-            },
-          ),
+          child: StreamBuilder<int>(
+            stream: bloc.page,
+            initialData: widget.page ?? 0,
+            builder: (_, snapshot) => pages[snapshot.data],
+          )
         );
       },
     );

@@ -61,11 +61,14 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
                     .isEmpty
             ? true
             : false;
-      });
+      }).asBroadcastStream();
 
   Function(String) get changeTitle => _title.sink.add;
   Function(String) get changeDescription => _description.sink.add;
-  Function(DateTime) get changeDeadline => _deadline.sink.add;
+  void changeDeadline(DateTime date) {
+    deadlineController.text = transformDate(date);
+    _deadline.sink.add(date);
+  }
   Function(BoxModel) get changeBox => _box.sink.add;
   Function(bool) get changeIsLoading => _isLoading.sink.add;
 
