@@ -17,12 +17,14 @@ class SplashBloc extends BlocBase {
   final boxRepository = AppModule.to.getDependency<BoxRepository>();
 
   Future<void> load(BuildContext context) async {
+    Future.delayed(Duration(seconds: 3)).whenComplete(() async {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => DashboardModule()));
+    });
     await _initDB();
     if (await isTheFirstTime()) {
       await createInitialBoxes(context);
       await setTheFirstTime();
     }
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => DashboardModule()));
   }
 
   Future<void> _initDB({String email}) async {

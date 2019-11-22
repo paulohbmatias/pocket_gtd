@@ -42,7 +42,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 items: <BottomNavigationBarItem>[
                   bottomItem(Icons.inbox, S.of(context).inbox),
                   bottomItem(Icons.view_list, S.of(context).next_actions),
-                  bottomItem(Icons.folder_open, S.of(context).references),
+//                  bottomItem(Icons.folder_open, S.of(context).references),
                   bottomItem(MdiIcons.inboxMultiple, S.of(context).boxes),
                 ],
                 currentIndex: snapshot.data,
@@ -64,7 +64,7 @@ class _DashboardPageState extends State<DashboardPage> {
   List<Widget> get pages => [
         InboxModule(),
         NextActionsModule(),
-        ReferencesModule(),
+//        ReferencesModule(),
         BoxesModule(),
       ];
 }

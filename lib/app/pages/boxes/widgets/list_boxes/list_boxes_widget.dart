@@ -90,7 +90,7 @@ class _ListBoxesWidgetState extends State<ListBoxesWidget> {
                     }).toList(),
                   ),
                 );
-              }) : Center(child: CircularProgressIndicator());
+              }) : Container();
         },
       ),
     );

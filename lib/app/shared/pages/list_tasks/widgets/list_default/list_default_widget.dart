@@ -74,11 +74,7 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                                   context: context,
                                   builder: (context) => AlertDialog(
                                     title: Text(
-                                        S.of(context).confirm_delete_box),
-                                    content: Text(S
-                                        .of(context)
-                                        .this_box_contains(
-                                        snapshot.data.toString())),
+                                        S.of(context).confirm_delete_task(snapshot.data[index].title)),
                                     actions: <Widget>[
                                       FlatButton(
                                           onPressed: () {
@@ -104,13 +100,13 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                               }
                             },
                             secondaryBackground: Container(
-                              color: Colors.red,
+                              color: Colors.red[100],
                               padding: const EdgeInsets.all(16),
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: Icon(
                                   Icons.delete,
-                                  color: Colors.white,
+                                  color: Colors.red,
                                 ),
                               ),
                             ),
@@ -127,7 +123,7 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                       ),
                     );
                   })
-              : Center(child: CircularProgressIndicator());
+              : Container();
         },
       ),
     );

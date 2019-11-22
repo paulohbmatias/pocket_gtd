@@ -41,8 +41,6 @@ class ListBoxesBloc extends BlocBase {
       (await boxRepository.getAll()).where((box) {
         return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
             box.idLocal !=
-                BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES) &&
-            box.idLocal !=
                 BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
       }).toList();
 

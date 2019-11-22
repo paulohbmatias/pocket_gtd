@@ -42,6 +42,7 @@ class S implements WidgetsLocalizations {
   String get reference => "Reference";
   String get references => "References";
   String get references_for_future_consultations => "References for future consultations";
+  String get register => "Register";
   String get register_reference => "Register reference";
   String get register_task => "Register task";
   String get save => "Save";
@@ -54,6 +55,7 @@ class S implements WidgetsLocalizations {
   String get update => "Update";
   String get waiting => "Waiting";
   String get waiting_for_others => "Waiting for others";
+  String confirm_delete_task(String task) => "Do you really want to delete the task $task?";
   String error_cant_be_empty(String prefix) => "$prefix can't be empty";
   String files_x(String numberFiles) => "Files: $numberFiles";
   String this_box_contains(String numberFiles) => "This box contains $numberFiles files";

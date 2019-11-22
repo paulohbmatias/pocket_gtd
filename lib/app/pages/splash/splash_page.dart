@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:pocket_gtd/app/pages/splash/splash_bloc.dart';
 import 'package:pocket_gtd/app/pages/splash/splash_module.dart';
 
@@ -8,15 +9,21 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-
   final bloc = SplashModule.to.bloc<SplashBloc>();
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
-        future: bloc.load(context),
-        builder: (context, snapshot) {
-          return Center(child: CircularProgressIndicator());
-        });
+    return Material(
+      child: FutureBuilder<void>(
+          future: bloc.load(context),
+          builder: (context, snapshot) {
+            return FlareActor(
+              "assets/flare/logo.flr",
+              alignment: Alignment.center,
+              fit: BoxFit.contain,
+              animation: "splash",
+            );
+          }),
+    );
   }
 }

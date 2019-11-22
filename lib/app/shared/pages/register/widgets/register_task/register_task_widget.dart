@@ -27,7 +27,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            S.of(context).register_task,
+            S.of(context).register,
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
           ),
           backgroundColor: Colors.transparent,
