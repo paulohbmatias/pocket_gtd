@@ -19,7 +19,7 @@ class CardBoxWidget extends StatelessWidget {
     return ListTile(
       onTap: () => bloc.openBox(context, box),
       contentPadding: const EdgeInsets.all(8),
-      leading: Icon(MdiIcons.package, size: 48),
+      leading: Icon(MdiIcons.package, size: 48, color: Colors.grey,),
       title: Text(box.title),
       subtitle: Text(S.of(context).files_x(box.length.toString())),
     );

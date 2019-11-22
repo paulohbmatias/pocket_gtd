@@ -4,11 +4,13 @@ import 'package:pocket_gtd/app/app_bloc.dart';
 import 'package:pocket_gtd/app/app_widget.dart';
 import 'package:pocket_gtd/app/shared/repositories/impl/box_repository_impl.dart';
 import 'package:pocket_gtd/app/shared/repositories/impl/task_repository_impl.dart';
+import 'package:pocket_gtd/app/shared/widgets/card_task_default/card_task_default_bloc.dart';
 
 class AppModule extends ModuleWidget {
   @override
   List<Bloc> get blocs => [
         Bloc((i) => AppBloc()),
+        Bloc((i) => CardTaskDefaultBloc())
       ];
 
   @override

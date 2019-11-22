@@ -1,6 +1,5 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
@@ -27,12 +26,11 @@ class ListBoxesBloc extends BlocBase {
 
   void openBox(BuildContext context, BoxModel box) async {
     await Navigator.of(context).push(
-      MaterialPageRoute(
+      CupertinoPageRoute(
           maintainState: true,
           builder: (context) => ListTasksModule(
                 box,
                 ListTypeEnum.DEFAULT,
-                pageToReturn: 3,
               )),
     );
   }

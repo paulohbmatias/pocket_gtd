@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pocket_gtd/app/app_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/card_task_default/card_task_default_bloc.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/default_task_details/default_task_details_widget.dart';
+import 'package:pocket_gtd/app/shared/widgets/card_task_default/card_task_default_bloc.dart';
 
 class CardTaskDefaultWidget extends StatelessWidget {
   final TaskModel task;
   final ListTypeEnum listType;
-  final bloc = ListTasksModule.to.bloc<CardTaskDefaultBloc>();
+  final bloc = AppModule.to.bloc<CardTaskDefaultBloc>();
   CardTaskDefaultWidget(this.listType, this.task);
 
   @override

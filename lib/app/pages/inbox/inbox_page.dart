@@ -21,7 +21,7 @@ class _InboxPageState extends State<InboxPage> {
       navigationBar: CupertinoNavigationBar(
         transitionBetweenRoutes: true,
         trailing: CupertinoButton(
-//            padding: const EdgeInsets.all(0),
+            padding: const EdgeInsets.all(8),
             onPressed: () => bloc.add(context, ListTypeEnum.DEFAULT),
             child: Icon(CupertinoIcons.add)),
       ),
