@@ -37,7 +37,7 @@ class _DashboardPageState extends State<DashboardPage> {
           initialData: widget.page ?? 0,
           builder: (_, snapshot) => BottomNavigationBar(
                 unselectedItemColor: Theme.of(context).unselectedWidgetColor,
-                selectedItemColor: Theme.of(context).primaryColor,
+                selectedItemColor: Theme.of(context).accentColor,
                 showUnselectedLabels: true,
                 items: <BottomNavigationBarItem>[
                   bottomItem(Icons.inbox, S.of(context).inbox),

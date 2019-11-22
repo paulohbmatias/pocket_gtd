@@ -28,11 +28,11 @@ class AppWidget extends StatelessWidget {
               900: Color(0xFF011E4C),
             },
           ),
-        accentColor: MaterialAccentColor(0xFFFF7E67,  <int, Color>{
-          100: Color(0xFFDCF7FD),
-          200: Color(0xFFFFD9C2),
-          400: Color(0xFFFFA78D),
-          700: Color(0xB73334),
+        accentColor: MaterialAccentColor(0xFF4F6CFF,  <int, Color>{
+          100: Color(0xFFEDFCFE),
+          200: Color(0xFFDCF7FD),
+          400: Color(0xFFB9E4F7),
+          700: Color(0xFF5181AE),
         }),
         primaryColorBrightness: Brightness.dark
       ),

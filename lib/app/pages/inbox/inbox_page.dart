@@ -9,8 +9,10 @@ class InboxPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: AddOptionsWidget(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        child: Icon(Icons.add),
+      ),
       body: ListTasksModule(
           BoxModel(
               null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX), null, null),
