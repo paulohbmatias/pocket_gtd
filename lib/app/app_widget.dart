@@ -7,12 +7,14 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      title: 'Pocket GTD',
-      localizationsDelegates: [S.delegate],
-      supportedLocales: S.delegate.supportedLocales,
-      localeResolutionCallback:
-          S.delegate.resolution(fallback: new Locale("en", "")),
-      home: SplashModule()
-    );
+        title: 'Pocket GTD',
+        localizationsDelegates: [S.delegate],
+        supportedLocales: S.delegate.supportedLocales,
+        theme: MaterialBasedCupertinoThemeData(
+          materialTheme: ThemeData.dark(),
+        ),
+
+        localeResolutionCallback: S.delegate.resolution(fallback: new Locale("en", "")),
+        home: SplashModule());
   }
 }

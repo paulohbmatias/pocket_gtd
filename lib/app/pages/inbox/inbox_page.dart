@@ -20,9 +20,8 @@ class _InboxPageState extends State<InboxPage> {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         transitionBetweenRoutes: true,
-        middle: Text("Tasks"),
         trailing: CupertinoButton(
-            padding: const EdgeInsets.all(8),
+//            padding: const EdgeInsets.all(0),
             onPressed: () => bloc.add(context, ListTypeEnum.DEFAULT),
             child: Icon(CupertinoIcons.add)),
       ),

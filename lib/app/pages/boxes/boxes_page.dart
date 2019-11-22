@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pocket_gtd/app/pages/boxes/boxes_bloc.dart';
 import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/pages/boxes/widgets/list_boxes/list_boxes_widget.dart';
@@ -14,8 +14,8 @@ class _BoxesPageState extends State<BoxesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListBoxesWidget(),
+    return CupertinoPageScaffold(
+      child: ListBoxesWidget(),
     );
   }
 

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_bloc.dart';
@@ -17,33 +17,26 @@ class ListDefaultWidget extends StatefulWidget {
 
 class _ListDefaultWidgetState extends State<ListDefaultWidget> {
   final bloc = ListTasksModule.to.bloc<ListTasksBloc>();
-  Future<Stream<List<TaskModel>>> listTasks;
 
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+//  final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  @override
-  void initState() {
-    listTasks = bloc.listenTasks();
-    super.initState();
-  }
-
-  void showMessage(String message, TaskModel task) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(message),
-      backgroundColor: Colors.green,
-      action: SnackBarAction(
-        onPressed: () => bloc.undo(task),
-        label: "Undo",
-      ),
-    ));
-  }
+//  void showMessage(String message, TaskModel task) {
+//    scaffoldKey.currentState.showSnackBar(SnackBar(
+//      content: Text(message),
+//      backgroundColor: Colors.green,
+//      action: SnackBarAction(
+//        onPressed: () => bloc.undo(task),
+//        label: "Undo",
+//      ),
+//    ));
+//  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      body: FutureBuilder<Stream<List<TaskModel>>>(
-        future: listTasks,
+    return CupertinoPageScaffold(
+//      key: scaffoldKey,
+      child: FutureBuilder<Stream<List<TaskModel>>>(
+        future: bloc.listenTasks(),
         builder: (context, snapshot) {
           return snapshot.hasData
               ? StreamBuilder<List<TaskModel>>(
@@ -58,39 +51,39 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                             key: Key(DateTime.now()
                                 .millisecondsSinceEpoch
                                 .toString()),
-                            confirmDismiss: (dismissible) async {
-                              if (dismissible != DismissDirection.endToStart) {
-                                showMessage(
-                                    S.of(context).task_marked_completed, task);
-                                return true;
-                              }
-                              bool result;
-                              await showDialog<bool>(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                        title: Text(
-                                            S.of(context).confirm_delete_box),
-                                        content: Text(S
-                                            .of(context)
-                                            .this_box_contains(
-                                                snapshot.data.toString())),
-                                        actions: <Widget>[
-                                          FlatButton(
-                                              onPressed: () {
-                                                result = false;
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text("No")),
-                                          FlatButton(
-                                              onPressed: () {
-                                                result = true;
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text("Yes")),
-                                        ],
-                                      ));
-                              return result;
-                            },
+//                            confirmDismiss: (dismissible) async {
+//                              if (dismissible != DismissDirection.endToStart) {
+////                                showMessage(
+////                                    S.of(context).task_marked_completed, task);
+//                                return true;
+//                              }
+//                              bool result;
+//                              await showDialog<bool>(
+//                                  context: context,
+//                                  builder: (context) => AlertDialog(
+//                                        title: Text(
+//                                            S.of(context).confirm_delete_box),
+//                                        content: Text(S
+//                                            .of(context)
+//                                            .this_box_contains(
+//                                                snapshot.data.toString())),
+//                                        actions: <Widget>[
+//                                          FlatButton(
+//                                              onPressed: () {
+//                                                result = false;
+//                                                Navigator.of(context).pop();
+//                                              },
+//                                              child: Text("No")),
+//                                          FlatButton(
+//                                              onPressed: () {
+//                                                result = true;
+//                                                Navigator.of(context).pop();
+//                                              },
+//                                              child: Text("Yes")),
+//                                        ],
+//                                      ));
+//                              return result;
+//                            },
                             onDismissed: (dismissible) async {
                               if (dismissible == DismissDirection.endToStart) {
                                 await bloc.removeTask(task);
@@ -99,13 +92,13 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                               }
                             },
                             secondaryBackground: Container(
-                              color: Colors.red,
+//                              color: CupertinoColors.ac,
                               padding: const EdgeInsets.all(16),
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
+                                  CupertinoIcons.delete,
+                                  color: CupertinoColors.white,
                                 ),
                               ),
                             ),
@@ -114,7 +107,7 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                                     ? DismissDirection.endToStart
                                     : DismissDirection.horizontal,
                             background: Container(
-                              color: Colors.green,
+                              color: CupertinoColors.activeGreen,
                             ),
                             child: CardTaskDefaultWidget(widget.listType, task),
                           );
@@ -122,7 +115,7 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                       ),
                     );
                   })
-              : Center(child: CircularProgressIndicator());
+              : Center(child: CupertinoActivityIndicator());
         },
       ),
     );
