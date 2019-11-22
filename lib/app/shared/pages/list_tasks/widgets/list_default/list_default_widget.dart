@@ -52,8 +52,13 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                   builder: (context, snapshot) {
                     return Container(
                       margin: const EdgeInsets.all(8.0),
-                      child: ListView(
-                        children: snapshot.data.map((task) {
+                      child: ListView.separated(
+                        itemCount: snapshot.data.length,
+                        separatorBuilder: (context, index){
+                          return Container();
+                        },
+                        itemBuilder: (context, index){
+                          TaskModel task = snapshot.data[index];
                           return Dismissible(
                             key: Key(DateTime.now()
                                 .millisecondsSinceEpoch
@@ -68,27 +73,27 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                               await showDialog<bool>(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                        title: Text(
-                                            S.of(context).confirm_delete_box),
-                                        content: Text(S
-                                            .of(context)
-                                            .this_box_contains(
-                                                snapshot.data.toString())),
-                                        actions: <Widget>[
-                                          FlatButton(
-                                              onPressed: () {
-                                                result = false;
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text("No")),
-                                          FlatButton(
-                                              onPressed: () {
-                                                result = true;
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text("Yes")),
-                                        ],
-                                      ));
+                                    title: Text(
+                                        S.of(context).confirm_delete_box),
+                                    content: Text(S
+                                        .of(context)
+                                        .this_box_contains(
+                                        snapshot.data.toString())),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                          onPressed: () {
+                                            result = false;
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("No")),
+                                      FlatButton(
+                                          onPressed: () {
+                                            result = true;
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("Yes")),
+                                    ],
+                                  ));
                               return result;
                             },
                             onDismissed: (dismissible) async {
@@ -110,15 +115,15 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                               ),
                             ),
                             direction:
-                                widget.listType != ListTypeEnum.NEXT_ACTIONS
-                                    ? DismissDirection.endToStart
-                                    : DismissDirection.horizontal,
+                            widget.listType != ListTypeEnum.NEXT_ACTIONS
+                                ? DismissDirection.endToStart
+                                : DismissDirection.horizontal,
                             background: Container(
                               color: Colors.green,
                             ),
                             child: CardTaskDefaultWidget(widget.listType, task),
                           );
-                        }).toList(),
+                        },
                       ),
                     );
                   })

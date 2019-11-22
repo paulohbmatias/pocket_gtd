@@ -42,57 +42,30 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                 margin: const EdgeInsets.all(16),
                 child: Column(
                   children: <Widget>[
-                    TextField(
-                      controller: bloc.titleController,
-                      decoration: InputDecoration(hintText: S.of(context).title),
-                      onChanged: bloc.changeTitle,
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 8),
+                      child: TextField(
+                        controller: bloc.titleController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: S.of(context).title,
+                        ),
+                        onChanged: bloc.changeTitle,
+                      ),
                     ),
-                    TextField(
-                      controller: bloc.contentController,
-                      decoration: InputDecoration(hintText: S.of(context).content),
-                      onChanged: bloc.changeDescription,
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 8),
+                      child: TextField(
+                        controller: bloc.contentController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: S.of(context).content,
+                        ),
+                        maxLines: 4,
+                        minLines: 2,
+                        onChanged: bloc.changeDescription,
+                      ),
                     ),
-                    !bloc.isUpdate
-                        ? FutureBuilder<List<BoxModel>>(
-                            future: futureBoxes,
-                            builder: (context, snapshot) {
-                              return snapshot.hasData
-                                  ? StreamBuilder<BoxModel>(
-                                      stream: bloc.box,
-                                      initialData: snapshot.data.first,
-                                      builder: (context, boxSelected) {
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                          child: DropdownButton<BoxModel>(
-                                            value: boxSelected.data,
-                                            elevation: 0,
-                                            isExpanded: true,
-                                            onChanged: bloc.changeBox,
-                                            iconSize: 32,
-//                                            icon: Icon(MdiIcons.package, color: Theme.of(context).primaryColor),
-                                            items: snapshot.data
-                                                .map<DropdownMenuItem<BoxModel>>((value) => DropdownMenuItem(
-                                                    value: value,
-                                                    child: Row(
-                                                      children: <Widget>[
-                                                        Icon(
-                                                          MdiIcons.package,
-                                                          size: 32,
-                                                          color: Theme.of(context).primaryColor,
-                                                        ),
-                                                        Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: Text(value.title),
-                                                        )
-                                                      ],
-                                                    )))
-                                                .toList(),
-                                          ),
-                                        );
-                                      })
-                                  : Container();
-                            })
-                        : Container(),
                     StreamBuilder<String>(
                         stream: bloc.deadline,
                         initialData: S.of(context).deadline,
@@ -109,12 +82,11 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                             },
                             keyboardType: TextInputType.datetime,
                             decoration: InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: snapshot.data,
                               errorText: snapshot.error,
-                              labelStyle: TextStyle(
-                                color: picked != null ? Colors.black : Colors.grey
-                              ),
-                              suffixIcon: Icon(
+                              labelStyle: TextStyle(color: picked != null ? Colors.black : Colors.grey),
+                              prefixIcon: Icon(
                                 Icons.calendar_today,
                                 color: Theme.of(context).primaryColor,
                               ),

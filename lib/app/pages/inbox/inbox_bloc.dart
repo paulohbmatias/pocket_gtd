@@ -6,8 +6,10 @@ import 'package:pocket_gtd/app/shared/pages/register/register_module.dart';
 
 class InboxBloc extends BlocBase {
 
-  void add(BuildContext context, ListTypeEnum type){
-    showBottomSheet(context: context, builder: (context) => RegisterModule(type));
+  void add(BuildContext context, ListTypeEnum type) async{
+    await Navigator.push(context, MaterialPageRoute(
+      builder: (context) => RegisterModule(type)
+    ));
   }
 
   //dispose will be called automatically by closing its streams

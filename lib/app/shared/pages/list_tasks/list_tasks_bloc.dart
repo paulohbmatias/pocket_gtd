@@ -65,12 +65,6 @@ class ListTasksBloc extends BlocBase {
     await taskRepository.delete(task, box);
   }
 
-  Future<void> showOptionsBoxes(BuildContext context, TaskModel task) async {
-    Navigator.of(context).pop();
-    await showModalBottomSheet(
-        context: context, builder: (context) => BoxOptionsWidget(task));
-  }
-
   Future<void> undo(TaskModel task) async {
     await taskRepository.delete(
         task,
