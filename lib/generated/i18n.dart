@@ -23,6 +23,7 @@ class S implements WidgetsLocalizations {
 
   String get actions_may_be_done_someday => "Actions that may be done someday";
   String get actions_to_perform_at_a_specific_time => "Actions to perform at a specific time";
+  String get analyze => "Analyze";
   String get boxes => "Boxes";
   String get cancel => "Cancel";
   String get completed_tasks => "completed tasks";
@@ -31,9 +32,11 @@ class S implements WidgetsLocalizations {
   String get create_box => "Create box";
   String get deadline => "Deadline";
   String get done => "Done";
+  String get edit => "Edit";
   String get event => "Event";
   String get inbox => "Inbox";
   String get inbox_for_tasks => "Inbox for tasks";
+  String get move => "Move";
   String get next_actions => "Next actions";
   String get next_actions_to_perform => "Next actions to perform";
   String get one_day_maybe => "One day/ Maybe";
@@ -45,6 +48,7 @@ class S implements WidgetsLocalizations {
   String get register => "Register";
   String get register_reference => "Register reference";
   String get register_task => "Register task";
+  String get remove => "Remove";
   String get save => "Save";
   String get scheduled => "Scheduled";
   String get task => "Task";
@@ -61,16 +65,100 @@ class S implements WidgetsLocalizations {
   String this_box_contains(String numberFiles) => "This box contains $numberFiles files";
 }
 
-class $pt extends S {
-  const $pt();
+class $en extends S {
+  const $en();
+}
+
+class $pt_BR extends S {
+  const $pt_BR();
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-}
-
-class $en extends S {
-  const $en();
+  @override
+  String get cancel => "Cancelar";
+  @override
+  String get projects => "Projetos";
+  @override
+  String get references => "Referências";
+  @override
+  String get waiting => "Em espera";
+  @override
+  String get register_task => "Registar tarefa";
+  @override
+  String get scheduled => "Agendado";
+  @override
+  String get save => "Salvar";
+  @override
+  String get project => "Projeto";
+  @override
+  String get update => "Atualização";
+  @override
+  String get title => "Título";
+  @override
+  String get remove => "Remover";
+  @override
+  String get content => "Conteúdo";
+  @override
+  String get reference => "Referência";
+  @override
+  String get references_for_future_consultations => "Referências para futuras consultas";
+  @override
+  String get inbox_for_tasks => "Caixa de entrada para as tarefas";
+  @override
+  String get actions_may_be_done_someday => "Ações que pode ser feito, algum dia.";
+  @override
+  String get register_reference => "Registo referência";
+  @override
+  String get event => "Eventos";
+  @override
+  String get deadline => "Prazo";
+  @override
+  String get boxes => "Caixas";
+  @override
+  String get actions_to_perform_at_a_specific_time => "Acções a executar em uma hora específica";
+  @override
+  String get move => "Mover";
+  @override
+  String get this_box_contains_your_personal_projects => "Esta caixa contém seus projetos pessoais.";
+  @override
+  String get test => "Prazo";
+  @override
+  String get edit => "Editar";
+  @override
+  String get confirm_delete_box => "Você realmente quer eliminar esta caixa?";
+  @override
+  String get one_day_maybe => "Um dia\/ Talvez";
+  @override
+  String get waiting_for_others => "Espera para que outros";
+  @override
+  String get create_box => "Criar caixa";
+  @override
+  String get completed_tasks => "tarefas concluídas";
+  @override
+  String get done => "Feito";
+  @override
+  String get task_marked_completed => "Tarefas Marcadas Como Concluídas";
+  @override
+  String get task => "Tarefa";
+  @override
+  String get analyze => "Analisar";
+  @override
+  String get next_actions_to_perform => "Próximas acções a realizar";
+  @override
+  String get inbox => "Caixa de entrada";
+  @override
+  String get register => "Registrar";
+  @override
+  String get next_actions => "Próximas ações";
+  @override
+  String confirm_delete_task(String tarefa) => "Você realmente deseja excluir a tarefa $tarefa?";
+  @override
+  String this_box_contains(String numberFiles) => "Esta caixa contém $numberFiles arquivos";
+  @override
+  String files_x(String numberFiles) => "Arquivos: $numberFiles";
+  @override
+  String error_cant_be_empty(String prefixo) => "$prefixo não pode ser vazio";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
@@ -78,8 +166,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale("pt", ""),
       Locale("en", ""),
+      Locale("pt", "BR"),
     ];
   }
 
@@ -104,11 +192,11 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     final String lang = getLang(locale);
     if (lang != null) {
       switch (lang) {
-        case "pt":
-          S.current = const $pt();
-          return SynchronousFuture<S>(S.current);
         case "en":
           S.current = const $en();
+          return SynchronousFuture<S>(S.current);
+        case "pt_BR":
+          S.current = const $pt_BR();
           return SynchronousFuture<S>(S.current);
         default:
           // NO-OP.

@@ -1,12 +1,11 @@
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/pages/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/pages/inbox/inbox_module.dart';
 import 'package:pocket_gtd/app/pages/next_actions/next_actions_module.dart';
-import 'package:pocket_gtd/app/pages/references/references_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -27,6 +26,21 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      drawer: Drawer(),
+      appBar: AppBar(
+        title: StreamBuilder<int>(
+          stream: bloc.page,
+          initialData: widget.page ?? 0,
+          builder: (context, snapshot){
+            switch(snapshot.data){
+              case 0: return Text(S.of(context).inbox);
+              case 1: return Text(S.of(context).next_actions);
+              case 2: return Text(S.of(context).boxes);
+              default: return Text(S.of(context).inbox);
+            }
+          },
+        ),
+      ),
       body: StreamBuilder<int>(
         stream: bloc.page,
         initialData: widget.page ?? 0,
@@ -37,13 +51,14 @@ class _DashboardPageState extends State<DashboardPage> {
           initialData: widget.page ?? 0,
           builder: (_, snapshot) => BottomNavigationBar(
                 unselectedItemColor: Theme.of(context).unselectedWidgetColor,
-                selectedItemColor: Theme.of(context).accentColor,
-                showUnselectedLabels: true,
+                selectedItemColor: Theme.of(context).primaryColor,
+                showUnselectedLabels: false,
+                showSelectedLabels: false,
                 items: <BottomNavigationBarItem>[
-                  bottomItem(Icons.inbox, S.of(context).inbox),
-                  bottomItem(Icons.view_list, S.of(context).next_actions),
-//                  bottomItem(Icons.folder_open, S.of(context).references),
-                  bottomItem(MdiIcons.inboxMultiple, S.of(context).boxes),
+                  bottomItem(MdiIcons.inbox, S.of(context).inbox),
+                  bottomItem(OMIcons.listAlt, S.of(context).next_actions),
+//                  bottomItem(MdiIcons.contentPaste, S.of(context).references),
+                  bottomItem(MdiIcons.cube, S.of(context).boxes),
                 ],
                 currentIndex: snapshot.data,
                 onTap: bloc.changePage,
@@ -55,6 +70,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return BottomNavigationBarItem(
         icon: Icon(
           icon,
+          size: 30,
         ),
         title: Text(
           title,
@@ -64,7 +80,7 @@ class _DashboardPageState extends State<DashboardPage> {
   List<Widget> get pages => [
         InboxModule(),
         NextActionsModule(),
-//        ReferencesModule(),
+//        Container(),
         BoxesModule(),
       ];
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pocket_gtd/app/pages/splash/splash_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
@@ -8,10 +9,16 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pocket GTD',
-      localizationsDelegates: [S.delegate],
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
       supportedLocales: S.delegate.supportedLocales,
+      debugShowCheckedModeBanner: false,
       localeResolutionCallback:
-          S.delegate.resolution(fallback: new Locale("en", "")),
+          S.delegate.resolution(fallback: new Locale("en", "US")),
       theme: ThemeData(
           primarySwatch: MaterialColor(
             0XFF07689f,

@@ -5,6 +5,7 @@ import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
 
 class InboxPage extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _InboxPageState extends State<InboxPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => bloc.add(context, ListTypeEnum.DEFAULT),
+        backgroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.add),
       ),
       body: ListTasksModule(

@@ -22,7 +22,7 @@ class BoxOptionsWidget extends StatelessWidget {
             shrinkWrap: true,
             children: snapshot.data.map<Widget>((item) => ListTile(
               onTap: () => bloc.moveTo(context, task, item),
-              leading: Icon(MdiIcons.package),
+              leading: Icon(MdiIcons.cubeOutline, size: 32,),
               title: Text(item.title),
             )).toList(),
           ) : Center(

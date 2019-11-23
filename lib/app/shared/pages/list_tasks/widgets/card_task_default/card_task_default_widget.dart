@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/card_task_default/card_task_default_bloc.dart';
 import 'package:pocket_gtd/app/shared/utils/date_utils.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
+import 'package:popup_menu/popup_menu.dart';
 
 class CardTaskDefaultWidget extends StatelessWidget {
   final TaskModel task;
@@ -20,48 +23,89 @@ class CardTaskDefaultWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Card(
-            child: ListTile(
-              contentPadding: EdgeInsets.all(8),
-              title: Text(task.title),
-              subtitle: Text(task.content),
-              trailing: task.deadline != null
-                  ? Text(
-                      "${task.deadline.day} ${DateUtils.monthFromDate(task.deadline)}",
-                      style: TextStyle(
-                        color: Color(0xffff7e67),
-                        fontWeight: FontWeight.bold
+            child: InkWell(
+              onTapDown: (pos) async{
+                int result = await showMenu<int>(
+                  context: context,
+                  position: RelativeRect.fromLTRB(
+                    pos.globalPosition.dx,
+                    pos.globalPosition.dy,
+                    pos.globalPosition.dx,
+                    pos.globalPosition.dy,
+                  ),
+                  items: <PopupMenuEntry<int>>[
+                    PopupMenuItem<int>(
+                      value: 0,
+                      child: Row(
+                        children: <Widget>[
+                          Icon(OMIcons.edit),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(S.of(context).edit),
+                          ),
+                        ],
                       ),
-                    )
-                  : Text(""),
-              onTap: (){
-                showDialog(context: context, builder: (context){
-                  return Dialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        FlatButton(
-                          onPressed: () => bloc.edit(context, ListTypeEnum.DEFAULT, task),
-                          textColor: Theme.of(context).accentColor,
-                          child: Text("EDIT"),
-                        ),
-                        FlatButton(
-                          onPressed: () => bloc.showOptionsBoxes(context, task),
-                          textColor: Theme.of(context).accentColor,
-                          child: Text("MOVE"),
-                        ),
-                        FlatButton(
-                          onPressed: (){},
-                          textColor: Theme.of(context).accentColor,
-                          child: Text("PROCESS"),
-                        ),
-                      ],
+                    PopupMenuItem<int>(
+                      value: 1,
+                      child: Row(
+                        children: <Widget>[
+                          Icon(OMIcons.delete),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(S.of(context).remove),
+                          ),
+                        ],
+                      ),
                     ),
-                  );
-                });
+                    PopupMenuItem(
+                      value: 2,
+                      child: Row(
+                        children: <Widget>[
+                          Icon(OMIcons.arrowForward),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(S.of(context).move),
+                          ),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 3,
+                      enabled: false,
+                      child: Row(
+                        children: <Widget>[
+                          Icon(OMIcons.reorder),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(S.of(context).analyze),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+                if(result != null){
+                  switch(result){
+                    case 0: bloc.edit(context, ListTypeEnum.DEFAULT, task); break;
+                    case 1: bloc.remove(context, task); break;
+                    case 2: bloc.showOptionsBoxes(context, task); break;
+                    case 3: break;
+                  }
+                }
               },
+              onTap: () {},
+              child: ListTile(
+                contentPadding: EdgeInsets.all(8),
+                title: Text(task.title),
+                subtitle: Text(task.content),
+                trailing: task.deadline != null
+                    ? Text(
+                        "${task.deadline.day} ${DateUtils.monthFromDate(task.deadline)}",
+                        style: TextStyle(color: Color(0xffff7e67), fontWeight: FontWeight.bold),
+                      )
+                    : Text(""),
+              ),
             ),
           ),
         ],

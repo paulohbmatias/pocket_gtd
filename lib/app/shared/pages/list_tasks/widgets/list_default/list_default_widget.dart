@@ -5,6 +5,7 @@ import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_bloc.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/card_task_default/card_task_default_widget.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
+import 'package:positioned_tap_detector/positioned_tap_detector.dart';
 
 class ListDefaultWidget extends StatefulWidget {
   final ListTypeEnum listType;
@@ -54,71 +55,12 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                       margin: const EdgeInsets.all(8.0),
                       child: ListView.separated(
                         itemCount: snapshot.data.length,
-                        separatorBuilder: (context, index){
+                        separatorBuilder: (context, index) {
                           return Container();
                         },
-                        itemBuilder: (context, index){
+                        itemBuilder: (context, index) {
                           TaskModel task = snapshot.data[index];
-                          return Dismissible(
-                            key: Key(DateTime.now()
-                                .millisecondsSinceEpoch
-                                .toString()),
-                            confirmDismiss: (dismissible) async {
-                              if (dismissible != DismissDirection.endToStart) {
-                                showMessage(
-                                    S.of(context).task_marked_completed, task);
-                                return true;
-                              }
-                              bool result;
-                              await showDialog<bool>(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: Text(
-                                        S.of(context).confirm_delete_task(snapshot.data[index].title)),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                          onPressed: () {
-                                            result = false;
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Text("No")),
-                                      FlatButton(
-                                          onPressed: () {
-                                            result = true;
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Text("Yes")),
-                                    ],
-                                  ));
-                              return result;
-                            },
-                            onDismissed: (dismissible) async {
-                              if (dismissible == DismissDirection.endToStart) {
-                                await bloc.removeTask(task);
-                              } else {
-                                await bloc.done(task);
-                              }
-                            },
-                            secondaryBackground: Container(
-                              color: Colors.red[100],
-                              padding: const EdgeInsets.all(16),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ),
-                            direction:
-                            widget.listType != ListTypeEnum.NEXT_ACTIONS
-                                ? DismissDirection.endToStart
-                                : DismissDirection.horizontal,
-                            background: Container(
-                              color: Colors.green,
-                            ),
-                            child: CardTaskDefaultWidget(widget.listType, task),
-                          );
+                          return CardTaskDefaultWidget(widget.listType, task);
                         },
                       ),
                     );
