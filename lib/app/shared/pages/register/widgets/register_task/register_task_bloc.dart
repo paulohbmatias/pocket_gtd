@@ -12,6 +12,7 @@ import 'package:rxdart/rxdart.dart';
 class RegisterTaskBloc extends BlocBase with RegisterValidators {
   final TaskModel task;
   final bool isUpdate;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   final titleController = TextEditingController();
   final contentController = TextEditingController();
   final deadlineController = TextEditingController();
@@ -22,17 +23,15 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
       titleController.text = task.title;
       changeDescription(task.content);
       contentController.text = task.content;
-      if(task.deadline != null){
+      if (task.deadline != null) {
         deadlineController.text = transformDate(task.deadline);
         changeDeadline(task.deadline);
       }
     }
   }
 
-  final TaskRepository taskRepository =
-      AppModule.to.getDependency<TaskRepository>();
-  final BoxRepository boxRepository =
-      AppModule.to.getDependency<BoxRepository>();
+  final TaskRepository taskRepository = AppModule.to.getDependency<TaskRepository>();
+  final BoxRepository boxRepository = AppModule.to.getDependency<BoxRepository>();
 
   BehaviorSubject<String> _title = BehaviorSubject();
   BehaviorSubject<String> _description = BehaviorSubject();
@@ -40,8 +39,7 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
   BehaviorSubject<BoxModel> _box = BehaviorSubject();
   BehaviorSubject<bool> _isLoading = BehaviorSubject();
 
-  Observable<String> title(BuildContext context) =>
-      _title.stream.transform(validateTitleFromStream(context));
+  Observable<String> title(BuildContext context) => _title.stream.transform(validateTitleFromStream(context));
 
   Observable<String> description(BuildContext context) =>
       _description.stream.transform(validateDescriptionFromStream(context));
@@ -53,12 +51,10 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
   Observable<bool> get isLoading => _isLoading.stream;
 
   Observable<bool> isValidFields(BuildContext context) =>
-      Observable.combineLatest2<String, String, bool>(
-          title(context), description(context), (title, description) {
-            print(title);
+      Observable.combineLatest2<String, String, bool>(title(context), description(context), (title, description) {
+        print(title);
         return validateTitleFromString(context, _title.value).isEmpty &&
-                validateDescriptionFromString(context, _description.value)
-                    .isEmpty
+                validateDescriptionFromString(context, _description.value).isEmpty
             ? true
             : false;
       });
@@ -69,11 +65,9 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
   Function(BoxModel) get changeBox => _box.sink.add;
   Function(bool) get changeIsLoading => _isLoading.sink.add;
 
-  Future<List<BoxModel>> getBoxes() async =>
-      (await boxRepository.getAll()).where((box) {
+  Future<List<BoxModel>> getBoxes() async => (await boxRepository.getAll()).where((box) {
         return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.DONE) &&
-            box.idLocal !=
-                BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES) &&
+            box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES) &&
             box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.DONE);
       }).toList();
 
@@ -85,18 +79,22 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
   void saveTask(BuildContext context) async {
     changeIsLoading(true);
     try {
-      TaskModel taskModel = TaskModel(
-          null, null, _title.value, _description.value, _deadline.value);
+      TaskModel taskModel = TaskModel(null, null, _title.value, _description.value, _deadline.value);
       await taskRepository.save(
-          taskModel,
-          _box.value ??
-              BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX),
-                  null, null));
-      Navigator.of(context).pop();
+          taskModel, _box.value ?? BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX), null, null));
     } catch (e) {
       print(e);
     } finally {
+      titleController.clear();
+      contentController.clear();
+      deadlineController.clear();
+      _title.sink.add(null);
+      _description.sink.add(null);
       changeIsLoading(false);
+      scaffoldKey.currentState.showSnackBar(SnackBar(
+        backgroundColor: Colors.green,
+        content: Text("Tarefa adicionada com sucesso"),
+      ));
     }
   }
 

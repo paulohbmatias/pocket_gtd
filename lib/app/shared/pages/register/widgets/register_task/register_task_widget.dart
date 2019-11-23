@@ -25,14 +25,11 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: bloc.scaffoldKey,
         appBar: AppBar(
           title: Text(
             S.of(context).register,
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
           ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,6 +43,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                       margin: const EdgeInsets.only(bottom: 8),
                       child: TextField(
                         controller: bloc.titleController,
+                        textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: S.of(context).title,
@@ -57,6 +55,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                       margin: const EdgeInsets.only(bottom: 8),
                       child: TextField(
                         controller: bloc.contentController,
+                        textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: S.of(context).content,

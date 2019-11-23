@@ -52,7 +52,8 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                   initialData: <TaskModel>[],
                   builder: (context, snapshot) {
                     return Container(
-                      margin: const EdgeInsets.all(8.0),
+                      margin: const EdgeInsets.all(2.0),
+                      padding: const EdgeInsets.all(2),
                       child: ListView.separated(
                         itemCount: snapshot.data.length,
                         separatorBuilder: (context, index) {

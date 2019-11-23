@@ -18,97 +18,91 @@ class CardTaskDefaultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Card(
-            child: InkWell(
-              onTapDown: (pos) async{
-                int result = await showMenu<int>(
-                  context: context,
-                  position: RelativeRect.fromLTRB(
-                    pos.globalPosition.dx,
-                    pos.globalPosition.dy,
-                    pos.globalPosition.dx,
-                    pos.globalPosition.dy,
-                  ),
-                  items: <PopupMenuEntry<int>>[
-                    PopupMenuItem<int>(
-                      value: 0,
-                      child: Row(
-                        children: <Widget>[
-                          Icon(OMIcons.edit),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(S.of(context).edit),
-                          ),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem<int>(
-                      value: 1,
-                      child: Row(
-                        children: <Widget>[
-                          Icon(OMIcons.delete),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(S.of(context).remove),
-                          ),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 2,
-                      child: Row(
-                        children: <Widget>[
-                          Icon(OMIcons.arrowForward),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(S.of(context).move),
-                          ),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 3,
-                      enabled: false,
-                      child: Row(
-                        children: <Widget>[
-                          Icon(OMIcons.reorder),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(S.of(context).analyze),
-                          ),
-                        ],
-                      ),
+    return Card(
+      elevation: 0.1,
+      child: InkWell(
+        onTapDown: (pos) async{
+          int result = await showMenu<int>(
+            context: context,
+            position: RelativeRect.fromLTRB(
+              pos.globalPosition.dx,
+              pos.globalPosition.dy,
+              pos.globalPosition.dx,
+              pos.globalPosition.dy,
+            ),
+            items: <PopupMenuEntry<int>>[
+              PopupMenuItem<int>(
+                value: 0,
+                child: Row(
+                  children: <Widget>[
+                    Icon(OMIcons.edit),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(S.of(context).edit),
                     ),
                   ],
-                );
-                if(result != null){
-                  switch(result){
-                    case 0: bloc.edit(context, ListTypeEnum.DEFAULT, task); break;
-                    case 1: bloc.remove(context, task); break;
-                    case 2: bloc.showOptionsBoxes(context, task); break;
-                    case 3: break;
-                  }
-                }
-              },
-              onTap: () {},
-              child: ListTile(
-                contentPadding: EdgeInsets.all(8),
-                title: Text(task.title),
-                subtitle: Text(task.content),
-                trailing: task.deadline != null
-                    ? Text(
-                        "${task.deadline.day} ${DateUtils.monthFromDate(task.deadline)}",
-                        style: TextStyle(color: Color(0xffff7e67), fontWeight: FontWeight.bold),
-                      )
-                    : Text(""),
+                ),
               ),
-            ),
-          ),
-        ],
+              PopupMenuItem<int>(
+                value: 1,
+                child: Row(
+                  children: <Widget>[
+                    Icon(OMIcons.delete),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(S.of(context).remove),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 2,
+                child: Row(
+                  children: <Widget>[
+                    Icon(OMIcons.arrowForward),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(S.of(context).move),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 3,
+                enabled: false,
+                child: Row(
+                  children: <Widget>[
+                    Icon(OMIcons.reorder),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(S.of(context).analyze),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+          if(result != null){
+            switch(result){
+              case 0: bloc.edit(context, ListTypeEnum.DEFAULT, task); break;
+              case 1: bloc.remove(context, task); break;
+              case 2: bloc.showOptionsBoxes(context, task); break;
+              case 3: break;
+            }
+          }
+        },
+        onTap: () {},
+        child: ListTile(
+          contentPadding: EdgeInsets.all(8),
+          title: Text(task.title),
+          subtitle: Text(task.content),
+          trailing: task.deadline != null
+              ? Text(
+                  "${task.deadline.day} ${DateUtils.monthFromDate(task.deadline)}",
+                  style: TextStyle(color: Color(0xffff7e67), fontWeight: FontWeight.bold),
+                )
+              : Text(""),
+        ),
       ),
     );
   }
