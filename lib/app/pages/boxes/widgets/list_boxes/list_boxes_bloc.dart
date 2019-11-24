@@ -1,17 +1,19 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
+import 'package:pocket_gtd/app/shared/widgets/empty_list/empty_list_widget.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ListBoxesBloc extends BlocBase {
-  final BoxRepository boxRepository =
-      BoxesModule.to.getDependency<BoxRepository>();
+  final BoxRepository boxRepository = BoxesModule.to.getDependency<BoxRepository>();
 
   List<BoxModel> listBoxes = List();
 
@@ -30,32 +32,31 @@ class ListBoxesBloc extends BlocBase {
       MaterialPageRoute(
           maintainState: true,
           builder: (context) => ListTasksModule(
-                box,
-                ListTypeEnum.DEFAULT,
-                pageToReturn: 3,
-              )),
+              box,
+              ListTypeEnum.DEFAULT,
+              EmptyListWidget(
+                S.of(context).app_pages_boxes_empty_box,
+                icon: MdiIcons.packageVariant,
+              ))),
     );
   }
 
-  Future<List<BoxModel>> getBoxes() async =>
-      (await boxRepository.getAll()).where((box) {
+  Future<List<BoxModel>> getBoxes() async => (await boxRepository.getAll()).where((box) {
         return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
-            box.idLocal !=
-                BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
+            box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
       }).toList();
 
   Future<Stream<List<BoxModel>>> listenBoxes() async {
     listBoxes = await getBoxes();
     changeBoxList(listBoxes);
-    (await boxRepository.listenBoxes())..listen((list) {
-      changeBoxList(list.where((box) {
-        return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
-            box.idLocal !=
-                BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES) &&
-            box.idLocal !=
-                BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
-      }));
-    });
+    (await boxRepository.listenBoxes())
+      ..listen((list) {
+        changeBoxList(list.where((box) {
+          return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
+              box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES) &&
+              box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
+        }));
+      });
     return boxes;
   }
 

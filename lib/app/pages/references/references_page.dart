@@ -13,8 +13,7 @@ class _ReferencesPageState extends State<ReferencesPage> {
   @override
   Widget build(BuildContext context) {
     return ListTasksModule(
-        BoxModel(
-            null, BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES), null, null),
-        ListTypeEnum.REFERENCES);
+        BoxModel.fromId(BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES)),
+        ListTypeEnum.REFERENCES, Container());
   }
 }

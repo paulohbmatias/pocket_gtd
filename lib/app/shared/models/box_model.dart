@@ -21,6 +21,8 @@ class BoxModel extends HiveObject{
 
   BoxModel(this.id, this.idLocal, this.title, this.content);
 
+  BoxModel.fromId(this.idLocal);
+
   BoxModel.fromMap(Map<String, dynamic> map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];

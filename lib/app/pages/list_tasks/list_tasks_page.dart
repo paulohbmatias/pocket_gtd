@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
+import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/list_default/list_default_widget.dart';
 
 class ListTasksPage extends StatelessWidget {
   final ListTypeEnum listType;
-  final int pageToBack;
+  final BoxModel box;
+  final Widget emptyList;
 
-  ListTasksPage(this.listType, {this.pageToBack});
+  ListTasksPage(this.listType, this.emptyList, this.box);
 
   @override
   Widget build(BuildContext context) {
     if (listType == ListTypeEnum.DEFAULT)
       return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+            title: Text(box.title),
           ),
-          body: ListDefaultWidget(listType));
+          body: ListDefaultWidget(listType, emptyList));
     else
       return Material(
-        child: ListDefaultWidget(listType),
+        child: ListDefaultWidget(listType, emptyList),
       );
   }
 }

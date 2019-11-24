@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_bloc.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/card_task_default/card_task_default_widget.dart';
-import 'package:pocket_gtd/generated/i18n.dart';
-import 'package:positioned_tap_detector/positioned_tap_detector.dart';
 
 class ListDefaultWidget extends StatefulWidget {
   final ListTypeEnum listType;
-
-  ListDefaultWidget(this.listType);
+  final Widget emptyList;
+  ListDefaultWidget(this.listType, this.emptyList);
 
   @override
   _ListDefaultWidgetState createState() => _ListDefaultWidgetState();
@@ -51,20 +50,24 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                   stream: bloc.boxes,
                   initialData: <TaskModel>[],
                   builder: (context, snapshot) {
-                    return Container(
-                      margin: const EdgeInsets.all(2.0),
-                      padding: const EdgeInsets.all(2),
-                      child: ListView.separated(
-                        itemCount: snapshot.data.length,
-                        separatorBuilder: (context, index) {
-                          return Container();
-                        },
-                        itemBuilder: (context, index) {
-                          TaskModel task = snapshot.data[index];
-                          return CardTaskDefaultWidget(widget.listType, task);
-                        },
-                      ),
-                    );
+                    if (snapshot.data.length > 0) {
+                      return Container(
+                        margin: const EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.all(2),
+                        child: ListView.separated(
+                          itemCount: snapshot.data.length,
+                          separatorBuilder: (context, index) {
+                            return Divider();
+                          },
+                          itemBuilder: (context, index) {
+                            TaskModel task = snapshot.data[index];
+                            return CardTaskDefaultWidget(widget.listType, task);
+                          },
+                        ),
+                      );
+                    } else {
+                      return widget.emptyList;
+                    }
                   })
               : Container();
         },

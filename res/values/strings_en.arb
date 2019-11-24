@@ -28,7 +28,7 @@
   "inbox_for_tasks": "Inbox for tasks",
   "next_actions": "Next actions",
   "next_actions_to_perform": "Next actions to perform",
-  "one_day_maybe": "One day/ Maybe",
+  "one_day_maybe": "One day/Maybe",
   "actions_may_be_done_someday": "Actions that may be done someday",
   "references": "References",
   "references_for_future_consultations": "References for future consultations",
@@ -40,5 +40,8 @@
   "completed_tasks": "completed tasks",
   "projects": "Projects",
   "this_box_contains_your_personal_projects": "This box contains your personal projects.",
-  "task_marked_completed": "Task Marked Completed"
+  "task_marked_completed": "Task Marked Completed",
+  "app_pages_inbox_empty_box": "Here you will add tasks, projects, and references that have not yet been reviewed.",
+  "app_pages_next_actions_empty_box": "Here are the next actions you should take.",
+  "app_pages_boxes_empty_box": "Empty box"
 }

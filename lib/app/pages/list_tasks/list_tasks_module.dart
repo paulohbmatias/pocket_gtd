@@ -11,9 +11,9 @@ import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/list_default/list
 class ListTasksModule extends ModuleWidget {
   final BoxModel box;
   final ListTypeEnum listType;
-  final int pageToReturn;
+  final Widget emptyList;
 
-  ListTasksModule(this.box, this.listType, {this.pageToReturn});
+  ListTasksModule(this.box, this.listType, this.emptyList);
 
   @override
   List<Bloc> get blocs => [
@@ -27,10 +27,7 @@ class ListTasksModule extends ModuleWidget {
   List<Dependency> get dependencies => [];
 
   @override
-  Widget get view => ListTasksPage(
-        listType,
-        pageToBack: pageToReturn,
-      );
+  Widget get view => ListTasksPage(listType, emptyList, box);
 
   static Inject get to => Inject<ListTasksModule>.of();
 }

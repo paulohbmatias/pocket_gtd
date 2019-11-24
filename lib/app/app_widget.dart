@@ -18,10 +18,10 @@ class AppWidget extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       localeResolutionCallback:
-          S.delegate.resolution(fallback: new Locale("en", "US")),
+          S.delegate.resolution(fallback: new Locale("en", "")),
       theme: ThemeData(
           primarySwatch: MaterialColor(
-            0XFF07689f,
+            0xFF4F6CFF,
             <int, Color>{
               50: Color(0xFFCAF4FA),
               100: Color(0xFFCAF4FA),

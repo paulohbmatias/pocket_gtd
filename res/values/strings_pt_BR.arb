@@ -28,7 +28,7 @@
   "inbox_for_tasks":"Caixa de entrada para as tarefas",
   "next_actions":"Próximas ações",
   "next_actions_to_perform":"Próximas acções a realizar",
-  "one_day_maybe":"Um dia\/ Talvez",
+  "one_day_maybe":"Um dia\/Talvez",
   "actions_may_be_done_someday":"Ações que pode ser feito, algum dia.",
   "references":"Referências",
   "references_for_future_consultations":"Referências para futuras consultas",
@@ -39,5 +39,8 @@
   "completed_tasks":"tarefas concluídas",
   "projects":"Projetos",
   "this_box_contains_your_personal_projects":"Esta caixa contém seus projetos pessoais.",
-  "task_marked_completed":"Tarefas Marcadas Como Concluídas"
+  "task_marked_completed":"Tarefas Marcadas Como Concluídas",
+  "app_pages_inbox_empty_box": "Aqui você vai adicionar as tarefas, projetos e referências que ainda não foram analisadas",
+  "app_pages_next_actions_empty_box": "Aqui ficam as próximas ações que você deve realizar",
+  "app_pages_boxes_empty_box": "Caixa vazia"
 }

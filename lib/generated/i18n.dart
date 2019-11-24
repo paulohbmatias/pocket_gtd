@@ -24,6 +24,9 @@ class S implements WidgetsLocalizations {
   String get actions_may_be_done_someday => "Actions that may be done someday";
   String get actions_to_perform_at_a_specific_time => "Actions to perform at a specific time";
   String get analyze => "Analyze";
+  String get app_pages_boxes_empty_box => "Empty box";
+  String get app_pages_inbox_empty_box => "Here you will add tasks, projects, and references that have not yet been reviewed.";
+  String get app_pages_next_actions_empty_box => "Here are the next actions you should take.";
   String get boxes => "Boxes";
   String get cancel => "Cancel";
   String get completed_tasks => "completed tasks";
@@ -39,7 +42,7 @@ class S implements WidgetsLocalizations {
   String get move => "Move";
   String get next_actions => "Next actions";
   String get next_actions_to_perform => "Next actions to perform";
-  String get one_day_maybe => "One day/ Maybe";
+  String get one_day_maybe => "One day/Maybe";
   String get project => "Project";
   String get projects => "Projects";
   String get reference => "Reference";
@@ -78,6 +81,8 @@ class $pt_BR extends S {
   @override
   String get cancel => "Cancelar";
   @override
+  String get app_pages_next_actions_empty_box => "Aqui ficam as próximas ações que você deve realizar";
+  @override
   String get projects => "Projetos";
   @override
   String get references => "Referências";
@@ -110,6 +115,8 @@ class $pt_BR extends S {
   @override
   String get register_reference => "Registo referência";
   @override
+  String get app_pages_boxes_empty_box => "Caixa vazia";
+  @override
   String get event => "Eventos";
   @override
   String get deadline => "Prazo";
@@ -128,7 +135,7 @@ class $pt_BR extends S {
   @override
   String get confirm_delete_box => "Você realmente quer eliminar esta caixa?";
   @override
-  String get one_day_maybe => "Um dia\/ Talvez";
+  String get one_day_maybe => "Um dia\/Talvez";
   @override
   String get waiting_for_others => "Espera para que outros";
   @override
@@ -137,6 +144,8 @@ class $pt_BR extends S {
   String get completed_tasks => "tarefas concluídas";
   @override
   String get done => "Feito";
+  @override
+  String get app_pages_inbox_empty_box => "Aqui você vai adicionar as tarefas, projetos e referências que ainda não foram analisadas";
   @override
   String get task_marked_completed => "Tarefas Marcadas Como Concluídas";
   @override
