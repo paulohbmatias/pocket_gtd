@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pocket_gtd/app/pages/list_tasks/list_tasks_bloc.dart';
+import 'package:pocket_gtd/app/pages/list_tasks/list_tasks_module.dart';
+import 'package:pocket_gtd/app/pages/list_tasks/widgets/card_task_default/card_task_default_widget.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_bloc.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/card_task_default/card_task_default_widget.dart';
 
 class ListDefaultWidget extends StatefulWidget {
   final ListTypeEnum listType;
@@ -50,6 +49,21 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                   stream: bloc.boxes,
                   initialData: <TaskModel>[],
                   builder: (context, snapshot) {
+
+                    return snapshot.hasData ? snapshot.data.length > 0 ? Container(
+                      margin: const EdgeInsets.all(2.0),
+                      padding: const EdgeInsets.all(2),
+                      child: ListView.separated(
+                        itemCount: snapshot.data.length,
+                        separatorBuilder: (context, index) {
+                          return Divider();
+                        },
+                        itemBuilder: (context, index) {
+                          TaskModel task = snapshot.data[index];
+                          return CardTaskDefaultWidget(widget.listType, task);
+                        },
+                      ),
+                    ) : widget.emptyList : Container();
                     if (snapshot.data.length > 0) {
                       return Container(
                         margin: const EdgeInsets.all(2.0),
@@ -65,8 +79,10 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                           },
                         ),
                       );
-                    } else {
+                    } else if(snapshot.data.length == 0){
                       return widget.emptyList;
+                    } else{
+                      return Container();
                     }
                   })
               : Container();

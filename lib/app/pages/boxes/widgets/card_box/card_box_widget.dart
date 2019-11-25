@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/pages/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/pages/boxes/widgets/list_boxes/list_boxes_bloc.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';

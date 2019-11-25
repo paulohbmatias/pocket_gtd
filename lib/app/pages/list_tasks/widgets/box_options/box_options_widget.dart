@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pocket_gtd/app/pages/list_tasks/list_tasks_module.dart';
+import 'package:pocket_gtd/app/pages/list_tasks/widgets/box_options/box_options_bloc.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_module.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/box_options/box_options_bloc.dart';
 
 class BoxOptionsWidget extends StatelessWidget {
 

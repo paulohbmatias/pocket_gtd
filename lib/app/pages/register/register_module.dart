@@ -1,13 +1,12 @@
-import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
-import 'package:pocket_gtd/app/shared/models/task_model.dart';
-import 'package:pocket_gtd/app/shared/pages/register/widgets/register_reference/register_reference_bloc.dart';
-import 'package:pocket_gtd/app/shared/enums/task_type.dart';
-import 'package:pocket_gtd/app/shared/pages/register/widgets/register_task/register_task_bloc.dart';
-import 'package:pocket_gtd/app/shared/pages/register/widgets/register_box/register_box_bloc.dart';
-import 'package:pocket_gtd/app/shared/pages/register/register_page.dart';
-import 'package:pocket_gtd/app/shared/pages/register/register_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:pocket_gtd/app/pages/register/register_bloc.dart';
+import 'package:pocket_gtd/app/pages/register/register_page.dart';
+import 'package:pocket_gtd/app/pages/register/widgets/register_box/register_box_bloc.dart';
+import 'package:pocket_gtd/app/pages/register/widgets/register_reference/register_reference_bloc.dart';
+import 'package:pocket_gtd/app/pages/register/widgets/register_task/register_task_bloc.dart';
+import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
+import 'package:pocket_gtd/app/shared/models/task_model.dart';
 
 class RegisterModule extends ModuleWidget {
   final ListTypeEnum type;

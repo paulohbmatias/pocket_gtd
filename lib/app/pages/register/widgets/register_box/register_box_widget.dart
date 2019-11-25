@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/app/shared/pages/register/register_module.dart';
-import 'package:pocket_gtd/app/shared/pages/register/widgets/register_box/register_box_bloc.dart';
+import 'package:pocket_gtd/app/pages/register/register_module.dart';
+import 'package:pocket_gtd/app/pages/register/widgets/register_box/register_box_bloc.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 class RegisterBoxWidget extends StatelessWidget {
   final bloc = RegisterModule.to.bloc<RegisterBoxBloc>();

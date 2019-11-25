@@ -1,9 +1,9 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:pocket_gtd/app/pages/list_tasks/widgets/box_options/box_options_widget.dart';
+import 'package:pocket_gtd/app/pages/register/register_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/box_options/box_options_widget.dart';
-import 'package:pocket_gtd/app/shared/pages/register/register_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class CardTaskDefaultBloc extends BlocBase {
@@ -20,7 +20,7 @@ class CardTaskDefaultBloc extends BlocBase {
 
   void remove(BuildContext context, TaskModel task) async{
     bool result = false;
-    await showDialog<bool>(
+    result = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
           title: Text(S.of(context).confirm_delete_task(task.title)),
@@ -39,7 +39,9 @@ class CardTaskDefaultBloc extends BlocBase {
                 child: Text("Yes")),
           ],
         ));
-    task.delete();
+    if(result){
+      task.delete();
+    }
   }
 
   Future<void> showOptionsBoxes(BuildContext context, TaskModel task) async {

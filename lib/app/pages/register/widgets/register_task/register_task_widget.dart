@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pocket_gtd/app/pages/register/register_module.dart';
+import 'package:pocket_gtd/app/pages/register/widgets/register_task/register_task_bloc.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
-import 'package:pocket_gtd/app/shared/pages/register/register_module.dart';
-import 'package:pocket_gtd/app/shared/pages/register/widgets/register_task/register_task_bloc.dart';
 import 'package:pocket_gtd/app/shared/utils/DisableFocusNode.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 

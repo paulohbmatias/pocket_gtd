@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
+import 'package:pocket_gtd/app/pages/list_tasks/widgets/list_default/list_default_widget.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/list_default/list_default_widget.dart';
 
 class ListTasksPage extends StatelessWidget {
   final ListTypeEnum listType;

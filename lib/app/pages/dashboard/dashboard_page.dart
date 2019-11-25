@@ -26,8 +26,9 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: Drawer(),
+//      drawer: Drawer(),
       appBar: AppBar(
+        centerTitle: false,
         title: StreamBuilder<int>(
           stream: bloc.page,
           initialData: widget.page ?? 0,
