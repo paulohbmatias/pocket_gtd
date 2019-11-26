@@ -10,6 +10,8 @@ class AnalyzeBloc extends BlocBase {
 
   Function(StepsEnum) get changeStep => _step.sink.add;
 
+  void goTo(StepsEnum step) => changeStep(step);
+
   //dispose will be called automatically by closing its streams
   @override
   void dispose() {

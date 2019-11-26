@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../task_model.dart';
+part of 'task_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -13,19 +13,20 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
     var fields = <int, dynamic>{
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return TaskModel(
-      fields[0] as int,
-      fields[1] as int,
-      fields[2] as String,
-      fields[3] as String,
-      fields[4] as DateTime,
-    );
+    return TaskModel()
+      ..id = fields[0] as int
+      ..idLocal = fields[1] as int
+      ..title = fields[2] as String
+      ..content = fields[3] as String
+      ..deadline = fields[4] as DateTime
+      ..when = fields[5] as DateTime
+      ..who = fields[6] as UserModel;
   }
 
   @override
   void write(BinaryWriter writer, TaskModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,6 +36,10 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..writeByte(3)
       ..write(obj.content)
       ..writeByte(4)
-      ..write(obj.deadline);
+      ..write(obj.deadline)
+      ..writeByte(5)
+      ..write(obj.when)
+      ..writeByte(6)
+      ..write(obj.who);
   }
 }

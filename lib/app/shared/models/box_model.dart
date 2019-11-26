@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
-part 'hive/box_model.g.dart';
+part 'box_model.g.dart';
 
 @HiveType()
 class BoxModel extends HiveObject{

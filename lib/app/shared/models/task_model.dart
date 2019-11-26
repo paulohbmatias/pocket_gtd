@@ -1,9 +1,9 @@
 import 'package:hive/hive.dart';
-part 'hive/task_model.g.dart';
+import 'package:pocket_gtd/app/shared/models/user_model.dart';
+part 'task_model.g.dart';
 
 @HiveType()
-class TaskModel extends HiveObject{
-
+class TaskModel extends HiveObject {
   @HiveField(0)
   int id;
 
@@ -19,26 +19,32 @@ class TaskModel extends HiveObject{
   @HiveField(4)
   DateTime deadline;
 
+  @HiveField(5)
+  DateTime when;
+
+  @HiveField(6)
+  UserModel who;
+
   TaskModel.fromMap(Map<dynamic, dynamic> map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];
     this.title = map['title'];
     this.content = map['content'];
-    this.deadline = map['deadline'] != null
-        ? DateTime.fromMillisecondsSinceEpoch(
-            int.parse(map['deadline'].toString()))
-        : null;
+    this.deadline =
+        map['deadline'] != null ? DateTime.fromMillisecondsSinceEpoch(int.parse(map['deadline'].toString())) : null;
+    this.when = map['when'] != null ? DateTime.fromMillisecondsSinceEpoch(int.parse(map['when'].toString())) : null;
+    this.who = UserModel.fromJson(map['who']);
   }
-  
+
   TaskModel.fromDatabase(var map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];
     this.title = map['title'];
     this.content = map['content'];
-    this.deadline = map['deadline'] != null
-        ? DateTime.fromMillisecondsSinceEpoch(
-            int.parse(map['deadline'].toString()))
-        : null;
+    this.deadline =
+        map['deadline'] != null ? DateTime.fromMillisecondsSinceEpoch(int.parse(map['deadline'].toString())) : null;
+    this.when = map['when'] != null ? DateTime.fromMillisecondsSinceEpoch(int.parse(map['when'].toString())) : null;
+    this.who = UserModel.fromJson(map['who']);
   }
 
   Map<String, dynamic> toJson() => {
@@ -46,9 +52,10 @@ class TaskModel extends HiveObject{
         'idLocal': this.idLocal,
         'title': this.title,
         'content': this.content,
-        'deadline':
-            this.deadline != null ? this.deadline.millisecondsSinceEpoch : null
+        'deadline': this.deadline != null ? this.deadline.millisecondsSinceEpoch : null,
+        'when': this.when != null ? this.when.millisecondsSinceEpoch : null,
+        'who': who.toMap()
       };
 
-  TaskModel(this.id, this.idLocal, this.title, this.content, this.deadline);
+  TaskModel();
 }

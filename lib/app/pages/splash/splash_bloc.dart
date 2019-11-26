@@ -9,6 +9,7 @@ import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
+import 'package:pocket_gtd/app/shared/models/user_model.dart';
 import 'package:pocket_gtd/app/shared/preferences/preferences_app.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
@@ -35,6 +36,7 @@ class SplashBloc extends BlocBase {
     Hive.init(dbPath);
     Hive.registerAdapter(BoxModelAdapter(), 0);
     Hive.registerAdapter(TaskModelAdapter(), 1);
+    Hive.registerAdapter(UserModelAdapter(), 2);
   }
 
   Future<bool> isTheFirstTime() => PreferencesApp.isTheFirstTime();

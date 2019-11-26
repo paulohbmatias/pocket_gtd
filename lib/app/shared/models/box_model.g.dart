@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../box_model.dart';
+part of 'box_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

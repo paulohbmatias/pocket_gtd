@@ -18,9 +18,9 @@ class AnalyzeModule extends ModuleWidget {
   @override
   List<Bloc> get blocs => [
         Bloc((i) => AnalyzeBloc()),
-        Bloc((i) => DelegateBloc()),
-        Bloc((i) => DoBloc(task)),
-        Bloc((i) => ChoiceNotActionableBloc(task)),
+        Bloc((i) => DelegateBloc(this.task)),
+        Bloc((i) => DoBloc(this.task)),
+        Bloc((i) => ChoiceNotActionableBloc(this.task)),
         Bloc((i) => IsItTemporalBloc()),
         Bloc((i) => WhoIsGoingToDoBloc()),
         Bloc((i) => TwoMinutesBloc()),

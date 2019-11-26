@@ -6,12 +6,6 @@ import 'package:pocket_gtd/app/pages/analyze/enums/steps_enum.dart';
 
 class TwoMinutesBloc extends BlocBase {
 
-  final bloc = AnalyzeModule.to.bloc<AnalyzeBloc>();
-
-  void goTo(BuildContext context, StepsEnum step){
-    bloc.changeStep(step);
-  }
-
   @override
   void dispose() {
     super.dispose();

@@ -79,7 +79,10 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
   void saveTask(BuildContext context) async {
     changeIsLoading(true);
     try {
-      TaskModel taskModel = TaskModel(null, null, _title.value, _description.value, _deadline.value);
+      TaskModel taskModel = TaskModel()
+        ..title = _title.value
+        ..content = _description.value
+        ..deadline = _deadline.value;
       await taskRepository.save(
           taskModel, _box.value ?? BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX), null, null));
     } catch (e) {
