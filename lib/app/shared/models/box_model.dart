@@ -23,6 +23,10 @@ class BoxModel extends HiveObject{
 
   BoxModel.fromId(this.idLocal);
 
+  BoxModel.fromEnum(InitialBoxesEnum boxEnum){
+    this.idLocal = getIdFromEnum(boxEnum);
+  }
+
   BoxModel.fromMap(Map<String, dynamic> map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];

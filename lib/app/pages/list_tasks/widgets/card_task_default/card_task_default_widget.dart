@@ -67,7 +67,6 @@ class CardTaskDefaultWidget extends StatelessWidget {
             ),
             PopupMenuItem(
               value: 3,
-              enabled: false,
               child: Row(
                 children: <Widget>[
                   Icon(OMIcons.reorder),
@@ -85,7 +84,8 @@ class CardTaskDefaultWidget extends StatelessWidget {
             case 0: bloc.edit(context, ListTypeEnum.DEFAULT, task); break;
             case 1: bloc.remove(context, task); break;
             case 2: bloc.showOptionsBoxes(context, task); break;
-            case 3: break;
+            case 3: bloc.analyze(context, task); break;
+            default: break;
           }
         }
       },

@@ -1,5 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:pocket_gtd/app/pages/analyze/analyze_module.dart';
 import 'package:pocket_gtd/app/pages/list_tasks/widgets/box_options/box_options_widget.dart';
 import 'package:pocket_gtd/app/pages/register/register_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
@@ -42,6 +43,10 @@ class CardTaskDefaultBloc extends BlocBase {
     if(result){
       task.delete();
     }
+  }
+
+  void analyze(BuildContext context, TaskModel task){
+    showDialog(context: context, builder: (context) => AnalyzeModule(task));
   }
 
   Future<void> showOptionsBoxes(BuildContext context, TaskModel task) async {

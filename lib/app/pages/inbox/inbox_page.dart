@@ -20,7 +20,7 @@ class _InboxPageState extends State<InboxPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => bloc.add(context, ListTypeEnum.DEFAULT),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).accentColor,
         child: Icon(Icons.add),
       ),
       body: ListTasksModule(

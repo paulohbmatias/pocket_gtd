@@ -47,7 +47,6 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
           return snapshot.hasData
               ? StreamBuilder<List<TaskModel>>(
                   stream: bloc.boxes,
-                  initialData: <TaskModel>[],
                   builder: (context, snapshot) {
 
                     return snapshot.hasData ? snapshot.data.length > 0 ? Container(
@@ -64,26 +63,6 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                         },
                       ),
                     ) : widget.emptyList : Container();
-                    if (snapshot.data.length > 0) {
-                      return Container(
-                        margin: const EdgeInsets.all(2.0),
-                        padding: const EdgeInsets.all(2),
-                        child: ListView.separated(
-                          itemCount: snapshot.data.length,
-                          separatorBuilder: (context, index) {
-                            return Divider();
-                          },
-                          itemBuilder: (context, index) {
-                            TaskModel task = snapshot.data[index];
-                            return CardTaskDefaultWidget(widget.listType, task);
-                          },
-                        ),
-                      );
-                    } else if(snapshot.data.length == 0){
-                      return widget.emptyList;
-                    } else{
-                      return Container();
-                    }
                   })
               : Container();
         },
