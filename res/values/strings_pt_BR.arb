@@ -42,5 +42,27 @@
   "task_marked_completed":"Tarefas Marcadas Como Concluídas",
   "app_pages_inbox_empty_box": "Aqui você vai adicionar as tarefas, projetos e referências que ainda não foram analisadas",
   "app_pages_next_actions_empty_box": "Aqui ficam as próximas ações que você deve realizar",
-  "app_pages_boxes_empty_box": "Caixa vazia"
+  "app_pages_boxes_empty_box": "Caixa vazia",
+
+  "app_pages_analyze_actionable_title": "É passível de ação?",
+  "app_pages_analyze_actionable_content": "Isso é passível de ação? Ou seja, é algo que pode ser executado e você tem todos os recursos para executar?",
+  "yes": "Sim",
+  "no": "Não",
+
+  "app_pages_analyze_choice_not_actionable_title": "Mover ação \"$task\" para",
+  "trash": "Lixeira",
+
+  "app_pages_analyze_delegate_title": "Quem vai realizar essa ação?",
+  "name": "Nome",
+
+  "app_pages_analyze_do_title": "Então faça agora!",
+  "schedule": "Agende",
+
+  "app_pages_analyze_two_minutes_title": "Isso leva menos que dois minutos?",
+  "app_pages_analyze_two_minutes_content": "Essa ação pode ser feita em menos de dois minutos?",
+
+  "app_pages_analyze_who_is_going_to_do_title": "Quem vai realizar essa ação?",
+  "app_pages_analyze_who_is_going_to_do_content": "Quem será responsável pela realização da tarefa?",
+  "someone_else": "Outra pessoa",
+  "me": "Eu"
 }

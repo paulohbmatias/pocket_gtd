@@ -43,5 +43,27 @@
   "task_marked_completed": "Task Marked Completed",
   "app_pages_inbox_empty_box": "Here you will add tasks, projects, and references that have not yet been reviewed.",
   "app_pages_next_actions_empty_box": "Here are the next actions you should take.",
-  "app_pages_boxes_empty_box": "Empty box"
+  "app_pages_boxes_empty_box": "Empty box",
+
+  "app_pages_analyze_actionable_title": "Is it actionable?",
+  "app_pages_analyze_actionable_content": "Is this actionable? That is, is it something that can be performed and do you have all the resources to perform?",
+  "yes": "Yes",
+  "no": "No",
+
+  "app_pages_analyze_choice_not_actionable_title": "Move action \"$task\" to",
+  "trash": "Trash",
+
+  "app_pages_analyze_delegate_title": "Who will accomplish this task?",
+  "name": "Name",
+
+  "app_pages_analyze_do_title": "So do it now!",
+  "schedule": "Schedule",
+
+  "app_pages_analyze_two_minutes_title": "Does it take less than two minutes?",
+  "app_pages_analyze_two_minutes_content": "Does this action take less than two minutes?",
+
+  "app_pages_analyze_who_is_going_to_do_title": "Who will accomplish this task?",
+  "app_pages_analyze_who_is_going_to_do_content": "Who will be responsible for performing the task?",
+  "someone_else": "Someone else",
+  "me": "Me"
 }

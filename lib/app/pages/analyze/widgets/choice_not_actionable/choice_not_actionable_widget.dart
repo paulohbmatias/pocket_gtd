@@ -13,7 +13,7 @@ class ChoiceNotActionableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Move action \"${bloc.task.title}\" to"),
+      title: Text(S.of(context).app_pages_analyze_choice_not_actionable_title(bloc.task.title)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -35,7 +35,7 @@ class ChoiceNotActionableWidget extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(MdiIcons.trashCan),
-            title: Text("Trash"),
+            title: Text(S.of(context).trash),
             onTap: () {
               bloc.remove();
               Navigator.of(context).pop();

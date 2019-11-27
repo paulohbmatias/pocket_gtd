@@ -24,6 +24,14 @@ class S implements WidgetsLocalizations {
   String get actions_may_be_done_someday => "Actions that may be done someday";
   String get actions_to_perform_at_a_specific_time => "Actions to perform at a specific time";
   String get analyze => "Analyze";
+  String get app_pages_analyze_actionable_content => "Is this actionable? That is, is it something that can be performed and do you have all the resources to perform?";
+  String get app_pages_analyze_actionable_title => "Is it actionable?";
+  String get app_pages_analyze_delegate_title => "Who will accomplish this task?";
+  String get app_pages_analyze_do_title => "So do it now!";
+  String get app_pages_analyze_two_minutes_content => "Does this action take less than two minutes?";
+  String get app_pages_analyze_two_minutes_title => "Does it take less than two minutes?";
+  String get app_pages_analyze_who_is_going_to_do_content => "Who will be responsible for performing the task?";
+  String get app_pages_analyze_who_is_going_to_do_title => "Who will accomplish this task?";
   String get app_pages_boxes_empty_box => "Empty box";
   String get app_pages_inbox_empty_box => "Here you will add tasks, projects, and references that have not yet been reviewed.";
   String get app_pages_next_actions_empty_box => "Here are the next actions you should take.";
@@ -39,9 +47,12 @@ class S implements WidgetsLocalizations {
   String get event => "Event";
   String get inbox => "Inbox";
   String get inbox_for_tasks => "Inbox for tasks";
+  String get me => "Me";
   String get move => "Move";
+  String get name => "Name";
   String get next_actions => "Next actions";
   String get next_actions_to_perform => "Next actions to perform";
+  String get no => "No";
   String get one_day_maybe => "One day/Maybe";
   String get project => "Project";
   String get projects => "Projects";
@@ -53,15 +64,20 @@ class S implements WidgetsLocalizations {
   String get register_task => "Register task";
   String get remove => "Remove";
   String get save => "Save";
+  String get schedule => "Schedule";
   String get scheduled => "Scheduled";
+  String get someone_else => "Someone else";
   String get task => "Task";
   String get task_marked_completed => "Task Marked Completed";
   String get test => "Deadline";
   String get this_box_contains_your_personal_projects => "This box contains your personal projects.";
   String get title => "Title";
+  String get trash => "Trash";
   String get update => "Update";
   String get waiting => "Waiting";
   String get waiting_for_others => "Waiting for others";
+  String get yes => "Yes";
+  String app_pages_analyze_choice_not_actionable_title(String task) => "Move action \"$task\" to";
   String confirm_delete_task(String task) => "Do you really want to delete the task $task?";
   String error_cant_be_empty(String prefix) => "$prefix can't be empty";
   String files_x(String numberFiles) => "Files: $numberFiles";
@@ -81,29 +97,17 @@ class $pt_BR extends S {
   @override
   String get cancel => "Cancelar";
   @override
-  String get app_pages_next_actions_empty_box => "Aqui ficam as próximas ações que você deve realizar";
+  String get app_pages_analyze_who_is_going_to_do_content => "Quem será responsável pela realização da tarefa?";
   @override
   String get projects => "Projetos";
   @override
   String get references => "Referências";
   @override
-  String get waiting => "Em espera";
-  @override
   String get register_task => "Registar tarefa";
   @override
-  String get scheduled => "Agendado";
-  @override
-  String get save => "Salvar";
+  String get app_pages_analyze_actionable_title => "É passível de ação?";
   @override
   String get project => "Projeto";
-  @override
-  String get update => "Atualização";
-  @override
-  String get title => "Título";
-  @override
-  String get remove => "Remover";
-  @override
-  String get content => "Conteúdo";
   @override
   String get reference => "Referência";
   @override
@@ -111,23 +115,15 @@ class $pt_BR extends S {
   @override
   String get inbox_for_tasks => "Caixa de entrada para as tarefas";
   @override
-  String get actions_may_be_done_someday => "Ações que pode ser feito, algum dia.";
+  String get me => "Eu";
   @override
   String get register_reference => "Registo referência";
   @override
   String get app_pages_boxes_empty_box => "Caixa vazia";
   @override
-  String get event => "Eventos";
-  @override
-  String get deadline => "Prazo";
-  @override
   String get boxes => "Caixas";
   @override
-  String get actions_to_perform_at_a_specific_time => "Acções a executar em uma hora específica";
-  @override
-  String get move => "Mover";
-  @override
-  String get this_box_contains_your_personal_projects => "Esta caixa contém seus projetos pessoais.";
+  String get app_pages_analyze_actionable_content => "Isso é passível de ação? Ou seja, é algo que pode ser executado e você tem todos os recursos para executar?";
   @override
   String get test => "Prazo";
   @override
@@ -137,21 +133,71 @@ class $pt_BR extends S {
   @override
   String get one_day_maybe => "Um dia\/Talvez";
   @override
-  String get waiting_for_others => "Espera para que outros";
+  String get app_pages_analyze_do_title => "Então faça agora!";
   @override
   String get create_box => "Criar caixa";
-  @override
-  String get completed_tasks => "tarefas concluídas";
   @override
   String get done => "Feito";
   @override
   String get app_pages_inbox_empty_box => "Aqui você vai adicionar as tarefas, projetos e referências que ainda não foram analisadas";
   @override
-  String get task_marked_completed => "Tarefas Marcadas Como Concluídas";
+  String get trash => "Lixeira";
+  @override
+  String get app_pages_analyze_two_minutes_content => "Essa ação pode ser feita em menos de dois minutos?";
   @override
   String get task => "Tarefa";
   @override
   String get analyze => "Analisar";
+  @override
+  String get name => "Nome";
+  @override
+  String get app_pages_analyze_delegate_title => "Quem vai realizar essa ação?";
+  @override
+  String get app_pages_next_actions_empty_box => "Aqui ficam as próximas ações que você deve realizar";
+  @override
+  String get no => "Não";
+  @override
+  String get waiting => "Em espera";
+  @override
+  String get scheduled => "Agendado";
+  @override
+  String get save => "Salvar";
+  @override
+  String get update => "Atualização";
+  @override
+  String get title => "Título";
+  @override
+  String get app_pages_analyze_who_is_going_to_do_title => "Quem vai realizar essa ação?";
+  @override
+  String get remove => "Remover";
+  @override
+  String get content => "Conteúdo";
+  @override
+  String get actions_may_be_done_someday => "Ações que pode ser feito, algum dia.";
+  @override
+  String get app_pages_analyze_two_minutes_title => "Isso leva menos que dois minutos?";
+  @override
+  String get event => "Eventos";
+  @override
+  String get deadline => "Prazo";
+  @override
+  String get actions_to_perform_at_a_specific_time => "Acções a executar em uma hora específica";
+  @override
+  String get move => "Mover";
+  @override
+  String get this_box_contains_your_personal_projects => "Esta caixa contém seus projetos pessoais.";
+  @override
+  String get yes => "Sim";
+  @override
+  String get waiting_for_others => "Espera para que outros";
+  @override
+  String get someone_else => "Outra pessoa";
+  @override
+  String get completed_tasks => "tarefas concluídas";
+  @override
+  String get task_marked_completed => "Tarefas Marcadas Como Concluídas";
+  @override
+  String get schedule => "Agende";
   @override
   String get next_actions_to_perform => "Próximas acções a realizar";
   @override
@@ -161,11 +207,13 @@ class $pt_BR extends S {
   @override
   String get next_actions => "Próximas ações";
   @override
-  String confirm_delete_task(String tarefa) => "Você realmente deseja excluir a tarefa $tarefa?";
+  String app_pages_analyze_choice_not_actionable_title(String task) => "Mover ação \"$task\" para";
   @override
   String this_box_contains(String numberFiles) => "Esta caixa contém $numberFiles arquivos";
   @override
   String files_x(String numberFiles) => "Arquivos: $numberFiles";
+  @override
+  String confirm_delete_task(String tarefa) => "Você realmente deseja excluir a tarefa $tarefa?";
   @override
   String error_cant_be_empty(String prefixo) => "$prefixo não pode ser vazio";
 }

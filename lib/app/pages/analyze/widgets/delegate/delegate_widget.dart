@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/pages/analyze/analyze_module.dart';
 import 'package:pocket_gtd/app/pages/analyze/widgets/delegate/delegate_bloc.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
 
 class DelegateWidget extends StatelessWidget {
 
@@ -9,11 +10,11 @@ class DelegateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Who will accomplish this task?"),
+      title: Text(S.of(context).app_pages_analyze_delegate_title),
       content: TextField(
         onChanged: bloc.changeName,
         decoration: InputDecoration(
-          hintText: "Name"
+          hintText: S.of(context).name
         ),
       ),
       actions: <Widget>[
@@ -24,7 +25,7 @@ class DelegateWidget extends StatelessWidget {
             return FlatButton(onPressed: !snapshot.data ? () {
               bloc.done();
               Navigator.of(context).pop();
-            } : null, child: Text("Done"),);
+            } : null, child: Text(S.of(context).done));
           }
         )
       ],

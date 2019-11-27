@@ -17,11 +17,11 @@ class AnalyzeModule extends ModuleWidget {
   AnalyzeModule(this.task);
   @override
   List<Bloc> get blocs => [
-        Bloc((i) => AnalyzeBloc()),
+        Bloc((i) => AnalyzeBloc(this.task)),
         Bloc((i) => DelegateBloc(this.task)),
         Bloc((i) => DoBloc(this.task)),
         Bloc((i) => ChoiceNotActionableBloc(this.task)),
-        Bloc((i) => IsItTemporalBloc()),
+        Bloc((i) => IsItTemporalBloc(this.task)),
         Bloc((i) => WhoIsGoingToDoBloc()),
         Bloc((i) => TwoMinutesBloc()),
         Bloc((i) => ActionableBloc()),
