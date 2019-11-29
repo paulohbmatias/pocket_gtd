@@ -65,5 +65,11 @@
   "app_pages_analyze_who_is_going_to_do_title": "Who will accomplish this task?",
   "app_pages_analyze_who_is_going_to_do_content": "Who will be responsible for performing the task?",
   "someone_else": "Someone else",
-  "me": "Me"
+  "me": "Me",
+
+  "app_pages_analyze_are_project_title": "Does this action need more than one step to complete?",
+
+  "app_pages_analyze_move_to_project_title": "Do you want to move \"$task\" to Projects?",
+  "app_pages_analyze_move_to_project_content": "If an action needs more than one step to complete, then it is a project.",
+  "move_to_projects": "Move to Projects"
 }

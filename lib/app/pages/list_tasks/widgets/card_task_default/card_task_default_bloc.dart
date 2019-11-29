@@ -4,10 +4,16 @@ import 'package:pocket_gtd/app/pages/analyze/analyze_module.dart';
 import 'package:pocket_gtd/app/pages/list_tasks/widgets/box_options/box_options_widget.dart';
 import 'package:pocket_gtd/app/pages/register/register_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
+import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class CardTaskDefaultBloc extends BlocBase {
+
+  final BoxModel box;
+
+  CardTaskDefaultBloc(this.box);
+  
   void edit(BuildContext context, ListTypeEnum type, TaskModel task) async {
     await Navigator.push(
         context,

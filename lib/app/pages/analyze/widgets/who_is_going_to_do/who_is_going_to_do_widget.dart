@@ -15,7 +15,7 @@ class WhoIsGoingToDoWidget extends StatelessWidget {
       content: Text(S.of(context).app_pages_analyze_who_is_going_to_do_content),
       actions: <Widget>[
         FlatButton(onPressed: () => bloc.goTo(StepsEnum.DELEGATE), child: Text(S.of(context).someone_else)),
-        FlatButton(onPressed: () => bloc.goTo(StepsEnum.IS_IT_TEMPORAL), child: Text(S.of(context).me))
+        FlatButton(onPressed: () => bloc.goTo(StepsEnum.ARE_PROJECT), child: Text(S.of(context).me))
       ],
     );
   }

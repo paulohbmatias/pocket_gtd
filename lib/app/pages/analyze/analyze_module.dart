@@ -1,3 +1,5 @@
+import 'package:pocket_gtd/app/pages/analyze/widgets/move_to_project/move_to_project_bloc.dart';
+import 'package:pocket_gtd/app/pages/analyze/widgets/are_project/are_project_bloc.dart';
 import 'package:pocket_gtd/app/pages/analyze/analyze_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,8 @@ class AnalyzeModule extends ModuleWidget {
   AnalyzeModule(this.task);
   @override
   List<Bloc> get blocs => [
+        Bloc((i) => MoveToProjectBloc()),
+        Bloc((i) => AreProjectBloc()),
         Bloc((i) => AnalyzeBloc(this.task)),
         Bloc((i) => DelegateBloc(this.task)),
         Bloc((i) => DoBloc(this.task)),

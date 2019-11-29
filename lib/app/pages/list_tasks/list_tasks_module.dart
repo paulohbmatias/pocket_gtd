@@ -19,7 +19,7 @@ class ListTasksModule extends ModuleWidget {
   List<Bloc> get blocs => [
         Bloc((i) => BoxOptionsBloc(this.box)),
         Bloc((i) => ListDefaultBloc()),
-        Bloc((i) => CardTaskDefaultBloc()),
+        Bloc((i) => CardTaskDefaultBloc(this.box)),
         Bloc((i) => ListTasksBloc(box, listType)),
       ];
 

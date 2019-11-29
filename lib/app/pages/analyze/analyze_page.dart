@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_gtd/app/pages/analyze/widgets/are_project/are_project_widget.dart';
 import 'package:pocket_gtd/app/pages/analyze/widgets/choice_not_actionable/choice_not_actionable_widget.dart';
 import 'package:pocket_gtd/app/pages/analyze/widgets/do/do_widget.dart';
 import 'package:pocket_gtd/app/pages/analyze/widgets/delegate/delegate_widget.dart';
@@ -7,6 +8,7 @@ import 'package:pocket_gtd/app/pages/analyze/analyze_module.dart';
 import 'package:pocket_gtd/app/pages/analyze/enums/steps_enum.dart';
 import 'package:pocket_gtd/app/pages/analyze/widgets/actionable/actionable_widget.dart';
 import 'package:pocket_gtd/app/pages/analyze/widgets/is_it_temporal/is_it_temporal_widget.dart';
+import 'package:pocket_gtd/app/pages/analyze/widgets/move_to_project/move_to_project_widget.dart';
 import 'package:pocket_gtd/app/pages/analyze/widgets/two_minutes/two_minutes_widget.dart';
 import 'package:pocket_gtd/app/pages/analyze/widgets/who_is_going_to_do/who_is_going_to_do_widget.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
@@ -43,6 +45,10 @@ class _AnalyzePageState extends State<AnalyzePage> {
             return DoWidget();
           case StepsEnum.DELEGATE:
             return DelegateWidget();
+          case StepsEnum.ARE_PROJECT:
+            return AreProjectWidget();
+          case StepsEnum.MOVE_TO_PROJECT:
+            return MoveToProjectWidget();
           default: return Container();
         }
       },

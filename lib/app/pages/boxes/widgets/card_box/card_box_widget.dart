@@ -19,7 +19,7 @@ class CardBoxWidget extends StatelessWidget {
       onTap: () => bloc.openBox(context, box),
       contentPadding: const EdgeInsets.all(8),
       leading: Icon(MdiIcons.cubeOutline, size: 48,),
-      title: Text(box.title),
+      title: Text(BoxModel.getBoxName(context, box)),
       subtitle: Text(S.of(context).files_x(box.length.toString())),
     );
   }

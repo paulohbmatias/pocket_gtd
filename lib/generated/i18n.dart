@@ -26,8 +26,10 @@ class S implements WidgetsLocalizations {
   String get analyze => "Analyze";
   String get app_pages_analyze_actionable_content => "Is this actionable? That is, is it something that can be performed and do you have all the resources to perform?";
   String get app_pages_analyze_actionable_title => "Is it actionable?";
+  String get app_pages_analyze_are_project_title => "Does this action need more than one step to complete?";
   String get app_pages_analyze_delegate_title => "Who will accomplish this task?";
   String get app_pages_analyze_do_title => "So do it now!";
+  String get app_pages_analyze_move_to_project_content => "If an action needs more than one step to complete, then it is a project.";
   String get app_pages_analyze_two_minutes_content => "Does this action take less than two minutes?";
   String get app_pages_analyze_two_minutes_title => "Does it take less than two minutes?";
   String get app_pages_analyze_who_is_going_to_do_content => "Who will be responsible for performing the task?";
@@ -49,6 +51,7 @@ class S implements WidgetsLocalizations {
   String get inbox_for_tasks => "Inbox for tasks";
   String get me => "Me";
   String get move => "Move";
+  String get move_to_projects => "Move to Projects";
   String get name => "Name";
   String get next_actions => "Next actions";
   String get next_actions_to_perform => "Next actions to perform";
@@ -78,6 +81,7 @@ class S implements WidgetsLocalizations {
   String get waiting_for_others => "Waiting for others";
   String get yes => "Yes";
   String app_pages_analyze_choice_not_actionable_title(String task) => "Move action \"$task\" to";
+  String app_pages_analyze_move_to_project_title(String task) => "Do you want to move \"$task\" to Projects?";
   String confirm_delete_task(String task) => "Do you really want to delete the task $task?";
   String error_cant_be_empty(String prefix) => "$prefix can't be empty";
   String files_x(String numberFiles) => "Files: $numberFiles";
@@ -153,13 +157,15 @@ class $pt_BR extends S {
   @override
   String get app_pages_analyze_delegate_title => "Quem vai realizar essa ação?";
   @override
+  String get move_to_projects => "Mover para projetos";
+  @override
   String get app_pages_next_actions_empty_box => "Aqui ficam as próximas ações que você deve realizar";
   @override
   String get no => "Não";
   @override
   String get waiting => "Em espera";
   @override
-  String get scheduled => "Agendado";
+  String get scheduled => "Agendadas";
   @override
   String get save => "Salvar";
   @override
@@ -201,6 +207,10 @@ class $pt_BR extends S {
   @override
   String get next_actions_to_perform => "Próximas acções a realizar";
   @override
+  String get app_pages_analyze_are_project_title => "Essa ação precisa de mais de um passo para ser realizada?";
+  @override
+  String get app_pages_analyze_move_to_project_content => "Se uma ação precisa de mais de um passo para ser completada, então ela é um projeto";
+  @override
   String get inbox => "Caixa de entrada";
   @override
   String get register => "Registrar";
@@ -208,6 +218,8 @@ class $pt_BR extends S {
   String get next_actions => "Próximas ações";
   @override
   String app_pages_analyze_choice_not_actionable_title(String task) => "Mover ação \"$task\" para";
+  @override
+  String app_pages_analyze_move_to_project_title(String task) => "Você deseja mover \"$task\" para Projetos?";
   @override
   String this_box_contains(String numberFiles) => "Esta caixa contém $numberFiles arquivos";
   @override

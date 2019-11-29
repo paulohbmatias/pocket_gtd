@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
 part 'box_model.g.dart';
 
 @HiveType()
@@ -27,6 +29,19 @@ class BoxModel extends HiveObject{
     this.idLocal = getIdFromEnum(boxEnum);
   }
 
+  static String getBoxName(BuildContext context, BoxModel box){
+    switch(box.idLocal){
+      case 0: return S.of(context).inbox;
+      case 1: return S.of(context).next_actions;
+      case 2: return S.of(context).projects;
+      case 3: return S.of(context).one_day_maybe;
+      case 4: return S.of(context).references;
+      case 5: return S.of(context).scheduled;
+      case 6: return S.of(context).waiting;
+      case 7: return S.of(context).done;
+      default: return box.title;
+    }
+  }
   BoxModel.fromMap(Map<String, dynamic> map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];

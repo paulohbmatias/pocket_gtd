@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/pages/register/register_module.dart';
 import 'package:pocket_gtd/app/pages/register/widgets/register_task/register_task_bloc.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
@@ -29,6 +30,20 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
           title: Text(
             S.of(context).register,
           ),
+          actions: <Widget>[
+            StreamBuilder<bool>(
+                stream: bloc.isValidFields(context),
+                initialData: false,
+                builder: (context, snapshot) {
+                  return IconButton(
+                    color: Theme.of(context).primaryColor,
+                    icon: Icon(OMIcons.done, color: Colors.white,),
+                    onPressed: snapshot.hasData && snapshot.data
+                        ? () => bloc.isUpdate ? bloc.updateTask(context) : bloc.saveTask(context)
+                        : null,
+                  );
+                })
+          ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,25 +114,6 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                 ),
               ),
             ),
-            StreamBuilder<bool>(
-                stream: bloc.isValidFields(context),
-                initialData: false,
-                builder: (context, snapshot) {
-                  return SizedBox(
-                    width: double.infinity,
-                    height: 40,
-                    child: RaisedButton(
-                      color: Theme.of(context).primaryColor,
-                      child: Text(
-                        bloc.isUpdate ? "UPDATE" : "SAVE",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: snapshot.hasData && snapshot.data
-                          ? () => bloc.isUpdate ? bloc.updateTask(context) : bloc.saveTask(context)
-                          : null,
-                    ),
-                  );
-                })
           ],
         ));
   }

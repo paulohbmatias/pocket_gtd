@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
-import 'package:pocket_gtd/app/pages/analyze/analyze_bloc.dart';
 import 'package:pocket_gtd/app/pages/analyze/analyze_module.dart';
 import 'package:pocket_gtd/app/pages/analyze/widgets/is_it_temporal/is_it_temporal_bloc.dart';
 import 'package:pocket_gtd/generated/i18n.dart';

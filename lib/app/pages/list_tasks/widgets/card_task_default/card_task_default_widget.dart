@@ -4,7 +4,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/pages/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/pages/list_tasks/widgets/card_task_default/card_task_default_bloc.dart';
+import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
+import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/utils/date_utils.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
@@ -65,7 +67,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
                 ],
               ),
             ),
-            PopupMenuItem(
+            bloc.box.idLocal == BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) ? PopupMenuItem(
               value: 3,
               child: Row(
                 children: <Widget>[
@@ -76,7 +78,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            ) : null,
           ],
         );
         if(result != null){
