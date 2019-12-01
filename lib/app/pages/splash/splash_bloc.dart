@@ -45,21 +45,21 @@ class SplashBloc extends BlocBase {
 
   Future<void> createInitialBoxes(BuildContext context) async {
     await boxRepository.saveAt(BoxModel(
-        null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX), S.of(context).inbox, S.of(context).inbox_for_tasks));
+        null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX), I18n.of(context).inbox, I18n.of(context).inbox_for_tasks));
     await boxRepository.saveAt(BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS),
-        S.of(context).next_actions, S.of(context).next_actions_to_perform));
-    await boxRepository.saveAt(BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.PROJECTS), S.of(context).projects,
-        S.of(context).this_box_contains_your_personal_projects));
+        I18n.of(context).next_actions, I18n.of(context).next_actions_to_perform));
+    await boxRepository.saveAt(BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.PROJECTS), I18n.of(context).projects,
+        I18n.of(context).this_box_contains_your_personal_projects));
     await boxRepository.saveAt(BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.ONE_DAY_MAYBE),
-        S.of(context).one_day_maybe, S.of(context).actions_may_be_done_someday));
+        I18n.of(context).one_day_maybe, I18n.of(context).actions_may_be_done_someday));
     await boxRepository.saveAt(BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES),
-        S.of(context).references, S.of(context).references_for_future_consultations));
+        I18n.of(context).references, I18n.of(context).references_for_future_consultations));
     await boxRepository.saveAt(BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED),
-        S.of(context).scheduled, S.of(context).actions_to_perform_at_a_specific_time));
-    await boxRepository.saveAt(BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.WAITING), S.of(context).waiting,
-        S.of(context).waiting_for_others));
+        I18n.of(context).scheduled, I18n.of(context).actions_to_perform_at_a_specific_time));
+    await boxRepository.saveAt(BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.WAITING), I18n.of(context).waiting,
+        I18n.of(context).waiting_for_others));
     await boxRepository.saveAt(BoxModel(
-        null, BoxModel.getIdFromEnum(InitialBoxesEnum.DONE), S.of(context).done, S.of(context).completed_tasks));
+        null, BoxModel.getIdFromEnum(InitialBoxesEnum.DONE), I18n.of(context).done, I18n.of(context).completed_tasks));
   }
 
   @override

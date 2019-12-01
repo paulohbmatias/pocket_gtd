@@ -12,7 +12,7 @@ mixin RegisterValidators {
 
   StreamTransformer<String, String> validateTitleFromStream(BuildContext context) =>
       StreamTransformer.fromHandlers(handleData: (title, sink) {
-        String errorTitle = _isEmpty(context, title, S.of(context).title);
+        String errorTitle = _isEmpty(context, title, I18n.of(context).title);
         if (errorTitle.isNotEmpty)
           sink.addError(errorTitle);
         else
@@ -20,21 +20,21 @@ mixin RegisterValidators {
       });
   StreamTransformer<String, String> validateDescriptionFromStream(BuildContext context) =>
       StreamTransformer.fromHandlers(handleData: (title, sink) {
-        String errorTitle = _isEmpty(context, title, S.of(context).title);
+        String errorTitle = _isEmpty(context, title, I18n.of(context).title);
         if (errorTitle.isNotEmpty)
           sink.addError(errorTitle);
         else
           sink.add(title);
       });
 
-  String validateTitleFromString(BuildContext context, String title) => _isEmpty(context, title, S.of(context).title);
+  String validateTitleFromString(BuildContext context, String title) => _isEmpty(context, title, I18n.of(context).title);
 
   String validateDescriptionFromString(BuildContext context, String title) =>
-      _isEmpty(context, title, S.of(context).content);
+      _isEmpty(context, title, I18n.of(context).content);
 
   String _isEmpty(BuildContext context, String email, String prefix) {
     if (email.isEmpty)
-      return S.of(context).error_cant_be_empty(prefix);
+      return I18n.of(context).error_cant_be_empty(prefix);
     else
       return "";
   }

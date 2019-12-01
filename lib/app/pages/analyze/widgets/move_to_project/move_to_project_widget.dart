@@ -11,14 +11,14 @@ class MoveToProjectWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(S.of(context).app_pages_analyze_move_to_project_title(bloc.task.title)),
-      content: Text(S.of(context).app_pages_analyze_move_to_project_content),
+      title: Text(I18n.of(context).app_pages_analyze_move_to_project_title(bloc.task.title)),
+      content: Text(I18n.of(context).app_pages_analyze_move_to_project_content),
       actions: <Widget>[
-        FlatButton(onPressed: () => Navigator.of(context).pop(), child: Text(S.of(context).cancel)),
+        FlatButton(onPressed: () => Navigator.of(context).pop(), child: Text(I18n.of(context).cancel)),
         FlatButton(onPressed: () {
           bloc.moveTo(InitialBoxesEnum.PROJECTS);
           Navigator.pop(context);
-        }, child: Text(S.of(context).move_to_projects)),
+        }, child: Text(I18n.of(context).move_to_projects)),
       ],
     );
   }

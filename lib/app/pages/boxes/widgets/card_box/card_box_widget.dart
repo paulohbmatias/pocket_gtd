@@ -20,7 +20,7 @@ class CardBoxWidget extends StatelessWidget {
       contentPadding: const EdgeInsets.all(8),
       leading: Icon(MdiIcons.cubeOutline, size: 48,),
       title: Text(BoxModel.getBoxName(context, box)),
-      subtitle: Text(S.of(context).files_x(box.length.toString())),
+      subtitle: Text(I18n.of(context).files_x(box.length.toString())),
     );
   }
 }

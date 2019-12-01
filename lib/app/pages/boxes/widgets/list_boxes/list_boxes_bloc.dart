@@ -35,7 +35,7 @@ class ListBoxesBloc extends BlocBase {
               box,
               ListTypeEnum.DEFAULT,
               EmptyListWidget(
-                S.of(context).app_pages_boxes_empty_box,
+                I18n.of(context).app_pages_boxes_empty_box,
                 icon: MdiIcons.packageVariant,
               ))),
     );

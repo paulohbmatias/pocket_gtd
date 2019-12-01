@@ -11,10 +11,10 @@ class AreProjectWidget extends StatelessWidget {
   @override
     Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(S.of(context).app_pages_analyze_are_project_title),
+      title: Text(I18n.of(context).app_pages_analyze_are_project_title),
       actions: <Widget>[
-        FlatButton(onPressed: () => bloc.goTo(StepsEnum.IS_IT_TEMPORAL), child: Text(S.of(context).no)),
-        FlatButton(onPressed: () => bloc.goTo(StepsEnum.MOVE_TO_PROJECT), child: Text(S.of(context).yes)),
+        FlatButton(onPressed: () => bloc.goTo(StepsEnum.IS_IT_TEMPORAL), child: Text(I18n.of(context).no)),
+        FlatButton(onPressed: () => bloc.goTo(StepsEnum.MOVE_TO_PROJECT), child: Text(I18n.of(context).yes)),
       ],
     );
   }

@@ -34,10 +34,10 @@ class _DashboardPageState extends State<DashboardPage> {
           initialData: widget.page ?? 0,
           builder: (context, snapshot){
             switch(snapshot.data){
-              case 0: return Text(S.of(context).inbox);
-              case 1: return Text(S.of(context).next_actions);
-              case 2: return Text(S.of(context).boxes);
-              default: return Text(S.of(context).inbox);
+              case 0: return Text(I18n.of(context).inbox);
+              case 1: return Text(I18n.of(context).next_actions);
+              case 2: return Text(I18n.of(context).boxes);
+              default: return Text(I18n.of(context).inbox);
             }
           },
         ),
@@ -56,10 +56,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 showUnselectedLabels: false,
                 showSelectedLabels: false,
                 items: <BottomNavigationBarItem>[
-                  bottomItem(MdiIcons.inbox, S.of(context).inbox),
-                  bottomItem(OMIcons.listAlt, S.of(context).next_actions),
-//                  bottomItem(MdiIcons.contentPaste, S.of(context).references),
-                  bottomItem(MdiIcons.cube, S.of(context).boxes),
+                  bottomItem(MdiIcons.inbox, I18n.of(context).inbox),
+                  bottomItem(OMIcons.listAlt, I18n.of(context).next_actions),
+//                  bottomItem(MdiIcons.contentPaste, I18n.of(context).references),
+                  bottomItem(MdiIcons.cube, I18n.of(context).boxes),
                 ],
                 currentIndex: snapshot.data,
                 onTap: bloc.changePage,

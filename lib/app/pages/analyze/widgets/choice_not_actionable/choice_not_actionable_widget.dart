@@ -13,13 +13,13 @@ class ChoiceNotActionableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(S.of(context).app_pages_analyze_choice_not_actionable_title(bloc.task.title)),
+      title: Text(I18n.of(context).app_pages_analyze_choice_not_actionable_title(bloc.task.title)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
             leading: Icon(MdiIcons.cubeOutline),
-            title: Text(S.of(context).one_day_maybe),
+            title: Text(I18n.of(context).one_day_maybe),
             onTap: () {
               bloc.moveTo(BoxModel.fromEnum(InitialBoxesEnum.ONE_DAY_MAYBE));
               Navigator.of(context).pop();
@@ -27,7 +27,7 @@ class ChoiceNotActionableWidget extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(MdiIcons.cubeOutline),
-            title: Text(S.of(context).references),
+            title: Text(I18n.of(context).references),
             onTap: () {
               bloc.moveTo(BoxModel.fromEnum(InitialBoxesEnum.REFERENCES));
               Navigator.of(context).pop();
@@ -35,7 +35,7 @@ class ChoiceNotActionableWidget extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(MdiIcons.trashCan),
-            title: Text(S.of(context).trash),
+            title: Text(I18n.of(context).trash),
             onTap: () {
               bloc.remove();
               Navigator.of(context).pop();

@@ -12,7 +12,7 @@ class RegisterBoxWidget extends StatelessWidget {
       actions: <Widget>[
         FlatButton(
           onPressed: () => bloc.cancelDialog(context),
-          child: Text(S.of(context).cancel),
+          child: Text(I18n.of(context).cancel),
         ),
         StreamBuilder<bool>(
             stream: bloc.isValidFields(context),
@@ -22,11 +22,11 @@ class RegisterBoxWidget extends StatelessWidget {
                 onPressed: snapshot.hasData && snapshot.data
                     ? () => bloc.saveBox(context)
                     : null,
-                child: Text(S.of(context).save),
+                child: Text(I18n.of(context).save),
               );
             })
       ],
-      title: Text(S.of(context).create_box),
+      title: Text(I18n.of(context).create_box),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -34,7 +34,7 @@ class RegisterBoxWidget extends StatelessWidget {
               stream: bloc.title(context),
               builder: (context, snapshot) {
                 return TextField(
-                  decoration: InputDecoration(hintText: S.of(context).title),
+                  decoration: InputDecoration(hintText: I18n.of(context).title),
                   onChanged: bloc.changeTitle,
                 );
               }),
@@ -43,7 +43,7 @@ class RegisterBoxWidget extends StatelessWidget {
               builder: (context, snapshot) {
                 return TextField(
                   decoration:
-                  InputDecoration(hintText: S.of(context).content),
+                  InputDecoration(hintText: I18n.of(context).content),
                   onChanged: bloc.changeDescription,
                 );
               }),

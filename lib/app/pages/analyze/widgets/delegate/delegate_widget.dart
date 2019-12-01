@@ -10,11 +10,11 @@ class DelegateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(S.of(context).app_pages_analyze_delegate_title),
+      title: Text(I18n.of(context).app_pages_analyze_delegate_title),
       content: TextField(
         onChanged: bloc.changeName,
         decoration: InputDecoration(
-          hintText: S.of(context).name
+          hintText: I18n.of(context).name
         ),
       ),
       actions: <Widget>[
@@ -25,7 +25,7 @@ class DelegateWidget extends StatelessWidget {
             return FlatButton(onPressed: !snapshot.data ? () {
               bloc.done();
               Navigator.of(context).pop();
-            } : null, child: Text(S.of(context).done));
+            } : null, child: Text(I18n.of(context).done));
           }
         )
       ],

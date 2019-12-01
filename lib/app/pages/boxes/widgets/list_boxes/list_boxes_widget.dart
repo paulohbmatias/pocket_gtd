@@ -47,9 +47,9 @@ class _ListBoxesWidgetState extends State<ListBoxesWidget> {
                                 await showDialog<bool>(
                                     context: context,
                                     builder: (context) => AlertDialog(
-                                      title: Text(S.of(context).confirm_delete_box
+                                      title: Text(I18n.of(context).confirm_delete_box
                                       ),
-                                      content: Text(S.of(context).this_box_contains(snapshot.data.toString())),
+                                      content: Text(I18n.of(context).this_box_contains(snapshot.data.toString())),
                                       actions: <Widget>[
                                         FlatButton(
                                             onPressed: () {

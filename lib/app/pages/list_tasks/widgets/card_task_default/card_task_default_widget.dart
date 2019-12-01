@@ -38,7 +38,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
                   Icon(OMIcons.edit),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(S.of(context).edit),
+                    child: Text(I18n.of(context).edit),
                   ),
                 ],
               ),
@@ -50,7 +50,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
                   Icon(OMIcons.delete),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(S.of(context).remove),
+                    child: Text(I18n.of(context).remove),
                   ),
                 ],
               ),
@@ -62,7 +62,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
                   Icon(OMIcons.arrowForward),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(S.of(context).move),
+                    child: Text(I18n.of(context).move),
                   ),
                 ],
               ),
@@ -74,7 +74,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
                   Icon(OMIcons.reorder),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(S.of(context).analyze),
+                    child: Text(I18n.of(context).analyze),
                   ),
                 ],
               ),

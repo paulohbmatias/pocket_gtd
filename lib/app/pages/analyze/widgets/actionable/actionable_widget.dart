@@ -11,11 +11,11 @@ class ActionableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(S.of(context).app_pages_analyze_actionable_title),
-      content: Text(S.of(context).app_pages_analyze_actionable_content),
+      title: Text(I18n.of(context).app_pages_analyze_actionable_title),
+      content: Text(I18n.of(context).app_pages_analyze_actionable_content),
       actions: <Widget>[
-        FlatButton(onPressed: () => bloc.goTo(StepsEnum.CHOICE_NOT_ACTIONABLE), child: Text(S.of(context).no)),
-        FlatButton(onPressed: () => bloc.goTo(StepsEnum.TWO_MINUTES), child: Text(S.of(context).yes)),
+        FlatButton(onPressed: () => bloc.goTo(StepsEnum.CHOICE_NOT_ACTIONABLE), child: Text(I18n.of(context).no)),
+        FlatButton(onPressed: () => bloc.goTo(StepsEnum.TWO_MINUTES), child: Text(I18n.of(context).yes)),
       ],
     );
   }

@@ -30,7 +30,7 @@ class CardTaskDefaultBloc extends BlocBase {
     result = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(S.of(context).confirm_delete_task(task.title)),
+          title: Text(I18n.of(context).confirm_delete_task(task.title)),
           actions: <Widget>[
             FlatButton(
                 onPressed: () {

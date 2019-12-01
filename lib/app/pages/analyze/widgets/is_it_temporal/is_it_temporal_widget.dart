@@ -15,7 +15,7 @@ class IsItTemporalWidget extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: Icon(OMIcons.calendarToday),
-            title: Text(S.of(context).schedule),
+            title: Text(I18n.of(context).schedule),
             onTap: () async{
               final date = await showDatePicker(
                 context: context,
@@ -36,7 +36,7 @@ class IsItTemporalWidget extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(OMIcons.navigateNext),
-            title: Text(S.of(context).next_actions),
+            title: Text(I18n.of(context).next_actions),
             onTap: () {
               bloc.nextActions();
               Navigator.of(context).pop();

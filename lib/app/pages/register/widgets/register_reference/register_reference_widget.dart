@@ -17,7 +17,7 @@ class _RegisterReferenceWidgetState extends State<RegisterReferenceWidget> {
       actions: <Widget>[
         FlatButton(
           onPressed: () => bloc.cancelDialog(context),
-          child: Text(S.of(context).cancel),
+          child: Text(I18n.of(context).cancel),
         ),
         StreamBuilder<bool>(
             stream: bloc.isValidFields(context),
@@ -27,11 +27,11 @@ class _RegisterReferenceWidgetState extends State<RegisterReferenceWidget> {
                 onPressed: snapshot.hasData && snapshot.data
                     ? () => bloc.isUpdate ? bloc.updateReference(context) : bloc.saveReference(context)
                     : null,
-                child: !bloc.isUpdate ? Text(S.of(context).save) : Text(S.of(context).update),
+                child: !bloc.isUpdate ? Text(I18n.of(context).save) : Text(I18n.of(context).update),
               );
             })
       ],
-      title: Text(S.of(context).register_reference),
+      title: Text(I18n.of(context).register_reference),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -40,7 +40,7 @@ class _RegisterReferenceWidgetState extends State<RegisterReferenceWidget> {
               builder: (context, snapshot) {
                 return TextField(
                   controller: bloc.titleController,
-                  decoration: InputDecoration(hintText: S.of(context).title),
+                  decoration: InputDecoration(hintText: I18n.of(context).title),
                   onChanged: bloc.changeTitle,
                 );
               }),
@@ -50,7 +50,7 @@ class _RegisterReferenceWidgetState extends State<RegisterReferenceWidget> {
                 return TextField(
                   controller: bloc.contentController,
                   decoration:
-                  InputDecoration(hintText: S.of(context).content),
+                  InputDecoration(hintText: I18n.of(context).content),
                   onChanged: bloc.changeContent,
                 );
               }),

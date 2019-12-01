@@ -19,7 +19,7 @@ class _NextActionsPageState extends State<NextActionsPage> {
           BoxModel.fromId(BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS)),
           ListTypeEnum.NEXT_ACTIONS,
           EmptyListWidget(
-            S.of(context).app_pages_next_actions_empty_box,
+            I18n.of(context).app_pages_next_actions_empty_box,
             image: "assets/images/actions.png",
           )),
     );

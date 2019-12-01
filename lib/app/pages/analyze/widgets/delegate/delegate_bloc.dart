@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:pocket_gtd/app/app_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
@@ -18,8 +17,9 @@ class DelegateBloc extends BlocBase {
 
   Function(String) get changeName => _name.sink.add;
 
-  Observable<bool> get isEmpty => _name.stream
-      .transform(StreamTransformer<String, bool>.fromHandlers(handleData: (data, sink) => sink.add(data.isEmpty)));
+  Observable<bool> get isEmpty =>
+      _name.stream.transform(StreamTransformer<String, bool>.fromHandlers(
+          handleData: (data, sink) => sink.add(data.isEmpty)));
 
   DelegateBloc(this.task);
 

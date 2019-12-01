@@ -10,13 +10,13 @@ class DoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(S.of(context).app_pages_analyze_do_title),
+      title: Text(I18n.of(context).app_pages_analyze_do_title),
       content: LinearProgressIndicator(),
       actions: <Widget>[
         FlatButton(onPressed: () {
           bloc.done();
           Navigator.of(context).pop();
-        }, child: Text(S.of(context).done)),
+        }, child: Text(I18n.of(context).done)),
       ],
     );
   }

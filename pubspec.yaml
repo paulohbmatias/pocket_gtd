@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
+  table_calendar: ^2.2.1
   bloc_pattern: ^2.3.4
   intl:
   flutter:

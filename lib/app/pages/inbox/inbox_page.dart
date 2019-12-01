@@ -27,7 +27,7 @@ class _InboxPageState extends State<InboxPage> {
           BoxModel.fromId(BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX)),
           ListTypeEnum.INBOX,
           EmptyListWidget(
-            S.of(context).app_pages_inbox_empty_box,
+            I18n.of(context).app_pages_inbox_empty_box,
             image: "assets/images/notes.png",
           )),
     );

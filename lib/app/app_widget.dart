@@ -10,15 +10,15 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       title: 'Pocket GTD',
       localizationsDelegates: [
-        S.delegate,
+        I18n.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      supportedLocales: S.delegate.supportedLocales,
+      supportedLocales: I18n.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       localeResolutionCallback:
-          S.delegate.resolution(fallback: new Locale("en", "")),
+          I18n.delegate.resolution(fallback: new Locale("en", "")),
       theme: ThemeData(
           primarySwatch: MaterialColor(
             0xFF4F6CFF,

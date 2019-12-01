@@ -28,7 +28,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
         key: bloc.scaffoldKey,
         appBar: AppBar(
           title: Text(
-            S.of(context).register,
+            I18n.of(context).register,
           ),
           actions: <Widget>[
             StreamBuilder<bool>(
@@ -60,7 +60,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                         textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: S.of(context).title,
+                          labelText: I18n.of(context).title,
                         ),
                         onChanged: bloc.changeTitle,
                       ),
@@ -72,7 +72,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                         textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: S.of(context).content,
+                          labelText: I18n.of(context).content,
                         ),
                         maxLines: 4,
                         minLines: 2,
@@ -81,7 +81,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                     ),
                     StreamBuilder<String>(
                         stream: bloc.deadline,
-                        initialData: S.of(context).deadline,
+                        initialData: I18n.of(context).deadline,
                         builder: (context, snapshot) {
                           return TextField(
                             controller: bloc.deadlineController,
