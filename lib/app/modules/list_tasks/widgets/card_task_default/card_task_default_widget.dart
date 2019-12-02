@@ -144,7 +144,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
                 firstDate: DateTime.now().subtract(Duration(days: 1)),
                 lastDate: DateTime(2060),
               );
-
+              if (date == null) return;
               final time = await showTimePicker(
                   context: context, initialTime: TimeOfDay.now());
 
@@ -154,7 +154,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
               bloc.schedule(when, task);
 
               break;
-            case 4:
+            case 5:
               bloc.analyze(context, task);
               break;
             default:
@@ -173,12 +173,28 @@ class CardTaskDefaultWidget extends StatelessWidget {
         ),
         trailing: task.deadline != null
             ? Text(
-                "${task.deadline.day} ${DateUtils.monthFromDate(task.deadline)}",
+                dateTask(context),
                 style: TextStyle(
                     color: Color(0xffff7e67), fontWeight: FontWeight.bold),
               )
             : Text(""),
       ),
     );
+  }
+
+  String dateTask(BuildContext context) {
+    DateTime today = DateTime.now();
+    DateTime tomorrow = DateTime.now().add(Duration(days: 1));
+    if ((task.deadline.year == today.year) &&
+        (task.deadline.month == today.month) &&
+        (task.deadline.day == today.day)) {
+      return I18n.of(context).today;
+    } else if ((task.deadline.year == tomorrow.year) &&
+        (task.deadline.month == tomorrow.month) &&
+        (task.deadline.day == tomorrow.day)) {
+      return I18n.of(context).tomorrow;
+    } else {
+      return "${task.deadline.day} ${DateUtils.monthFromDate(task.deadline)}";
+    }
   }
 }

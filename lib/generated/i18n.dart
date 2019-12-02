@@ -52,12 +52,22 @@ class I18n implements WidgetsLocalizations {
   String get remove => "Remove";
   /// "Move"
   String get move => "Move";
+  /// "Today"
+  String get today => "Today";
+  /// "Tomorrow"
+  String get tomorrow => "Tomorrow";
   /// "Edit"
   String get edit => "Edit";
   /// "Analyze"
   String get analyze => "Analyze";
   /// "Update"
   String get update => "Update";
+  /// "Week"
+  String get week_calendar => "Week";
+  /// "Two week"
+  String get two_weeks => "Two week";
+  /// "Month"
+  String get month_calendar => "Month";
   /// "Create box"
   String get create_box => "Create box";
   /// "Boxes"

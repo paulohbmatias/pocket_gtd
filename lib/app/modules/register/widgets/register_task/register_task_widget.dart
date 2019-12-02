@@ -85,7 +85,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                         onChanged: bloc.changeDescription,
                       ),
                     ),
-                    StreamBuilder<String>(
+                    bloc.isUpdate ? StreamBuilder<String>(
                         stream: bloc.schedule,
                         initialData: "",
                         builder: (context, snapshot) {
@@ -113,7 +113,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                                             .subtract(Duration(days: 1)),
                                         lastDate: DateTime(2060),
                                       );
-
+                                      if(date == null) return;
                                       final time = await showTimePicker(
                                           context: context,
                                           initialTime: TimeOfDay.now());
@@ -130,7 +130,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                                   )
                                 ],
                               ));
-                        }),
+                        }) : Container(),
                     StreamBuilder<String>(
                         stream: bloc.deadline,
                         initialData: "",
@@ -141,38 +141,44 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  Text(I18n.of(context).deadline,
-                                      style: TextStyle(color: Colors.grey)),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(I18n.of(context).deadline,
+                                        style: TextStyle(color: Colors.grey)),
+                                  ),
                                   Text(snapshot.data),
-                                  IconButton(
-                                    icon: Icon(
-                                      MdiIcons.alarmPlus,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                                    onPressed: () async{
-                                      final date = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        initialDatePickerMode:
-                                            DatePickerMode.day,
-                                        firstDate: DateTime.now()
-                                            .subtract(Duration(days: 1)),
-                                        lastDate: DateTime(2060),
-                                      );
-
-                                      final time = await showTimePicker(
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: IconButton(
+                                      icon: Icon(
+                                        MdiIcons.alarmPlus,
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                      onPressed: () async{
+                                        final date = await showDatePicker(
                                           context: context,
-                                          initialTime: TimeOfDay.now());
+                                          initialDate: DateTime.now(),
+                                          initialDatePickerMode:
+                                              DatePickerMode.day,
+                                          firstDate: DateTime.now()
+                                              .subtract(Duration(days: 1)),
+                                          lastDate: DateTime(2060),
+                                        );
+                                        if(date == null) return;
+                                        final time = await showTimePicker(
+                                            context: context,
+                                            initialTime: TimeOfDay.now());
 
-                                      DateTime when = DateTime(
-                                          date.year,
-                                          date.month,
-                                          date.day,
-                                          time.hour,
-                                          time.minute);
+                                        DateTime when = DateTime(
+                                            date.year,
+                                            date.month,
+                                            date.day,
+                                            time.hour,
+                                            time.minute);
 
-                                      bloc.changeDeadline(when);
-                                    },
+                                        bloc.changeDeadline(when);
+                                      },
+                                    ),
                                   )
                                 ],
                               ));

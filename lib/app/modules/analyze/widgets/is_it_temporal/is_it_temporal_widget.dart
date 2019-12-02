@@ -24,7 +24,10 @@ class IsItTemporalWidget extends StatelessWidget {
                 firstDate: DateTime.now().subtract(Duration(days: 1)),
                 lastDate: DateTime(2060),
               );
-
+              if(date == null){
+                Navigator.of(context).pop();
+                return;
+              }
               final time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
 
               DateTime when = DateTime(date.year, date.month, date.day, time.hour, time.minute);
