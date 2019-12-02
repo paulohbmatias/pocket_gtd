@@ -75,6 +75,20 @@ class CardTaskDefaultWidget extends StatelessWidget {
                         Icon(OMIcons.eventNote),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
+                          child: Text(I18n.of(context).delegate_task),
+                        ),
+                      ],
+                    ),
+                  )
+                : null,
+            bloc.box.idLocal == BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX)
+                ? PopupMenuItem(
+                    value: 3,
+                    child: Row(
+                      children: <Widget>[
+                        Icon(OMIcons.eventNote),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(I18n.of(context).schedule),
                         ),
                       ],

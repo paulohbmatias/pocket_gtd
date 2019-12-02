@@ -16,6 +16,7 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final titleController = TextEditingController();
   final contentController = TextEditingController();
+  final focusTitle = FocusNode();
 
   RegisterTaskBloc({this.task, this.isUpdate = false}) {
     if (task != null) {
@@ -105,6 +106,7 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
         backgroundColor: Colors.green,
         content: Text(I18n.of(context).successfully_added),
       ));
+      focusTitle.requestFocus();
     }
   }
 
