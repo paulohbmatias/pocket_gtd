@@ -63,7 +63,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 showSelectedLabels: false,
                 items: <BottomNavigationBarItem>[
                   bottomItem(MdiIcons.inbox, I18n.of(context).inbox),
-                  bottomItem(OMIcons.listAlt, I18n.of(context).next_actions),
+                  bottomItem(OMIcons.notes, I18n.of(context).next_actions),
                   bottomItem(
                       MdiIcons.calendarOutline, I18n.of(context).scheduled),
                   bottomItem(MdiIcons.cube, I18n.of(context).boxes),

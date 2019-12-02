@@ -39,6 +39,7 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
       await boxBoxes.put(box.idLocal, box);
       return true;
     } catch (e) {
+      print(e);
       return false;
     }
   }

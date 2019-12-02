@@ -75,7 +75,7 @@ class RegisterReferenceBloc extends BlocBase with RegisterValidators {
         ..title = _title.value
         ..content = _content.value;
       await taskRepository.save(
-          taskModel, BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES), null, null));
+          taskModel, BoxModel.fromEnum(InitialBoxesEnum.REFERENCES));
       Navigator.of(context).pop();
     } catch (e) {
       print(e);

@@ -12,13 +12,12 @@ import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class CardTaskDefaultBloc extends BlocBase {
-
   final BoxModel box;
 
   final taskRepository = AppModule.to.getDependency<TaskRepository>();
 
   CardTaskDefaultBloc(this.box);
-  
+
   void edit(BuildContext context, ListTypeEnum type, TaskModel task) async {
     await Navigator.push(
         context,
@@ -30,31 +29,31 @@ class CardTaskDefaultBloc extends BlocBase {
                 )));
   }
 
-  void remove(BuildContext context, TaskModel task) async{
+  void remove(BuildContext context, TaskModel task) async {
     bool result = false;
     result = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(I18n.of(context).confirm_delete_task(task.title)),
-          actions: <Widget>[
-            FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: Text("No")),
-            FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: Text("Yes")),
-          ],
-        ));
-    if(result){
+              title: Text(I18n.of(context).confirm_delete_task(task.title)),
+              actions: <Widget>[
+                FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(false);
+                    },
+                    child: Text("No")),
+                FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: Text("Yes")),
+              ],
+            ));
+    if (result) {
       task.delete();
     }
   }
 
-  schedule(DateTime when, TaskModel task){
+  schedule(DateTime when, TaskModel task) {
     task.when = when;
     task.save();
     taskRepository.moveTask(
@@ -64,16 +63,18 @@ class CardTaskDefaultBloc extends BlocBase {
     );
   }
 
-  void analyze(BuildContext context, TaskModel task){
+  moveTo(BuildContext context, TaskModel task, InitialBoxesEnum boxEnum) {
+    taskRepository.moveTask(box, BoxModel.fromEnum(boxEnum), task);
+  }
+
+  void analyze(BuildContext context, TaskModel task) {
     showDialog(context: context, builder: (context) => AnalyzeModule(task));
   }
 
   Future<void> showOptionsBoxes(BuildContext context, TaskModel task) async {
     await showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       builder: (context) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: BoxOptionsWidget(task),

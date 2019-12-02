@@ -44,7 +44,7 @@ class RegisterBoxBloc extends BlocBase with RegisterValidators{
     changeIsLoading(true);
     try {
       BoxModel boxModel =
-      BoxModel(null, null, _title.value, _description.value);
+      BoxModel(null, null, _title.value, _description.value, null);
       await boxRepository.save(boxModel);
       Navigator.of(context).pop();
     } catch (e) {

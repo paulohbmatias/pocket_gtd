@@ -238,15 +238,15 @@ class _I18n_pt_BR extends I18n {
   /// "Prazo"
   @override
   String get test => "Prazo";
-  /// "{prefixo} não pode ser vazio"
+  /// "${prefix} não pode ser vazio"
   @override
-  String error_cant_be_empty(String prefix) => "{prefixo} não pode ser vazio";
+  String error_cant_be_empty(String prefix) => "${prefix} não pode ser vazio";
   /// "Você realmente quer eliminar esta caixa?"
   @override
   String get confirm_delete_box => "Você realmente quer eliminar esta caixa?";
-  /// "Você realmente deseja excluir a tarefa {tarefa}?"
+  /// "Você realmente deseja excluir a tarefa \"${task}\"?"
   @override
-  String confirm_delete_task(String task) => "Você realmente deseja excluir a tarefa {tarefa}?";
+  String confirm_delete_task(String task) => "Você realmente deseja excluir a tarefa \"${task}\"?";
   /// "Esta caixa contém ${numberFiles} arquivos"
   @override
   String this_box_contains(String numberFiles) => "Esta caixa contém ${numberFiles} arquivos";

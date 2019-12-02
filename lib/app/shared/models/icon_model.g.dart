@@ -1,40 +1,37 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'box_model.dart';
+part of 'icon_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class BoxModelAdapter extends TypeAdapter<BoxModel> {
+class IconModelAdapter extends TypeAdapter<IconModel> {
   @override
-  BoxModel read(BinaryReader reader) {
+  IconModel read(BinaryReader reader) {
     var numOfFields = reader.readByte();
     var fields = <int, dynamic>{
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return BoxModel(
+    return IconModel(
       fields[0] as int,
-      fields[1] as int,
+      fields[1] as String,
       fields[2] as String,
-      fields[3] as String,
-      fields[4] as IconModel,
+      fields[3] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, BoxModel obj) {
+  void write(BinaryWriter writer, IconModel obj) {
     writer
-      ..writeByte(5)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.idLocal)
-      ..writeByte(2)
-      ..write(obj.title)
-      ..writeByte(3)
-      ..write(obj.content)
       ..writeByte(4)
-      ..write(obj.icon);
+      ..writeByte(0)
+      ..write(obj.codePoint)
+      ..writeByte(1)
+      ..write(obj.fontFamily)
+      ..writeByte(2)
+      ..write(obj.fontPackage)
+      ..writeByte(3)
+      ..write(obj.matchTextDirection);
   }
 }

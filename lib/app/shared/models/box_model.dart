@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
+import 'package:pocket_gtd/app/shared/models/icon_model.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 part 'box_model.g.dart';
@@ -20,9 +21,12 @@ class BoxModel extends HiveObject{
   @HiveField(3)
   String content;
 
+  @HiveField(4)
+  IconModel icon;
+
   int length;
 
-  BoxModel(this.id, this.idLocal, this.title, this.content);
+  BoxModel(this.id, this.idLocal, this.title, this.content, this.icon);
 
   BoxModel.fromId(this.idLocal);
 

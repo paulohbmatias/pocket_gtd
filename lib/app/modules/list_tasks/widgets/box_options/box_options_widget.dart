@@ -6,7 +6,6 @@ import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 
 class BoxOptionsWidget extends StatelessWidget {
-
   final bloc = ListTasksModule.to.bloc<BoxOptionsBloc>();
   final TaskModel task;
 
@@ -17,17 +16,28 @@ class BoxOptionsWidget extends StatelessWidget {
     return Material(
       child: FutureBuilder<List<BoxModel>>(
         future: bloc.getBoxes(),
-        builder: (context, snapshot){
-          return snapshot.hasData ? ListView(
-            shrinkWrap: true,
-            children: snapshot.data.map<Widget>((item) => ListTile(
-              onTap: () => bloc.moveTo(context, task, item),
-              leading: Icon(MdiIcons.cubeOutline, size: 32,),
-              title: Text(item.title),
-            )).toList(),
-          ) : Center(
-            child: CircularProgressIndicator(),
-          );
+        builder: (context, snapshot) {
+          return snapshot.hasData
+              ? ListView(
+                  shrinkWrap: true,
+                  children: snapshot.data
+                      .map<Widget>((item) => ListTile(
+                            onTap: () => bloc.moveTo(context, task, item),
+                            leading: Icon(
+                              IconData(
+                                item.icon.codePoint,
+                                fontPackage: item.icon.fontPackage,
+                                fontFamily: item.icon.fontFamily
+                              ),
+                              size: 32,
+                            ),
+                            title: Text(item.title),
+                          ))
+                      .toList(),
+                )
+              : Center(
+                  child: CircularProgressIndicator(),
+                );
         },
       ),
     );
