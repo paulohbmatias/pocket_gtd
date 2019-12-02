@@ -22,34 +22,50 @@ class _ScheduledPageState extends State<ScheduledPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder<List<TaskModel>>(
-            future: bloc.getScheduledTasks(),
-            builder: (context, snapshot) {
-              return snapshot.hasData
-                  ? Column(
-                      children: <Widget>[
-                        TableCalendar(
-                            calendarController: calendarController,
-                            events: Map<DateTime, List>.fromIterable(
-                                snapshot.data,
-                                key: (item) => item.when,
-                                value: (item) => snapshot.data
-                                    .where((task) =>
-                                        (task.when.year == item.when.year) &&
-                                        (task.when.month == item.when.month) &&
-                                        (task.when.day == item.when.day))
-                                    .toList()),
-                            onDaySelected: (date, tasks) {
-                              if(tasks != null) bloc.changeTasks(tasks.isNotEmpty ? tasks as List<TaskModel> : <TaskModel>[]);
-                            }),
-                        Expanded(
-                          child: ListTasksModule(
-                              BoxModel.fromEnum(InitialBoxesEnum.SCHEDULED), ListTypeEnum.SCHEDULEDS, Container(),
-                              streamListTasks: bloc.tasks),
-                        )
-                      ],
-                    )
-                  : Container();
-            }));
+        body: FutureBuilder <
+            Stream<List<TaskModel>>>(
+              future: bloc.getScheduledTasks(),
+              builder: (context, snapshot) {
+                return StreamBuilder<List<TaskModel>>(
+                    stream: snapshot.data,
+                    builder: (context, snapshot) {
+                      return snapshot.hasData
+                          ? Column(
+                              children: <Widget>[
+                                TableCalendar(
+                                    calendarController: bloc.calendarTableController,
+                                    events: Map<DateTime, List>.fromIterable(
+                                        snapshot.data,
+                                        key: (item) => item.when,
+                                        value: (item) => snapshot.data
+                                            .where((task) =>
+                                                (task.when.year ==
+                                                    item.when.year) &&
+                                                (task.when.month ==
+                                                    item.when.month) &&
+                                                (task.when.day ==
+                                                    item.when.day))
+                                            .toList()),
+                                    onDaySelected: (date, tasks) {
+                                      if (tasks != null)
+                                        bloc.changeScheduleTasks(tasks.isNotEmpty
+                                            ? tasks as List<TaskModel>
+                                            : <TaskModel>[]);
+                                    },
+                                    ),
+                                Expanded(
+                                  child: ListTasksModule(
+                                      BoxModel.fromEnum(
+                                          InitialBoxesEnum.SCHEDULED),
+                                      ListTypeEnum.SCHEDULEDS,
+                                      Container(),
+                                      streamListTasks: bloc.scheduleTasks),
+                                )
+                              ],
+                            )
+                          : Container();
+                    });
+              },
+            ));
   }
 }

@@ -13,7 +13,8 @@ import 'package:pocket_gtd/generated/i18n.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ListBoxesBloc extends BlocBase {
-  final BoxRepository boxRepository = BoxesModule.to.getDependency<BoxRepository>();
+  final BoxRepository boxRepository =
+      BoxesModule.to.getDependency<BoxRepository>();
 
   List<BoxModel> listBoxes = List();
 
@@ -41,9 +42,12 @@ class ListBoxesBloc extends BlocBase {
     );
   }
 
-  Future<List<BoxModel>> getBoxes() async => (await boxRepository.getAll()).where((box) {
+  Future<List<BoxModel>> getBoxes() async =>
+      (await boxRepository.getAll()).where((box) {
         return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
-            box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
+            box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED) &&
+            box.idLocal !=
+                BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
       }).toList();
 
   Future<Stream<List<BoxModel>>> listenBoxes() async {
@@ -52,9 +56,12 @@ class ListBoxesBloc extends BlocBase {
     (await boxRepository.listenBoxes())
       ..listen((list) {
         changeBoxList(list.where((box) {
-          return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
-              box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES) &&
-              box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
+          return box.idLocal !=
+                  BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
+              box.idLocal !=
+                  BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED) &&
+              box.idLocal !=
+                  BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
         }));
       });
     return boxes;

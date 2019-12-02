@@ -134,7 +134,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
           }
         }
       },
-      onTap: () {},
+      onLongPress: (){},
       child: ListTile(
         contentPadding: EdgeInsets.all(8),
         title: Text(task.title),

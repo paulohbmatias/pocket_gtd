@@ -23,20 +23,20 @@ class ListTasksBloc extends BlocBase {
 
   ListTasksBloc(this.box, this.listType, {this.streamListTasks});
 
-  Observable<List<TaskModel>> get boxes => _tasks.stream;
+  Observable<List<TaskModel>> get tasks => _tasks.stream;
 
-  Function(List<TaskModel>) get changeBoxList => _tasks.sink.add;
+  Function(List<TaskModel>) get changeListTask => _tasks.sink.add;
 
   Future<List<TaskModel>> getTasks() => taskRepository.getAll(box);
 
   Future<Stream<List<TaskModel>>> listenTasks() async {
     if(streamListTasks != null) return streamListTasks;
     listTasks = await taskRepository.getAll(box);
-    changeBoxList(await taskRepository.getAll(box));
+    changeListTask(await taskRepository.getAll(box));
     (await taskRepository.listenTasks(box)).listen((list) {
-      changeBoxList(list);
+      changeListTask(list);
     });
-    return boxes;
+    return tasks;
   }
 
   void edit(BuildContext context, TaskModel task) async {

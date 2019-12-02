@@ -5,7 +5,10 @@ import 'package:pocket_gtd/generated/i18n.dart';
 mixin RegisterValidators {
   StreamTransformer<DateTime, String> validateDate() =>
       StreamTransformer<DateTime, String>.fromHandlers(handleData: (date, sink) {
-        sink.add(transformDate(date));
+        if(date != null)
+          sink.add(transformDate(date));
+        else
+          sink.add("");
       });
   String transformDate(DateTime date) => "${(date.day).toString().padLeft(2, "0")}/"
       "${(date.month).toString().padLeft(2, "0")}/${date.year} ${(date.hour).toString().padLeft(2, "0")}:${(date.minute).toString().padLeft(2, "0")}";

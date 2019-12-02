@@ -97,6 +97,8 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
       titleController.clear();
       contentController.clear();
       _title.sink.add(null);
+      _deadline.sink.add(null);
+      _schedule.sink.add(null);
       _description.sink.add(null);
       changeIsLoading(false);
       scaffoldKey.currentState.showSnackBar(SnackBar(
