@@ -1,3 +1,4 @@
+  import 'package:pocket_gtd/app/modules/list_tasks/widgets/delegate/delegate_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_bloc.dart';
@@ -18,7 +19,7 @@ class ListTasksModule extends ModuleWidget {
   ListTasksModule(this.box, this.listType, this.emptyList, {this.streamListTasks});
 
   @override
-  List<Bloc> get blocs => [
+  List<Bloc> get blocs => [Bloc((i) => DelegateBloc()),
         Bloc((i) => BoxOptionsBloc(this.box)),
         Bloc((i) => ListDefaultBloc()),
         Bloc((i) => CardTaskDefaultBloc(this.box)),

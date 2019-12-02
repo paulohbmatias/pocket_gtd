@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:pocket_gtd/app/modules/list_tasks/widgets/delegate/delegate_widget.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/widgets/card_task_default/card_task_default_bloc.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
+import 'package:pocket_gtd/app/shared/models/user_model.dart';
 import 'package:pocket_gtd/app/shared/utils/date_utils.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
@@ -72,7 +74,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
                     value: 3,
                     child: Row(
                       children: <Widget>[
-                        Icon(OMIcons.eventNote),
+                        Icon(OMIcons.permContactCalendar),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(I18n.of(context).delegate_task),
@@ -83,7 +85,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
                 : null,
             bloc.box.idLocal == BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX)
                 ? PopupMenuItem(
-                    value: 3,
+                    value: 4,
                     child: Row(
                       children: <Widget>[
                         Icon(OMIcons.eventNote),
@@ -97,7 +99,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
                 : null,
             bloc.box.idLocal == BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX)
                 ? PopupMenuItem(
-                    value: 4,
+                    value: 5,
                     child: Row(
                       children: <Widget>[
                         Icon(OMIcons.reorder),
@@ -123,6 +125,18 @@ class CardTaskDefaultWidget extends StatelessWidget {
               bloc.showOptionsBoxes(context, task);
               break;
             case 3:
+              final result = await showDialog<String>(
+                  context: context,
+                  builder: (context) {
+                    return DelegateWidget();
+                  });
+              if (result != null && result.isNotEmpty) {
+                task.who = UserModel()..name = result;
+                task.save();
+                bloc.moveTo(context, task, InitialBoxesEnum.WAITING);
+              }
+              break;
+            case 4:
               final date = await showDatePicker(
                 context: context,
                 initialDate: DateTime.now(),
@@ -148,7 +162,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
           }
         }
       },
-      onLongPress: (){},
+      onLongPress: () {},
       child: ListTile(
         contentPadding: EdgeInsets.all(8),
         title: Text(task.title),
