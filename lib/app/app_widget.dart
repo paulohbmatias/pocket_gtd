@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:pocket_gtd/app/pages/splash/splash_module.dart';
+import 'package:pocket_gtd/app/modules/splash/splash_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class AppWidget extends StatelessWidget {
