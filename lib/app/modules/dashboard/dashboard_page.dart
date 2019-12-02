@@ -22,6 +22,8 @@ class _DashboardPageState extends State<DashboardPage> {
   DashboardBloc bloc = DashboardModule.to.getBloc<DashboardBloc>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final initialPage = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class _DashboardPageState extends State<DashboardPage> {
         centerTitle: false,
         title: StreamBuilder<int>(
           stream: bloc.page,
-          initialData: widget.page ?? 0,
+          initialData: widget.page ?? initialPage,
           builder: (context, snapshot) {
             switch (snapshot.data) {
               case 0:
@@ -50,19 +52,19 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       body: StreamBuilder<int>(
         stream: bloc.page,
-        initialData: widget.page ?? 0,
+        initialData: widget.page ?? initialPage,
         builder: (_, snapshot) => pages[snapshot.data],
       ),
       bottomNavigationBar: StreamBuilder<int>(
           stream: bloc.page,
-          initialData: widget.page ?? 0,
+          initialData: widget.page ?? initialPage,
           builder: (_, snapshot) => BottomNavigationBar(
                 unselectedItemColor: Theme.of(context).unselectedWidgetColor,
                 selectedItemColor: Theme.of(context).accentColor,
                 showUnselectedLabels: false,
                 showSelectedLabels: false,
                 items: <BottomNavigationBarItem>[
-                  bottomItem(MdiIcons.inbox, I18n.of(context).inbox),
+                  bottomItem(OMIcons.inbox, I18n.of(context).inbox),
                   bottomItem(OMIcons.notes, I18n.of(context).next_actions),
                   bottomItem(
                       MdiIcons.calendarOutline, I18n.of(context).scheduled),
