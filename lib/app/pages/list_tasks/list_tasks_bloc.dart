@@ -12,6 +12,7 @@ import 'package:rxdart/rxdart.dart';
 class ListTasksBloc extends BlocBase {
   final BoxModel box;
   final ListTypeEnum listType;
+  Stream<List<TaskModel>> streamListTasks;
 
   final TaskRepository taskRepository =
       AppModule.to.getDependency<TaskRepository>();
@@ -20,7 +21,7 @@ class ListTasksBloc extends BlocBase {
 
   BehaviorSubject<List<TaskModel>> _tasks = BehaviorSubject();
 
-  ListTasksBloc(this.box, this.listType);
+  ListTasksBloc(this.box, this.listType, {this.streamListTasks});
 
   Observable<List<TaskModel>> get boxes => _tasks.stream;
 
@@ -29,6 +30,7 @@ class ListTasksBloc extends BlocBase {
   Future<List<TaskModel>> getTasks() => taskRepository.getAll(box);
 
   Future<Stream<List<TaskModel>>> listenTasks() async {
+    if(streamListTasks != null) return streamListTasks;
     listTasks = await taskRepository.getAll(box);
     changeBoxList(await taskRepository.getAll(box));
     (await taskRepository.listenTasks(box)).listen((list) {

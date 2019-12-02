@@ -162,6 +162,10 @@ class I18n implements WidgetsLocalizations {
   String get app_pages_analyze_move_to_project_content => "If an action needs more than one step to complete, then it is a project.";
   /// "Move to Projects"
   String get move_to_projects => "Move to Projects";
+  /// "Successfully added"
+  String get successfully_added => "Successfully added";
+  /// "Schedule for"
+  String get schedule_for => "Schedule for";
 }
 
 class _I18n_en_US extends I18n {
@@ -228,9 +232,9 @@ class _I18n_pt_BR extends I18n {
   /// "Registo referência"
   @override
   String get register_reference => "Registo referência";
-  /// "Prazo"
+  /// "Prazo máximo"
   @override
-  String get deadline => "Prazo";
+  String get deadline => "Prazo máximo";
   /// "Prazo"
   @override
   String get test => "Prazo";
@@ -369,6 +373,12 @@ class _I18n_pt_BR extends I18n {
   /// "Mover para projetos"
   @override
   String get move_to_projects => "Mover para projetos";
+  /// "Adicionado com sucesso"
+  @override
+  String get successfully_added => "Adicionado com sucesso";
+  /// "Agendar para"
+  @override
+  String get schedule_for => "Agendar para";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

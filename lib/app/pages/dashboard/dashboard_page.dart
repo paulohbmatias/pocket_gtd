@@ -6,10 +6,10 @@ import 'package:pocket_gtd/app/pages/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/pages/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/pages/inbox/inbox_module.dart';
 import 'package:pocket_gtd/app/pages/next_actions/next_actions_module.dart';
+import 'package:pocket_gtd/app/pages/scheduled/scheduled_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class DashboardPage extends StatefulWidget {
-
   final int page;
 
   DashboardPage({this.page = 0});
@@ -32,12 +32,18 @@ class _DashboardPageState extends State<DashboardPage> {
         title: StreamBuilder<int>(
           stream: bloc.page,
           initialData: widget.page ?? 0,
-          builder: (context, snapshot){
-            switch(snapshot.data){
-              case 0: return Text(I18n.of(context).inbox);
-              case 1: return Text(I18n.of(context).next_actions);
-              case 2: return Text(I18n.of(context).boxes);
-              default: return Text(I18n.of(context).inbox);
+          builder: (context, snapshot) {
+            switch (snapshot.data) {
+              case 0:
+                return Text(I18n.of(context).inbox);
+              case 1:
+                return Text(I18n.of(context).next_actions);
+              case 2:
+                return Text(I18n.of(context).scheduled);
+              case 3:
+                return Text(I18n.of(context).boxes);
+              default:
+                return Text(I18n.of(context).inbox);
             }
           },
         ),
@@ -58,7 +64,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 items: <BottomNavigationBarItem>[
                   bottomItem(MdiIcons.inbox, I18n.of(context).inbox),
                   bottomItem(OMIcons.listAlt, I18n.of(context).next_actions),
-//                  bottomItem(MdiIcons.contentPaste, I18n.of(context).references),
+                  bottomItem(
+                      MdiIcons.calendarOutline, I18n.of(context).scheduled),
                   bottomItem(MdiIcons.cube, I18n.of(context).boxes),
                 ],
                 currentIndex: snapshot.data,
@@ -81,7 +88,7 @@ class _DashboardPageState extends State<DashboardPage> {
   List<Widget> get pages => [
         InboxModule(),
         NextActionsModule(),
-//        Container(),
+        ScheduledModule(),
         BoxesModule(),
       ];
 }

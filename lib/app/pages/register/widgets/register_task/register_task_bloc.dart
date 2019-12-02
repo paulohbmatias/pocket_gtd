@@ -7,6 +7,7 @@ import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
 import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
 import 'package:pocket_gtd/app/shared/validators/register_validators.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RegisterTaskBloc extends BlocBase with RegisterValidators {
@@ -15,7 +16,6 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final titleController = TextEditingController();
   final contentController = TextEditingController();
-  final deadlineController = TextEditingController();
 
   RegisterTaskBloc({this.task, this.isUpdate = false}) {
     if (task != null) {
@@ -24,8 +24,10 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
       changeDescription(task.content);
       contentController.text = task.content;
       if (task.deadline != null) {
-        deadlineController.text = transformDate(task.deadline);
         changeDeadline(task.deadline);
+      }
+      if (task.when != null) {
+        changeSchedule(task.when);
       }
     }
   }
@@ -36,6 +38,7 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
   BehaviorSubject<String> _title = BehaviorSubject();
   BehaviorSubject<String> _description = BehaviorSubject();
   BehaviorSubject<DateTime> _deadline = BehaviorSubject();
+  BehaviorSubject<DateTime> _schedule = BehaviorSubject();
   BehaviorSubject<BoxModel> _box = BehaviorSubject();
   BehaviorSubject<bool> _isLoading = BehaviorSubject();
 
@@ -45,6 +48,7 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
       _description.stream.transform(validateDescriptionFromStream(context));
 
   Observable<String> get deadline => _deadline.stream.transform(validateDate());
+  Observable<String> get schedule => _schedule.stream.transform(validateDate());
 
   Observable<BoxModel> get box => _box.stream;
 
@@ -62,6 +66,7 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
   Function(String) get changeTitle => _title.sink.add;
   Function(String) get changeDescription => _description.sink.add;
   Function(DateTime) get changeDeadline => _deadline.sink.add;
+  Function(DateTime) get changeSchedule => _schedule.sink.add;
   Function(BoxModel) get changeBox => _box.sink.add;
   Function(bool) get changeIsLoading => _isLoading.sink.add;
 
@@ -82,21 +87,21 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
       TaskModel taskModel = TaskModel()
         ..title = _title.value
         ..content = _description.value
-        ..deadline = _deadline.value;
+        ..deadline = _deadline.value
+        ..when = _schedule.value;
       await taskRepository.save(
-          taskModel, _box.value ?? BoxModel(null, BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX), null, null));
+          taskModel, _box.value ?? BoxModel.fromEnum(taskModel.when != null ? InitialBoxesEnum.SCHEDULED : InitialBoxesEnum.INBOX));
     } catch (e) {
       print(e);
     } finally {
       titleController.clear();
       contentController.clear();
-      deadlineController.clear();
       _title.sink.add(null);
       _description.sink.add(null);
       changeIsLoading(false);
       scaffoldKey.currentState.showSnackBar(SnackBar(
         backgroundColor: Colors.green,
-        content: Text("Tarefa adicionada com sucesso"),
+        content: Text(I18n.of(context).successfully_added),
       ));
     }
   }
@@ -128,6 +133,7 @@ class RegisterTaskBloc extends BlocBase with RegisterValidators {
     _deadline.close();
     _box.close();
     _isLoading.close();
+    _schedule.close();
     super.dispose();
   }
 }

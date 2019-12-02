@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/pages/register/register_module.dart';
 import 'package:pocket_gtd/app/pages/register/widgets/register_task/register_task_bloc.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
-import 'package:pocket_gtd/app/shared/utils/DisableFocusNode.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class RegisterTaskWidget extends StatefulWidget {
@@ -37,9 +37,14 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                 builder: (context, snapshot) {
                   return IconButton(
                     color: Theme.of(context).primaryColor,
-                    icon: Icon(OMIcons.done, color: Colors.white,),
+                    icon: Icon(
+                      OMIcons.done,
+                      color: Colors.white,
+                    ),
                     onPressed: snapshot.hasData && snapshot.data
-                        ? () => bloc.isUpdate ? bloc.updateTask(context) : bloc.saveTask(context)
+                        ? () => bloc.isUpdate
+                            ? bloc.updateTask(context)
+                            : bloc.saveTask(context)
                         : null,
                   );
                 })
@@ -50,7 +55,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
           children: <Widget>[
             Expanded(
               child: Container(
-                margin: const EdgeInsets.all(16),
+                margin: const EdgeInsets.all(8),
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -80,35 +85,96 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                       ),
                     ),
                     StreamBuilder<String>(
-                        stream: bloc.deadline,
-                        initialData: I18n.of(context).deadline,
+                        stream: bloc.schedule,
+                        initialData: "",
                         builder: (context, snapshot) {
-                          return TextField(
-                            controller: bloc.deadlineController,
-                            onTap: () async {
-                              picked = await showDatePicker(
-                                  context: context,
-                                  initialDate: new DateTime.now(),
-                                  firstDate: new DateTime(2018),
-                                  lastDate: new DateTime(2020));
-                              if (picked != null) bloc.changeDeadline(picked);
-                            },
-                            keyboardType: TextInputType.datetime,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: snapshot.data,
-                              errorText: snapshot.error,
-                              labelStyle: TextStyle(color: picked != null ? Colors.black : Colors.grey),
-                              prefixIcon: Icon(
-                                Icons.calendar_today,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                            enabled: true,
-                            autofocus: false,
-                            enableInteractiveSelection: false,
-                            focusNode: DisabledFocusNode(),
-                          );
+                          return Container(
+                              margin: const EdgeInsets.only(bottom: 8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(I18n.of(context).schedule_for,
+                                      style: TextStyle(color: Colors.grey)),
+                                  Text(snapshot.data),
+                                  IconButton(
+                                    icon: Icon(
+                                      MdiIcons.alarmPlus,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                    onPressed: () async{
+                                      final date = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        initialDatePickerMode:
+                                            DatePickerMode.day,
+                                        firstDate: DateTime.now()
+                                            .subtract(Duration(days: 1)),
+                                        lastDate: DateTime(2060),
+                                      );
+
+                                      final time = await showTimePicker(
+                                          context: context,
+                                          initialTime: TimeOfDay.now());
+
+                                      DateTime when = DateTime(
+                                          date.year,
+                                          date.month,
+                                          date.day,
+                                          time.hour,
+                                          time.minute);
+
+                                      bloc.changeSchedule(when);
+                                    },
+                                  )
+                                ],
+                              ));
+                        }),
+                    StreamBuilder<String>(
+                        stream: bloc.deadline,
+                        initialData: "",
+                        builder: (context, snapshot) {
+                          return Container(
+                              margin: const EdgeInsets.only(bottom: 8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(I18n.of(context).deadline,
+                                      style: TextStyle(color: Colors.grey)),
+                                  Text(snapshot.data),
+                                  IconButton(
+                                    icon: Icon(
+                                      MdiIcons.alarmPlus,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                    onPressed: () async{
+                                      final date = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        initialDatePickerMode:
+                                            DatePickerMode.day,
+                                        firstDate: DateTime.now()
+                                            .subtract(Duration(days: 1)),
+                                        lastDate: DateTime(2060),
+                                      );
+
+                                      final time = await showTimePicker(
+                                          context: context,
+                                          initialTime: TimeOfDay.now());
+
+                                      DateTime when = DateTime(
+                                          date.year,
+                                          date.month,
+                                          date.day,
+                                          time.hour,
+                                          time.minute);
+
+                                      bloc.changeDeadline(when);
+                                    },
+                                  )
+                                ],
+                              ));
                         }),
                   ],
                 ),

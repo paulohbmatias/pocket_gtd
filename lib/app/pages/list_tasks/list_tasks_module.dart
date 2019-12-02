@@ -7,20 +7,22 @@ import 'package:pocket_gtd/app/pages/list_tasks/widgets/card_task_default/card_t
 import 'package:pocket_gtd/app/pages/list_tasks/widgets/list_default/list_default_bloc.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
+import 'package:pocket_gtd/app/shared/models/task_model.dart';
 
 class ListTasksModule extends ModuleWidget {
   final BoxModel box;
   final ListTypeEnum listType;
   final Widget emptyList;
+  final Stream<List<TaskModel>> streamListTasks;
 
-  ListTasksModule(this.box, this.listType, this.emptyList);
+  ListTasksModule(this.box, this.listType, this.emptyList, {this.streamListTasks});
 
   @override
   List<Bloc> get blocs => [
         Bloc((i) => BoxOptionsBloc(this.box)),
         Bloc((i) => ListDefaultBloc()),
         Bloc((i) => CardTaskDefaultBloc(this.box)),
-        Bloc((i) => ListTasksBloc(box, listType)),
+        Bloc((i) => ListTasksBloc(box, listType, streamListTasks: this.streamListTasks)),
       ];
 
   @override

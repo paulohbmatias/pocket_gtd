@@ -1,16 +1,21 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:pocket_gtd/app/app_module.dart';
 import 'package:pocket_gtd/app/pages/analyze/analyze_module.dart';
 import 'package:pocket_gtd/app/pages/list_tasks/widgets/box_options/box_options_widget.dart';
 import 'package:pocket_gtd/app/pages/register/register_module.dart';
+import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
+import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class CardTaskDefaultBloc extends BlocBase {
 
   final BoxModel box;
+
+  final taskRepository = AppModule.to.getDependency<TaskRepository>();
 
   CardTaskDefaultBloc(this.box);
   
@@ -34,14 +39,12 @@ class CardTaskDefaultBloc extends BlocBase {
           actions: <Widget>[
             FlatButton(
                 onPressed: () {
-                  result = false;
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(false);
                 },
                 child: Text("No")),
             FlatButton(
                 onPressed: () {
-                  result = true;
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(true);
                 },
                 child: Text("Yes")),
           ],
@@ -49,6 +52,16 @@ class CardTaskDefaultBloc extends BlocBase {
     if(result){
       task.delete();
     }
+  }
+
+  schedule(DateTime when, TaskModel task){
+    task.when = when;
+    task.save();
+    taskRepository.moveTask(
+      BoxModel.fromEnum(InitialBoxesEnum.INBOX),
+      BoxModel.fromEnum(InitialBoxesEnum.SCHEDULED),
+      task,
+    );
   }
 
   void analyze(BuildContext context, TaskModel task){

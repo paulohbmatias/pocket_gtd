@@ -21,7 +21,7 @@ class CardTaskDefaultWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTapDown: (pos) async{
+      onTapDown: (pos) async {
         int result = await showMenu<int>(
           context: context,
           position: RelativeRect.fromLTRB(
@@ -67,27 +67,70 @@ class CardTaskDefaultWidget extends StatelessWidget {
                 ],
               ),
             ),
-            bloc.box.idLocal == BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) ? PopupMenuItem(
-              value: 3,
-              child: Row(
-                children: <Widget>[
-                  Icon(OMIcons.reorder),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(I18n.of(context).analyze),
-                  ),
-                ],
-              ),
-            ) : null,
+            bloc.box.idLocal == BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX)
+                ? PopupMenuItem(
+                    value: 3,
+                    child: Row(
+                      children: <Widget>[
+                        Icon(OMIcons.eventNote),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(I18n.of(context).schedule),
+                        ),
+                      ],
+                    ),
+                  )
+                : null,
+            bloc.box.idLocal == BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX)
+                ? PopupMenuItem(
+                    value: 4,
+                    child: Row(
+                      children: <Widget>[
+                        Icon(OMIcons.reorder),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(I18n.of(context).analyze),
+                        ),
+                      ],
+                    ),
+                  )
+                : null,
           ],
         );
-        if(result != null){
-          switch(result){
-            case 0: bloc.edit(context, ListTypeEnum.DEFAULT, task); break;
-            case 1: bloc.remove(context, task); break;
-            case 2: bloc.showOptionsBoxes(context, task); break;
-            case 3: bloc.analyze(context, task); break;
-            default: break;
+        if (result != null) {
+          switch (result) {
+            case 0:
+              bloc.edit(context, ListTypeEnum.DEFAULT, task);
+              break;
+            case 1:
+              bloc.remove(context, task);
+              break;
+            case 2:
+              bloc.showOptionsBoxes(context, task);
+              break;
+            case 3:
+              final date = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                initialDatePickerMode: DatePickerMode.day,
+                firstDate: DateTime.now().subtract(Duration(days: 1)),
+                lastDate: DateTime(2060),
+              );
+
+              final time = await showTimePicker(
+                  context: context, initialTime: TimeOfDay.now());
+
+              DateTime when = DateTime(
+                  date.year, date.month, date.day, time.hour, time.minute);
+
+              bloc.schedule(when, task);
+
+              break;
+            case 4:
+              bloc.analyze(context, task);
+              break;
+            default:
+              break;
           }
         }
       },
@@ -96,11 +139,15 @@ class CardTaskDefaultWidget extends StatelessWidget {
         contentPadding: EdgeInsets.all(8),
         title: Text(task.title),
         subtitle: Text(task.content),
-        leading: Icon(MdiIcons.noteTextOutline, size: 35,),
+        leading: Icon(
+          MdiIcons.noteTextOutline,
+          size: 35,
+        ),
         trailing: task.deadline != null
             ? Text(
                 "${task.deadline.day} ${DateUtils.monthFromDate(task.deadline)}",
-                style: TextStyle(color: Color(0xffff7e67), fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Color(0xffff7e67), fontWeight: FontWeight.bold),
               )
             : Text(""),
       ),

@@ -46,9 +46,8 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
         builder: (context, snapshot) {
           return snapshot.hasData
               ? StreamBuilder<List<TaskModel>>(
-                  stream: bloc.boxes,
+                  stream: snapshot.data,
                   builder: (context, snapshot) {
-
                     return snapshot.hasData ? snapshot.data.length > 0 ? Container(
                       margin: const EdgeInsets.all(2.0),
                       padding: const EdgeInsets.all(2),
