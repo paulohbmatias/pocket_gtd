@@ -1,3 +1,4 @@
+  import 'package:pocket_gtd/app/modules/register/widgets/register_task_bottom_sheet/register_task_bottom_sheet_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/modules/register/register_bloc.dart';
@@ -16,11 +17,11 @@ class RegisterModule extends ModuleWidget {
   RegisterModule(this.type, {this.task, this.isUpdate = false});
 
   @override
-  List<Bloc> get blocs => [
+  List<Bloc> get blocs => [Bloc((i) => RegisterTaskBottomSheetBloc()),
         Bloc((i) => RegisterReferenceBloc(task: task, isUpdate: isUpdate)),
-        Bloc((i) => RegisterTaskBloc(task: task, isUpdate: this.isUpdate)),
+        Bloc((i) => RegisterTaskBloc()),
         Bloc((i) => RegisterBoxBloc()),
-        Bloc((i) => RegisterBloc()),
+        Bloc((i) => RegisterBloc(task: task, isUpdate: this.isUpdate)),
       ];
 
   @override

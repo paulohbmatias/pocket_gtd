@@ -46,6 +46,8 @@ class I18n implements WidgetsLocalizations {
   String get cancel => "Cancel";
   /// "Save"
   String get save => "Save";
+  /// "Add"
+  String get add => "Add";
   /// "Delegate"
   String get delegate_task => "Delegate";
   /// "Remove"

@@ -17,11 +17,28 @@ class _SplashPageState extends State<SplashPage> {
       child: FutureBuilder<void>(
           future: bloc.load(context),
           builder: (context, snapshot) {
-            return FlareActor(
-              "assets/flare/logo.flr",
-              alignment: Alignment.center,
-              fit: BoxFit.contain,
-              animation: "splash",
+            return Stack(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image:
+                              AssetImage('assets/images/background_splash.jpg'),
+                          fit: BoxFit.cover)),
+                ),
+                Opacity(
+                  opacity: 0.9,
+                  child: Container(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+                FlareActor(
+                    "assets/flare/logo.flr",
+                    alignment: Alignment.center,
+                    fit: BoxFit.contain,
+                    animation: "splash",
+                  )
+              ],
             );
           }),
     );

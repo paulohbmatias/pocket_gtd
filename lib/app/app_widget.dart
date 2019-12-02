@@ -21,7 +21,7 @@ class AppWidget extends StatelessWidget {
           I18n.delegate.resolution(fallback: new Locale("en", "")),
       theme: ThemeData(
           primarySwatch: MaterialColor(
-            0xFF4F6CFF,
+            0XFF07689f,
             <int, Color>{
               50: Color(0xFFCAF4FA),
               100: Color(0xFFCAF4FA),
@@ -35,7 +35,7 @@ class AppWidget extends StatelessWidget {
               900: Color(0xFF011E4C),
             },
           ),
-        accentColor: MaterialAccentColor(0xFF4F6CFF,  <int, Color>{
+        accentColor: MaterialAccentColor(0XFF07689f,  <int, Color>{
           100: Color(0xFFEDFCFE),
           200: Color(0xFFDCF7FD),
           400: Color(0xFFB9E4F7),

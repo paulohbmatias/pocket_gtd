@@ -19,7 +19,7 @@ class _InboxPageState extends State<InboxPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => bloc.add(context, ListTypeEnum.DEFAULT),
+        onPressed: () => bloc.add(context, ListTypeEnum.INBOX),
         backgroundColor: Theme.of(context).accentColor,
         child: Icon(Icons.add),
       ),

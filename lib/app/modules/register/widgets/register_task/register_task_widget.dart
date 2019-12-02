@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:pocket_gtd/app/modules/register/register_bloc.dart';
 import 'package:pocket_gtd/app/modules/register/register_module.dart';
 import 'package:pocket_gtd/app/modules/register/widgets/register_task/register_task_bloc.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
@@ -12,7 +13,7 @@ class RegisterTaskWidget extends StatefulWidget {
 }
 
 class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
-  final bloc = RegisterModule.to.getBloc<RegisterTaskBloc>();
+  final bloc = RegisterModule.to.getBloc<RegisterBloc>();
   Future<List<BoxModel>> futureBoxes;
   DateTime picked;
 
