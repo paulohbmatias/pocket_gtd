@@ -11,9 +11,19 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.grey[200],
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          AppBar(
+            backgroundColor: Colors.transparent,
+            leading: IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            elevation: 0,
+            iconTheme: IconThemeData(color: Colors.black45),
+          ),
           Container(
             margin: const EdgeInsets.all(8),
             child: Column(

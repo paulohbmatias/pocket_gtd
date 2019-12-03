@@ -129,6 +129,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       task.title = _title.value;
       task.content = _description.value;
       task.deadline = _deadline.value;
+      task.when = _schedule.value;
       await task.save();
       Navigator.of(context).pop();
     } catch (e) {

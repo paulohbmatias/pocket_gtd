@@ -5,18 +5,18 @@ import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 
 class InboxBloc extends BlocBase {
   void add(BuildContext context, ListTypeEnum type) async {
-    // await Navigator.push(context, MaterialPageRoute(
-    //   builder: (context) => RegisterModule(type)
-    // ));
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return RegisterModule(type);
-      },
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10)
-      )
-    );
+    await Navigator.push(context, MaterialPageRoute(
+      builder: (context) => RegisterModule(type)
+    ));
+    // showBottomSheet(
+    //   context: context,
+    //   builder: (context) {
+    //     return RegisterModule(type);
+    //   },
+    //   shape: RoundedRectangleBorder(
+    //     borderRadius: BorderRadius.circular(10)
+    //   )
+    // );
   }
 
   //dispose will be called automatically by closing its streams
