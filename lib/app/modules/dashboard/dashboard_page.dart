@@ -4,9 +4,11 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/modules/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_module.dart';
+import 'package:pocket_gtd/app/modules/dashboard/widgets/app_bar/app_bar_widget.dart';
 import 'package:pocket_gtd/app/modules/inbox/inbox_module.dart';
 import 'package:pocket_gtd/app/modules/next_actions/next_actions_module.dart';
 import 'package:pocket_gtd/app/modules/scheduled/scheduled_module.dart';
+import 'package:pocket_gtd/app/modules/tasks/tasks_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -26,53 +28,53 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-//      drawer: Drawer(),
-      appBar: AppBar(
-        centerTitle: false,
-        title: StreamBuilder<int>(
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        // appBar: AppBar(
+        //   centerTitle: false,
+        //   title: StreamBuilder<int>(
+        //     stream: bloc.page,
+        //     initialData: widget.page ?? initialPage,
+        //     builder: (context, snapshot) {
+        //       switch (snapshot.data) {
+        //         case 0:
+        //           return Text(I18n.of(context).inbox);
+        //         case 1:
+        //           return Text(I18n.of(context).next_actions);
+        //         case 2:
+        //           return Text(I18n.of(context).scheduled);
+        //         case 3:
+        //           return Text(I18n.of(context).boxes);
+        //         default:
+        //           return Text(I18n.of(context).inbox);
+        //       }
+        //     },
+        //   ),
+        // ),
+        body: StreamBuilder<int>(
           stream: bloc.page,
           initialData: widget.page ?? initialPage,
-          builder: (context, snapshot) {
-            switch (snapshot.data) {
-              case 0:
-                return Text(I18n.of(context).inbox);
-              case 1:
-                return Text(I18n.of(context).next_actions);
-              case 2:
-                return Text(I18n.of(context).scheduled);
-              case 3:
-                return Text(I18n.of(context).boxes);
-              default:
-                return Text(I18n.of(context).inbox);
-            }
-          },
+          builder: (_, snapshot) => pages[snapshot.data],
         ),
+        bottomNavigationBar: StreamBuilder<int>(
+            stream: bloc.page,
+            initialData: widget.page ?? initialPage,
+            builder: (_, snapshot) => BottomNavigationBar(
+                  unselectedItemColor: Theme.of(context).unselectedWidgetColor,
+                  selectedItemColor: Theme.of(context).accentColor,
+                  showUnselectedLabels: false,
+                  type: BottomNavigationBarType.shifting,
+                  showSelectedLabels: true,
+                  items: <BottomNavigationBarItem>[
+                    bottomItem(OMIcons.inbox, I18n.of(context).inbox),
+                    bottomItem(OMIcons.notes, I18n.of(context).tasks),
+                    bottomItem(MdiIcons.appsBox, I18n.of(context).boxes),
+                  ],
+                  currentIndex: snapshot.data,
+                  onTap: bloc.changePage,
+                )),
       ),
-      body: StreamBuilder<int>(
-        stream: bloc.page,
-        initialData: widget.page ?? initialPage,
-        builder: (_, snapshot) => pages[snapshot.data],
-      ),
-      bottomNavigationBar: StreamBuilder<int>(
-          stream: bloc.page,
-          initialData: widget.page ?? initialPage,
-          builder: (_, snapshot) => BottomNavigationBar(
-                unselectedItemColor: Theme.of(context).unselectedWidgetColor,
-                selectedItemColor: Theme.of(context).accentColor,
-                showUnselectedLabels: false,
-                showSelectedLabels: false,
-                items: <BottomNavigationBarItem>[
-                  bottomItem(OMIcons.inbox, I18n.of(context).inbox),
-                  bottomItem(OMIcons.notes, I18n.of(context).next_actions),
-                  bottomItem(
-                      MdiIcons.calendarOutline, I18n.of(context).scheduled),
-                  bottomItem(MdiIcons.cube, I18n.of(context).boxes),
-                ],
-                currentIndex: snapshot.data,
-                onTap: bloc.changePage,
-              )),
     );
   }
 
@@ -89,8 +91,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   List<Widget> get pages => [
         InboxModule(),
-        NextActionsModule(),
-        ScheduledModule(),
+        TasksModule(),
         BoxesModule(),
       ];
 }

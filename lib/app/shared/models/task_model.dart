@@ -25,6 +25,9 @@ class TaskModel extends HiveObject {
   @HiveField(6)
   UserModel who;
 
+  @HiveField(7)
+  bool done = false;
+
   TaskModel.fromMap(Map<dynamic, dynamic> map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];

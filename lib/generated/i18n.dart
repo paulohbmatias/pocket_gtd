@@ -126,6 +126,8 @@ class I18n implements WidgetsLocalizations {
   String get completed_tasks => "completed tasks";
   /// "Projects"
   String get projects => "Projects";
+  /// "Tasks"
+  String get tasks => "Tasks";
   /// "This box contains your personal projects."
   String get this_box_contains_your_personal_projects => "This box contains your personal projects.";
   /// "Task Marked Completed"
@@ -333,6 +335,9 @@ class _I18n_pt_BR extends I18n {
   /// "Projetos"
   @override
   String get projects => "Projetos";
+  /// "Tarefas"
+  @override
+  String get tasks => "Tarefas";
   /// "Esta caixa contém seus projetos pessoais."
   @override
   String get this_box_contains_your_personal_projects => "Esta caixa contém seus projetos pessoais.";
