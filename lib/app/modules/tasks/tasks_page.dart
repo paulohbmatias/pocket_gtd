@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/modules/next_actions/next_actions_module.dart';
 import 'package:pocket_gtd/app/modules/scheduled/scheduled_module.dart';
+import 'package:pocket_gtd/app/modules/waiting/waiting_module.dart';
+import 'package:pocket_gtd/app/modules/waiting/waiting_page.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class TasksPage extends StatefulWidget {
@@ -38,7 +40,7 @@ class _TasksPageState extends State<TasksPage> {
                 children: <Widget>[
                   NextActionsModule(),
                   ScheduledModule(),
-                  Container(),
+                  WaitingModule(),
                 ],
               ),
             )

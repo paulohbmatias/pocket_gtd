@@ -4,10 +4,8 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/modules/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_module.dart';
-import 'package:pocket_gtd/app/modules/dashboard/widgets/app_bar/app_bar_widget.dart';
 import 'package:pocket_gtd/app/modules/inbox/inbox_module.dart';
-import 'package:pocket_gtd/app/modules/next_actions/next_actions_module.dart';
-import 'package:pocket_gtd/app/modules/scheduled/scheduled_module.dart';
+import 'package:pocket_gtd/app/modules/projects/projects_module.dart';
 import 'package:pocket_gtd/app/modules/tasks/tasks_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
@@ -153,7 +151,7 @@ class _DashboardPageState extends State<DashboardPage> {
   List<Widget> get pages => [
         InboxModule(),
         TasksModule(),
-        Container(),
+        ProjectsModule(),
         BoxesModule(),
       ];
 }

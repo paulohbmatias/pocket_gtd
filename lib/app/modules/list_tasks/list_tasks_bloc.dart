@@ -33,12 +33,20 @@ class ListTasksBloc extends BlocBase {
   Future<List<TaskModel>> getTasks() => taskRepository.getAll(box);
 
   Future<Stream<List<TaskModel>>> listenTasks() async {
-    if(streamListTasks != null) return streamListTasks;
-    listTasks = await taskRepository.getAll(box);
-    changeListTask(await taskRepository.getAll(box));
-    (await taskRepository.listenTasks(box)).listen((list) {
-      changeListTask(list);
-    });
+    if (streamListTasks != null) return streamListTasks;
+    if (listType == ListTypeEnum.NEXT_ACTIONS) {
+      listTasks = await taskRepository.getAll(box);
+      changeListTask(await taskRepository.getAll(box));
+      (await taskRepository.listenTasks(box)).listen((list) {
+        changeListTask(list);
+      });
+    } else {
+      listTasks = await taskRepository.getAll(box);
+      changeListTask(await taskRepository.getAll(box));
+      (await taskRepository.listenTasks(box)).listen((list) {
+        changeListTask(list);
+      });
+    }
     return tasks;
   }
 
@@ -76,7 +84,7 @@ class ListTasksBloc extends BlocBase {
             {'idLocal': BoxModel.getIdFromEnum(InitialBoxesEnum.DONE)}));
     await taskRepository.saveAt(task, box);
   }
-  
+
   void remove(BuildContext context, TaskModel task) async {
     bool result = false;
     result = await showDialog<bool>(
@@ -111,7 +119,7 @@ class ListTasksBloc extends BlocBase {
     );
   }
 
-  markDone(TaskModel task, bool value){
+  markDone(TaskModel task, bool value) {
     task.done = value;
     task.save();
   }

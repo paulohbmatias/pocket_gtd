@@ -3,7 +3,6 @@ import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_bloc.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/widgets/card_task_default/card_task_default_widget.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/widgets/card_task_next_actions/card_task_next_actions_widget.dart';
-import 'package:pocket_gtd/app/modules/list_tasks/widgets/card_task_scheduled/card_task_scheduled_widget.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 
@@ -67,7 +66,7 @@ class _ListDefaultWidgetState extends State<ListDefaultWidget> {
                                         return CardTaskNextActionsWidget(
                                             widget.listType, task);
                                       case ListTypeEnum.SCHEDULEDS:
-                                        return CardTaskScheduledWidget(
+                                        return CardTaskNextActionsWidget(
                                             widget.listType, task);
                                       default:
                                         return CardTaskDefaultWidget(

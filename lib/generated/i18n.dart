@@ -176,6 +176,8 @@ class I18n implements WidgetsLocalizations {
   String app_pages_analyze_move_to_project_title(String task) => "Do you want to move \"${task}\" to Projects?";
   /// "If an action needs more than one step to complete, then it is a project."
   String get app_pages_analyze_move_to_project_content => "If an action needs more than one step to complete, then it is a project.";
+  /// "Here are the tasks you're waiting for someone else to do."
+  String get app_pages_waiting_empty_box => "Here are the tasks you're waiting for someone else to do.";
   /// "Move to Projects"
   String get move_to_projects => "Move to Projects";
   /// "Successfully added"
@@ -410,6 +412,9 @@ class _I18n_pt_BR extends I18n {
   /// "Se uma ação precisa de mais de um passo para ser completada, então ela é um projeto"
   @override
   String get app_pages_analyze_move_to_project_content => "Se uma ação precisa de mais de um passo para ser completada, então ela é um projeto";
+  /// "Aqui ficam as tarefas que você está aguardando serem realizadas por outra pessoa"
+  @override
+  String get app_pages_waiting_empty_box => "Aqui ficam as tarefas que você está aguardando serem realizadas por outra pessoa";
   /// "Mover para projetos"
   @override
   String get move_to_projects => "Mover para projetos";

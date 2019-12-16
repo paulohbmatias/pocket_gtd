@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/generated/i18n.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AppBarWidget extends AppBar {

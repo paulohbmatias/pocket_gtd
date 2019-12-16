@@ -15,7 +15,10 @@ class ListTasksPage extends StatelessWidget {
     if (listType == ListTypeEnum.DEFAULT)
       return Scaffold(
           appBar: AppBar(
-            title: Text(box.title),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: IconThemeData(color: Colors.black87),
+            title: Text(box.title, style: TextStyle(color: Colors.black87, fontWeight: FontWeight.normal),),
           ),
           body: ListDefaultWidget(listType, emptyList));
     else

@@ -75,8 +75,11 @@ flutter:
     - assets/images/things.png
     - assets/images/box.png
     - assets/images/clock.png
+    - assets/images/wait.png
     - assets/images/notes.png
     - assets/images/actions.png
+    - assets/images/developer.png
+    - assets/images/doing.png
     - assets/images/background_splash.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see

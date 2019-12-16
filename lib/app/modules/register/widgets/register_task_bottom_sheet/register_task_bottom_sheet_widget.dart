@@ -28,7 +28,7 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
                     textCapitalization: TextCapitalization.sentences,
                     focusNode: bloc.focusTitle,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      // border: OutlineInputBorder(),
                       labelText: I18n.of(context).title,
                     ),
                     onChanged: bloc.changeTitle,
@@ -40,11 +40,11 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
                     controller: bloc.contentController,
                     textCapitalization: TextCapitalization.sentences,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      // border: OutlineInputBorder(),
                       labelText: I18n.of(context).content,
                     ),
                     maxLines: 4,
-                    minLines: 2,
+                    minLines: 1,
                     onChanged: bloc.changeDescription,
                   ),
                 ),
@@ -104,9 +104,8 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
                     builder: (context, snapshot) {
                       return Container(
                         width: double.infinity,
-                        child: RaisedButton(
-                          color: Theme.of(context).primaryColor,
-                          textColor: Colors.white,
+                        child: FlatButton(
+                          textColor: Theme.of(context).accentColor,
                           child: Text(I18n.of(context).add),
                           onPressed: snapshot.hasData && snapshot.data
                               ? () => bloc.isUpdate

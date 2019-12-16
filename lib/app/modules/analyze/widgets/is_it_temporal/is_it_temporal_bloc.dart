@@ -23,9 +23,11 @@ class IsItTemporalBloc extends BlocBase {
   }
 
   nextActions() {
+    task.when = DateTime.now();
+    task.save();
     taskRepository.moveTask(
       BoxModel.fromEnum(InitialBoxesEnum.INBOX),
-      BoxModel.fromEnum(InitialBoxesEnum.NEXT_ACTIONS),
+      BoxModel.fromEnum(InitialBoxesEnum.SCHEDULED),
       task,
     );
   }
