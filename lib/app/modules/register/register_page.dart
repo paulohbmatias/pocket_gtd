@@ -18,8 +18,8 @@ class RegisterPage extends StatelessWidget {
         return RegisterBoxWidget();
       case ListTypeEnum.REFERENCES:
         return RegisterReferenceWidget();
-      // case ListTypeEnum.INBOX:
-      //   return RegisterTaskBottomSheetWidget();
+      case ListTypeEnum.INBOX:
+        return RegisterTaskBottomSheetWidget();
       default:
         return RegisterTaskWidget();
     }

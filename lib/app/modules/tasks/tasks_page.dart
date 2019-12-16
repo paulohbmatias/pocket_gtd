@@ -20,9 +20,10 @@ class _TasksPageState extends State<TasksPage> {
         child: Column(
           children: <Widget>[
             Container(
-              color: Theme.of(context).primaryColor,
+              // color: Theme.of(context).primaryColor,
               child: TabBar(
-                indicatorColor: Colors.white,
+                indicatorColor: Theme.of(context).primaryColor,
+                labelColor: Colors.black,
                 tabs: <Widget>[
                   Tab(
                     text: I18n.of(context).next_actions,

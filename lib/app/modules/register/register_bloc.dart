@@ -116,6 +116,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       changeIsLoading(false);
       Fluttertoast.showToast(
         msg: I18n.of(context).successfully_added,
+        backgroundColor: Colors.black87,
         fontSize: 15,
         toastLength: Toast.LENGTH_SHORT
       );

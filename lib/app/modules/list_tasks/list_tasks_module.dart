@@ -1,3 +1,4 @@
+import 'package:pocket_gtd/app/modules/list_tasks/widgets/card_task_next_actions/card_task_next_actions_bloc.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/widgets/card_task_scheduled/card_task_scheduled_bloc.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/widgets/delegate/delegate_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
@@ -22,6 +23,7 @@ class ListTasksModule extends ModuleWidget {
 
   @override
   List<Bloc> get blocs => [
+        Bloc((i) => CardTaskNextActionsBloc()),
         Bloc((i) => CardTaskScheduledBloc(this.box)),
         Bloc((i) => DelegateBloc()),
         Bloc((i) => BoxOptionsBloc(this.box)),

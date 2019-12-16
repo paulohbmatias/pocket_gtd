@@ -47,6 +47,8 @@ class ListBoxesBloc extends BlocBase {
         return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
             box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED) &&
             box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.DONE) &&
+            box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.PROJECTS) &&
+            box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.WAITING) &&
             box.idLocal !=
                 BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
       }).toList();
@@ -61,8 +63,10 @@ class ListBoxesBloc extends BlocBase {
                   BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX) &&
               box.idLocal !=
                   BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED) &&
+              box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.DONE) &&
               box.idLocal !=
-                  BoxModel.getIdFromEnum(InitialBoxesEnum.DONE) &&
+                  BoxModel.getIdFromEnum(InitialBoxesEnum.PROJECTS) &&
+              box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.WAITING) &&
               box.idLocal !=
                   BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS);
         }));

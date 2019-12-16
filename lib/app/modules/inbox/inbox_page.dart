@@ -18,11 +18,11 @@ class _InboxPageState extends State<InboxPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => bloc.add(context, ListTypeEnum.INBOX),
-        backgroundColor: Theme.of(context).accentColor,
-        child: Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => bloc.add(context, ListTypeEnum.INBOX),
+      //   backgroundColor: Theme.of(context).accentColor,
+      //   child: Icon(Icons.add),
+      // ),
       body: ListTasksModule(
           BoxModel.fromId(BoxModel.getIdFromEnum(InitialBoxesEnum.INBOX)),
           ListTypeEnum.INBOX,

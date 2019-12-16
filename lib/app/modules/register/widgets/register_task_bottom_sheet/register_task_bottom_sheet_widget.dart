@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/modules/register/register_bloc.dart';
 import 'package:pocket_gtd/app/modules/register/register_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
@@ -11,19 +10,13 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[200],
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(6)
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          AppBar(
-            backgroundColor: Colors.transparent,
-            leading: IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            elevation: 0,
-            iconTheme: IconThemeData(color: Colors.black45),
-          ),
           Container(
             margin: const EdgeInsets.all(8),
             child: Column(
@@ -35,7 +28,7 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
                     textCapitalization: TextCapitalization.sentences,
                     focusNode: bloc.focusTitle,
                     decoration: InputDecoration(
-                      // border: OutlineInputBorder(),
+                      border: OutlineInputBorder(),
                       labelText: I18n.of(context).title,
                     ),
                     onChanged: bloc.changeTitle,
@@ -47,7 +40,7 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
                     controller: bloc.contentController,
                     textCapitalization: TextCapitalization.sentences,
                     decoration: InputDecoration(
-                      // border: OutlineInputBorder(),
+                      border: OutlineInputBorder(),
                       labelText: I18n.of(context).content,
                     ),
                     maxLines: 4,

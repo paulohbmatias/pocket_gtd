@@ -18,6 +18,10 @@ class IconModel {
   @HiveField(3)
   bool matchTextDirection;
 
+  IconData get iconData => IconData(
+    codePoint, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: matchTextDirection
+  );
+
   IconModel(this.codePoint, this.fontFamily, this.fontPackage,
       this.matchTextDirection);
 

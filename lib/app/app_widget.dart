@@ -43,6 +43,8 @@ class AppWidget extends StatelessWidget {
         }),
         primaryColorBrightness: Brightness.dark
       ),
+      themeMode: ThemeMode.light,
+      darkTheme: ThemeData.dark(),
       home: SplashModule()
     );
   }
