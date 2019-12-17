@@ -3,9 +3,24 @@
 //
 
 #import "GeneratedPluginRegistrant.h"
+
+#if __has_include(<fluttertoast/FluttertoastPlugin.h>)
 #import <fluttertoast/FluttertoastPlugin.h>
+#else
+@import fluttertoast;
+#endif
+
+#if __has_include(<path_provider/PathProviderPlugin.h>)
 #import <path_provider/PathProviderPlugin.h>
-#import <shared_preferences/SharedPreferencesPlugin.h>
+#else
+@import path_provider;
+#endif
+
+#if __has_include(<shared_preferences/FLTSharedPreferencesPlugin.h>)
+#import <shared_preferences/FLTSharedPreferencesPlugin.h>
+#else
+@import shared_preferences;
+#endif
 
 @implementation GeneratedPluginRegistrant
 

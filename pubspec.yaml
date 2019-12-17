@@ -11,7 +11,7 @@ description: A new Flutter application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.0.7
+version: 0.0.8
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -37,7 +37,7 @@ dependencies:
   hive_flutter: ^0.2.1
   fab_circular_menu: ^0.1.1
   radial_button: ^0.1.1
-  shared_preferences: ^0.5.3+4
+  shared_preferences: ^0.5.6
   bubble_bottom_bar: ^1.2.0
   popup_menu: ^1.0.5
   flare_flutter: ^1.7.3

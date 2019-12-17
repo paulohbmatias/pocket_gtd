@@ -61,11 +61,6 @@ class _DashboardPageState extends State<DashboardPage> {
                     I18n.of(context).boxes,
                     style: TextStyle(color: textColor, fontWeight: fontWeight),
                   );
-                case 4:
-                  return Text(
-                    I18n.of(context).boxes,
-                    style: TextStyle(color: textColor, fontWeight: fontWeight),
-                  );
                 default:
                   return Text(
                     I18n.of(context).inbox,
