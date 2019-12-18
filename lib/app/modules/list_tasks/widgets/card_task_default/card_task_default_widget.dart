@@ -165,13 +165,12 @@ class CardTaskDefaultWidget extends StatelessWidget {
       onLongPress: () {},
       child: ListTile(
         contentPadding: EdgeInsets.all(8),
-        title: Text(task.title),
-        subtitle: Text(task.content),
+        title: Text(task.content),
         leading: Icon(
           MdiIcons.noteTextOutline,
           size: 35,
         ),
-        trailing: task.deadline != null
+        subtitle: task.deadline != null
             ? Text(
                 dateTask(context),
                 style: TextStyle(

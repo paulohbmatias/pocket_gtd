@@ -13,7 +13,6 @@ class ChoiceNotActionableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(I18n.of(context).app_pages_analyze_choice_not_actionable_title(bloc.task.title)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[

@@ -50,6 +50,11 @@ class ListTasksBloc extends BlocBase {
     return tasks;
   }
 
+  // Future<Stream<List<TaskModel>>> listenTasks() async {
+  //   if (streamListTasks != null) return streamListTasks;
+  //   return taskRepository.listenTasks(box);
+  // }
+
   void edit(BuildContext context, TaskModel task) async {
     Navigator.of(context).pop();
     if (listType == ListTypeEnum.DEFAULT) {
@@ -90,7 +95,7 @@ class ListTasksBloc extends BlocBase {
     result = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text(I18n.of(context).confirm_delete_task(task.title)),
+              title: Text(I18n.of(context).confirm_delete_task(task.content)),
               actions: <Widget>[
                 FlatButton(
                     onPressed: () {
@@ -145,7 +150,7 @@ class ListTasksBloc extends BlocBase {
 
   @override
   void dispose() {
-    _tasks.close();
+    // _tasks.close();
     super.dispose();
   }
 }

@@ -34,7 +34,7 @@ class CardTaskScheduledBloc extends BlocBase {
     result = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text(I18n.of(context).confirm_delete_task(task.title)),
+              title: Text(I18n.of(context).confirm_delete_task(task.content)),
               actions: <Widget>[
                 FlatButton(
                     onPressed: () {

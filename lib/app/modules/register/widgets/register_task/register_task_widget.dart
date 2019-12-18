@@ -61,19 +61,6 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                     Container(
                       margin: const EdgeInsets.only(bottom: 8),
                       child: TextField(
-                        controller: bloc.titleController,
-                        textCapitalization: TextCapitalization.sentences,
-                        focusNode: bloc.focusTitle,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: I18n.of(context).title,
-                        ),
-                        onChanged: bloc.changeTitle,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      child: TextField(
                         controller: bloc.contentController,
                         textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration(

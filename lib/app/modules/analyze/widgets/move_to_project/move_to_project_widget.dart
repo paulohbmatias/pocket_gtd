@@ -11,7 +11,6 @@ class MoveToProjectWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(I18n.of(context).app_pages_analyze_move_to_project_title(bloc.task.title)),
       content: Text(I18n.of(context).app_pages_analyze_move_to_project_content),
       actions: <Widget>[
         FlatButton(onPressed: () => Navigator.of(context).pop(), child: Text(I18n.of(context).cancel)),

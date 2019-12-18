@@ -171,16 +171,22 @@ class CardTaskNextActionsWidget extends StatelessWidget {
         selected: task.done,
         activeColor: Colors.grey[400],
         title: Text(
-          task.title,
+          task.content,
           style: TextStyle(
               decoration:
                   task.done ? TextDecoration.lineThrough : TextDecoration.none),
         ),
-        subtitle: Text(task.content,
-            style: TextStyle(
-                decoration: task.done
-                    ? TextDecoration.lineThrough
-                    : TextDecoration.none)),
+        subtitle: task.deadline != null
+            ? Text(
+                dateTask(context),
+                style: TextStyle(
+                    color: !task.done ? Color(0xffff7e67) : Colors.grey[400],
+                    decoration: task.done
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
+                    fontWeight: FontWeight.bold),
+              )
+            : Text(""),
       ),
     );
   }

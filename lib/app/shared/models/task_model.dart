@@ -10,9 +10,6 @@ class TaskModel extends HiveObject {
   @HiveField(1)
   int idLocal;
 
-  @HiveField(2)
-  String title;
-
   @HiveField(3)
   String content;
 
@@ -31,7 +28,6 @@ class TaskModel extends HiveObject {
   TaskModel.fromMap(Map<dynamic, dynamic> map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];
-    this.title = map['title'];
     this.content = map['content'];
     this.deadline =
         map['deadline'] != null ? DateTime.fromMillisecondsSinceEpoch(int.parse(map['deadline'].toString())) : null;
@@ -42,7 +38,6 @@ class TaskModel extends HiveObject {
   TaskModel.fromDatabase(var map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];
-    this.title = map['title'];
     this.content = map['content'];
     this.deadline =
         map['deadline'] != null ? DateTime.fromMillisecondsSinceEpoch(int.parse(map['deadline'].toString())) : null;
@@ -53,7 +48,6 @@ class TaskModel extends HiveObject {
   Map<String, dynamic> toJson() => {
         'id': this.id,
         'idLocal': this.idLocal,
-        'title': this.title,
         'content': this.content,
         'deadline': this.deadline != null ? this.deadline.millisecondsSinceEpoch : null,
         'when': this.when != null ? this.when.millisecondsSinceEpoch : null,

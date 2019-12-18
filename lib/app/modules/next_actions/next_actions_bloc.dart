@@ -51,8 +51,8 @@ class NextActionsBloc extends BlocBase {
   }
   @override
   void dispose() {
-    _scheduleTasks.close();
-    _tasks.close();
+    // _scheduleTasks.close();
+    // _tasks.close();
     super.dispose();
   }
 }

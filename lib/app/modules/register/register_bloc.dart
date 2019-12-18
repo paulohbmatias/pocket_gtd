@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -21,8 +23,6 @@ class RegisterBloc extends BlocBase with RegisterValidators {
 
   RegisterBloc({this.task, this.isUpdate = false}) {
     if (task != null) {
-      changeTitle(task.title);
-      titleController.text = task.title;
       changeDescription(task.content);
       contentController.text = task.content;
       if (task.deadline != null) {
@@ -60,15 +60,15 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   Observable<bool> get isLoading => _isLoading.stream;
 
   Observable<bool> isValidFields(BuildContext context) =>
-      Observable.combineLatest2<String, String, bool>(
-          title(context), description(context), (title, description) {
-        print(title);
-        return validateTitleFromString(context, _title.value).isEmpty &&
-                validateDescriptionFromString(context, _description.value)
-                    .isEmpty
-            ? true
-            : false;
-      });
+      _description.transform(StreamTransformer<String, bool>.fromHandlers(
+        handleData: (data, sink){
+          if(data != null && validateDescriptionFromString(context, data).isEmpty){
+            sink.add(true);
+          }else{
+            sink.add(false);
+          }
+        }
+      ));
 
   Function(String) get changeTitle => _title.sink.add;
   Function(String) get changeDescription => _description.sink.add;
@@ -94,7 +94,6 @@ class RegisterBloc extends BlocBase with RegisterValidators {
     changeIsLoading(true);
     try {
       TaskModel taskModel = TaskModel()
-        ..title = _title.value
         ..content = _description.value
         ..deadline = _deadline.value
         ..when = _schedule.value;
@@ -115,11 +114,10 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       _description.sink.add(null);
       changeIsLoading(false);
       Fluttertoast.showToast(
-        msg: I18n.of(context).successfully_added,
-        backgroundColor: Colors.black87,
-        fontSize: 15,
-        toastLength: Toast.LENGTH_SHORT
-      );
+          msg: I18n.of(context).successfully_added,
+          backgroundColor: Colors.black87,
+          fontSize: 15,
+          toastLength: Toast.LENGTH_SHORT);
       focusTitle.requestFocus();
     }
   }
@@ -127,7 +125,6 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   void updateTask(BuildContext context) async {
     changeIsLoading(true);
     try {
-      task.title = _title.value;
       task.content = _description.value;
       task.deadline = _deadline.value;
       task.when = _schedule.value;
