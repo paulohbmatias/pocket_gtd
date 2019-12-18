@@ -61,14 +61,14 @@ class RegisterBloc extends BlocBase with RegisterValidators {
 
   Observable<bool> isValidFields(BuildContext context) =>
       _description.transform(StreamTransformer<String, bool>.fromHandlers(
-        handleData: (data, sink){
-          if(data != null && validateDescriptionFromString(context, data).isEmpty){
-            sink.add(true);
-          }else{
-            sink.add(false);
-          }
+          handleData: (data, sink) {
+        if (data != null &&
+            validateDescriptionFromString(context, data).isEmpty) {
+          sink.add(true);
+        } else {
+          sink.add(false);
         }
-      ));
+      }));
 
   Function(String) get changeTitle => _title.sink.add;
   Function(String) get changeDescription => _description.sink.add;
@@ -132,8 +132,6 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       Navigator.of(context).pop();
     } catch (e) {
       print(e);
-    } finally {
-      changeIsLoading(false);
     }
   }
 

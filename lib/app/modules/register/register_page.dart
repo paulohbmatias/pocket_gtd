@@ -21,7 +21,7 @@ class RegisterPage extends StatelessWidget {
       case ListTypeEnum.INBOX:
         return RegisterTaskBottomSheetWidget();
       default:
-        return RegisterTaskWidget();
+        return RegisterTaskBottomSheetWidget();
     }
   }
 }

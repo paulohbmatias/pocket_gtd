@@ -58,9 +58,25 @@ class ListTasksBloc extends BlocBase {
   void edit(BuildContext context, TaskModel task) async {
     Navigator.of(context).pop();
     if (listType == ListTypeEnum.DEFAULT) {
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>
-              RegisterModule(listType, task: task, isUpdate: true)));
+      showModalBottomSheet(
+      context: context,
+      elevation: 20,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      builder: (context) {
+        return AnimatedPadding(
+                  padding: MediaQuery.of(context).viewInsets,
+                  duration: const Duration(milliseconds: 100),
+                  curve: Curves.decelerate,
+                  child: RegisterModule(listType));
+      },
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(100)
+      )
+    );
+      // Navigator.of(context).push(MaterialPageRoute(
+      //     builder: (context) =>
+      //         RegisterModule(listType, task: task, isUpdate: true)));
     } else {
       showDialog(
           context: context,
