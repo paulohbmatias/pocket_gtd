@@ -166,7 +166,7 @@ class ListTasksBloc extends BlocBase {
 
   @override
   void dispose() {
-    // _tasks.close();
+    _tasks.close();
     super.dispose();
   }
 }

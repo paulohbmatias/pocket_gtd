@@ -83,27 +83,6 @@ class _DashboardPageState extends State<DashboardPage> {
                 : Container();
           },
         ),
-        // appBar: AppBar(
-        //   centerTitle: false,
-        //   title: StreamBuilder<int>(
-        //     stream: bloc.page,
-        //     initialData: widget.page ?? initialPage,
-        //     builder: (context, snapshot) {
-        //       switch (snapshot.data) {
-        //         case 0:
-        //           return Text(I18n.of(context).inbox);
-        //         case 1:
-        //           return Text(I18n.of(context).next_actions);
-        //         case 2:
-        //           return Text(I18n.of(context).scheduled);
-        //         case 3:
-        //           return Text(I18n.of(context).boxes);
-        //         default:
-        //           return Text(I18n.of(context).inbox);
-        //       }
-        //     },
-        //   ),
-        // ),
         body: StreamBuilder<int>(
           stream: bloc.page,
           initialData: widget.page ?? initialPage,
@@ -143,7 +122,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ));
   }
 
-  List<Widget> get pages => [
+  final pages = [
         InboxModule(),
         TasksModule(),
         ProjectsModule(),

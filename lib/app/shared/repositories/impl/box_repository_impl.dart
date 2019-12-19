@@ -37,7 +37,6 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
     try {
       Box boxBoxes = await getBox();
       await boxBoxes.put(box.idLocal, box);
-      boxBoxes.close();
       return true;
     } catch (e) {
       print(e);
@@ -62,7 +61,6 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
     try {
       Box boxBoxes = await getBox();
       await boxBoxes.delete(box.idLocal);
-      boxBoxes.close();
       return true;
     } catch (e) {
       return false;
@@ -84,7 +82,6 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
     try {
       Box boxBoxes = await getBox();
       await boxBoxes.deleteFromDisk();
-      boxBoxes.close();
       return true;
     } catch (e) {
       return false;
@@ -94,7 +91,6 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
   @override
   Future<int> getLength(int boxID) async {
     Box boxBoxes = await getBox(id: boxID);
-    boxBoxes.close();
     return boxBoxes.values.length;
   }
 

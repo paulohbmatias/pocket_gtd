@@ -25,6 +25,10 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
                     child: TextField(
                       controller: bloc.contentController,
                       textCapitalization: TextCapitalization.sentences,
+                      autofocus: true,
+                      focusNode: FocusNode(
+                        canRequestFocus: true
+                      ),
                       decoration: InputDecoration(
                         border: UnderlineInputBorder(
                             borderSide: BorderSide(
