@@ -86,6 +86,8 @@ class I18n implements WidgetsLocalizations {
   String get deadline => "Deadline";
   /// "Deadline"
   String get test => "Deadline";
+  /// "Undo"
+  String get undo => "Undo";
   /// "${prefix} can't be empty"
   String error_cant_be_empty(String prefix) => "${prefix} can't be empty";
   /// "Do you really want to delete this box?"
@@ -277,6 +279,9 @@ class _I18n_pt_BR extends I18n {
   /// "Prazo"
   @override
   String get test => "Prazo";
+  /// "Desfazer"
+  @override
+  String get undo => "Desfazer";
   /// "${prefix} não pode ser vazio"
   @override
   String error_cant_be_empty(String prefix) => "${prefix} não pode ser vazio";

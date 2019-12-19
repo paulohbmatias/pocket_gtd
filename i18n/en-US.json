@@ -26,6 +26,7 @@
     "register_reference": "Register reference",
     "deadline": "Deadline",
     "test": "Deadline",
+    "undo": "Undo",
     "error_cant_be_empty": "{prefix} can't be empty",
     "confirm_delete_box": "Do you really want to delete this box?",
     "confirm_delete_task": "Do you really want to delete the task {task}?",

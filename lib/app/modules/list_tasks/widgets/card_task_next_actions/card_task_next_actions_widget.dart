@@ -163,7 +163,7 @@ class CardTaskNextActionsWidget extends StatelessWidget {
       },
       child: CheckboxListTile(
         value: task.done,
-        onChanged: (value) => bloc.markDone(task, value),
+        onChanged: (value) => bloc.markDone(context, task, value),
         secondary: Icon(
           MdiIcons.noteTextOutline,
           size: 35,

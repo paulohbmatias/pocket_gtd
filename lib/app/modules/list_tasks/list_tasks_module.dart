@@ -17,9 +17,10 @@ class ListTasksModule extends ModuleWidget {
   final ListTypeEnum listType;
   final Widget emptyList;
   final Stream<List<TaskModel>> streamListTasks;
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
   ListTasksModule(this.box, this.listType, this.emptyList,
-      {this.streamListTasks});
+      {this.streamListTasks, this.scaffoldKey});
 
   @override
   List<Bloc> get blocs => [
@@ -30,7 +31,7 @@ class ListTasksModule extends ModuleWidget {
         Bloc((i) => ListDefaultBloc()),
         Bloc((i) => CardTaskDefaultBloc(this.box)),
         Bloc((i) => ListTasksBloc(box, listType,
-            streamListTasks: this.streamListTasks)),
+            streamListTasks: this.streamListTasks, scaffoldKey: this.scaffoldKey)),
       ];
 
   @override

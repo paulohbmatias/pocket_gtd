@@ -17,10 +17,12 @@ class NextActionsPage extends StatefulWidget {
 class _NextActionsPageState extends State<NextActionsPage> {
 
   final bloc = NextActionsModule.to.bloc<NextActionsBloc>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       body: FutureBuilder<Stream<List<TaskModel>>>(
         future: bloc.getScheduledTasks(),
         builder: (context, snapshot) {
@@ -30,7 +32,7 @@ class _NextActionsPageState extends State<NextActionsPage> {
               EmptyListWidget(
                 I18n.of(context).app_pages_next_actions_empty_box,
                 image: "assets/images/actions.png",
-              ), streamListTasks: bloc.tasks,);
+              ), streamListTasks: bloc.tasks, scaffoldKey: this.scaffoldKey,);
         }
       ),
     );

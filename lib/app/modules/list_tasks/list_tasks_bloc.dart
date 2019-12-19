@@ -15,6 +15,7 @@ import 'package:rxdart/rxdart.dart';
 class ListTasksBloc extends BlocBase {
   final BoxModel box;
   final ListTypeEnum listType;
+  final GlobalKey<ScaffoldState> scaffoldKey;
   Stream<List<TaskModel>> streamListTasks;
 
   final TaskRepository taskRepository =
@@ -24,7 +25,8 @@ class ListTasksBloc extends BlocBase {
 
   BehaviorSubject<List<TaskModel>> _tasks = BehaviorSubject();
 
-  ListTasksBloc(this.box, this.listType, {this.streamListTasks});
+  ListTasksBloc(this.box, this.listType,
+      {this.streamListTasks, this.scaffoldKey});
 
   Observable<List<TaskModel>> get tasks => _tasks.stream;
 
@@ -52,21 +54,23 @@ class ListTasksBloc extends BlocBase {
 
   void edit(BuildContext context, TaskModel task) async {
     showModalBottomSheet(
-      context: context,
-      elevation: 20,
-      isScrollControlled: true,
-      useRootNavigator: true,
-      builder: (context) {
-        return AnimatedPadding(
-                  padding: MediaQuery.of(context).viewInsets,
-                  duration: const Duration(milliseconds: 100),
-                  curve: Curves.decelerate,
-                  child: RegisterModule(listType, task: task, isUpdate: true,));
-      },
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(100)
-      )
-    );
+        context: context,
+        elevation: 20,
+        isScrollControlled: true,
+        useRootNavigator: true,
+        builder: (context) {
+          return AnimatedPadding(
+              padding: MediaQuery.of(context).viewInsets,
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.decelerate,
+              child: RegisterModule(
+                listType,
+                task: task,
+                isUpdate: true,
+              ));
+        },
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)));
   }
 
   Future<void> done(TaskModel task) async => await taskRepository.moveTask(
@@ -121,9 +125,22 @@ class ListTasksBloc extends BlocBase {
     );
   }
 
-  markDone(TaskModel task, bool value) {
+  markDone(BuildContext context, TaskModel task, bool value) {
     task.done = value;
     task.save();
+    if (value && listType == ListTypeEnum.NEXT_ACTIONS) {
+      scaffoldKey.currentState.showSnackBar(SnackBar(
+        backgroundColor: Colors.green,
+        action: SnackBarAction(
+          label: I18n.of(context).undo,
+          onPressed: () {
+            task.done = !value;
+            task.save();
+          },
+        ),
+        content: Text(I18n.of(context).done),
+      ));
+    }
   }
 
   moveTo(BuildContext context, TaskModel task, InitialBoxesEnum boxEnum) {

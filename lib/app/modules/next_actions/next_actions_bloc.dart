@@ -25,7 +25,7 @@ class NextActionsBloc extends BlocBase {
       sink.add(list.where((item) =>
               (now.year == item.when.year) &&
               (now.month == item.when.month) &&
-              (now.day == item.when.day))
+              (now.day == item.when.day) && !item.done)
           .toList());
     }
   ));
@@ -51,8 +51,8 @@ class NextActionsBloc extends BlocBase {
   }
   @override
   void dispose() {
-    // _scheduleTasks.close();
-    // _tasks.close();
+    _scheduleTasks.close();
+    _tasks.close();
     super.dispose();
   }
 }

@@ -27,6 +27,7 @@
   "register_reference": "Registo referência",
   "deadline": "Prazo máximo",
   "test": "Prazo",
+  "undo": "Desfazer",
   "error_cant_be_empty": "{prefix} não pode ser vazio",
   "confirm_delete_box": "Você realmente quer eliminar esta caixa?",
   "confirm_delete_task": "Você realmente deseja excluir a tarefa \"{task}\"?",
