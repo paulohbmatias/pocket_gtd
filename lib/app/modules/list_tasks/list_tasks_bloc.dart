@@ -50,15 +50,8 @@ class ListTasksBloc extends BlocBase {
     return tasks;
   }
 
-  // Future<Stream<List<TaskModel>>> listenTasks() async {
-  //   if (streamListTasks != null) return streamListTasks;
-  //   return taskRepository.listenTasks(box);
-  // }
-
   void edit(BuildContext context, TaskModel task) async {
-    Navigator.of(context).pop();
-    if (listType == ListTypeEnum.DEFAULT) {
-      showModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       elevation: 20,
       isScrollControlled: true,
@@ -68,24 +61,12 @@ class ListTasksBloc extends BlocBase {
                   padding: MediaQuery.of(context).viewInsets,
                   duration: const Duration(milliseconds: 100),
                   curve: Curves.decelerate,
-                  child: RegisterModule(listType));
+                  child: RegisterModule(listType, task: task, isUpdate: true,));
       },
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(100)
       )
     );
-      // Navigator.of(context).push(MaterialPageRoute(
-      //     builder: (context) =>
-      //         RegisterModule(listType, task: task, isUpdate: true)));
-    } else {
-      showDialog(
-          context: context,
-          builder: (context) => RegisterModule(
-                listType,
-                task: task,
-                isUpdate: true,
-              ));
-    }
   }
 
   Future<void> done(TaskModel task) async => await taskRepository.moveTask(
