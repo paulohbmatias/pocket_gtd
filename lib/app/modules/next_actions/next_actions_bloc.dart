@@ -13,46 +13,28 @@ class NextActionsBloc extends BlocBase {
   final boxRepository = AppModule.to.getDependency<BoxRepository>();
   final taskRepository = AppModule.to.getDependency<TaskRepository>();
   final box = BoxModel.fromEnum(InitialBoxesEnum.SCHEDULED);
+  StreamSubscription _taskSubscription;
 
   List<TaskModel> listTasks = List();
 
   final _tasks = BehaviorSubject<List<TaskModel>>();
-  final _scheduleTasks = BehaviorSubject<List<TaskModel>>();
 
-  Observable<List<TaskModel>> get tasks => _tasks.stream.transform(StreamTransformer.fromHandlers(
-    handleData: (list, sink){
-      final now = DateTime.now();
-      sink.add(list.where((item) =>
-              (now.year == item.when.year) &&
-              (now.month == item.when.month) &&
-              (now.day == item.when.day) && !item.done)
-          .toList());
-    }
-  ));
-  Observable<List<TaskModel>> get scheduleTasks => _scheduleTasks.stream;
-
-  Function(List<TaskModel> tasks) get changeTasks => _tasks.sink.add;
-  Function(List<TaskModel> tasks) get changeScheduleTasks =>
-      _scheduleTasks.sink.add;
-
-  Future<Stream<List<TaskModel>>> getScheduledTasks() async {
-    DateTime now = DateTime.now();
-    listTasks = await taskRepository.getAll(box);
-    changeTasks(await taskRepository.getAll(box));
-    (await taskRepository.listenTasks(box)).listen((list){
-      changeTasks(list
-          .where((item) =>
-              (now.year == item.when.year) &&
-              (now.month == item.when.month) &&
-              (now.day == item.when.day))
-          .toList());
-    });
-    return tasks;
+  Future<Stream<List<TaskModel>>> getTasks() async {
+    final now = DateTime.now();
+    _tasks.sink.add((await taskRepository.getAll(box)).where((item) => (now.year == item.when.year) &&
+          (now.month == item.when.month) &&
+          (now.day == item.when.day)).toList());
+    _taskSubscription = (await taskRepository.listenTasks(box)).listen((data) => _tasks.sink.add(data.where((item) =>
+          (now.year == item.when.year) &&
+          (now.month == item.when.month) &&
+          (now.day == item.when.day))));
+    return _tasks.stream;
   }
+
   @override
   void dispose() {
-    _scheduleTasks.close();
     _tasks.close();
+    if (_taskSubscription != null) _taskSubscription.cancel();
     super.dispose();
   }
 }

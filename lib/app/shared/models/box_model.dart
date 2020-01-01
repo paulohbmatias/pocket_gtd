@@ -26,6 +26,20 @@ class BoxModel extends HiveObject{
 
   int length;
 
+  InitialBoxesEnum get boxEnum{
+    switch(idLocal){
+      case 0: return InitialBoxesEnum.INBOX;
+      case 1: return InitialBoxesEnum.NEXT_ACTIONS;
+      case 2: return InitialBoxesEnum.PROJECTS;
+      case 3: return InitialBoxesEnum.ONE_DAY_MAYBE;
+      case 4: return InitialBoxesEnum.REFERENCES;
+      case 5: return InitialBoxesEnum.SCHEDULED;
+      case 6: return InitialBoxesEnum.WAITING;
+      case 7: return InitialBoxesEnum.DONE;
+      default: return null;
+    }
+  }
+
   BoxModel(this.id, this.idLocal, this.title, this.content, this.icon);
 
   BoxModel.fromId(this.idLocal);
@@ -47,6 +61,8 @@ class BoxModel extends HiveObject{
       default: return box.title;
     }
   }
+
+
   BoxModel.fromMap(Map<String, dynamic> map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];

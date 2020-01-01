@@ -13,6 +13,12 @@ class TasksPage extends StatefulWidget {
   _TasksPageState createState() => _TasksPageState();
 }
 
+final pages = [
+  NextActionsModule(),
+  ScheduledModule(),
+  WaitingModule(),
+];
+
 class _TasksPageState extends State<TasksPage> {
   @override
   Widget build(BuildContext context) {
@@ -37,11 +43,7 @@ class _TasksPageState extends State<TasksPage> {
             ),
             Expanded(
               child: TabBarView(
-                children: <Widget>[
-                  NextActionsModule(),
-                  ScheduledModule(),
-                  WaitingModule(),
-                ],
+                children: pages,
               ),
             )
           ],

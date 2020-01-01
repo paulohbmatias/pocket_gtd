@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/modules/next_actions/next_actions_bloc.dart';
 import 'package:pocket_gtd/app/modules/next_actions/next_actions_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
+import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_page.dart';
 import 'package:pocket_gtd/app/shared/widgets/empty_list/empty_list_widget.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
@@ -24,15 +24,21 @@ class _NextActionsPageState extends State<NextActionsPage> {
     return Scaffold(
       key: scaffoldKey,
       body: FutureBuilder<Stream<List<TaskModel>>>(
-        future: bloc.getScheduledTasks(),
+        future: bloc.getTasks(),
         builder: (context, snapshot) {
-          return ListTasksModule(
-              BoxModel.fromId(BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED)),
-              ListTypeEnum.NEXT_ACTIONS,
-              EmptyListWidget(
-                I18n.of(context).app_pages_next_actions_empty_box,
-                image: "assets/images/actions.png",
-              ), streamListTasks: bloc.tasks, scaffoldKey: this.scaffoldKey,);
+          return snapshot.hasData ? StreamBuilder<Object>(
+            stream: snapshot.data,
+            builder: (context, snapshot) {
+              return snapshot.hasData ? ListTasksPage(
+                  ListTypeEnum.NEXT_ACTIONS,
+                  BoxModel.fromId(BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED)),
+                  snapshot.data,
+                  EmptyListWidget(
+                    I18n.of(context).app_pages_next_actions_empty_box,
+                    image: "assets/images/actions.png",
+                  )) : Container();
+            }
+          ) : Container();
         }
       ),
     );
