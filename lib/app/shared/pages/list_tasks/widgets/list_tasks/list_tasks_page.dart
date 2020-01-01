@@ -50,11 +50,11 @@ class ListTasksWidget extends StatelessWidget {
                     TaskModel task = listTasks[index];
                     switch (listType) {
                       case ListTypeEnum.NEXT_ACTIONS:
-                        return CardTaskDefaultWidget(listType, box, task);
+                        return CardTaskDefaultWidget(listType, box, task, hasCheckBox: true,);
                       case ListTypeEnum.SCHEDULEDS:
                         return CardTaskDefaultWidget(listType, box, task);
                       default:
-                        return CardTaskDefaultWidget(listType, box, task);
+                        return CardTaskDefaultWidget(listType, box, task, hasCheckBox: true,);
                     }
                   },
                 ),

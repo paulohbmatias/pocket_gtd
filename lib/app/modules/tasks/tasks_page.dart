@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/modules/next_actions/next_actions_module.dart';
 import 'package:pocket_gtd/app/modules/scheduled/scheduled_module.dart';
 import 'package:pocket_gtd/app/modules/waiting/waiting_module.dart';
-import 'package:pocket_gtd/app/modules/waiting/waiting_page.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class TasksPage extends StatefulWidget {
@@ -13,7 +12,7 @@ class TasksPage extends StatefulWidget {
   _TasksPageState createState() => _TasksPageState();
 }
 
-final pages = [
+List<Widget> pages() => [
   NextActionsModule(),
   ScheduledModule(),
   WaitingModule(),
@@ -43,7 +42,7 @@ class _TasksPageState extends State<TasksPage> {
             ),
             Expanded(
               child: TabBarView(
-                children: pages,
+                children: pages(),
               ),
             )
           ],

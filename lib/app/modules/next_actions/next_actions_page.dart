@@ -26,12 +26,13 @@ class _NextActionsPageState extends State<NextActionsPage> {
       body: FutureBuilder<Stream<List<TaskModel>>>(
         future: bloc.getTasks(),
         builder: (context, snapshot) {
-          return snapshot.hasData ? StreamBuilder<Object>(
+          return snapshot.hasData ? StreamBuilder<List<TaskModel>>(
             stream: snapshot.data,
             builder: (context, snapshot) {
+              print(snapshot.data);
               return snapshot.hasData ? ListTasksPage(
                   ListTypeEnum.NEXT_ACTIONS,
-                  BoxModel.fromId(BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED)),
+                  bloc.box,
                   snapshot.data,
                   EmptyListWidget(
                     I18n.of(context).app_pages_next_actions_empty_box,

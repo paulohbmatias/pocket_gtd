@@ -17,10 +17,12 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
   final TaskModel task;
   final BoxModel box;
   final ListTypeEnum listType;
+  final bool hasCheckBox;
 
   final bloc = AppModule.to.bloc<ListTasksBloc>();
 
-  CardTaskDefaultWidget(this.listType, this.box, this.task);
+  CardTaskDefaultWidget(this.listType, this.box, this.task,
+      {this.hasCheckBox = false});
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +41,8 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
             ItemMenuTaskModel(1, OMIcons.delete, I18n.of(context).remove),
             ItemMenuTaskModel(2, OMIcons.arrowForward, I18n.of(context).move),
             listType == ListTypeEnum.INBOX
-                ? ItemMenuTaskModel(
-                    3, OMIcons.permContactCalendar, I18n.of(context).delegate_task)
+                ? ItemMenuTaskModel(3, OMIcons.permContactCalendar,
+                    I18n.of(context).delegate_task)
                 : null,
             listType == ListTypeEnum.INBOX
                 ? ItemMenuTaskModel(
@@ -72,7 +74,8 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
               if (result != null && result.isNotEmpty) {
                 task.who = UserModel()..name = result;
                 task.save();
-                bloc.moveTo(context, task, box.boxEnum, InitialBoxesEnum.WAITING);
+                bloc.moveTo(
+                    context, task, box.boxEnum, InitialBoxesEnum.WAITING);
               }
               break;
             case 4:
@@ -102,21 +105,49 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
         }
       },
       onLongPress: () {},
-      child: ListTile(
-        contentPadding: EdgeInsets.all(8),
-        title: Text(task.content),
-        leading: Icon(
-          MdiIcons.noteTextOutline,
-          size: 35,
-        ),
-        subtitle: task.deadline != null
-            ? Text(
-                dateTask(context, task),
+      child: hasCheckBox
+          ? CheckboxListTile(
+              value: task.done,
+              onChanged: (value) =>
+                  bloc.markDone(context, task, value, listType),
+              selected: task.done,
+              activeColor: Colors.grey[400],
+              title: Text(
+                task.content,
                 style: TextStyle(
-                    color: Color(0xffff7e67), fontWeight: FontWeight.bold),
-              )
-            : Text(""),
-      ),
+                    decoration: task.done
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none),
+              ),
+              subtitle: task.deadline != null
+                  ? Text(
+                      dateTask(context, task),
+                      style: TextStyle(
+                          color:
+                              !task.done ? Color(0xffff7e67) : Colors.grey[400],
+                          decoration: task.done
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                          fontWeight: FontWeight.bold),
+                    )
+                  : Text(""),
+            )
+          : ListTile(
+              contentPadding: EdgeInsets.all(8),
+              title: Text(task.content),
+              leading: Icon(
+                MdiIcons.noteTextOutline,
+                size: 35,
+              ),
+              subtitle: task.deadline != null
+                  ? Text(
+                      dateTask(context, task),
+                      style: TextStyle(
+                          color: Color(0xffff7e67),
+                          fontWeight: FontWeight.bold),
+                    )
+                  : Text(""),
+            ),
     );
   }
 }

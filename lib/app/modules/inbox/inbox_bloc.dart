@@ -26,7 +26,7 @@ class InboxBloc extends BlocBase {
   @override
   void dispose() {
     _tasks.close();
-    _tasksSubscription.cancel();
+    if (_tasksSubscription != null) _tasksSubscription.cancel();
     super.dispose();
   }
 }

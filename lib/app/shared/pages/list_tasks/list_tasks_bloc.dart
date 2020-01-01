@@ -83,11 +83,11 @@ class ListTasksBloc extends BlocBase {
   }
 
   markDone(BuildContext context, TaskModel task, bool value,
-      ListTypeEnum listType, GlobalKey<ScaffoldState> scaffoldKey) {
+      ListTypeEnum listType) {
     task.done = value;
     task.save();
     if (value && listType == ListTypeEnum.NEXT_ACTIONS) {
-      scaffoldKey.currentState.showSnackBar(SnackBar(
+      Scaffold.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.green,
         action: SnackBarAction(
           label: I18n.of(context).undo,
@@ -122,6 +122,7 @@ class ListTasksBloc extends BlocBase {
 
   @override
   void dispose() {
+    _tasks.close();
     super.dispose();
   }
 }

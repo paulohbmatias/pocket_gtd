@@ -1,4 +1,3 @@
-import 'package:pocket_gtd/app/modules/dashboard/widgets/app_bar/app_bar_bloc.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ class DashboardModule extends ModuleWidget {
 
   @override
   List<Bloc> get blocs => [
-        Bloc((i) => AppBarBloc()),
         Bloc((i) => DashboardBloc()),
       ];
 
