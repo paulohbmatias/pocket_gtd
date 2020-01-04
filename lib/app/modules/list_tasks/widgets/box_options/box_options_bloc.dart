@@ -8,25 +8,30 @@ import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
 import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
 
 class BoxOptionsBloc extends BlocBase {
-
   final boxRepository = AppModule.to.getDependency<BoxRepository>();
   final taskRepository = AppModule.to.getDependency<TaskRepository>();
 
+  Future<List<BoxModel>> getBoxes(BoxModel box) async {
+    final list = (await boxRepository.getAll())
+          .where((b) => b.idLocal != box.idLocal)
+          .toList();
+    return list;
+  }
 
-  Future<List<BoxModel>> getBoxes(BoxModel box) async => (await boxRepository.getAll())
-      // .where((b) => b.idLocal != box.idLocal)
-      .toList();
-
-  Future<void> moveTo(
-      BuildContext context, TaskModel task,BoxModel boxFrom, BoxModel boxTo) async {
-    if (boxTo.idLocal ==
-        BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS)) {
-      task.when = DateTime.now();
-      boxTo.idLocal = BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED);
-      task.save();
+  Future<void> moveTo(BuildContext context, TaskModel task, BoxModel boxFrom,
+      BoxModel boxTo) async {
+    try {
+      if (boxTo.idLocal ==
+          BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS)) {
+        task.when = DateTime.now();
+        boxTo = BoxModel.fromEnum(InitialBoxesEnum.SCHEDULED);
+        await task.save();
+      }
+      await taskRepository.moveTask(boxFrom, boxTo, task);
+      Navigator.of(context).pop();
+    } catch (e) {
+      print(e);
     }
-    await taskRepository.moveTask(boxFrom, boxTo, task);
-    Navigator.of(context).pop();
   }
 
   @override

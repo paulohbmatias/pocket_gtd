@@ -102,7 +102,7 @@ class TaskRepositoryImpl implements TaskRepository {
   @override
   Future<bool> moveTask(BoxModel from, BoxModel to, TaskModel task) async {
     try {
-      await delete(task, from);
+      await task.delete();
       await save(task, to);
       return true;
     } catch (e) {

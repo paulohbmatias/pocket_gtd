@@ -71,7 +71,8 @@ class BoxRepositoryImpl extends BlocBase implements BoxRepository {
   Future<List<BoxModel>> getAll() async {
     try {
       Box boxBoxes = await getBox();
-      return boxBoxes.values.cast<BoxModel>().toList(growable: false);
+      List<BoxModel> list = boxBoxes.values.cast<BoxModel>().toList(growable: false);
+      return list;
     } catch (e) {
       return null;
     }
