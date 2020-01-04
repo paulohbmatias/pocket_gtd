@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pocket_gtd/app/app_module.dart';
+import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_page.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
 import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
 import 'package:pocket_gtd/app/shared/widgets/empty_list/empty_list_widget.dart';
@@ -43,7 +43,7 @@ class ListBoxesBloc extends BlocBase {
                   iconTheme: IconThemeData(color: Colors.black),
                   title: Text(box.title, style: TextStyle(color: Colors.black)),
                 ),
-                body: ListTasksPage(
+                body: ListTasksModule(
                     ListTypeEnum.DEFAULT,
                     box,
                     tasks,

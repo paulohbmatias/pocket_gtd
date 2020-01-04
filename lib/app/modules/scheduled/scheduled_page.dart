@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_module.dart';
 import 'package:pocket_gtd/app/modules/scheduled/scheduled_bloc.dart';
 import 'package:pocket_gtd/app/modules/scheduled/scheduled_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_page.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -67,7 +67,7 @@ class _ScheduledPageState extends State<ScheduledPage> {
                           ),
                         ),
                         Expanded(
-                          child: ListTasksPage(
+                          child: ListTasksModule(
                               ListTypeEnum.SCHEDULEDS,
                               BoxModel.fromEnum(InitialBoxesEnum.SCHEDULED),
                               null,

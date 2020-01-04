@@ -25,7 +25,7 @@ class _DashboardPageState extends State<DashboardPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final FontWeight fontWeight = FontWeight.normal;
   final textColor = Colors.black;
-  final initialPage = 1;
+  final initialPage = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -37,31 +37,18 @@ class _DashboardPageState extends State<DashboardPage> {
           elevation: 0,
           // textTheme: TextTheme(title: TextStyle(color: Colors.black, fontSize: 16)),
           iconTheme: IconThemeData(color: Colors.black),
-          title: StreamBuilder<int>(
-            stream: bloc.page,
-            initialData: widget.page ?? initialPage,
-            builder: (context, snapshot) {
-              switch (snapshot.data) {
-                case 0:
-                  return Text(
-                    I18n.of(context).tasks,
-                    style: TextStyle(color: textColor, fontWeight: fontWeight),
-                  );
-                case 1:
-                  return Text(
-                    I18n.of(context).projects,
-                    style: TextStyle(color: textColor, fontWeight: fontWeight),
-                  );
-                default:
-                  return Text(
-                    I18n.of(context).tasks,
-                    style: TextStyle(color: textColor, fontWeight: fontWeight),
-                  );
-              }
-            },
+          title: Text(
+            "Pocket GTD",
+            style: TextStyle(color: Theme.of(context).primaryColor),
           ),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.search, color: Theme.of(context).primaryColor,),
+            )
+          ],
         ),
-        drawer: Drawer(),
+        // drawer: Drawer(),
         floatingActionButton: StreamBuilder<int>(
           stream: bloc.page,
           initialData: widget.page ?? initialPage,
@@ -90,8 +77,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   showSelectedLabels: true,
                   items: <BottomNavigationBarItem>[
                     bottomItem(OMIcons.listAlt, I18n.of(context).tasks),
-                    bottomItem(
-                        OMIcons.widgets, I18n.of(context).projects),
+                    bottomItem(OMIcons.widgets, I18n.of(context).projects),
                   ],
                   currentIndex: snapshot.data,
                   onTap: bloc.changePage,
@@ -112,7 +98,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   final pages = [
-        TasksModule(),
-        ProjectsModule(),
-      ];
+    TasksModule(),
+    ProjectsModule(),
+  ];
 }

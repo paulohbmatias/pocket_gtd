@@ -14,7 +14,7 @@ class BoxOptionsBloc extends BlocBase {
 
 
   Future<List<BoxModel>> getBoxes(BoxModel box) async => (await boxRepository.getAll())
-      .where((b) => b.idLocal != box.idLocal)
+      // .where((b) => b.idLocal != box.idLocal)
       .toList();
 
   Future<void> moveTo(

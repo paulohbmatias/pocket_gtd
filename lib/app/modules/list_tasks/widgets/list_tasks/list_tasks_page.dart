@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/app/app_module.dart';
+import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_bloc.dart';
+import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_module.dart';
+import 'package:pocket_gtd/app/modules/list_tasks/widgets/card_task_default/card_task_default_widget.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/list_tasks_bloc.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/card_task_default/card_task_default_widget.dart';
 
 class ListTasksWidget extends StatelessWidget {
   final List<TaskModel> listTasks;
   final ListTypeEnum listType;
   final BoxModel box;
   final Widget emptyList;
-  final bloc = AppModule.to.bloc<ListTasksBloc>();
+  final bloc = ListTasksModule.to.bloc<ListTasksBloc>();
   final GlobalKey<ScaffoldState> scaffoldKey;
 
   ListTasksWidget({

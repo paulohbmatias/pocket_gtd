@@ -182,8 +182,8 @@ class I18n implements WidgetsLocalizations {
   String get app_pages_waiting_empty_box => "Here are the tasks you're waiting for someone else to do.";
   /// "Move to Projects"
   String get move_to_projects => "Move to Projects";
-  /// "Successfully added"
-  String get successfully_added => "Successfully added";
+  /// "Added inbox"
+  String get successfully_added => "Added inbox";
   /// "Schedule for"
   String get schedule_for => "Schedule for";
 }
@@ -423,9 +423,9 @@ class _I18n_pt_BR extends I18n {
   /// "Mover para projetos"
   @override
   String get move_to_projects => "Mover para projetos";
-  /// "Adicionado com sucesso"
+  /// "Adicionado a caixa de entrada"
   @override
-  String get successfully_added => "Adicionado com sucesso";
+  String get successfully_added => "Adicionado a caixa de entrada";
   /// "Agendar para"
   @override
   String get schedule_for => "Agendar para";

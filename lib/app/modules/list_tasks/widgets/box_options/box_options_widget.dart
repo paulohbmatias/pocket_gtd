@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/app_module.dart';
+import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_module.dart';
+import 'package:pocket_gtd/app/modules/list_tasks/widgets/box_options/box_options_bloc.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
-import 'package:pocket_gtd/app/shared/pages/list_tasks/widgets/box_options/box_options_bloc.dart';
 
 class BoxOptionsWidget extends StatelessWidget {
-  final bloc = AppModule.to.bloc<BoxOptionsBloc>();
+  final bloc = ListTasksModule.to.bloc<BoxOptionsBloc>();
   final BoxModel boxLocal;
   final TaskModel task;
 

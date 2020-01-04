@@ -28,6 +28,7 @@ class _TasksPageState extends State<TasksPage> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: pages.length,
+      initialIndex: 1,
       child: Material(
         child: Column(
           children: <Widget>[
