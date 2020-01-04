@@ -58,7 +58,12 @@ class ListTasksWidget extends StatelessWidget {
                           scaffoldKey: this.scaffoldKey,
                         );
                       case ListTypeEnum.SCHEDULEDS:
-                        return CardTaskDefaultWidget(listType, box, task);
+                        return CardTaskDefaultWidget(
+                          listType,
+                          box,
+                          task,
+                          hasCheckBox: true
+                        );
                       default:
                         return CardTaskDefaultWidget(listType, box, task);
                     }
