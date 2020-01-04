@@ -12,15 +12,16 @@ class ListTasksWidget extends StatelessWidget {
   final BoxModel box;
   final Widget emptyList;
   final bloc = AppModule.to.bloc<ListTasksBloc>();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
-  ListTasksWidget(
-      {Key key,
-      @required this.listTasks,
-      @required this.listType,
-      @required this.box,
-      @required this.emptyList})
-      : super(key: key);
+  ListTasksWidget({
+    Key key,
+    @required this.listTasks,
+    @required this.listType,
+    @required this.box,
+    @required this.emptyList,
+    @required this.scaffoldKey,
+  }) : super(key: key);
 
   void showMessage(String message, TaskModel task) {
     scaffoldKey.currentState.showSnackBar(SnackBar(
@@ -36,7 +37,6 @@ class ListTasksWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: scaffoldKey,
         body: listTasks != null && listTasks.isNotEmpty
             ? Container(
                 margin: const EdgeInsets.all(2.0),
@@ -50,11 +50,17 @@ class ListTasksWidget extends StatelessWidget {
                     TaskModel task = listTasks[index];
                     switch (listType) {
                       case ListTypeEnum.NEXT_ACTIONS:
-                        return CardTaskDefaultWidget(listType, box, task, hasCheckBox: true,);
+                        return CardTaskDefaultWidget(
+                          listType,
+                          box,
+                          task,
+                          hasCheckBox: true,
+                          scaffoldKey: this.scaffoldKey,
+                        );
                       case ListTypeEnum.SCHEDULEDS:
                         return CardTaskDefaultWidget(listType, box, task);
                       default:
-                        return CardTaskDefaultWidget(listType, box, task, hasCheckBox: true,);
+                        return CardTaskDefaultWidget(listType, box, task);
                     }
                   },
                 ),

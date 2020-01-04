@@ -82,34 +82,41 @@ class ListTasksBloc extends BlocBase {
     );
   }
 
-  markDone(BuildContext context, TaskModel task, bool value,
-      ListTypeEnum listType) {
+  markDone(
+      BuildContext context, TaskModel task, bool value, ListTypeEnum listType, {GlobalKey<ScaffoldState> scaffoldKey}) {
     task.done = value;
     task.save();
     if (value && listType == ListTypeEnum.NEXT_ACTIONS) {
-      Scaffold.of(context).showSnackBar(SnackBar(
-        backgroundColor: Colors.green,
-        action: SnackBarAction(
-          label: I18n.of(context).undo,
-          onPressed: () {
-            task.done = !value;
-            task.save();
-          },
-        ),
-        content: Text(I18n.of(context).done),
-      ));
+      try {
+        scaffoldKey.currentState.showSnackBar(SnackBar(
+          backgroundColor: Colors.green,
+          action: SnackBarAction(
+            label: I18n.of(context).undo,
+            onPressed: () {
+              task.done = !value;
+              task.save();
+            },
+          ),
+          content: Text(I18n.of(context).done),
+        ));
+      } catch (e) {
+        print(e);
+      }
     }
   }
 
-  moveTo(BuildContext context, TaskModel task, InitialBoxesEnum boxFrom, InitialBoxesEnum boxTo) {
-    taskRepository.moveTask(BoxModel.fromEnum(boxFrom), BoxModel.fromEnum(boxTo), task);
+  moveTo(BuildContext context, TaskModel task, InitialBoxesEnum boxFrom,
+      InitialBoxesEnum boxTo) {
+    taskRepository.moveTask(
+        BoxModel.fromEnum(boxFrom), BoxModel.fromEnum(boxTo), task);
   }
 
   void analyze(BuildContext context, TaskModel task) {
     showDialog(context: context, builder: (context) => AnalyzeModule(task));
   }
 
-  Future<void> showOptionsBoxes(BuildContext context, TaskModel task, BoxModel box) async {
+  Future<void> showOptionsBoxes(
+      BuildContext context, TaskModel task, BoxModel box) async {
     await showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

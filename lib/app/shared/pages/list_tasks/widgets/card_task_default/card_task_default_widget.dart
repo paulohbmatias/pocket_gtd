@@ -18,11 +18,17 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
   final BoxModel box;
   final ListTypeEnum listType;
   final bool hasCheckBox;
+  GlobalKey<ScaffoldState> scaffoldKey;
 
   final bloc = AppModule.to.bloc<ListTasksBloc>();
 
-  CardTaskDefaultWidget(this.listType, this.box, this.task,
-      {this.hasCheckBox = false});
+  CardTaskDefaultWidget(
+    this.listType,
+    this.box,
+    this.task, {
+    this.hasCheckBox = false,
+    this.scaffoldKey
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +115,7 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
           ? CheckboxListTile(
               value: task.done,
               onChanged: (value) =>
-                  bloc.markDone(context, task, value, listType),
+                  bloc.markDone(context, task, value, listType, scaffoldKey: scaffoldKey),
               selected: task.done,
               activeColor: Colors.grey[400],
               title: Text(

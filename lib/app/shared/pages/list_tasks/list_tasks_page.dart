@@ -9,8 +9,9 @@ class ListTasksPage extends StatefulWidget {
   final List<TaskModel> tasks;
   final BoxModel box;
   final Widget emptyList;
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
-  ListTasksPage(this.listType, this.box, this.tasks, this.emptyList);
+  ListTasksPage(this.listType, this.box, this.tasks, this.emptyList, {this.scaffoldKey});
 
   @override
   _ListTasksPageState createState() => _ListTasksPageState();
@@ -24,7 +25,8 @@ class _ListTasksPageState extends State<ListTasksPage> {
             listTasks: widget.tasks,
             box: widget.box,
             listType: widget.listType,
-            emptyList: widget.emptyList
+            emptyList: widget.emptyList,
+            scaffoldKey: widget.scaffoldKey
           ),
     );
   }

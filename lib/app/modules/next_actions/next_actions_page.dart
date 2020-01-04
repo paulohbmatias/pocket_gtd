@@ -37,7 +37,7 @@ class _NextActionsPageState extends State<NextActionsPage> {
                   EmptyListWidget(
                     I18n.of(context).app_pages_next_actions_empty_box,
                     image: "assets/images/actions.png",
-                  )) : Container();
+                  ), scaffoldKey: this.scaffoldKey,) : Container();
             }
           ) : Container();
         }

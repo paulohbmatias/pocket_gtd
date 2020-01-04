@@ -6,6 +6,7 @@ import 'package:pocket_gtd/app/modules/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/modules/inbox/inbox_module.dart';
 import 'package:pocket_gtd/app/modules/projects/projects_module.dart';
+import 'package:pocket_gtd/app/modules/references/references_module.dart';
 import 'package:pocket_gtd/app/modules/tasks/tasks_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
@@ -43,27 +44,17 @@ class _DashboardPageState extends State<DashboardPage> {
               switch (snapshot.data) {
                 case 0:
                   return Text(
-                    I18n.of(context).inbox,
+                    I18n.of(context).tasks,
                     style: TextStyle(color: textColor, fontWeight: fontWeight),
                   );
                 case 1:
                   return Text(
-                    I18n.of(context).tasks,
-                    style: TextStyle(color: textColor, fontWeight: fontWeight),
-                  );
-                case 2:
-                  return Text(
                     I18n.of(context).projects,
-                    style: TextStyle(color: textColor, fontWeight: fontWeight),
-                  );
-                case 3:
-                  return Text(
-                    I18n.of(context).boxes,
                     style: TextStyle(color: textColor, fontWeight: fontWeight),
                   );
                 default:
                   return Text(
-                    I18n.of(context).inbox,
+                    I18n.of(context).tasks,
                     style: TextStyle(color: textColor, fontWeight: fontWeight),
                   );
               }
@@ -96,13 +87,11 @@ class _DashboardPageState extends State<DashboardPage> {
                   selectedItemColor: Theme.of(context).accentColor,
                   showUnselectedLabels: false,
                   type: BottomNavigationBarType.shifting,
-                  showSelectedLabels: false,
+                  showSelectedLabels: true,
                   items: <BottomNavigationBarItem>[
-                    bottomItem(OMIcons.inbox, I18n.of(context).inbox),
-                    bottomItem(OMIcons.notes, I18n.of(context).tasks),
+                    bottomItem(OMIcons.listAlt, I18n.of(context).tasks),
                     bottomItem(
-                        MdiIcons.developerBoard, I18n.of(context).projects),
-                    bottomItem(MdiIcons.appsBox, I18n.of(context).boxes),
+                        OMIcons.widgets, I18n.of(context).projects),
                   ],
                   currentIndex: snapshot.data,
                   onTap: bloc.changePage,
@@ -123,9 +112,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   final pages = [
-        InboxModule(),
         TasksModule(),
         ProjectsModule(),
-        BoxesModule(),
       ];
 }
