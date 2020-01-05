@@ -41,12 +41,12 @@ class _DashboardPageState extends State<DashboardPage> {
             "Pocket GTD",
             style: TextStyle(color: Theme.of(context).primaryColor),
           ),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.search, color: Theme.of(context).primaryColor,),
-            )
-          ],
+          // actions: <Widget>[
+          //   Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: Icon(Icons.search, color: Theme.of(context).primaryColor,),
+          //   )
+          // ],
         ),
         // drawer: Drawer(),
         floatingActionButton: StreamBuilder<int>(

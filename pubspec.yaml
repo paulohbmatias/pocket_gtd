@@ -81,6 +81,8 @@ flutter:
     - assets/images/developer.png
     - assets/images/doing.png
     - assets/images/background_splash.jpg
+    - assets/images/references.png
+    - assets/images/one_day_maybe.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

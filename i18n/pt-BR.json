@@ -73,6 +73,8 @@
   "app_pages_analyze_move_to_project_title": "Você deseja mover \"{task}\" para Projetos?",
   "app_pages_analyze_move_to_project_content": "Se uma ação precisa de mais de um passo para ser completada, então ela é um projeto",
   "app_pages_waiting_empty_box": "Aqui ficam as tarefas que você está aguardando serem realizadas por outra pessoa",
+  "app_pages_one_day_maybe_empty_box": "Aqui ficam as tarefas passiveis de ação, mas que você não pode realizar no momento, porém deseja lembrar delas mais tarde.",
+  "app_pages_references_empty_box": "Aqui ficam suas referências (filmes, livros, lugares... etc).",
   "move_to_projects": "Mover para projetos",
   "successfully_added": "Adicionado a caixa de entrada",
   "schedule_for": "Agendar para"

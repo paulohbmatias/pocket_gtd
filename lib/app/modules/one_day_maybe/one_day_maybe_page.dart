@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_module.dart';
-import 'package:pocket_gtd/app/modules/waiting/waiting_bloc.dart';
-import 'package:pocket_gtd/app/modules/waiting/waiting_module.dart';
-import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
+import 'package:pocket_gtd/app/modules/one_day_maybe/one_day_maybe_bloc.dart';
+import 'package:pocket_gtd/app/modules/one_day_maybe/one_day_maybe_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
-import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/widgets/empty_list/empty_list_widget.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
-class WaitingPage extends StatefulWidget {
+class OneDayMaybePage extends StatefulWidget {
   final String title;
-  const WaitingPage({Key key, this.title = "Waiting"}) : super(key: key);
+  const OneDayMaybePage({Key key, this.title = "OneDayMaybe"})
+      : super(key: key);
 
   @override
-  _WaitingPageState createState() => _WaitingPageState();
+  _OneDayMaybePageState createState() => _OneDayMaybePageState();
 }
 
-class _WaitingPageState extends State<WaitingPage> {
-
-  final bloc = WaitingModule.to.bloc<WaitingBloc>();
+class _OneDayMaybePageState extends State<OneDayMaybePage> {
+  final bloc = OneDayMaybeModule.to.bloc<OneDayMaybeBloc>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -39,7 +37,7 @@ class _WaitingPageState extends State<WaitingPage> {
                   snapshot.data,
                   EmptyListWidget(
                     I18n.of(context).app_pages_one_day_maybe_empty_box,
-                    image: "assets/images/wait.png",
+                    image: "assets/images/one_day_maybe.png",
                   ), scaffoldKey: this.scaffoldKey,) : Container();
             }
           ) : Container();

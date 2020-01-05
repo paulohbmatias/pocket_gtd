@@ -180,6 +180,10 @@ class I18n implements WidgetsLocalizations {
   String get app_pages_analyze_move_to_project_content => "If an action needs more than one step to complete, then it is a project.";
   /// "Here are the tasks you're waiting for someone else to do."
   String get app_pages_waiting_empty_box => "Here are the tasks you're waiting for someone else to do.";
+  /// "Here are the actionable tasks you can't do right now, but you want to remember them later."
+  String get app_pages_one_day_maybe_empty_box => "Here are the actionable tasks you can't do right now, but you want to remember them later.";
+  /// "Here are your references (movies, books, places... etc)."
+  String get app_pages_references_empty_box => "Here are your references (movies, books, places... etc).";
   /// "Move to Projects"
   String get move_to_projects => "Move to Projects";
   /// "Added inbox"
@@ -420,6 +424,12 @@ class _I18n_pt_BR extends I18n {
   /// "Aqui ficam as tarefas que você está aguardando serem realizadas por outra pessoa"
   @override
   String get app_pages_waiting_empty_box => "Aqui ficam as tarefas que você está aguardando serem realizadas por outra pessoa";
+  /// "Aqui ficam as tarefas passiveis de ação, mas que você não pode realizar no momento, porém deseja lembrar delas mais tarde."
+  @override
+  String get app_pages_one_day_maybe_empty_box => "Aqui ficam as tarefas passiveis de ação, mas que você não pode realizar no momento, porém deseja lembrar delas mais tarde.";
+  /// "Aqui ficam suas referências (filmes, livros, lugares... etc)."
+  @override
+  String get app_pages_references_empty_box => "Aqui ficam suas referências (filmes, livros, lugares... etc).";
   /// "Mover para projetos"
   @override
   String get move_to_projects => "Mover para projetos";

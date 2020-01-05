@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/modules/inbox/inbox_module.dart';
 import 'package:pocket_gtd/app/modules/next_actions/next_actions_module.dart';
+import 'package:pocket_gtd/app/modules/one_day_maybe/one_day_maybe_module.dart';
+import 'package:pocket_gtd/app/modules/references/references_module.dart';
 import 'package:pocket_gtd/app/modules/scheduled/scheduled_module.dart';
 import 'package:pocket_gtd/app/modules/waiting/waiting_module.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
@@ -18,9 +20,9 @@ final pages =[
   InboxModule(),
   NextActionsModule(),
   ScheduledModule(),
-  Container(),
+  ReferencesModule(),
   WaitingModule(),
-  Container(),
+  OneDayMaybeModule(),
 ];
 
 class _TasksPageState extends State<TasksPage> {
