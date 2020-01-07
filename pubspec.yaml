@@ -42,6 +42,8 @@ dependencies:
   popup_menu: ^1.0.5
   flare_flutter: ^1.7.3
   positioned_tap_detector: ^1.0.3
+  fancy_bottom_bar: ^0.0.1
+
   
 dev_dependencies:
   flutter_test:

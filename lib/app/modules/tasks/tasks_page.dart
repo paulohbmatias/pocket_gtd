@@ -39,6 +39,7 @@ class _TasksPageState extends State<TasksPage> {
               child: TabBar(
                 indicatorColor: Theme.of(context).primaryColor,
                 labelColor: Theme.of(context).primaryColor,
+                labelStyle: TextStyle(fontWeight: FontWeight.normal),
                 unselectedLabelColor: Colors.black,
                 isScrollable: true,
                 dragStartBehavior: DragStartBehavior.down,
