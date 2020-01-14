@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/modules/boxes/boxes_module.dart';
@@ -72,12 +73,13 @@ class _DashboardPageState extends State<DashboardPage> {
             builder: (_, snapshot) => BottomNavigationBar(
                   unselectedItemColor: Theme.of(context).unselectedWidgetColor,
                   selectedItemColor: Theme.of(context).accentColor,
-                  showUnselectedLabels: false,
-                  type: BottomNavigationBarType.shifting,
+                  showUnselectedLabels: true,
+                  type: BottomNavigationBarType.fixed,
                   showSelectedLabels: true,
                   items: <BottomNavigationBarItem>[
-                    bottomItem(OMIcons.listAlt, I18n.of(context).tasks),
-                    bottomItem(OMIcons.widgets, I18n.of(context).projects),
+                    bottomItem(OMIcons.home, MdiIcons.home, I18n.of(context).home),
+                    bottomItem(OMIcons.listAlt, OMIcons.listAlt, I18n.of(context).tasks),
+                    bottomItem(OMIcons.widgets, MdiIcons.widgets, I18n.of(context).projects),
                   ],
                   currentIndex: snapshot.data,
                   onTap: bloc.changePage,
@@ -86,18 +88,20 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  BottomNavigationBarItem bottomItem(IconData icon, String title) {
+  BottomNavigationBarItem bottomItem(IconData icon, IconData activeIcon, String title) {
     return BottomNavigationBarItem(
         icon: Icon(
           icon,
           size: 30,
         ),
+        activeIcon: Icon(activeIcon),
         title: Text(
           title,
         ));
   }
 
   final pages = [
+    Container(),
     TasksModule(),
     ProjectsModule(),
   ];

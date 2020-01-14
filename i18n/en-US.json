@@ -33,6 +33,7 @@
     "this_box_contains": "This box contains {numberFiles} files",
     "files_x": "Files: {numberFiles}",
     "inbox": "Inbox",
+    "home": "Home",
     "inbox_for_tasks": "Inbox for tasks",
     "next_actions": "Next actions",
     "next_actions_to_perform": "Next actions to perform",

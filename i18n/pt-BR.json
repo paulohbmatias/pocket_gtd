@@ -34,6 +34,7 @@
   "this_box_contains": "Esta caixa contém {numberFiles} arquivos",
   "files_x": "Arquivos: {numberFiles}",
   "inbox": "Caixa de entrada",
+  "home": "Inicio",
   "inbox_for_tasks": "Caixa de entrada para as tarefas",
   "next_actions": "Próximas ações",
   "next_actions_to_perform": "Próximas acções a realizar",

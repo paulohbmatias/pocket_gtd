@@ -43,6 +43,7 @@ dependencies:
   flare_flutter: ^1.7.3
   positioned_tap_detector: ^1.0.3
   fancy_bottom_bar: ^0.0.1
+  font_awesome_flutter: ^8.5.0
 
   
 dev_dependencies:

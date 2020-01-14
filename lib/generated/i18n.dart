@@ -100,6 +100,8 @@ class I18n implements WidgetsLocalizations {
   String files_x(String numberFiles) => "Files: ${numberFiles}";
   /// "Inbox"
   String get inbox => "Inbox";
+  /// "Home"
+  String get home => "Home";
   /// "Inbox for tasks"
   String get inbox_for_tasks => "Inbox for tasks";
   /// "Next actions"
@@ -304,6 +306,9 @@ class _I18n_pt_BR extends I18n {
   /// "Caixa de entrada"
   @override
   String get inbox => "Caixa de entrada";
+  /// "Inicio"
+  @override
+  String get home => "Inicio";
   /// "Caixa de entrada para as tarefas"
   @override
   String get inbox_for_tasks => "Caixa de entrada para as tarefas";
