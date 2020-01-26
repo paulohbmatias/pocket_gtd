@@ -39,12 +39,12 @@ class ListTasksWidget extends StatelessWidget {
     return Scaffold(
         body: listTasks != null && listTasks.isNotEmpty
             ? Container(
-                margin: const EdgeInsets.all(2.0),
                 padding: const EdgeInsets.all(2),
+                margin: const EdgeInsets.symmetric(horizontal: 8),
                 child: ListView.separated(
                   itemCount: listTasks.length,
                   separatorBuilder: (context, index) {
-                    return Divider();
+                    return Container();
                   },
                   itemBuilder: (context, index) {
                     TaskModel task = listTasks[index];

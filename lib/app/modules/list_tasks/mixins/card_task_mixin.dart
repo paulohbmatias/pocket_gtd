@@ -7,10 +7,11 @@ import 'package:pocket_gtd/generated/i18n.dart';
 
 mixin CardTaskMixin{
   Future<int> showOptions(BuildContext context, RelativeRect position, List<ItemMenuTaskModel> items){
+    print(items);
     return showMenu<int>(
       context: context,
       position: position,
-      items: items.map<PopupMenuEntry<int>>((item){
+      items: items.where((item) => item != null).map<PopupMenuEntry<int>>((item){
         return PopupMenuItem<int>(
               value: item.value,
               child: Row(

@@ -1,3 +1,4 @@
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:fancy_bottom_bar/fancy_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -5,9 +6,11 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/modules/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_module.dart';
+import 'package:pocket_gtd/app/modules/home/home_module.dart';
 import 'package:pocket_gtd/app/modules/inbox/inbox_module.dart';
 import 'package:pocket_gtd/app/modules/projects/projects_module.dart';
 import 'package:pocket_gtd/app/modules/references/references_module.dart';
+import 'package:pocket_gtd/app/modules/scheduled/scheduled_module.dart';
 import 'package:pocket_gtd/app/modules/tasks/tasks_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
@@ -42,24 +45,38 @@ class _DashboardPage2State extends State<DashboardPage2> {
             "Pocket GTD",
             style: TextStyle(color: Theme.of(context).primaryColor),
           ),
-          // actions: <Widget>[
-          //   Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: Icon(Icons.search, color: Theme.of(context).primaryColor,),
-          //   )
-          // ],
+          actions: <Widget>[
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Icon(Icons.search, color: Theme.of(context).primaryColor,),
+            // ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                icon: Icon(OMIcons.calendarToday, color: Theme.of(context).primaryColor,),
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ScheduledModule()
+                  ));
+                },
+              ),
+            ),
+          ],
         ),
-        // drawer: Drawer(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         floatingActionButton: StreamBuilder<int>(
           stream: bloc.page,
           initialData: widget.page ?? initialPage,
           builder: (context, snapshot) {
-            return snapshot.hasData && snapshot.data == 0
+            return snapshot.hasData && snapshot.data == 1
                 ? FloatingActionButton(
                     onPressed: () => bloc.add(context, ListTypeEnum.INBOX),
                     child: Icon(Icons.add),
                   )
-                : Container();
+                : FloatingActionButton(
+                    onPressed: () => bloc.add(context, ListTypeEnum.INBOX),
+                    child: Icon(Icons.add),
+                  );
           },
         ),
         body: StreamBuilder<int>(
@@ -70,37 +87,55 @@ class _DashboardPage2State extends State<DashboardPage2> {
         bottomNavigationBar: StreamBuilder<int>(
             stream: bloc.page,
             initialData: widget.page ?? initialPage,
-            builder: (_, snapshot) => FancyBottomBar(
+            builder: (_, snapshot) => BubbleBottomBar(
                   items: [
-                    bottomItem(OMIcons.listAlt, I18n.of(context).tasks),
-                    bottomItem(OMIcons.widgets, I18n.of(context).projects),
-                    bottomItem(OMIcons.wifi, I18n.of(context).projects),
+                    bottomItem(
+                        OMIcons.inbox, MdiIcons.inbox, I18n.of(context).home),
+                    bottomItem(OMIcons.listAlt, OMIcons.listAlt,
+                        I18n.of(context).tasks),
+                    bottomItem(OMIcons.widgets, MdiIcons.widgets,
+                        I18n.of(context).projects),
                   ],
-                  selectedColor: Theme.of(context).primaryColor,
-                  selectedPosition: snapshot.data,
-                  elevation: 0,
-                  indicatorColor: Theme.of(context).primaryColor,
-                  onItemSelected: bloc.changePage,
+
+                  opacity: .2,
+                  elevation: 1,
+                  // borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                  fabLocation: BubbleBottomBarFabLocation.end,
+                  hasInk: false,
+                  hasNotch: false,
+                  // selectedColor: Theme.of(context).primaryColor,
+                  currentIndex: snapshot.data,
+                  // indicatorColor: Theme.of(context).primaryColor,
+                  onTap: bloc.changePage,
                 )),
       ),
     );
   }
 
-  FancyBottomItem bottomItem(IconData icon, String title) {
-    return FancyBottomItem(
+  BubbleBottomBarItem bottomItem(
+      IconData icon, IconData activeIcon, String title) {
+    return BubbleBottomBarItem(
+        backgroundColor: Colors.grey,
         icon: Icon(
           icon,
           size: 30,
+          color: Colors.black,
+        ),
+        activeIcon: Icon(
+          activeIcon,
+          size: 30,
+          color: Theme.of(context).primaryColor,
         ),
         title: Text(
           title,
-          style: TextStyle(fontFamily: 'roboto', color: Theme.of(context).primaryColor),
+          style: TextStyle(
+              fontFamily: 'roboto', color: Theme.of(context).primaryColor),
         ));
   }
 
   final pages = [
+    InboxModule(),
     TasksModule(),
-    ProjectsModule(),
     ProjectsModule(),
   ];
 }

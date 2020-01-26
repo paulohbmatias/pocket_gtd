@@ -17,9 +17,7 @@ class TasksPage extends StatefulWidget {
 }
 
 final pages =[
-  InboxModule(),
   NextActionsModule(),
-  ScheduledModule(),
   ReferencesModule(),
   WaitingModule(),
   OneDayMaybeModule(),
@@ -30,7 +28,7 @@ class _TasksPageState extends State<TasksPage> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: pages.length,
-      initialIndex: 1,
+      initialIndex: 0,
       child: Material(
         child: Column(
           children: <Widget>[
@@ -44,11 +42,9 @@ class _TasksPageState extends State<TasksPage> {
                 isScrollable: true,
                 dragStartBehavior: DragStartBehavior.down,
                 tabs: <Widget>[
-                  Tab(text: I18n.of(context).inbox),
                   Tab(
                     text: I18n.of(context).next_actions,
                   ),
-                  Tab(text: I18n.of(context).scheduled),
                   Tab(text: I18n.of(context).references),
                   Tab(text: I18n.of(context).waiting),
                   Tab(text: I18n.of(context).one_day_maybe),

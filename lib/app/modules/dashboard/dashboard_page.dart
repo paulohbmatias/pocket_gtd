@@ -38,23 +38,22 @@ class _DashboardPageState extends State<DashboardPage> {
           elevation: 0,
           // textTheme: TextTheme(title: TextStyle(color: Colors.black, fontSize: 16)),
           iconTheme: IconThemeData(color: Colors.black),
-          title: Text(
-            "Pocket GTD",
-            style: TextStyle(color: Theme.of(context).primaryColor),
-          ),
-          // actions: <Widget>[
-          //   Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: Icon(Icons.search, color: Theme.of(context).primaryColor,),
-          //   )
-          // ],
+          // title: Text(
+          //   "Pocket GTD",
+          //   style: TextStyle(color: Theme.of(context).primaryColor),
+          // ),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.search, color: Theme.of(context).primaryColor,),
+            )
+          ],
         ),
-        // drawer: Drawer(),
         floatingActionButton: StreamBuilder<int>(
           stream: bloc.page,
           initialData: widget.page ?? initialPage,
           builder: (context, snapshot) {
-            return snapshot.hasData && snapshot.data == 0
+            return snapshot.hasData && snapshot.data == 1
                 ? FloatingActionButton(
                     onPressed: () => bloc.add(context, ListTypeEnum.INBOX),
                     child: Icon(Icons.add),
@@ -77,9 +76,12 @@ class _DashboardPageState extends State<DashboardPage> {
                   type: BottomNavigationBarType.fixed,
                   showSelectedLabels: true,
                   items: <BottomNavigationBarItem>[
-                    bottomItem(OMIcons.home, MdiIcons.home, I18n.of(context).home),
-                    bottomItem(OMIcons.listAlt, OMIcons.listAlt, I18n.of(context).tasks),
-                    bottomItem(OMIcons.widgets, MdiIcons.widgets, I18n.of(context).projects),
+                    bottomItem(
+                        OMIcons.home, MdiIcons.home, I18n.of(context).home),
+                    bottomItem(OMIcons.listAlt, OMIcons.listAlt,
+                        I18n.of(context).tasks),
+                    bottomItem(OMIcons.widgets, MdiIcons.widgets,
+                        I18n.of(context).projects),
                   ],
                   currentIndex: snapshot.data,
                   onTap: bloc.changePage,
@@ -88,7 +90,8 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  BottomNavigationBarItem bottomItem(IconData icon, IconData activeIcon, String title) {
+  BottomNavigationBarItem bottomItem(
+      IconData icon, IconData activeIcon, String title) {
     return BottomNavigationBarItem(
         icon: Icon(
           icon,

@@ -18,7 +18,7 @@ class DashboardModule extends ModuleWidget {
   List<Dependency> get dependencies => [];
 
   @override
-  Widget get view => DashboardPage(page: page,);
+  Widget get view => DashboardPage2(page: page,);
 
   static Inject get to => Inject<DashboardModule>.of();
 }

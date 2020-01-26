@@ -31,12 +31,7 @@ class ScheduledBloc extends BlocBase {
   Future<Stream<List<TaskModel>>> getTasks() async {
     try {
       final now = DateTime.now();
-      _tasks.sink.add((await taskRepository.getAll(box))
-          .where((item) =>
-              (now.year == item.when.year) &&
-              (now.month == item.when.month) &&
-              (now.day == item.when.day))
-          .toList());
+      _tasks.sink.add((await taskRepository.getAll(box)));
       _tasksDay.sink.add((await taskRepository.getAll(box))
           .where((item) =>
               (now.year == item.when.year) &&
@@ -45,14 +40,7 @@ class ScheduledBloc extends BlocBase {
           .toList());
       _tasksSubscription = (await taskRepository.listenTasks(box)).listen(
           (data) {
-            _tasks.sink.add(data
-              .where((item) =>
-                  (calendarTableController.selectedDay.year ==
-                      item.when.year) &&
-                  (calendarTableController.selectedDay.month ==
-                      item.when.month) &&
-                  (calendarTableController.selectedDay.day == item.when.day))
-              .toList());
+            _tasks.sink.add(data);
             _tasksDay.sink.add(data
               .where((item) =>
                   (calendarTableController.selectedDay.year ==

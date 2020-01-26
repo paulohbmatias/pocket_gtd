@@ -22,68 +22,83 @@ class _ScheduledPageState extends State<ScheduledPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: FutureBuilder<Stream<List<TaskModel>>>(
-      future: bloc.getTasks(),
-      builder: (context, snapshot) {
-        return StreamBuilder<List<TaskModel>>(
-            stream: snapshot.data,
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+            title: Text(
+              I18n.of(context).scheduled,
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ),
+          body: FutureBuilder<Stream<List<TaskModel>>>(
+            future: bloc.getTasks(),
             builder: (context, snapshot) {
-              return snapshot.hasData
-                  ? Column(
-                      children: <Widget>[
-                        TableCalendar(
-                          calendarController: bloc.calendarTableController,
-                          initialSelectedDay: DateTime.now(),
-                          events: Map<DateTime, List>.fromIterable(
-                              snapshot.data,
-                              key: (item) => item.when,
-                              value: (item) => snapshot.data
-                                  .where((task) =>
-                                      (task.when.year == item.when.year) &&
-                                      (task.when.month == item.when.month) &&
-                                      (task.when.day == item.when.day))
-                                  .toList()),
-                          onDaySelected: (date, tasks) {
-                            if (tasks != null)
-                              bloc.changeTasks(tasks.isNotEmpty
-                                  ? tasks as List<TaskModel>
-                                  : <TaskModel>[]);
-                          },
-                          formatAnimation: FormatAnimation.slide,
-                          availableCalendarFormats: {
-                            CalendarFormat.month:
-                                I18n.of(context).month_calendar,
-                            CalendarFormat.week: I18n.of(context).week_calendar,
-                            CalendarFormat.twoWeeks: I18n.of(context).two_weeks
-                          },
-                          initialCalendarFormat: CalendarFormat.week,
-                          calendarStyle: CalendarStyle(
-                              canEventMarkersOverflow: true,
-                              markersMaxAmount: 1,
-                              markersColor: Theme.of(context).accentColor),
-                          headerStyle: HeaderStyle(
-                              centerHeaderTitle: true,
-                              formatButtonVisible: false),
-                        ),
-                        Expanded(
-                          child: StreamBuilder<List<TaskModel>>(
-                              stream: bloc.tasksDay,
-                              initialData: [],
-                              builder: (context, snapshot) {
-                                return ListTasksModule(
-                                    ListTypeEnum.SCHEDULEDS,
-                                    BoxModel.fromEnum(
-                                        InitialBoxesEnum.SCHEDULED),
+              return StreamBuilder<List<TaskModel>>(
+                  stream: snapshot.data,
+                  builder: (context, snapshot) {
+                    print(snapshot.data);
+                    return snapshot.hasData
+                        ? Column(
+                            children: <Widget>[
+                              TableCalendar(
+                                calendarController: bloc.calendarTableController,
+                                initialSelectedDay: DateTime.now(),
+                                events: Map<DateTime, List>.fromIterable(
                                     snapshot.data,
-                                    Container());
-                              }),
-                        )
-                      ],
-                    )
-                  : Container();
-            });
-      },
-    ));
+                                    key: (item) => item.when,
+                                    value: (item) => snapshot.data
+                                        .where((task) =>
+                                            (task.when.year == item.when.year) &&
+                                            (task.when.month ==
+                                                item.when.month) &&
+                                            (task.when.day == item.when.day))
+                                        .toList()),
+                                onDaySelected: (date, tasks) {
+                                  if (tasks != null)
+                                    bloc.changeTasks(tasks.isNotEmpty
+                                        ? tasks as List<TaskModel>
+                                        : <TaskModel>[]);
+                                },
+                                formatAnimation: FormatAnimation.slide,
+                                availableCalendarFormats: {
+                                  CalendarFormat.month:
+                                      I18n.of(context).month_calendar,
+                                  CalendarFormat.week:
+                                      I18n.of(context).week_calendar,
+                                  CalendarFormat.twoWeeks:
+                                      I18n.of(context).two_weeks
+                                },
+                                initialCalendarFormat: CalendarFormat.week,
+                                calendarStyle: CalendarStyle(
+                                    canEventMarkersOverflow: true,
+                                    markersMaxAmount: 1,
+                                    markersColor: Theme.of(context).accentColor),
+                                headerStyle: HeaderStyle(
+                                    centerHeaderTitle: true,
+                                    formatButtonVisible: false),
+                              ),
+                              Expanded(
+                                child: StreamBuilder<List<TaskModel>>(
+                                    stream: bloc.tasksDay,
+                                    initialData: [],
+                                    builder: (context, snapshot) {
+                                      return ListTasksModule(
+                                          ListTypeEnum.SCHEDULEDS,
+                                          BoxModel.fromEnum(
+                                              InitialBoxesEnum.SCHEDULED),
+                                          snapshot.data,
+                                          Container());
+                                    }),
+                              )
+                            ],
+                          )
+                        : Container();
+                  });
+            },
+          )),
+    );
   }
 }
