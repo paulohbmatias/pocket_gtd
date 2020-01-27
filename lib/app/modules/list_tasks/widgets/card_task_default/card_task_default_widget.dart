@@ -117,18 +117,17 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
                 title: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    task.content,
+                    task.title,
                     style: TextStyle(
-                      decoration: task.done
+                        decoration: task.done
                             ? TextDecoration.lineThrough
-                            : TextDecoration.none
-                    ),
+                            : TextDecoration.none),
                   ),
                 ),
                 leading: hasCheckBox
                     ? CircularCheckBox(
                         value: task.done,
-                        
+
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         onChanged: (value) => bloc.markDone(
                             context, task, value, listType,
@@ -136,20 +135,45 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
                         // activeColor: Colors.grey[400],
                       )
                     : null,
-                subtitle: task.deadline != null
-                    ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                          dateTask(context, task),
-                          style: TextStyle(
-                              // decoration: task.done
-                              //     ? TextDecoration.lineThrough
-                              //     : TextDecoration.none,
-                              color: Color(0xffff7e67),
-                              fontWeight: FontWeight.bold),
-                        ),
-                    )
-                    : null,
+                subtitle: task.details != null && task.deadline != null ? Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    task.details != null
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(task.details),
+                          )
+                        : Container(),
+                    task.deadline != null
+                        ? Container(
+                            alignment: Alignment.centerLeft,
+                            // padding: const EdgeInsets.all(value),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Chip(
+                                label: Text(
+                                  dateTask(context, task),
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                avatar: Icon(
+                                  MdiIcons.calendarCheck,
+                                  size: 16,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                    side: BorderSide(
+                                        color: Colors.grey, width: .2)),
+                                backgroundColor: Colors.transparent,
+                              ),
+                            ))
+                        : Container(),
+                  ],
+                ) : null,
               ),
               Divider()
             ],

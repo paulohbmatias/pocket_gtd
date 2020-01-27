@@ -18,13 +18,15 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   final bool isUpdate;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final titleController = TextEditingController();
-  final contentController = TextEditingController();
+  final detailsController = TextEditingController();
   final focusTitle = FocusNode();
 
   RegisterBloc({this.task, this.isUpdate = false}) {
     if (task != null) {
-      changeDescription(task.content);
-      contentController.text = task.content;
+      changeTitle(task.title);
+      changeDetails(task.details);
+      detailsController.text = task.details;
+      titleController.text = task.title;
       if (task.deadline != null) {
         changeDeadline(task.deadline);
       }
@@ -40,7 +42,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       AppModule.to.getDependency<BoxRepository>();
 
   BehaviorSubject<String> _title = BehaviorSubject();
-  BehaviorSubject<String> _description = BehaviorSubject();
+  BehaviorSubject<String> _details = BehaviorSubject();
   BehaviorSubject<DateTime> _deadline = BehaviorSubject();
   BehaviorSubject<DateTime> _schedule = BehaviorSubject();
   BehaviorSubject<BoxModel> _box = BehaviorSubject();
@@ -49,8 +51,8 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   Observable<String> title(BuildContext context) =>
       _title.stream.transform(validateTitleFromStream(context));
 
-  Observable<String> description(BuildContext context) =>
-      _description.stream.transform(validateDescriptionFromStream(context));
+  Observable<String> details(BuildContext context) =>
+      _details.stream.transform(validateDescriptionFromStream(context));
 
   Observable<String> get deadline => _deadline.stream.transform(validateDate());
   Observable<String> get schedule => _schedule.stream.transform(validateDate());
@@ -60,7 +62,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   Observable<bool> get isLoading => _isLoading.stream;
 
   Observable<bool> isValidFields(BuildContext context) =>
-      _description.transform(StreamTransformer<String, bool>.fromHandlers(
+      _title.transform(StreamTransformer<String, bool>.fromHandlers(
           handleData: (data, sink) {
         if (data != null &&
             validateDescriptionFromString(context, data).isEmpty) {
@@ -71,7 +73,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       }));
 
   Function(String) get changeTitle => _title.sink.add;
-  Function(String) get changeDescription => _description.sink.add;
+  Function(String) get changeDetails => _details.sink.add;
   Function(DateTime) get changeDeadline => _deadline.sink.add;
   Function(DateTime) get changeSchedule => _schedule.sink.add;
   Function(BoxModel) get changeBox => _box.sink.add;
@@ -94,7 +96,8 @@ class RegisterBloc extends BlocBase with RegisterValidators {
     changeIsLoading(true);
     try {
       TaskModel taskModel = TaskModel()
-        ..content = _description.value
+        ..title = _title.value
+        ..details = _details.value
         ..deadline = _deadline.value
         ..when = _schedule.value;
       await taskRepository.save(
@@ -107,11 +110,11 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       print(e);
     } finally {
       titleController.clear();
-      contentController.clear();
+      detailsController.clear();
       _title.sink.add(null);
       _deadline.sink.add(null);
       _schedule.sink.add(null);
-      _description.sink.add(null);
+      _details.sink.add(null);
       changeIsLoading(false);
       Fluttertoast.showToast(
           msg: I18n.of(context).successfully_added,
@@ -125,7 +128,8 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   void updateTask(BuildContext context) async {
     changeIsLoading(true);
     try {
-      task.content = _description.value;
+      task.title = _title.value;
+      task.details = _details.value;
       task.deadline = _deadline.value;
       task.when = _schedule.value;
       await task.save();
@@ -137,13 +141,13 @@ class RegisterBloc extends BlocBase with RegisterValidators {
 
   _cleanFields() {
     changeTitle("");
-    changeDescription("");
+    changeDetails("");
   }
 
   @override
   void dispose() {
     _title.close();
-    _description.close();
+    _details.close();
     _deadline.close();
     _box.close();
     _isLoading.close();

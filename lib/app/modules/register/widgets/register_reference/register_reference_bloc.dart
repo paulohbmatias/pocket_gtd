@@ -22,8 +22,8 @@ class RegisterReferenceBloc extends BlocBase with RegisterValidators {
 
   RegisterReferenceBloc({this.task, this.isUpdate = false}) {
     if (this.task != null) {
-      contentController.text = task.content;
-      changeContent(task.content);
+      contentController.text = task.details;
+      changeContent(task.details);
     }
   }
 
@@ -55,7 +55,7 @@ class RegisterReferenceBloc extends BlocBase with RegisterValidators {
   void updateReference(BuildContext context) async {
     changeIsLoading(true);
     try {
-      task.content = _content.value;
+      task.details = _content.value;
       await task.save();
       Navigator.of(context).pop();
     } catch (e) {
@@ -69,7 +69,7 @@ class RegisterReferenceBloc extends BlocBase with RegisterValidators {
     changeIsLoading(true);
     try {
       TaskModel taskModel = TaskModel()
-        ..content = _content.value;
+        ..details = _content.value;
       await taskRepository.save(
           taskModel, BoxModel.fromEnum(InitialBoxesEnum.REFERENCES));
       Navigator.of(context).pop();

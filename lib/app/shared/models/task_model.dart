@@ -10,8 +10,11 @@ class TaskModel extends HiveObject {
   @HiveField(1)
   int idLocal;
 
+  @HiveField(2)
+  String title;
+
   @HiveField(3)
-  String content;
+  String details;
 
   @HiveField(4)
   DateTime deadline;
@@ -28,7 +31,7 @@ class TaskModel extends HiveObject {
   TaskModel.fromMap(Map<dynamic, dynamic> map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];
-    this.content = map['content'];
+    this.details = map['content'];
     this.deadline =
         map['deadline'] != null ? DateTime.fromMillisecondsSinceEpoch(int.parse(map['deadline'].toString())) : null;
     this.when = map['when'] != null ? DateTime.fromMillisecondsSinceEpoch(int.parse(map['when'].toString())) : null;
@@ -38,7 +41,7 @@ class TaskModel extends HiveObject {
   TaskModel.fromDatabase(var map) {
     this.id = map['id'];
     this.idLocal = map['idLocal'];
-    this.content = map['content'];
+    this.details = map['content'];
     this.deadline =
         map['deadline'] != null ? DateTime.fromMillisecondsSinceEpoch(int.parse(map['deadline'].toString())) : null;
     this.when = map['when'] != null ? DateTime.fromMillisecondsSinceEpoch(int.parse(map['when'].toString())) : null;
@@ -48,7 +51,7 @@ class TaskModel extends HiveObject {
   Map<String, dynamic> toJson() => {
         'id': this.id,
         'idLocal': this.idLocal,
-        'content': this.content,
+        'content': this.details,
         'deadline': this.deadline != null ? this.deadline.millisecondsSinceEpoch : null,
         'when': this.when != null ? this.when.millisecondsSinceEpoch : null,
         'who': who.toMap()

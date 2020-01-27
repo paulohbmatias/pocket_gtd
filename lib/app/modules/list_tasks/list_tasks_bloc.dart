@@ -53,7 +53,7 @@ class ListTasksBloc extends BlocBase {
     result = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text(I18n.of(context).confirm_delete_task(task.content)),
+              title: Text(I18n.of(context).confirm_delete_task(task.details)),
               actions: <Widget>[
                 FlatButton(
                     onPressed: () {

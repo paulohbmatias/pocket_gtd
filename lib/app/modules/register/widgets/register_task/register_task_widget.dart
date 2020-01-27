@@ -61,7 +61,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                     Container(
                       margin: const EdgeInsets.only(bottom: 8),
                       child: TextField(
-                        controller: bloc.contentController,
+                        controller: bloc.detailsController,
                         textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -69,7 +69,7 @@ class _RegisterTaskWidgetState extends State<RegisterTaskWidget> {
                         ),
                         maxLines: 4,
                         minLines: 2,
-                        onChanged: bloc.changeDescription,
+                        onChanged: bloc.changeDetails,
                       ),
                     ),
                     bloc.isUpdate ? StreamBuilder<String>(

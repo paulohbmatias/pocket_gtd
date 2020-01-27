@@ -29,7 +29,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final FontWeight fontWeight = FontWeight.normal;
   final textColor = Colors.black;
-  final initialPage = 0;
+  final initialPage = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -98,11 +98,12 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   ],
 
                   opacity: .2,
-                  elevation: 1,
+                  elevation: 100,
+                  inkColor: Colors.black,
                   // borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                   fabLocation: BubbleBottomBarFabLocation.end,
-                  hasInk: false,
-                  hasNotch: false,
+                  hasInk: true,
+                  hasNotch: true,
                   // selectedColor: Theme.of(context).primaryColor,
                   currentIndex: snapshot.data,
                   // indicatorColor: Theme.of(context).primaryColor,

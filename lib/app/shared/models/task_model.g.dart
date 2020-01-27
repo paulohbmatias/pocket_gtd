@@ -16,7 +16,8 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
     return TaskModel()
       ..id = fields[0] as int
       ..idLocal = fields[1] as int
-      ..content = fields[3] as String
+      ..title = fields[2] as String
+      ..details = fields[3] as String
       ..deadline = fields[4] as DateTime
       ..when = fields[5] as DateTime
       ..who = fields[6] as UserModel
@@ -26,13 +27,15 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
   @override
   void write(BinaryWriter writer, TaskModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.idLocal)
+      ..writeByte(2)
+      ..write(obj.title)
       ..writeByte(3)
-      ..write(obj.content)
+      ..write(obj.details)
       ..writeByte(4)
       ..write(obj.deadline)
       ..writeByte(5)
