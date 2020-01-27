@@ -44,14 +44,16 @@ class _ScheduledPageState extends State<ScheduledPage> {
                         ? Column(
                             children: <Widget>[
                               TableCalendar(
-                                calendarController: bloc.calendarTableController,
+                                calendarController:
+                                    bloc.calendarTableController,
                                 initialSelectedDay: DateTime.now(),
                                 events: Map<DateTime, List>.fromIterable(
                                     snapshot.data,
                                     key: (item) => item.when,
                                     value: (item) => snapshot.data
                                         .where((task) =>
-                                            (task.when.year == item.when.year) &&
+                                            (task.when.year ==
+                                                item.when.year) &&
                                             (task.when.month ==
                                                 item.when.month) &&
                                             (task.when.day == item.when.day))
@@ -71,13 +73,18 @@ class _ScheduledPageState extends State<ScheduledPage> {
                                   CalendarFormat.twoWeeks:
                                       I18n.of(context).two_weeks
                                 },
-                                initialCalendarFormat: CalendarFormat.week,
+                                initialCalendarFormat: CalendarFormat.twoWeeks,
                                 calendarStyle: CalendarStyle(
-                                    canEventMarkersOverflow: true,
-                                    markersMaxAmount: 1,
-                                    markersColor: Theme.of(context).accentColor),
+                                  canEventMarkersOverflow: true,
+                                  markersMaxAmount: 1,
+                                  markersColor: Theme.of(context).accentColor,
+                                  renderDaysOfWeek: true,
+                                  selectedColor: Theme.of(context).primaryColor,
+                                ),
+                                
                                 headerStyle: HeaderStyle(
                                     centerHeaderTitle: true,
+                                    formatButtonShowsNext: false,
                                     formatButtonVisible: false),
                               ),
                               Expanded(

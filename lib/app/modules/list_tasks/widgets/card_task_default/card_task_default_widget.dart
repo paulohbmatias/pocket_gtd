@@ -114,34 +114,41 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
               ListTile(
                 contentPadding: EdgeInsets.all(8),
                 isThreeLine: false,
-                title: Text(
-                  task.content,
-                  style: TextStyle(
-                    // decoration: task.done
-                    //       ? TextDecoration.lineThrough
-                    //       : TextDecoration.none
+                title: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    task.content,
+                    style: TextStyle(
+                      decoration: task.done
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none
+                    ),
                   ),
                 ),
                 leading: hasCheckBox
                     ? CircularCheckBox(
                         value: task.done,
+                        
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         onChanged: (value) => bloc.markDone(
                             context, task, value, listType,
                             scaffoldKey: scaffoldKey),
-                        activeColor: Colors.grey[400],
+                        // activeColor: Colors.grey[400],
                       )
                     : null,
                 subtitle: task.deadline != null
-                    ? Text(
-                        dateTask(context, task),
-                        style: TextStyle(
-                            // decoration: task.done
-                            //     ? TextDecoration.lineThrough
-                            //     : TextDecoration.none,
-                            color: Color(0xffff7e67),
-                            fontWeight: FontWeight.bold),
-                      )
+                    ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                          dateTask(context, task),
+                          style: TextStyle(
+                              // decoration: task.done
+                              //     ? TextDecoration.lineThrough
+                              //     : TextDecoration.none,
+                              color: Color(0xffff7e67),
+                              fontWeight: FontWeight.bold),
+                        ),
+                    )
                     : null,
               ),
               Divider()

@@ -40,7 +40,7 @@ class ListTasksWidget extends StatelessWidget {
         body: listTasks != null && listTasks.isNotEmpty
             ? Container(
                 padding: const EdgeInsets.all(2),
-                margin: const EdgeInsets.symmetric(horizontal: 8),
+                // margin: const EdgeInsets.symmetric(horizontal: 8),
                 child: ListView.separated(
                   itemCount: listTasks.length,
                   separatorBuilder: (context, index) {

@@ -53,7 +53,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
-                icon: Icon(OMIcons.calendarToday, color: Theme.of(context).primaryColor,),
+                icon: Icon(Icons.calendar_today, color: Theme.of(context).primaryColor,),
                 onPressed: (){
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ScheduledModule()
@@ -90,7 +90,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
             builder: (_, snapshot) => BubbleBottomBar(
                   items: [
                     bottomItem(
-                        OMIcons.inbox, MdiIcons.inbox, I18n.of(context).home),
+                        OMIcons.inbox, MdiIcons.inbox, I18n.of(context).inbox),
                     bottomItem(OMIcons.listAlt, OMIcons.listAlt,
                         I18n.of(context).tasks),
                     bottomItem(OMIcons.widgets, MdiIcons.widgets,
