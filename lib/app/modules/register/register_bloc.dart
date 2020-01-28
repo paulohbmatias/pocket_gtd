@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pocket_gtd/app/app_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
+import 'package:pocket_gtd/app/shared/models/priority_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
 import 'package:pocket_gtd/app/shared/repositories/task_repository.dart';
@@ -25,6 +26,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
     if (task != null) {
       changeTitle(task.title);
       changeDetails(task.details);
+      changePriority(task.priority);
       detailsController.text = task.details;
       titleController.text = task.title;
       if (task.deadline != null) {
@@ -48,6 +50,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   BehaviorSubject<BoxModel> _box = BehaviorSubject();
   BehaviorSubject<bool> _isLoading = BehaviorSubject();
   BehaviorSubject<bool> _openDetails = BehaviorSubject();
+  BehaviorSubject<PriorityEnum> _priority = BehaviorSubject();
 
   Observable<String> title(BuildContext context) =>
       _title.stream.transform(validateTitleFromStream(context));
@@ -63,6 +66,8 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   Observable<bool> get isLoading => _isLoading.stream;
 
   Observable<bool> get openDetails => _openDetails.stream;
+
+  Observable<PriorityEnum> get priority => _priority.stream;
 
   Observable<bool> isValidFields(BuildContext context) =>
       _title.transform(StreamTransformer<String, bool>.fromHandlers(
@@ -82,6 +87,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   Function(BoxModel) get changeBox => _box.sink.add;
   Function(bool) get changeIsLoading => _isLoading.sink.add;
   Function(bool) get changeOpenDetails => _openDetails.sink.add;
+  Function(PriorityEnum) get changePriority => _priority.sink.add;
 
   Future<List<BoxModel>> getBoxes() async =>
       (await boxRepository.getAll()).where((box) {
@@ -103,7 +109,8 @@ class RegisterBloc extends BlocBase with RegisterValidators {
         ..title = _title.value
         ..details = _details.value
         ..deadline = _deadline.value
-        ..when = _schedule.value;
+        ..when = _schedule.value
+        ..priority = _priority.value;
       await taskRepository.save(
           taskModel,
           _box.value ??
@@ -119,6 +126,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       _deadline.sink.add(null);
       _schedule.sink.add(null);
       _details.sink.add(null);
+      _priority.sink.add(null);
       changeIsLoading(false);
       Fluttertoast.showToast(
           msg: I18n.of(context).successfully_added,
@@ -136,6 +144,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       task.details = _details.value;
       task.deadline = _deadline.value;
       task.when = _schedule.value;
+      task.priority = _priority.value;
       await task.save();
       Navigator.of(context).pop();
     } catch (e) {
@@ -156,6 +165,8 @@ class RegisterBloc extends BlocBase with RegisterValidators {
     _box.close();
     _isLoading.close();
     _schedule.close();
+    _openDetails.close();
+    _priority.close();
     super.dispose();
   }
 }

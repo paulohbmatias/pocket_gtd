@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/modules/register/register_bloc.dart';
 import 'package:pocket_gtd/app/modules/register/register_module.dart';
+import 'package:pocket_gtd/app/shared/models/priority_enum.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class RegisterTaskBottomSheetWidget extends StatelessWidget {
@@ -116,6 +118,49 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
                             ))
                         : Container();
                   }),
+              StreamBuilder<PriorityEnum>(
+                  stream: bloc.priority,
+                  initialData: PriorityEnum.NORMAL,
+                  builder: (context, snapshot) {
+                    return Container(
+                      alignment: Alignment.centerLeft,
+                      child: CupertinoSegmentedControl<PriorityEnum>(
+                        onValueChanged: bloc.changePriority,
+                        groupValue: snapshot.data,
+                        padding: const EdgeInsets.all(8),
+                        children: {
+                          PriorityEnum.LOW: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                            child: Text(
+                              I18n.of(context).low,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                          PriorityEnum.NORMAL: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(
+                              I18n.of(context).normal,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                          PriorityEnum.HIGH: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(
+                              I18n.of(context).high,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                          PriorityEnum.URGENT: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(
+                              I18n.of(context).urgent,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        },
+                      ),
+                    );
+                  }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -158,14 +203,46 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
                           },
                         ),
                       ),
-                      Container(
-                        // padding: const EdgeInsets.all(8.0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.label_important,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          onPressed: (){}
+                      // Container(
+                      //   // padding: const EdgeInsets.all(8.0),
+                      //   child: IconButton(
+                      //     icon: Icon(
+                      //       Icons.label_important,
+                      //       color: Theme.of(context).primaryColor,
+                      //     ),
+                      //     onPressed: (){}
+                      //   ),
+                      // ),
+                      InkWell(
+                        onTapDown: (pos) async {
+                          final result = await showMenu<int>(
+                            context: context,
+                            position: RelativeRect.fromLTRB(
+                              pos.globalPosition.dx,
+                              pos.globalPosition.dy,
+                              pos.globalPosition.dx,
+                              pos.globalPosition.dy,
+                            ),
+                            items: <PopupMenuEntry<int>>[
+                              PopupMenuItem<int>(
+                                value: 0,
+                                child: ListTile(
+                                  title: Text("Alta"),
+                                ),
+                              ),
+                              PopupMenuItem<int>(
+                                value: 0,
+                                child: ListTile(
+                                  title: Text("Alta"),
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                        onTap: () {},
+                        child: Icon(
+                          Icons.label_important,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ],

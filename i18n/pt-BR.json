@@ -79,5 +79,9 @@
   "app_pages_references_empty_box": "Aqui ficam suas referências (filmes, livros, lugares... etc).",
   "move_to_projects": "Mover para projetos",
   "successfully_added": "Adicionado a caixa de entrada",
-  "schedule_for": "Agendar para"
+  "schedule_for": "Agendar para",
+  "low": "Baixa",
+  "normal": "Normal",
+  "high": "Alta",
+  "urgent": "Urgente"
 }

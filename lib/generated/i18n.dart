@@ -194,6 +194,14 @@ class I18n implements WidgetsLocalizations {
   String get successfully_added => "Added inbox";
   /// "Schedule for"
   String get schedule_for => "Schedule for";
+  /// "Low"
+  String get low => "Low";
+  /// "Normal"
+  String get normal => "Normal";
+  /// "High"
+  String get high => "High";
+  /// "Urgent"
+  String get urgent => "Urgent";
 }
 
 class _I18n_en_US extends I18n {
@@ -449,6 +457,18 @@ class _I18n_pt_BR extends I18n {
   /// "Agendar para"
   @override
   String get schedule_for => "Agendar para";
+  /// "Baixa"
+  @override
+  String get low => "Baixa";
+  /// "Normal"
+  @override
+  String get normal => "Normal";
+  /// "Alta"
+  @override
+  String get high => "Alta";
+  /// "Urgente"
+  @override
+  String get urgent => "Urgente";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

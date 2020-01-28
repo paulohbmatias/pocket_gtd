@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:pocket_gtd/app/shared/models/priority_enum.dart';
 import 'package:pocket_gtd/app/shared/models/user_model.dart';
 part 'task_model.g.dart';
 
@@ -27,6 +28,9 @@ class TaskModel extends HiveObject {
 
   @HiveField(7)
   bool done = false;
+
+  @HiveField(8)
+  PriorityEnum priority = PriorityEnum.NORMAL;
 
   TaskModel.fromMap(Map<dynamic, dynamic> map) {
     this.id = map['id'];

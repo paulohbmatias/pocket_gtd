@@ -79,5 +79,9 @@
     "app_pages_references_empty_box": "Here are your references (movies, books, places... etc).",
     "move_to_projects": "Move to Projects",
     "successfully_added": "Added inbox",
-    "schedule_for": "Schedule for"
+    "schedule_for": "Schedule for",
+    "low": "Low",
+    "normal": "Normal",
+    "high": "High",
+    "urgent": "Urgent"
   }

@@ -11,6 +11,8 @@ import 'package:pocket_gtd/app/modules/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/icon_model.dart';
+import 'package:pocket_gtd/app/shared/models/priority_enum.dart';
+import 'package:pocket_gtd/app/shared/models/priority_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/models/user_model.dart';
 import 'package:pocket_gtd/app/shared/preferences/preferences_app.dart';
@@ -43,6 +45,7 @@ class SplashBloc extends BlocBase {
     Hive.registerAdapter(TaskModelAdapter(), 1);
     Hive.registerAdapter(UserModelAdapter(), 2);
     Hive.registerAdapter(IconModelAdapter(), 3);
+    Hive.registerAdapter(PriorityEnumAdapter(), 4);
   }
 
   Future<bool> isTheFirstTime() => PreferencesApp.isTheFirstTime();
