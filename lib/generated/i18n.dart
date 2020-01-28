@@ -76,6 +76,8 @@ class I18n implements WidgetsLocalizations {
   String get boxes => "Boxes";
   /// "Title"
   String get title => "Title";
+  /// "Details"
+  String get details => "Details";
   /// "Content"
   String get content => "Content";
   /// "Register task"
@@ -270,6 +272,9 @@ class _I18n_pt_BR extends I18n {
   /// "Título"
   @override
   String get title => "Título";
+  /// "Detalhes"
+  @override
+  String get details => "Detalhes";
   /// "Conteúdo"
   @override
   String get content => "Conteúdo";

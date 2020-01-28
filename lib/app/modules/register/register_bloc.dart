@@ -47,6 +47,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   BehaviorSubject<DateTime> _schedule = BehaviorSubject();
   BehaviorSubject<BoxModel> _box = BehaviorSubject();
   BehaviorSubject<bool> _isLoading = BehaviorSubject();
+  BehaviorSubject<bool> _openDetails = BehaviorSubject();
 
   Observable<String> title(BuildContext context) =>
       _title.stream.transform(validateTitleFromStream(context));
@@ -60,6 +61,8 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   Observable<BoxModel> get box => _box.stream;
 
   Observable<bool> get isLoading => _isLoading.stream;
+
+  Observable<bool> get openDetails => _openDetails.stream;
 
   Observable<bool> isValidFields(BuildContext context) =>
       _title.transform(StreamTransformer<String, bool>.fromHandlers(
@@ -78,6 +81,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   Function(DateTime) get changeSchedule => _schedule.sink.add;
   Function(BoxModel) get changeBox => _box.sink.add;
   Function(bool) get changeIsLoading => _isLoading.sink.add;
+  Function(bool) get changeOpenDetails => _openDetails.sink.add;
 
   Future<List<BoxModel>> getBoxes() async =>
       (await boxRepository.getAll()).where((box) {

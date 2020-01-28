@@ -135,7 +135,7 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
                         // activeColor: Colors.grey[400],
                       )
                     : null,
-                subtitle: task.details != null && task.deadline != null ? Column(
+                subtitle: task.details != null || task.deadline != null ? Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,

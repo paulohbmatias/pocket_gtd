@@ -53,6 +53,17 @@ class _DashboardPage2State extends State<DashboardPage2> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
+                icon: Icon(Icons.schedule, color: Theme.of(context).primaryColor,),
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ScheduledModule()
+                  ));
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
                 icon: Icon(Icons.calendar_today, color: Theme.of(context).primaryColor,),
                 onPressed: (){
                   Navigator.of(context).push(MaterialPageRoute(
