@@ -19,10 +19,11 @@ class NextActionsBloc extends BlocBase {
     final now = DateTime.now();
     _tasks.sink.add((await taskRepository.getAll(box))
         .where((item) =>
-            (now.year == item.when.year) &&
-            (now.month == item.when.month) &&
-            (now.day == item.when.day) &&
-            !item.done)
+            ((now.year == item.when.year) &&
+                (now.month == item.when.month) &&
+                (now.day == item.when.day) &&
+                !item.done) ||
+            (item.when.isBefore(now) && !item.done))
         .toList());
     _tasksSubscription = (await taskRepository.listenTasks(box)).listen(
         (data) => _tasks.sink.add(data

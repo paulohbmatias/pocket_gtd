@@ -79,15 +79,12 @@ class _DashboardPage2State extends State<DashboardPage2> {
           stream: bloc.page,
           initialData: widget.page ?? initialPage,
           builder: (context, snapshot) {
-            return snapshot.hasData && snapshot.data == 1
+            return snapshot.hasData && snapshot.data == 0
                 ? FloatingActionButton(
                     onPressed: () => bloc.add(context, ListTypeEnum.INBOX),
                     child: Icon(Icons.add),
                   )
-                : FloatingActionButton(
-                    onPressed: () => bloc.add(context, ListTypeEnum.INBOX),
-                    child: Icon(Icons.add),
-                  );
+                : Container();
           },
         ),
         body: StreamBuilder<int>(
@@ -112,9 +109,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   elevation: 100,
                   inkColor: Colors.black,
                   // borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                  fabLocation: BubbleBottomBarFabLocation.end,
-                  hasInk: true,
-                  hasNotch: true,
+                  fabLocation: snapshot.data == 0 ? BubbleBottomBarFabLocation.end : null,
+                  hasNotch: snapshot.data == 0,
                   // selectedColor: Theme.of(context).primaryColor,
                   currentIndex: snapshot.data,
                   // indicatorColor: Theme.of(context).primaryColor,

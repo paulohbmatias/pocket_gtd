@@ -39,6 +39,12 @@ mixin CardTaskMixin{
         (task.deadline.month == tomorrow.month) &&
         (task.deadline.day == tomorrow.day)) {
       return I18n.of(context).tomorrow;
+    }else if (task.deadline.isBefore(DateTime.now())){
+      final result = task.deadline.difference(DateTime.now());
+      if(result.inDays.abs() == 1){
+        return I18n.of(context).yesterday;
+      }
+      return "${result.inDays.abs()} ${I18n.of(context).days_ago}";
     } else {
       return "${task.deadline.day} ${DateUtils.monthFromDate(task.deadline)}";
     }

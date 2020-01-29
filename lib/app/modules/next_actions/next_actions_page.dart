@@ -27,7 +27,6 @@ class _NextActionsPageState extends State<NextActionsPage> {
           return snapshot.hasData ? StreamBuilder<List<TaskModel>>(
             stream: snapshot.data,
             builder: (context, snapshot) {
-              print(snapshot.data);
               return snapshot.hasData ? ListTasksModule(
                   ListTypeEnum.NEXT_ACTIONS,
                   bloc.box,

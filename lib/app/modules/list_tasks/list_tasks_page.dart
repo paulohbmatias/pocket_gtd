@@ -11,7 +11,8 @@ class ListTasksPage extends StatefulWidget {
   final Widget emptyList;
   final GlobalKey<ScaffoldState> scaffoldKey;
 
-  ListTasksPage(this.listType, this.box, this.tasks, this.emptyList, {this.scaffoldKey});
+  ListTasksPage(this.listType, this.box, this.tasks, this.emptyList,
+      {this.scaffoldKey});
 
   @override
   _ListTasksPageState createState() => _ListTasksPageState();
@@ -19,15 +20,22 @@ class ListTasksPage extends StatefulWidget {
 
 class _ListTasksPageState extends State<ListTasksPage> {
   @override
+  void initState() {
+    widget.tasks.sort((task1, task2) {
+      return task2.priority.index.compareTo(task1.priority.index);
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Material(
       child: ListTasksWidget(
-            listTasks: widget.tasks,
-            box: widget.box,
-            listType: widget.listType,
-            emptyList: widget.emptyList,
-            scaffoldKey: widget.scaffoldKey
-          ),
+          listTasks: widget.tasks,
+          box: widget.box,
+          listType: widget.listType,
+          emptyList: widget.emptyList,
+          scaffoldKey: widget.scaffoldKey),
     );
   }
 }

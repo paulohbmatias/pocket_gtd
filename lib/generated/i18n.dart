@@ -202,6 +202,10 @@ class I18n implements WidgetsLocalizations {
   String get high => "High";
   /// "Urgent"
   String get urgent => "Urgent";
+  /// "days ago"
+  String get days_ago => "days ago";
+  /// "Yesterday"
+  String get yesterday => "Yesterday";
 }
 
 class _I18n_en_US extends I18n {
@@ -469,6 +473,12 @@ class _I18n_pt_BR extends I18n {
   /// "Urgente"
   @override
   String get urgent => "Urgente";
+  /// "dias atrás"
+  @override
+  String get days_ago => "dias atrás";
+  /// "Ontem"
+  @override
+  String get yesterday => "Ontem";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

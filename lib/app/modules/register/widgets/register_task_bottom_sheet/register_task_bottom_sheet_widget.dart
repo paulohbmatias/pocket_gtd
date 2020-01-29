@@ -213,38 +213,7 @@ class RegisterTaskBottomSheetWidget extends StatelessWidget {
                       //     onPressed: (){}
                       //   ),
                       // ),
-                      InkWell(
-                        onTapDown: (pos) async {
-                          final result = await showMenu<int>(
-                            context: context,
-                            position: RelativeRect.fromLTRB(
-                              pos.globalPosition.dx,
-                              pos.globalPosition.dy,
-                              pos.globalPosition.dx,
-                              pos.globalPosition.dy,
-                            ),
-                            items: <PopupMenuEntry<int>>[
-                              PopupMenuItem<int>(
-                                value: 0,
-                                child: ListTile(
-                                  title: Text("Alta"),
-                                ),
-                              ),
-                              PopupMenuItem<int>(
-                                value: 0,
-                                child: ListTile(
-                                  title: Text("Alta"),
-                                ),
-                              )
-                            ],
-                          );
-                        },
-                        onTap: () {},
-                        child: Icon(
-                          Icons.label_important,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
+                      
                     ],
                   ),
                   StreamBuilder<bool>(

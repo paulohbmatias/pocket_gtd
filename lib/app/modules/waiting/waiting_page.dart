@@ -32,7 +32,7 @@ class _WaitingPageState extends State<WaitingPage> {
             builder: (context, snapshot) {
               print(snapshot.data);
               return snapshot.hasData ? ListTasksModule(
-                  ListTypeEnum.ONE_DAY_MAYBE,
+                  ListTypeEnum.WAITING,
                   bloc.box,
                   snapshot.data,
                   EmptyListWidget(

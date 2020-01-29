@@ -45,6 +45,7 @@ dependencies:
   fancy_bottom_bar: ^0.0.1
   font_awesome_flutter: ^8.5.0
   circular_check_box: ^1.0.1
+  flutter_svg: ^0.17.0
 
   
 dev_dependencies:
@@ -87,6 +88,8 @@ flutter:
     - assets/images/background_splash.jpg
     - assets/images/references.png
     - assets/images/one_day_maybe.png
+    - assets/icons/double_arrow.png
+    - assets/icons/double_arrow.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -36,6 +36,9 @@ class ListTasksWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    listTasks.sort((task1, task2) {
+      return task2.priority.index.compareTo(task1.priority.index);
+    });
     return Scaffold(
         body: listTasks != null && listTasks.isNotEmpty
             ? Container(
@@ -62,7 +65,16 @@ class ListTasksWidget extends StatelessWidget {
                           listType,
                           box,
                           task,
-                          hasCheckBox: true
+                          hasCheckBox: true,
+                          scaffoldKey: this.scaffoldKey,
+                        );
+                      case ListTypeEnum.WAITING:
+                        return CardTaskDefaultWidget(
+                          listType,
+                          box,
+                          task,
+                          hasCheckBox: true,
+                          scaffoldKey: this.scaffoldKey,
                         );
                       default:
                         return CardTaskDefaultWidget(listType, box, task);

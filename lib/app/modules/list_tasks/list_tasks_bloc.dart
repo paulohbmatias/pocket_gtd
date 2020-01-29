@@ -53,7 +53,7 @@ class ListTasksBloc extends BlocBase {
     result = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text(I18n.of(context).confirm_delete_task(task.details)),
+              title: Text(I18n.of(context).confirm_delete_task(task.title)),
               actions: <Widget>[
                 FlatButton(
                     onPressed: () {
@@ -86,7 +86,7 @@ class ListTasksBloc extends BlocBase {
       BuildContext context, TaskModel task, bool value, ListTypeEnum listType, {GlobalKey<ScaffoldState> scaffoldKey}) {
     task.done = value;
     task.save();
-    if (value && listType == ListTypeEnum.NEXT_ACTIONS) {
+    if (value && (listType == ListTypeEnum.NEXT_ACTIONS || listType == ListTypeEnum.WAITING)) {
       try {
         scaffoldKey.currentState.showSnackBar(SnackBar(
           backgroundColor: Colors.green,
@@ -102,6 +102,9 @@ class ListTasksBloc extends BlocBase {
       } catch (e) {
         print(e);
       }
+    }
+    if(listType == ListTypeEnum.WAITING){
+      moveTo(context, task, InitialBoxesEnum.WAITING, InitialBoxesEnum.SCHEDULED);
     }
   }
 

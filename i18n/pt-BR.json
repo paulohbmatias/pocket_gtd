@@ -83,5 +83,7 @@
   "low": "Baixa",
   "normal": "Normal",
   "high": "Alta",
-  "urgent": "Urgente"
+  "urgent": "Urgente",
+  "days_ago": "dias atrás",
+  "yesterday": "Ontem"
 }

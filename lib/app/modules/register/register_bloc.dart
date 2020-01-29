@@ -50,7 +50,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   BehaviorSubject<BoxModel> _box = BehaviorSubject();
   BehaviorSubject<bool> _isLoading = BehaviorSubject();
   BehaviorSubject<bool> _openDetails = BehaviorSubject();
-  BehaviorSubject<PriorityEnum> _priority = BehaviorSubject();
+  BehaviorSubject<PriorityEnum> _priority = BehaviorSubject.seeded(PriorityEnum.NORMAL);
 
   Observable<String> title(BuildContext context) =>
       _title.stream.transform(validateTitleFromStream(context));
@@ -126,7 +126,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       _deadline.sink.add(null);
       _schedule.sink.add(null);
       _details.sink.add(null);
-      _priority.sink.add(null);
+      _priority.sink.add(PriorityEnum.NORMAL);
       changeIsLoading(false);
       Fluttertoast.showToast(
           msg: I18n.of(context).successfully_added,
