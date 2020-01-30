@@ -1,15 +1,10 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'package:fancy_bottom_bar/fancy_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
-import 'package:pocket_gtd/app/modules/boxes/boxes_module.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_module.dart';
-import 'package:pocket_gtd/app/modules/home/home_module.dart';
 import 'package:pocket_gtd/app/modules/inbox/inbox_module.dart';
-import 'package:pocket_gtd/app/modules/projects/projects_module.dart';
-import 'package:pocket_gtd/app/modules/references/references_module.dart';
 import 'package:pocket_gtd/app/modules/scheduled/scheduled_module.dart';
 import 'package:pocket_gtd/app/modules/tasks/tasks_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
@@ -50,17 +45,17 @@ class _DashboardPage2State extends State<DashboardPage2> {
             //   padding: const EdgeInsets.all(8.0),
             //   child: Icon(Icons.search, color: Theme.of(context).primaryColor,),
             // ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                icon: Icon(Icons.schedule, color: Theme.of(context).primaryColor,),
-                onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ScheduledModule()
-                  ));
-                },
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: IconButton(
+            //     icon: Icon(Icons.schedule, color: Theme.of(context).primaryColor,),
+            //     onPressed: (){
+            //       Navigator.of(context).push(MaterialPageRoute(
+            //         builder: (context) => ScheduledModule()
+            //       ));
+            //     },
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
@@ -101,8 +96,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                         OMIcons.inbox, MdiIcons.inbox, I18n.of(context).inbox),
                     bottomItem(OMIcons.listAlt, OMIcons.listAlt,
                         I18n.of(context).tasks),
-                    bottomItem(OMIcons.widgets, MdiIcons.widgets,
-                        I18n.of(context).projects),
+                    // bottomItem(OMIcons.widgets, MdiIcons.widgets,
+                    //     I18n.of(context).projects),
                   ],
 
                   opacity: .2,
@@ -144,6 +139,6 @@ class _DashboardPage2State extends State<DashboardPage2> {
   final pages = [
     InboxModule(),
     TasksModule(),
-    ProjectsModule(),
+    // ProjectsModule(),
   ];
 }
