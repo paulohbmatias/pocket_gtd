@@ -320,9 +320,9 @@ class _I18n_pt_BR extends I18n {
   /// "Arquivos: ${numberFiles}"
   @override
   String files_x(String numberFiles) => "Arquivos: ${numberFiles}";
-  /// "Caixa de entrada"
+  /// "Entrada"
   @override
-  String get inbox => "Caixa de entrada";
+  String get inbox => "Entrada";
   /// "Inicio"
   @override
   String get home => "Inicio";

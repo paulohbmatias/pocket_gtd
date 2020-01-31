@@ -22,13 +22,14 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..when = fields[5] as DateTime
       ..who = fields[6] as UserModel
       ..done = fields[7] as bool
+      ..notification = fields[9] as DateTime
       ..priority = fields[8] as PriorityEnum;
   }
 
   @override
   void write(BinaryWriter writer, TaskModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -45,6 +46,8 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..write(obj.who)
       ..writeByte(7)
       ..write(obj.done)
+      ..writeByte(9)
+      ..write(obj.notification)
       ..writeByte(8)
       ..write(obj.priority);
   }

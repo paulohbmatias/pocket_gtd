@@ -29,6 +29,9 @@ class TaskModel extends HiveObject {
   @HiveField(7)
   bool done = false;
 
+  @HiveField(9)
+  DateTime notification;
+
   @HiveField(8)
   PriorityEnum priority = PriorityEnum.NORMAL;
 

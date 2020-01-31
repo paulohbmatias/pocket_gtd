@@ -155,12 +155,14 @@ class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
-                        task.title,
-                        style: TextStyle(
-                            decoration: task.done
-                                ? TextDecoration.lineThrough
-                                : TextDecoration.none),
+                      Expanded(
+                        child: Text(
+                          task.title,
+                          style: TextStyle(
+                              decoration: task.done
+                                  ? TextDecoration.lineThrough
+                                  : TextDecoration.none),
+                        ),
                       ),
                       listType == ListTypeEnum.REFERENCES ||
                               listType == ListTypeEnum.ONE_DAY_MAYBE

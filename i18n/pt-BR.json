@@ -34,7 +34,7 @@
   "confirm_delete_task": "Você realmente deseja excluir a tarefa \"{task}\"?",
   "this_box_contains": "Esta caixa contém {numberFiles} arquivos",
   "files_x": "Arquivos: {numberFiles}",
-  "inbox": "Caixa de entrada",
+  "inbox": "Entrada",
   "home": "Inicio",
   "inbox_for_tasks": "Caixa de entrada para as tarefas",
   "next_actions": "Próximas ações",
