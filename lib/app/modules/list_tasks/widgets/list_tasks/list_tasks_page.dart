@@ -36,8 +36,19 @@ class ListTasksWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // listTasks.sort((task1, task2) {
+    //   final i = task2.priority.index.compareTo(task1.priority.index);
+    //   final i2 = task1.priority.index.compareTo(task2.priority.index);
+    //   return task2.priority.index.compareTo(task1.priority.index);
+    // });
     listTasks.sort((task1, task2) {
-      return task2.priority.index.compareTo(task1.priority.index);
+      if(task1.done && !task2.done){
+        return 1;
+      }else if(!task1.done && task2.done){
+        return -1;
+      }else{
+        return task2.priority.index.compareTo(task1.priority.index);
+      }
     });
     return Scaffold(
         body: listTasks != null && listTasks.isNotEmpty

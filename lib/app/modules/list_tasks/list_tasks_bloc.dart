@@ -89,9 +89,10 @@ class ListTasksBloc extends BlocBase {
     if (value && (listType == ListTypeEnum.NEXT_ACTIONS || listType == ListTypeEnum.WAITING)) {
       try {
         scaffoldKey.currentState.showSnackBar(SnackBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Theme.of(context).primaryColor,
           action: SnackBarAction(
             label: I18n.of(context).undo,
+            textColor: Colors.white,
             onPressed: () {
               task.done = !value;
               task.save();

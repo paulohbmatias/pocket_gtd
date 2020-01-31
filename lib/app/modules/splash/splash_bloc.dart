@@ -66,7 +66,7 @@ class SplashBloc extends BlocBase {
           BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS),
           I18n.of(context).next_actions,
           I18n.of(context).next_actions_to_perform,
-          IconModel.fromIconData(OMIcons.notes)));
+          IconModel.fromIconData(OMIcons.keyboardArrowRight)));
       await boxRepository.saveAt(BoxModel(
           null,
           BoxModel.getIdFromEnum(InitialBoxesEnum.PROJECTS),

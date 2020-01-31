@@ -23,6 +23,9 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   final detailsController = TextEditingController();
   final notificationUtils = AppModule.to.getDependency<NotificationUtils>();
   final focusTitle = FocusNode();
+  final focusDetails = FocusNode(
+    canRequestFocus: true,
+  );
 
   RegisterBloc({this.task, this.isUpdate = false}) {
     if (task != null) {
@@ -40,6 +43,9 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       if (task.notification != null) {
         changeNotification(task.notification);
       }
+      if (task.notification != null) {
+        changeNotification(task.notification);
+      }
     }
   }
 
@@ -48,6 +54,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   final BoxRepository boxRepository =
       AppModule.to.getDependency<BoxRepository>();
 
+  final _boxIndex = BehaviorSubject<int>();
   BehaviorSubject<String> _title = BehaviorSubject();
   BehaviorSubject<String> _details = BehaviorSubject();
   BehaviorSubject<DateTime> _deadline = BehaviorSubject();
@@ -56,7 +63,10 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   BehaviorSubject<BoxModel> _box = BehaviorSubject();
   BehaviorSubject<bool> _isLoading = BehaviorSubject();
   BehaviorSubject<bool> _openDetails = BehaviorSubject();
-  BehaviorSubject<PriorityEnum> _priority = BehaviorSubject.seeded(PriorityEnum.NORMAL);
+  BehaviorSubject<PriorityEnum> _priority =
+      BehaviorSubject.seeded(PriorityEnum.NORMAL);
+
+  Observable<int> get boxIndex => _boxIndex.stream;
 
   Observable<String> title(BuildContext context) =>
       _title.stream.transform(validateTitleFromStream(context));
@@ -66,7 +76,8 @@ class RegisterBloc extends BlocBase with RegisterValidators {
 
   Observable<String> get deadline => _deadline.stream.transform(validateDate());
   Observable<String> get schedule => _schedule.stream.transform(validateDate());
-  Observable<String> get notification => _notification.stream.transform(validateDate());
+  Observable<String> get notification =>
+      _notification.stream.transform(validateDate());
 
   Observable<BoxModel> get box => _box.stream;
 
@@ -87,6 +98,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
         }
       }));
 
+  Function(int) get changeBoxIndex => _boxIndex.sink.add;
   Function(String) get changeTitle => _title.sink.add;
   Function(String) get changeDetails => _details.sink.add;
   Function(DateTime) get changeDeadline => _deadline.sink.add;
@@ -94,14 +106,18 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   Function(DateTime) get changeNotification => _notification.sink.add;
   Function(BoxModel) get changeBox => _box.sink.add;
   Function(bool) get changeIsLoading => _isLoading.sink.add;
-  Function(bool) get changeOpenDetails => _openDetails.sink.add;
+  changeOpenDetails(bool value) {
+    _openDetails.sink.add(value);
+    focusTitle.unfocus();
+  }
+
   Function(PriorityEnum) get changePriority => _priority.sink.add;
 
   Future<List<BoxModel>> getBoxes() async =>
       (await boxRepository.getAll()).where((box) {
         return box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.DONE) &&
-            box.idLocal !=
-                BoxModel.getIdFromEnum(InitialBoxesEnum.REFERENCES) &&
+            box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.SCHEDULED) &&
+            box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.PROJECTS) &&
             box.idLocal != BoxModel.getIdFromEnum(InitialBoxesEnum.DONE);
       }).toList();
 
@@ -120,13 +136,22 @@ class RegisterBloc extends BlocBase with RegisterValidators {
         ..when = _schedule.value
         ..notification = _notification.value
         ..priority = _priority.value;
+      BoxModel box;
+
+      if (_box.value != null &&
+          _box.value.idLocal ==
+              BoxModel.getIdFromEnum(InitialBoxesEnum.NEXT_ACTIONS)) {
+        taskModel.when = DateTime.now();
+        box = BoxModel.fromEnum(InitialBoxesEnum.SCHEDULED);
+      }
+
       taskModel.idLocal = await taskRepository.save(
           taskModel,
-          _box.value ??
+          box ??
               BoxModel.fromEnum(taskModel.when != null
                   ? InitialBoxesEnum.SCHEDULED
                   : InitialBoxesEnum.INBOX));
-      if(taskModel.notification != null){
+      if (taskModel.notification != null) {
         notificationUtils.scheduleNotification(taskModel);
       }
     } catch (e) {
