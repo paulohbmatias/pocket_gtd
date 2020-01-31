@@ -109,6 +109,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   changeOpenDetails(bool value) {
     _openDetails.sink.add(value);
     focusTitle.unfocus();
+    focusTitle.canRequestFocus = true;
   }
 
   Function(PriorityEnum) get changePriority => _priority.sink.add;
