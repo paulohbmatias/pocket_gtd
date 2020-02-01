@@ -108,6 +108,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
   Function(bool) get changeIsLoading => _isLoading.sink.add;
   changeOpenDetails(bool value) {
     _openDetails.sink.add(value);
+    // focusTitle.requestFocus(focusDetails);
     focusTitle.unfocus();
     focusTitle.canRequestFocus = true;
   }
@@ -132,7 +133,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
     try {
       TaskModel taskModel = TaskModel()
         ..title = _title.value
-        ..details = _details.value
+        ..details = _details.value != null && _details.value.isEmpty ? null : _details.value
         ..deadline = _deadline.value
         ..when = _schedule.value
         ..notification = _notification.value
