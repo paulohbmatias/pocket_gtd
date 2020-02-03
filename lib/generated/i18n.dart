@@ -206,6 +206,38 @@ class I18n implements WidgetsLocalizations {
   String get days_ago => "days ago";
   /// "Yesterday"
   String get yesterday => "Yesterday";
+  /// "day"
+  String get day => "day";
+  /// "days"
+  String get days => "days";
+  /// "week"
+  String get week => "week";
+  /// "weeks"
+  String get weeks => "weeks";
+  /// "month"
+  String get month => "month";
+  /// "months"
+  String get months => "months";
+  /// "year"
+  String get year => "year";
+  /// "years"
+  String get years => "years";
+  /// "Every"
+  String get every => "Every";
+  /// "S"
+  String get sunday => "S";
+  /// "M"
+  String get monday => "M";
+  /// "T"
+  String get tuesday => "T";
+  /// "W"
+  String get wednesday => "W";
+  /// "T"
+  String get thursday => "T";
+  /// "F"
+  String get friday => "F";
+  /// "S"
+  String get saturday => "S";
 }
 
 class _I18n_en_US extends I18n {
@@ -479,6 +511,54 @@ class _I18n_pt_BR extends I18n {
   /// "Ontem"
   @override
   String get yesterday => "Ontem";
+  /// "dia"
+  @override
+  String get day => "dia";
+  /// "dias"
+  @override
+  String get days => "dias";
+  /// "semana"
+  @override
+  String get week => "semana";
+  /// "semanas"
+  @override
+  String get weeks => "semanas";
+  /// "mês"
+  @override
+  String get month => "mês";
+  /// "meses"
+  @override
+  String get months => "meses";
+  /// "anos"
+  @override
+  String get year => "anos";
+  /// "anos"
+  @override
+  String get years => "anos";
+  /// "A cada"
+  @override
+  String get every => "A cada";
+  /// "D"
+  @override
+  String get sunday => "D";
+  /// "S"
+  @override
+  String get monday => "S";
+  /// "T"
+  @override
+  String get tuesday => "T";
+  /// "Q"
+  @override
+  String get wednesday => "Q";
+  /// "Q"
+  @override
+  String get thursday => "Q";
+  /// "S"
+  @override
+  String get friday => "S";
+  /// "S"
+  @override
+  String get saturday => "S";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

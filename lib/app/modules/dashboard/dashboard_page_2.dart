@@ -5,6 +5,8 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_bloc.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_module.dart';
 import 'package:pocket_gtd/app/modules/inbox/inbox_module.dart';
+import 'package:pocket_gtd/app/modules/projects/projects_module.dart';
+import 'package:pocket_gtd/app/modules/routines/routines_module.dart';
 import 'package:pocket_gtd/app/modules/scheduled/scheduled_module.dart';
 import 'package:pocket_gtd/app/modules/tasks/tasks_module.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
@@ -41,23 +43,19 @@ class _DashboardPage2State extends State<DashboardPage2> {
             style: TextStyle(color: Theme.of(context).primaryColor),
           ),
           actions: <Widget>[
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Icon(Icons.search, color: Theme.of(context).primaryColor,),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: IconButton(
-            //     icon: Icon(Icons.schedule, color: Theme.of(context).primaryColor,),
-            //     onPressed: (){
-            //       Navigator.of(context).push(MaterialPageRoute(
-            //         builder: (context) => ScheduledModule()
-            //       ));
-            //     },
-            //   ),
-            // ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(0),
+              child: IconButton(
+                icon: Icon(Icons.schedule, color: Theme.of(context).primaryColor,),
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => RoutinesModule()
+                  ));
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(0),
               child: IconButton(
                 icon: Icon(Icons.calendar_today, color: Theme.of(context).primaryColor,),
                 onPressed: (){
@@ -96,13 +94,12 @@ class _DashboardPage2State extends State<DashboardPage2> {
                         OMIcons.inbox, MdiIcons.inbox, I18n.of(context).inbox),
                     bottomItem(OMIcons.listAlt, OMIcons.listAlt,
                         I18n.of(context).tasks),
-                    // bottomItem(OMIcons.widgets, MdiIcons.widgets,
-                    //     I18n.of(context).projects),
+                    bottomItem(OMIcons.widgets, MdiIcons.widgets,
+                        I18n.of(context).projects),
                   ],
 
                   opacity: .2,
                   elevation: 100,
-                  inkColor: Colors.black,
                   // borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                   fabLocation: snapshot.data == 0 ? BubbleBottomBarFabLocation.end : null,
                   hasNotch: snapshot.data == 0,
@@ -118,7 +115,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
   BubbleBottomBarItem bottomItem(
       IconData icon, IconData activeIcon, String title) {
     return BubbleBottomBarItem(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey[300],
         icon: Icon(
           icon,
           size: 30,
@@ -139,6 +136,6 @@ class _DashboardPage2State extends State<DashboardPage2> {
   final pages = [
     InboxModule(),
     TasksModule(),
-    // ProjectsModule(),
+    ProjectsModule(),
   ];
 }

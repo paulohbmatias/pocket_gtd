@@ -85,5 +85,21 @@
     "high": "High",
     "urgent": "Urgent",
     "days_ago": "days ago",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "day": "day",
+    "days": "days",
+    "week": "week",
+    "weeks": "weeks",
+    "month": "month",
+    "months": "months",
+    "year": "year",
+    "years": "years",
+    "every": "Every",
+    "sunday": "S",
+    "monday": "M",
+    "tuesday": "T",
+    "wednesday": "W",
+    "thursday": "T",
+    "friday": "F",
+    "saturday": "S" 
   }

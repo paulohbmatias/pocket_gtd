@@ -85,5 +85,21 @@
   "high": "Alta",
   "urgent": "Urgente",
   "days_ago": "dias atrás",
-  "yesterday": "Ontem"
+  "yesterday": "Ontem",
+  "day": "dia",
+  "days": "dias",
+  "week": "semana",
+  "weeks": "semanas",
+  "month": "mês",
+  "months": "meses",
+  "year": "anos",
+  "years": "anos",
+  "every": "A cada",
+  "sunday": "D",
+  "monday": "S",
+  "tuesday": "T",
+  "wednesday": "Q",
+  "thursday": "Q",
+  "friday": "S",
+  "saturday": "S"
 }
