@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:pocket_gtd/app/modules/register_routines/enums/initial_day_of_month_enum.dart';
 import 'package:pocket_gtd/app/modules/register_routines/enums/often_month_enum.dart';
 import 'package:pocket_gtd/app/modules/register_routines/register_routines_bloc.dart';
 import 'package:pocket_gtd/app/modules/register_routines/register_routines_module.dart';
+import 'package:pocket_gtd/app/modules/register_routines/widgets/days/days_widget.dart';
+import 'package:pocket_gtd/app/modules/register_routines/widgets/months/months_widget.dart';
+import 'package:pocket_gtd/app/modules/register_routines/widgets/weeks/weeks_widget.dart';
 import 'package:pocket_gtd/app/shared/enums/days_of_week_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/routine_often_enum.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
@@ -95,7 +99,7 @@ class _RegisterRoutinesPageState extends State<RegisterRoutinesPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   children: <Widget>[
-                    Text("Every"),
+                    Text(I18n.of(context).every),
                     Container(
                       width: 32,
                       margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -141,7 +145,7 @@ class _RegisterRoutinesPageState extends State<RegisterRoutinesPage> {
                                         child: Text(item.key),
                                         value: item.value);
                                   }).toList(),
-                                  value: RoutineOftenEnum.DAY,
+                                  value: snapshot.data,
                                   onChanged: bloc.changeRoutineOften,
                                 );
                               });
@@ -151,62 +155,20 @@ class _RegisterRoutinesPageState extends State<RegisterRoutinesPage> {
                   ],
                 ),
               ),
-              StreamBuilder<List<DaysOfWeekEnum>>(
-                  stream: bloc.daysOfWeekSelected,
-                  builder: (context, snapshot) {
-                    return Container(
-                      margin: const EdgeInsets.only(left: 4),
-                      child: Row(
-                          children:
-                              bloc.getRoutineDays(context).entries.map((item) {
-                        return Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: ChoiceChip(
-                            label: Text(item.key),
-                            labelStyle: TextStyle(
-                              color: bloc.listDaysOfWeek.contains(item.value)
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
-                            shadowColor: Colors.white,
-                            disabledColor: Colors.black,
-                            selectedShadowColor: Colors.white,
-                            selectedColor: Theme.of(context).primaryColor,
-                            elevation: 2,
-                            selected: bloc.listDaysOfWeek.contains(item.value),
-                            onSelected: (value) =>
-                                bloc.changeDaysOfWeek(item.value, value),
-                            // onPressed: (){},
-                            // selected: true,
-                          ),
-                        );
-                      }).toList()),
-                    );
-                  }),
-              StreamBuilder<OftenMonthEnum>(
-                stream: bloc.oftenMonth,
-                initialData: OftenMonthEnum.SPECIFIC_DAY,
+              StreamBuilder<RoutineOftenEnum>(
+                stream: bloc.routineOften,
+                initialData: RoutineOftenEnum.DAY,
                 builder: (context, snapshot) {
-                  return Container(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        RadioListTile<OftenMonthEnum>(
-                            value: OftenMonthEnum.SPECIFIC_DAY,
-                            groupValue: snapshot.data,
-                            title: DropdownButton(
-                              items: null,
-                              onChanged: (v) {},
-                            ),
-                            onChanged: bloc.changeOftenMonth),
-                        RadioListTile<OftenMonthEnum>(
-                            value: OftenMonthEnum.WEEK_DAY,
-                            title: Text("D"),
-                            groupValue: snapshot.data,
-                            onChanged: bloc.changeOftenMonth),
-                      ],
-                    ),
-                  );
+                  switch (snapshot.data) {
+                    case RoutineOftenEnum.DAY:
+                      return DaysWidget();
+                    case RoutineOftenEnum.WEEK:
+                      return WeeksWidget();
+                    case RoutineOftenEnum.MONTH:
+                      return MonthsWidget();
+                    case RoutineOftenEnum.YEAR:
+                      return Container();
+                  }
                 },
               ),
               Row(
@@ -222,57 +184,6 @@ class _RegisterRoutinesPageState extends State<RegisterRoutinesPage> {
                             color: Theme.of(context).primaryColor,
                           ),
                           onPressed: () => bloc.changeOpenDetails(true),
-                        ),
-                      ),
-                      Container(
-                        // padding: const EdgeInsets.all(8.0),
-                        child: IconButton(
-                          icon: Icon(
-                            MdiIcons.calendarCheck,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          onPressed: () async {
-                            final date = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              initialDatePickerMode: DatePickerMode.day,
-                              firstDate:
-                                  DateTime.now().subtract(Duration(days: 1)),
-                              lastDate: DateTime(2060),
-                            );
-                            if (date == null) return;
-                            final time = await showTimePicker(
-                                context: context, initialTime: TimeOfDay.now());
-
-                            DateTime when = DateTime(date.year, date.month,
-                                date.day, time.hour, time.minute);
-                          },
-                        ),
-                      ),
-                      Container(
-                        child: IconButton(
-                          icon: Icon(
-                            MdiIcons.alarm,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          onPressed: () async {
-                            final date = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              initialDatePickerMode: DatePickerMode.day,
-                              firstDate:
-                                  DateTime.now().subtract(Duration(days: 1)),
-                              lastDate: DateTime(2060),
-                            );
-                            if (date == null) return;
-                            final time = await showTimePicker(
-                                context: context, initialTime: TimeOfDay.now());
-
-                            DateTime notification = DateTime(date.year,
-                                date.month, date.day, time.hour, time.minute);
-
-                            bloc.changeNotification(notification);
-                          },
                         ),
                       ),
                     ],

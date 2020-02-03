@@ -208,6 +208,8 @@ class I18n implements WidgetsLocalizations {
   String get yesterday => "Yesterday";
   /// "day"
   String get day => "day";
+  /// "Day"
+  String get Day => "Day";
   /// "days"
   String get days => "days";
   /// "week"
@@ -224,20 +226,30 @@ class I18n implements WidgetsLocalizations {
   String get years => "years";
   /// "Every"
   String get every => "Every";
-  /// "S"
-  String get sunday => "S";
-  /// "M"
-  String get monday => "M";
-  /// "T"
-  String get tuesday => "T";
-  /// "W"
-  String get wednesday => "W";
-  /// "T"
-  String get thursday => "T";
-  /// "F"
-  String get friday => "F";
-  /// "S"
-  String get saturday => "S";
+  /// "Sunday"
+  String get sunday => "Sunday";
+  /// "Monday"
+  String get monday => "Monday";
+  /// "Tuesday"
+  String get tuesday => "Tuesday";
+  /// "Wednesday"
+  String get wednesday => "Wednesday";
+  /// "Thursday"
+  String get thursday => "Thursday";
+  /// "Friday"
+  String get friday => "Friday";
+  /// "Saturday"
+  String get saturday => "Saturday";
+  /// "First"
+  String get First => "First";
+  /// "Second"
+  String get Second => "Second";
+  /// "Third"
+  String get Third => "Third";
+  /// "Fourth"
+  String get Fourth => "Fourth";
+  /// "Last"
+  String get Last => "Last";
 }
 
 class _I18n_en_US extends I18n {
@@ -514,6 +526,9 @@ class _I18n_pt_BR extends I18n {
   /// "dia"
   @override
   String get day => "dia";
+  /// "Dia"
+  @override
+  String get Day => "Dia";
   /// "dias"
   @override
   String get days => "dias";
@@ -538,27 +553,42 @@ class _I18n_pt_BR extends I18n {
   /// "A cada"
   @override
   String get every => "A cada";
-  /// "D"
+  /// "Domingo"
   @override
-  String get sunday => "D";
-  /// "S"
+  String get sunday => "Domingo";
+  /// "Segunda"
   @override
-  String get monday => "S";
-  /// "T"
+  String get monday => "Segunda";
+  /// "Terça"
   @override
-  String get tuesday => "T";
-  /// "Q"
+  String get tuesday => "Terça";
+  /// "Quarta"
   @override
-  String get wednesday => "Q";
-  /// "Q"
+  String get wednesday => "Quarta";
+  /// "Quinta"
   @override
-  String get thursday => "Q";
-  /// "S"
+  String get thursday => "Quinta";
+  /// "Sexta"
   @override
-  String get friday => "S";
-  /// "S"
+  String get friday => "Sexta";
+  /// "Sábado"
   @override
-  String get saturday => "S";
+  String get saturday => "Sábado";
+  /// "Primeiro"
+  @override
+  String get First => "Primeiro";
+  /// "Segundo"
+  @override
+  String get Second => "Segundo";
+  /// "Terceiro"
+  @override
+  String get Third => "Terceiro";
+  /// "Quarto"
+  @override
+  String get Fourth => "Quarto";
+  /// "Último"
+  @override
+  String get Last => "Último";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
