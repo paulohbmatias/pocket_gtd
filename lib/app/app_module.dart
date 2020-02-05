@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/app_bloc.dart';
 import 'package:pocket_gtd/app/app_widget.dart';
 import 'package:pocket_gtd/app/shared/repositories/impl/box_repository_impl.dart';
+import 'package:pocket_gtd/app/shared/repositories/impl/routine_repository_impl.dart';
 import 'package:pocket_gtd/app/shared/repositories/impl/task_repository_impl.dart';
 import 'package:pocket_gtd/app/shared/utils/notification_utils.dart';
 
@@ -16,6 +17,7 @@ class AppModule extends ModuleWidget {
   List<Dependency> get dependencies => [
         Dependency((i) => BoxRepositoryImpl()),
         Dependency((i) => TaskRepositoryImpl()),
+        Dependency((i) => RoutineRepositoryImpl()),
         Dependency((i) => NotificationUtils()),
       ];
 

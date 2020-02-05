@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/modules/register_routines/register_routines_bloc.dart';
 import 'package:pocket_gtd/app/modules/register_routines/register_routines_module.dart';
 import 'package:pocket_gtd/app/shared/utils/date_utils.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
 
 class DaysWidget extends StatelessWidget {
   final bloc = RegisterRoutinesModule.to.bloc<RegisterRoutinesBloc>();
@@ -16,7 +17,7 @@ class DaysWidget extends StatelessWidget {
             children: <Widget>[
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text("Start"),
+                child: Text(I18n.of(context).start),
               ),
               Expanded(
                 child: Material(

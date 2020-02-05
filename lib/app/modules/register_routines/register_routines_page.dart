@@ -8,6 +8,7 @@ import 'package:pocket_gtd/app/modules/register_routines/register_routines_modul
 import 'package:pocket_gtd/app/modules/register_routines/widgets/days/days_widget.dart';
 import 'package:pocket_gtd/app/modules/register_routines/widgets/months/months_widget.dart';
 import 'package:pocket_gtd/app/modules/register_routines/widgets/weeks/weeks_widget.dart';
+import 'package:pocket_gtd/app/modules/register_routines/widgets/years/years_widget.dart';
 import 'package:pocket_gtd/app/shared/enums/days_of_week_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/routine_often_enum.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
@@ -99,7 +100,10 @@ class _RegisterRoutinesPageState extends State<RegisterRoutinesPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   children: <Widget>[
-                    Text(I18n.of(context).every),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(I18n.of(context).every),
+                    ),
                     Container(
                       width: 32,
                       margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -167,7 +171,7 @@ class _RegisterRoutinesPageState extends State<RegisterRoutinesPage> {
                     case RoutineOftenEnum.MONTH:
                       return MonthsWidget();
                     case RoutineOftenEnum.YEAR:
-                      return Container();
+                      return YearsWidget();
                   }
                 },
               ),
@@ -199,7 +203,7 @@ class _RegisterRoutinesPageState extends State<RegisterRoutinesPage> {
                             onPressed: snapshot.hasData && snapshot.data
                                 ? () => bloc.isUpdate
                                     ? bloc.updateTask(context)
-                                    : bloc.saveTask(context)
+                                    : bloc.saveRoutine(context)
                                 : null,
                           ),
                         );

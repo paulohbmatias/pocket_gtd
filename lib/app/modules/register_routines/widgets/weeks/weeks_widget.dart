@@ -3,6 +3,7 @@ import 'package:pocket_gtd/app/modules/register_routines/register_routines_bloc.
 import 'package:pocket_gtd/app/modules/register_routines/register_routines_module.dart';
 import 'package:pocket_gtd/app/shared/enums/days_of_week_enum.dart';
 import 'package:pocket_gtd/app/shared/utils/date_utils.dart';
+import 'package:pocket_gtd/generated/i18n.dart';
 
 class WeeksWidget extends StatelessWidget {
   final bloc = RegisterRoutinesModule.to.bloc<RegisterRoutinesBloc>();
@@ -44,7 +45,7 @@ class WeeksWidget extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text("Start"),
+                    child: Text(I18n.of(context).start),
                   ),
                   Expanded(
                     child: Material(

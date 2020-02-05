@@ -250,6 +250,32 @@ class I18n implements WidgetsLocalizations {
   String get Fourth => "Fourth";
   /// "Last"
   String get Last => "Last";
+  /// "Start"
+  String get start => "Start";
+  /// "January"
+  String get january => "January";
+  /// "February"
+  String get february => "February";
+  /// "March"
+  String get march => "March";
+  /// "April"
+  String get april => "April";
+  /// "May"
+  String get may => "May";
+  /// "June"
+  String get june => "June";
+  /// "July"
+  String get july => "July";
+  /// "August"
+  String get august => "August";
+  /// "September"
+  String get september => "September";
+  /// "October"
+  String get october => "October";
+  /// "November"
+  String get november => "November";
+  /// "December"
+  String get december => "December";
 }
 
 class _I18n_en_US extends I18n {
@@ -589,6 +615,45 @@ class _I18n_pt_BR extends I18n {
   /// "Último"
   @override
   String get Last => "Último";
+  /// "Início"
+  @override
+  String get start => "Início";
+  /// "Janeiro"
+  @override
+  String get january => "Janeiro";
+  /// "Fevereiro"
+  @override
+  String get february => "Fevereiro";
+  /// "Março"
+  @override
+  String get march => "Março";
+  /// "Abril"
+  @override
+  String get april => "Abril";
+  /// "Maio"
+  @override
+  String get may => "Maio";
+  /// "Junho"
+  @override
+  String get june => "Junho";
+  /// "Julho"
+  @override
+  String get july => "Julho";
+  /// "Agosto"
+  @override
+  String get august => "Agosto";
+  /// "Setembro"
+  @override
+  String get september => "Setembro";
+  /// "Outubro"
+  @override
+  String get october => "Outubro";
+  /// "Novembro"
+  @override
+  String get november => "Novembro";
+  /// "Dezembro"
+  @override
+  String get december => "Dezembro";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

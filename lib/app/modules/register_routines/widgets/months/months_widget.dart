@@ -4,6 +4,7 @@ import 'package:pocket_gtd/app/modules/register_routines/enums/often_month_enum.
 import 'package:pocket_gtd/app/modules/register_routines/register_routines_bloc.dart';
 import 'package:pocket_gtd/app/modules/register_routines/register_routines_module.dart';
 import 'package:pocket_gtd/app/shared/enums/days_of_week_enum.dart';
+import 'package:pocket_gtd/app/shared/utils/date_utils.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class MonthsWidget extends StatelessWidget {
@@ -93,6 +94,44 @@ class MonthsWidget extends StatelessWidget {
                   ),
                   groupValue: snapshot.data,
                   onChanged: bloc.changeOftenMonth),
+              Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Text(I18n.of(context).start),
+                      ),
+                      Expanded(
+                        child: StreamBuilder<int>(
+                        stream: bloc.selectedMonth,
+                        initialData: 1,
+                        builder: (context, snapshot) {
+                          return DropdownButton<int>(
+                            items: bloc
+                                .getMonthsOfYear(context)
+                                .entries
+                                .map<DropdownMenuItem<int>>((item) {
+                              return DropdownMenuItem(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(item.key),
+                                ),
+                                value: item.value,
+                              );
+                            }).toList(),
+                            
+                            isExpanded: true,
+                            value: snapshot.data,
+                            onChanged: bloc.changeSelectedMonth,
+                          );
+                        },
+                      ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ],
           ),
         );

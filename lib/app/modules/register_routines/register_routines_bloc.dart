@@ -9,12 +9,14 @@ import 'package:pocket_gtd/app/modules/register_routines/enums/often_month_enum.
 import 'package:pocket_gtd/app/shared/enums/days_of_week_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/routine_often_enum.dart';
 import 'package:pocket_gtd/app/shared/models/routine_model.dart';
+import 'package:pocket_gtd/app/shared/repositories/routine_repository.dart';
 import 'package:pocket_gtd/app/shared/utils/notification_utils.dart';
 import 'package:pocket_gtd/app/shared/validators/register_validators.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
+  final _routineRepository = AppModule.to.getDependency<RoutineRepository>();
   final RoutineModel routine;
   final bool isUpdate;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -26,7 +28,7 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
   final focusDetails = FocusNode(
     canRequestFocus: true,
   );
-  final listDays = List.generate(31, (i) => i+1);
+  final listDays = List.generate(31, (i) => i + 1);
   final listDaysOfMonth = List<String>();
   List<DaysOfWeekEnum> listDaysOfWeek = List();
 
@@ -39,13 +41,18 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
     }
   }
   final _selectedDay = BehaviorSubject.seeded(1);
+  final _selectedMonth = BehaviorSubject.seeded(1);
   final _startAt = BehaviorSubject<DateTime>.seeded(DateTime.now());
-  final _dayOfInit = BehaviorSubject<DaysOfWeekEnum>.seeded(DaysOfWeekEnum.SUNDAY);
-  final _oftenMonth = BehaviorSubject<OftenMonthEnum>.seeded(OftenMonthEnum.SPECIFIC_DAY);
+  final _dayOfInit =
+      BehaviorSubject<DaysOfWeekEnum>.seeded(DaysOfWeekEnum.SUNDAY);
+  final _oftenMonth =
+      BehaviorSubject<OftenMonthEnum>.seeded(OftenMonthEnum.SPECIFIC_DAY);
   final _often = BehaviorSubject<int>.seeded(1);
   final _listDaysOfWeek = BehaviorSubject<List<DaysOfWeekEnum>>();
-  final _routineOften = BehaviorSubject<RoutineOftenEnum>.seeded(RoutineOftenEnum.DAY);
-  final _initialDayOfMonth = BehaviorSubject<InitialDayOfMonthEnum>.seeded(InitialDayOfMonthEnum.FIRST);
+  final _routineOften =
+      BehaviorSubject<RoutineOftenEnum>.seeded(RoutineOftenEnum.DAY);
+  final _initialDayOfMonth = BehaviorSubject<InitialDayOfMonthEnum>.seeded(
+      InitialDayOfMonthEnum.FIRST);
   final _details = BehaviorSubject<String>();
   final _title = BehaviorSubject<String>();
   final _notification = BehaviorSubject<DateTime>();
@@ -53,13 +60,16 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
   BehaviorSubject<bool> _openDetails = BehaviorSubject();
 
   Observable<int> get selectedDay => _selectedDay.stream;
+  Observable<int> get selectedMonth => _selectedMonth.stream;
   Observable<DateTime> get startAt => _startAt.stream;
   Observable<DaysOfWeekEnum> get dayOfInit => _dayOfInit.stream;
   Observable<OftenMonthEnum> get oftenMonth => _oftenMonth.stream;
   Observable<int> get often => _often.stream;
-  Observable<List<DaysOfWeekEnum>> get daysOfWeekSelected => _listDaysOfWeek.stream;
+  Observable<List<DaysOfWeekEnum>> get daysOfWeekSelected =>
+      _listDaysOfWeek.stream;
   Observable<RoutineOftenEnum> get routineOften => _routineOften.stream;
-  Observable<InitialDayOfMonthEnum> get initialDayOfMonth => _initialDayOfMonth.stream;
+  Observable<InitialDayOfMonthEnum> get initialDayOfMonth =>
+      _initialDayOfMonth.stream;
 
   Observable<String> title(BuildContext context) =>
       _title.stream.transform(validateTitleFromStream(context));
@@ -88,8 +98,10 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
   Function(int) get changeOften => _often.sink.add;
   Function(DaysOfWeekEnum) get changeDayOfInit => _dayOfInit.sink.add;
   Function(int) get changeSelectedDay => _selectedDay.sink.add;
+  Function(int) get changeSelectedMonth => _selectedMonth.sink.add;
   Function(RoutineOftenEnum) get changeRoutineOften => _routineOften.sink.add;
-  Function(InitialDayOfMonthEnum) get changeInitialDayOfMonth => _initialDayOfMonth.sink.add;
+  Function(InitialDayOfMonthEnum) get changeInitialDayOfMonth =>
+      _initialDayOfMonth.sink.add;
   Function(String) get changeTitle => _title.sink.add;
   Function(String) get changeDetails => _details.sink.add;
   Function(DateTime) get changeNotification => _notification.sink.add;
@@ -101,67 +113,100 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
     focusTitle.canRequestFocus = true;
   }
 
-  changeDaysOfWeek(DaysOfWeekEnum day, bool value){
-    if(value){
+  changeDaysOfWeek(DaysOfWeekEnum day, bool value) {
+    if (value) {
       listDaysOfWeek.add(day);
-    }else{
+    } else {
       listDaysOfWeek.removeWhere((item) => item == day);
     }
     _listDaysOfWeek.sink.add(listDaysOfWeek);
   }
 
-  Map<String, RoutineOftenEnum> getRoutinerOftenOptions(BuildContext context, bool isPlural) => {
-    isPlural ? I18n.of(context).days : I18n.of(context).day: RoutineOftenEnum.DAY,
-    isPlural ? I18n.of(context).weeks : I18n.of(context).week: RoutineOftenEnum.WEEK,
-    isPlural ? I18n.of(context).months : I18n.of(context).month: RoutineOftenEnum.MONTH,
-    isPlural ? I18n.of(context).years : I18n.of(context).year: RoutineOftenEnum.YEAR,
-  };
+  Map<String, RoutineOftenEnum> getRoutinerOftenOptions(
+          BuildContext context, bool isPlural) =>
+      {
+        isPlural ? I18n.of(context).days : I18n.of(context).day:
+            RoutineOftenEnum.DAY,
+        isPlural ? I18n.of(context).weeks : I18n.of(context).week:
+            RoutineOftenEnum.WEEK,
+        isPlural ? I18n.of(context).months : I18n.of(context).month:
+            RoutineOftenEnum.MONTH,
+        isPlural ? I18n.of(context).years : I18n.of(context).year:
+            RoutineOftenEnum.YEAR,
+      };
 
   Map<String, DaysOfWeekEnum> getRoutineDays(BuildContext context) => {
-    I18n.of(context).sunday: DaysOfWeekEnum.SUNDAY,
-    I18n.of(context).monday: DaysOfWeekEnum.MONDAY,
-    I18n.of(context).tuesday: DaysOfWeekEnum.TUESDAY,
-    I18n.of(context).wednesday: DaysOfWeekEnum.WEDNESDAY,
-    I18n.of(context).thursday: DaysOfWeekEnum.THURSDAY,
-    I18n.of(context).friday: DaysOfWeekEnum.FRIDAY,
-    I18n.of(context).saturday: DaysOfWeekEnum.SATURDAY,
-  };
+        I18n.of(context).sunday: DaysOfWeekEnum.SUNDAY,
+        I18n.of(context).monday: DaysOfWeekEnum.MONDAY,
+        I18n.of(context).tuesday: DaysOfWeekEnum.TUESDAY,
+        I18n.of(context).wednesday: DaysOfWeekEnum.WEDNESDAY,
+        I18n.of(context).thursday: DaysOfWeekEnum.THURSDAY,
+        I18n.of(context).friday: DaysOfWeekEnum.FRIDAY,
+        I18n.of(context).saturday: DaysOfWeekEnum.SATURDAY,
+      };
 
-  Map<String, InitialDayOfMonthEnum> getInitialDayOfMonth(BuildContext context) => {
-    I18n.of(context).First: InitialDayOfMonthEnum.FIRST,
-    I18n.of(context).Second: InitialDayOfMonthEnum.SECOND,
-    I18n.of(context).Third: InitialDayOfMonthEnum.THIRD,
-    I18n.of(context).Fourth: InitialDayOfMonthEnum.FOURTH,
-    I18n.of(context).Last: InitialDayOfMonthEnum.LAST,
-  };
+  Map<String, InitialDayOfMonthEnum> getInitialDayOfMonth(
+          BuildContext context) =>
+      {
+        I18n.of(context).First: InitialDayOfMonthEnum.FIRST,
+        I18n.of(context).Second: InitialDayOfMonthEnum.SECOND,
+        I18n.of(context).Third: InitialDayOfMonthEnum.THIRD,
+        I18n.of(context).Fourth: InitialDayOfMonthEnum.FOURTH,
+        I18n.of(context).Last: InitialDayOfMonthEnum.LAST,
+      };
+  Map<String, int> getMonthsOfYear(BuildContext context) => {
+        I18n.of(context).january: 1,
+        I18n.of(context).february: 2,
+        I18n.of(context).march: 3,
+        I18n.of(context).april: 4,
+        I18n.of(context).may: 5,
+        I18n.of(context).june: 6,
+        I18n.of(context).july: 7,
+        I18n.of(context).august: 8,
+        I18n.of(context).september: 9,
+        I18n.of(context).october: 10,
+        I18n.of(context).november: 11,
+        I18n.of(context).december: 12,
+      };
 
   void cancelDialog(BuildContext context) async {
     _cleanFields();
     Navigator.of(context).pop();
   }
 
-  void saveTask(BuildContext context) async {
+  void saveRoutine(BuildContext context) async {
     changeIsLoading(true);
     try {
       RoutineModel routineModel = RoutineModel()
         ..title = _title.value
         ..details = _details.value != null && _details.value.isEmpty
             ? null
-            : _details.value;
+            : _details.value
+        ..often = _often.value
+        ..routineOften = _routineOften.value;
+      if (_routineOften.value == RoutineOftenEnum.DAY ||
+          _routineOften.value == RoutineOftenEnum.YEAR) {
+        routineModel.begin = _startAt.value;
+      } else if (_routineOften.value == RoutineOftenEnum.WEEK) {
+        routineModel.begin = _startAt.value;
+        routineModel.daysOfWeek = _listDaysOfWeek.value;
+      } else {
+        if (_oftenMonth.value == OftenMonthEnum.SPECIFIC_DAY) {
+          routineModel.initDay = _selectedDay.value;
+          routineModel.initMonth = _selectedMonth.value;
+        }
+      }
+      await _routineRepository.save(routineModel);
     } catch (e) {
       print(e);
     } finally {
-      titleController.clear();
-      detailsController.clear();
-      _title.sink.add(null);
-      _details.sink.add(null);
       changeIsLoading(false);
       Fluttertoast.showToast(
           msg: I18n.of(context).successfully_added,
           backgroundColor: Colors.black87,
           fontSize: 15,
           toastLength: Toast.LENGTH_SHORT);
-      focusTitle.requestFocus();
+      Navigator.of(context).pop();
     }
   }
 
@@ -183,6 +228,7 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
 
   @override
   void dispose() {
+    _selectedMonth.close();
     _startAt.close();
     _dayOfInit.close();
     _initialDayOfMonth.close();
