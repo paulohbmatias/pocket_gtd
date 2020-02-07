@@ -169,7 +169,7 @@ class RegisterBloc extends BlocBase with RegisterValidators {
       _priority.sink.add(PriorityEnum.NORMAL);
       changeIsLoading(false);
       Fluttertoast.showToast(
-          msg: I18n.of(context).successfully_added,
+          msg: I18n.of(context).successfully_added_task,
           backgroundColor: Colors.black87,
           fontSize: 15,
           toastLength: Toast.LENGTH_SHORT);

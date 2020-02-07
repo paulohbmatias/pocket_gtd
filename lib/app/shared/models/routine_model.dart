@@ -5,8 +5,7 @@ import 'package:pocket_gtd/app/shared/enums/routine_often_enum.dart';
 part 'routine_model.g.dart';
 
 @HiveType()
-class RoutineModel {
-
+class RoutineModel extends HiveObject {
   @HiveField(0)
   int id;
 
@@ -45,4 +44,20 @@ class RoutineModel {
 
   @HiveField(12)
   List<DaysOfWeekEnum> daysOfWeek;
+
+  @HiveField(13)
+  bool isActive = false;
+
+  @override
+  String toString() {
+    if (routineOften == RoutineOftenEnum.DAY) {
+      return often <= 1 ? "repeats daily" : "repeat every $often days";
+    } else if (routineOften == RoutineOftenEnum.WEEK) {
+      return often <= 1 ? "repeats weekly" : "repeat every $often weeks";
+    } else if (routineOften == RoutineOftenEnum.MONTH) {
+      return often <= 1 ? "repeats monthly" : "repeat every $often months";
+    } else{
+      return often <= 1 ? "repeats annually" : "repeat every $often years"; 
+    }
+  }
 }

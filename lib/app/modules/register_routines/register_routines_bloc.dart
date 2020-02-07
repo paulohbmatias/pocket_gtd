@@ -118,8 +118,8 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
       listDaysOfWeek.add(day);
     } else {
       listDaysOfWeek.removeWhere((item) => item == day);
-    }
     _listDaysOfWeek.sink.add(listDaysOfWeek);
+    }
   }
 
   Map<String, RoutineOftenEnum> getRoutinerOftenOptions(
@@ -129,10 +129,10 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
             RoutineOftenEnum.DAY,
         isPlural ? I18n.of(context).weeks : I18n.of(context).week:
             RoutineOftenEnum.WEEK,
-        isPlural ? I18n.of(context).months : I18n.of(context).month:
-            RoutineOftenEnum.MONTH,
-        isPlural ? I18n.of(context).years : I18n.of(context).year:
-            RoutineOftenEnum.YEAR,
+        // isPlural ? I18n.of(context).months : I18n.of(context).month:
+        //     RoutineOftenEnum.MONTH,
+        // isPlural ? I18n.of(context).years : I18n.of(context).year:
+        //     RoutineOftenEnum.YEAR,
       };
 
   Map<String, DaysOfWeekEnum> getRoutineDays(BuildContext context) => {
@@ -202,7 +202,7 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
     } finally {
       changeIsLoading(false);
       Fluttertoast.showToast(
-          msg: I18n.of(context).successfully_added,
+          msg: I18n.of(context).successfully_added_routine,
           backgroundColor: Colors.black87,
           fontSize: 15,
           toastLength: Toast.LENGTH_SHORT);

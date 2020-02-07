@@ -30,6 +30,7 @@ class RoutineRepositoryImpl implements RoutineRepository{
       await boxRoutines.put(routine.idLocal, routine);
       return routine.idLocal;
     } catch (e) {
+      print(e);
       return null;
     }
   }

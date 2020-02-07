@@ -26,13 +26,14 @@ class RoutineModelAdapter extends TypeAdapter<RoutineModel> {
       ..initMonth = fields[9] as int
       ..routineOften = fields[10] as RoutineOftenEnum
       ..days = (fields[11] as List)?.cast<DateTime>()
-      ..daysOfWeek = (fields[12] as List)?.cast<DaysOfWeekEnum>();
+      ..daysOfWeek = (fields[12] as List)?.cast<DaysOfWeekEnum>()
+      ..isActive = fields[13] as bool;
   }
 
   @override
   void write(BinaryWriter writer, RoutineModel obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -58,6 +59,8 @@ class RoutineModelAdapter extends TypeAdapter<RoutineModel> {
       ..writeByte(11)
       ..write(obj.days)
       ..writeByte(12)
-      ..write(obj.daysOfWeek);
+      ..write(obj.daysOfWeek)
+      ..writeByte(13)
+      ..write(obj.isActive);
   }
 }

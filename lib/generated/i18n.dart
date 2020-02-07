@@ -191,7 +191,9 @@ class I18n implements WidgetsLocalizations {
   /// "Move to Projects"
   String get move_to_projects => "Move to Projects";
   /// "Added inbox"
-  String get successfully_added => "Added inbox";
+  String get successfully_added_task => "Added inbox";
+  /// "Routine added successfully"
+  String get successfully_added_routine => "Routine added successfully";
   /// "Schedule for"
   String get schedule_for => "Schedule for";
   /// "Low"
@@ -527,7 +529,10 @@ class _I18n_pt_BR extends I18n {
   String get move_to_projects => "Mover para projetos";
   /// "Adicionado a caixa de entrada"
   @override
-  String get successfully_added => "Adicionado a caixa de entrada";
+  String get successfully_added_task => "Adicionado a caixa de entrada";
+  /// "Rotina adicionada com sucesso"
+  @override
+  String get successfully_added_routine => "Rotina adicionada com sucesso";
   /// "Agendar para"
   @override
   String get schedule_for => "Agendar para";

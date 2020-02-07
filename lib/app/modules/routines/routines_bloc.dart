@@ -9,27 +9,19 @@ import 'package:pocket_gtd/app/shared/repositories/routine_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RoutinesBloc extends BlocBase {
+  final _routineRepository = AppModule.to.getDependency<RoutineRepository>();
+  StreamSubscription<List<RoutineModel>> _routineSubscription;
+
+  final _routines = BehaviorSubject<List<RoutineModel>>();
+
+  Future<Stream<List<RoutineModel>>> listenRoutines() async {
+    _routines.sink.add(await _routineRepository.getAll());
+    _routineSubscription = (await _routineRepository.listenAll())
+        .listen((data) => _routines.sink.add(data));
+    return _routines.stream;
+  }
+
   void add(BuildContext context) async {
-    final _routineRepository = AppModule.to.getDependency<RoutineRepository>();
-    StreamSubscription<List<RoutineModel>> _routineSubscription;
-
-    final _routines = BehaviorSubject<List<RoutineModel>>();
-
-    Future<Stream<List<RoutineModel>>> getTasks() async {
-      _routines.sink.add(await _routineRepository.getAll());
-      _routineSubscription = (await _routineRepository.listenAll())
-          .listen((data) => _routines.sink.add(data));
-      return _routines.stream;
-    }
-
-    //dispose will be called automatically by closing its streams
-    @override
-    void dispose() {
-      _routines.close();
-      if (_routineSubscription != null) _routineSubscription.cancel();
-      super.dispose();
-    }
-
     showModalBottomSheet(
         context: context,
         elevation: 20,
@@ -44,5 +36,18 @@ class RoutinesBloc extends BlocBase {
         },
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)));
+  }
+
+  void activeRoutine(RoutineModel routine, bool isActive){
+    routine.isActive = isActive;
+    routine.save();
+  }
+
+  //dispose will be called automatically by closing its streams
+  @override
+  void dispose() {
+    _routines.close();
+    if (_routineSubscription != null) _routineSubscription.cancel();
+    super.dispose();
   }
 }

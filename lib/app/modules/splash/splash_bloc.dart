@@ -8,11 +8,14 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pocket_gtd/app/app_module.dart';
 import 'package:path/path.dart';
 import 'package:pocket_gtd/app/modules/dashboard/dashboard_module.dart';
+import 'package:pocket_gtd/app/shared/enums/days_of_week_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
+import 'package:pocket_gtd/app/shared/enums/routine_often_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/icon_model.dart';
 import 'package:pocket_gtd/app/shared/models/priority_enum.dart';
 import 'package:pocket_gtd/app/shared/models/priority_enum.dart';
+import 'package:pocket_gtd/app/shared/models/routine_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/models/user_model.dart';
 import 'package:pocket_gtd/app/shared/preferences/preferences_app.dart';
@@ -46,6 +49,9 @@ class SplashBloc extends BlocBase {
     Hive.registerAdapter(UserModelAdapter(), 2);
     Hive.registerAdapter(IconModelAdapter(), 3);
     Hive.registerAdapter(PriorityEnumAdapter(), 4);
+    Hive.registerAdapter(RoutineOftenEnumAdapter(), 5);
+    Hive.registerAdapter(DaysOfWeekEnumAdapter(), 6);
+    Hive.registerAdapter(RoutineModelAdapter(), 7);
   }
 
   Future<bool> isTheFirstTime() => PreferencesApp.isTheFirstTime();
