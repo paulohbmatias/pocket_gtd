@@ -10,6 +10,13 @@ mixin RegisterValidators {
         else
           sink.add("");
       });
+  StreamTransformer<DateTime, String> validateTime() =>
+      StreamTransformer<DateTime, String>.fromHandlers(handleData: (date, sink) {
+        if(date != null)
+          sink.add("${date.hour}:${date.minute}");
+        else
+          sink.add("");
+      });
   String transformDate(DateTime date) => "${(date.day).toString().padLeft(2, "0")}/"
       "${(date.month).toString().padLeft(2, "0")}/${date.year} ${(date.hour).toString().padLeft(2, "0")}:${(date.minute).toString().padLeft(2, "0")}";
 

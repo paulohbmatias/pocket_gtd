@@ -14,23 +14,25 @@ import 'package:pocket_gtd/app/shared/enums/routine_often_enum.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
 import 'package:pocket_gtd/app/shared/models/icon_model.dart';
 import 'package:pocket_gtd/app/shared/models/priority_enum.dart';
-import 'package:pocket_gtd/app/shared/models/priority_enum.dart';
 import 'package:pocket_gtd/app/shared/models/routine_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/models/user_model.dart';
 import 'package:pocket_gtd/app/shared/preferences/preferences_app.dart';
 import 'package:pocket_gtd/app/shared/repositories/box_repository.dart';
+import 'package:pocket_gtd/app/shared/utils/routine_utils.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 class SplashBloc extends BlocBase {
   final boxRepository = AppModule.to.getDependency<BoxRepository>();
+  final _routinesUtils = AppModule.to.getDependency<RoutineUtils>();
 
   Future<void> load(BuildContext context) async {
+    await _initDB();
+    await _routinesUtils.addRoutines();
     Future.delayed(Duration(seconds: 3)).whenComplete(() async {
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => DashboardModule()));
     });
-    await _initDB();
     await createInitialBoxes(context);
     if (await isTheFirstTime()) {
       await setTheFirstTime();

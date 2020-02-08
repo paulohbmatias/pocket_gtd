@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/modules/register_routines/register_routines_bloc.dart';
 import 'package:pocket_gtd/app/modules/register_routines/register_routines_module.dart';
-import 'package:pocket_gtd/app/shared/enums/days_of_week_enum.dart';
 import 'package:pocket_gtd/app/shared/utils/date_utils.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
@@ -9,7 +8,7 @@ class WeeksWidget extends StatelessWidget {
   final bloc = RegisterRoutinesModule.to.bloc<RegisterRoutinesBloc>();
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<DaysOfWeekEnum>>(
+    return StreamBuilder<List<int>>(
         stream: bloc.daysOfWeekSelected,
         builder: (context, snapshot) {
           return Column(

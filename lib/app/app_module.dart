@@ -6,6 +6,7 @@ import 'package:pocket_gtd/app/shared/repositories/impl/box_repository_impl.dart
 import 'package:pocket_gtd/app/shared/repositories/impl/routine_repository_impl.dart';
 import 'package:pocket_gtd/app/shared/repositories/impl/task_repository_impl.dart';
 import 'package:pocket_gtd/app/shared/utils/notification_utils.dart';
+import 'package:pocket_gtd/app/shared/utils/routine_utils.dart';
 
 class AppModule extends ModuleWidget {
   @override
@@ -19,6 +20,7 @@ class AppModule extends ModuleWidget {
         Dependency((i) => TaskRepositoryImpl()),
         Dependency((i) => RoutineRepositoryImpl()),
         Dependency((i) => NotificationUtils()),
+        Dependency((i) => RoutineUtils()),
       ];
 
   @override

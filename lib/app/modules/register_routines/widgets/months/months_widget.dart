@@ -71,15 +71,15 @@ class MonthsWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      StreamBuilder<DaysOfWeekEnum>(
+                      StreamBuilder<int>(
                         stream: bloc.dayOfInit,
-                        initialData: DaysOfWeekEnum.SUNDAY,
+                        initialData: 1,
                         builder: (context, snapshot) {
-                          return DropdownButton<DaysOfWeekEnum>(
+                          return DropdownButton<int>(
                             items: bloc
                                 .getRoutineDays(context)
                                 .entries
-                                .map<DropdownMenuItem<DaysOfWeekEnum>>((item) {
+                                .map<DropdownMenuItem<int>>((item) {
                               return DropdownMenuItem(
                                 child: Text(item.key),
                                 value: item.value,

@@ -43,10 +43,16 @@ class RoutineModel extends HiveObject {
   List<DateTime> days;
 
   @HiveField(12)
-  List<DaysOfWeekEnum> daysOfWeek;
+  List<int> daysOfWeek;
 
   @HiveField(13)
   bool isActive = false;
+
+  @HiveField(14)
+  DateTime notification;
+
+  @HiveField(15)
+  DateTime lastAdded;
 
   @override
   String toString() {

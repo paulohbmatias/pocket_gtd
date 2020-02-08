@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:pocket_gtd/app/shared/models/routine_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 
 class NotificationUtils {
@@ -23,13 +24,17 @@ class NotificationUtils {
     var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
     NotificationDetails platformChannelSpecifics = new NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await _flutterLocalNotificationsPlugin.schedule(
-      task.idLocal,
-      task.title,
-      task.details ?? '',
-      task.notification,
-      platformChannelSpecifics,
-      androidAllowWhileIdle: true
-    );
+    await _flutterLocalNotificationsPlugin.schedule(task.idLocal, task.title,
+        task.details ?? '', task.notification, platformChannelSpecifics,
+        androidAllowWhileIdle: true);
   }
+
+  // scheduleRoutine(RoutineModel routine) {
+  //   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+  //       task.idLocal.toString(), routine.title, routine.details ?? '');
+  //   var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+  //   NotificationDetails platformChannelSpecifics = new NotificationDetails(
+  //       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+  // }
 }

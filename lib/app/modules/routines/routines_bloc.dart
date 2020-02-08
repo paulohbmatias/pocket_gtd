@@ -6,10 +6,12 @@ import 'package:pocket_gtd/app/app_module.dart';
 import 'package:pocket_gtd/app/modules/register_routines/register_routines_module.dart';
 import 'package:pocket_gtd/app/shared/models/routine_model.dart';
 import 'package:pocket_gtd/app/shared/repositories/routine_repository.dart';
+import 'package:pocket_gtd/app/shared/utils/routine_utils.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RoutinesBloc extends BlocBase {
   final _routineRepository = AppModule.to.getDependency<RoutineRepository>();
+  final _routineUtils = AppModule.to.getDependency<RoutineUtils>();
   StreamSubscription<List<RoutineModel>> _routineSubscription;
 
   final _routines = BehaviorSubject<List<RoutineModel>>();
@@ -41,6 +43,8 @@ class RoutinesBloc extends BlocBase {
   void activeRoutine(RoutineModel routine, bool isActive){
     routine.isActive = isActive;
     routine.save();
+    _routineUtils.addRoutines();
+
   }
 
   //dispose will be called automatically by closing its streams

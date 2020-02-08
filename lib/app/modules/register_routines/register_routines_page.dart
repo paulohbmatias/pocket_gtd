@@ -175,6 +175,45 @@ class _RegisterRoutinesPageState extends State<RegisterRoutinesPage> {
                   }
                 },
               ),
+              StreamBuilder<String>(
+                  stream: bloc.notification,
+                  initialData: "",
+                  builder: (context, snapshot) {
+                    return snapshot.hasData && snapshot.data.isNotEmpty
+                        ? Container(
+                            alignment: Alignment.centerLeft,
+                            // padding: const EdgeInsets.all(value),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Chip(
+                                label: Text(
+                                  snapshot.data,
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                avatar: Icon(
+                                  MdiIcons.alarm,
+                                  size: 16,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                    side: BorderSide(
+                                        color: Colors.grey, width: .2)),
+                                deleteIcon: Icon(
+                                  Icons.clear,
+                                  color: Colors.black54,
+                                  size: 16,
+                                ),
+                                onDeleted: () {
+                                  bloc.changeNotification(null);
+                                },
+                                backgroundColor: Colors.grey[200],
+                              ),
+                            ))
+                        : Container();
+                  }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -188,6 +227,32 @@ class _RegisterRoutinesPageState extends State<RegisterRoutinesPage> {
                             color: Theme.of(context).primaryColor,
                           ),
                           onPressed: () => bloc.changeOpenDetails(true),
+                        ),
+                      ),
+                      Container(
+                        child: IconButton(
+                          icon: Icon(
+                            MdiIcons.alarm,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          onPressed: () async {
+                            final date = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              initialDatePickerMode: DatePickerMode.day,
+                              firstDate:
+                                  DateTime.now().subtract(Duration(days: 1)),
+                              lastDate: DateTime(2060),
+                            );
+                            if (date == null) return;
+                            final time = await showTimePicker(
+                                context: context, initialTime: TimeOfDay.now());
+
+                            DateTime notification = DateTime(date.year,
+                                date.month, date.day, time.hour, time.minute);
+
+                            bloc.changeNotification(notification);
+                          },
                         ),
                       ),
                     ],
