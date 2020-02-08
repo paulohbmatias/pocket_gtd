@@ -30,7 +30,7 @@ class RoutineUtils {
             }
           } else {
             int i = routine.lastAdded.difference(DateTime.now()).inDays; 
-            if (routine.lastAdded.difference(DateTime.now()).inDays <=
+            if (routine.lastAdded.difference(DateTime.now()).inDays >=
                 routine.often) {
               final task = TaskModel()
                 ..title = routine.title
