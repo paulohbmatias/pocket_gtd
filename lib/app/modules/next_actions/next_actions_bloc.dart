@@ -13,10 +13,11 @@ class NextActionsBloc extends BlocBase {
   final taskRepository = AppModule.to.getDependency<TaskRepository>();
   StreamSubscription<List<TaskModel>> _tasksSubscription;
 
-  final _tasks = BehaviorSubject<List<TaskModel>>();
+  var _tasks = BehaviorSubject<List<TaskModel>>();
 
   Future<Stream<List<TaskModel>>> getTasks() async {
     final now = DateTime.now();
+    if (_tasks.isClosed) _tasks = BehaviorSubject<List<TaskModel>>();
     _tasks.sink.add((await taskRepository.getAll(box))
         .where((item) =>
             ((now.year == item.when.year) &&

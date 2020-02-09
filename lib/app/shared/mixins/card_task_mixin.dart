@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_gtd/app/modules/list_tasks/models/item_menu_task_model.dart';
+import 'package:pocket_gtd/app/shared/models/item_menu_task_model.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/utils/date_utils.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
 
-mixin CardTaskMixin{
+mixin CardMixin{
   Future<int> showOptions(BuildContext context, RelativeRect position, List<ItemMenuTaskModel> items){
     print(items);
     return showMenu<int>(

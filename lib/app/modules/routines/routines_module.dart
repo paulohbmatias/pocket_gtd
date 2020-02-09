@@ -1,3 +1,4 @@
+import 'package:pocket_gtd/app/modules/routines/widgets/card_routine/card_routine_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_gtd/app/modules/routines/routines_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:pocket_gtd/app/modules/routines/widgets/list_routines/list_routi
 class RoutinesModule extends ModuleWidget {
   @override
   List<Bloc> get blocs => [
+        Bloc((i) => CardRoutineBloc()),
         Bloc((i) => ListRoutinesBloc()),
         Bloc((i) => RoutinesBloc()),
       ];

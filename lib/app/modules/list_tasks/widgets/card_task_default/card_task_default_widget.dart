@@ -5,18 +5,18 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_bloc.dart';
 import 'package:pocket_gtd/app/modules/list_tasks/list_tasks_module.dart';
-import 'package:pocket_gtd/app/modules/list_tasks/mixins/card_task_mixin.dart';
-import 'package:pocket_gtd/app/modules/list_tasks/models/item_menu_task_model.dart';
 import 'package:pocket_gtd/app/shared/enums/initial_boxes_enum.dart';
 import 'package:pocket_gtd/app/shared/enums/list_type_enum.dart';
+import 'package:pocket_gtd/app/shared/mixins/card_task_mixin.dart';
 import 'package:pocket_gtd/app/shared/models/box_model.dart';
+import 'package:pocket_gtd/app/shared/models/item_menu_task_model.dart';
 import 'package:pocket_gtd/app/shared/models/priority_enum.dart';
 import 'package:pocket_gtd/app/shared/models/task_model.dart';
 import 'package:pocket_gtd/app/shared/models/user_model.dart';
 import 'package:pocket_gtd/app/shared/widgets/delegate/delegate_widget.dart';
 import 'package:pocket_gtd/generated/i18n.dart';
 
-class CardTaskDefaultWidget extends StatelessWidget with CardTaskMixin {
+class CardTaskDefaultWidget extends StatelessWidget with CardMixin {
   final TaskModel task;
   final BoxModel box;
   final ListTypeEnum listType;

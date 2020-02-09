@@ -17,21 +17,26 @@ class RoutineUtils {
       if (routine.isActive) {
         if (routine.routineOften == RoutineOftenEnum.DAY) {
           if (routine.lastAdded == null) {
-            if (routine.begin.difference(DateTime.now()).inDays <= 0) {
+            int difference = routine.begin
+                .difference(DateTime.now().add(Duration(hours: 1)))
+                .inDays;
+            if (difference < 0 ||
+                (difference == 0 && routine.begin.day == DateTime.now().day)) {
               final task = TaskModel()
                 ..title = routine.title
                 ..details = routine.details
                 ..deadline = DateTime.now()
                 ..when = DateTime.now();
+
               _taskRepository.save(
                   task, BoxModel.fromEnum(InitialBoxesEnum.SCHEDULED));
               routine.lastAdded = DateTime.now();
               routine.save();
             }
           } else {
-            int i = routine.lastAdded.difference(DateTime.now()).inDays; 
+            int i = routine.lastAdded.difference(DateTime.now()).inDays;
             if (routine.lastAdded.difference(DateTime.now()).inDays <=
-                routine.often) {
+                (routine.often * -1)) {
               final task = TaskModel()
                 ..title = routine.title
                 ..details = routine.details
@@ -45,7 +50,11 @@ class RoutineUtils {
           }
         } else if (routine.routineOften == RoutineOftenEnum.WEEK) {
           if (routine.lastAdded == null) {
-            if (routine.begin.difference(DateTime.now()).inDays <= 0) {
+            int difference = routine.begin
+                .difference(DateTime.now().add(Duration(hours: 1)))
+                .inDays;
+            if (difference < 0 ||
+                (difference == 0 && routine.begin.day == DateTime.now().day)) {
               final task = TaskModel()
                 ..title = routine.title
                 ..details = routine.details
@@ -57,8 +66,18 @@ class RoutineUtils {
               routine.save();
             }
           } else {
+            int difference = routine.lastAdded
+                .difference(DateTime.now().add(Duration(hours: 1)))
+                .inDays;
             if (routine.daysOfWeek.contains(DateTime.now().weekday) &&
-                routine.lastAdded.difference(DateTime.now()).inDays != 0) {
+                (difference < 0 ||
+                    (difference == 0 &&
+                        routine.lastAdded.day != DateTime.now().day)) &&
+                difference >=
+                    (((routine.often * 7) +
+                            routine.daysOfWeek
+                                .reduce((v1, v2) => v1 >= v2 ? v1 : v2)) *
+                        -1)) {
               final task = TaskModel()
                 ..title = routine.title
                 ..details = routine.details

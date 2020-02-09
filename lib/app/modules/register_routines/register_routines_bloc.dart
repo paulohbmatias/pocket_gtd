@@ -38,8 +38,12 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
       changeTitle(routine.title);
       changeDetails(routine.details);
       changeNotification(routine.notification);
-      detailsController.text = routine.details;
-      titleController.text = routine.title;
+      changeOften(routine.often);
+      changeRoutineOften(routine.routineOften);
+      changeStartAt(routine.begin);
+      listDaysOfWeek = routine.daysOfWeek;
+      _listDaysOfWeek.sink.add(listDaysOfWeek);
+      
     }
   }
   final _selectedDay = BehaviorSubject.seeded(1);
@@ -138,13 +142,13 @@ class RegisterRoutinesBloc extends BlocBase with RegisterValidators {
       };
 
   Map<String, int> getRoutineDays(BuildContext context) => {
-        I18n.of(context).sunday: 1,
-        I18n.of(context).monday: 2,
-        I18n.of(context).tuesday: 3,
-        I18n.of(context).wednesday: 4,
-        I18n.of(context).thursday: 5,
-        I18n.of(context).friday: 6,
-        I18n.of(context).saturday: 7,
+        I18n.of(context).monday: 1,
+        I18n.of(context).tuesday: 2,
+        I18n.of(context).wednesday: 3,
+        I18n.of(context).thursday: 4,
+        I18n.of(context).friday: 5,
+        I18n.of(context).saturday: 6,
+        I18n.of(context).sunday: 7,
       };
 
   Map<String, InitialDayOfMonthEnum> getInitialDayOfMonth(

@@ -40,6 +40,30 @@ class RoutinesBloc extends BlocBase {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)));
   }
 
+  void edit(BuildContext context, RoutineModel routine){
+    showModalBottomSheet(
+          context: context,
+          elevation: 20,
+          isScrollControlled: true,
+          useRootNavigator: true,
+          builder: (context) {
+            return AnimatedPadding(
+                padding: MediaQuery.of(context).viewInsets,
+                duration: const Duration(milliseconds: 100),
+                curve: Curves.decelerate,
+                child: RegisterRoutinesModule(
+                  isUpdate: true,
+                  routine: routine,
+                ));
+          },
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)));
+  }
+
+  void remove(RoutineModel routine){
+    _routineRepository.delete(routine);
+  }
+
   void activeRoutine(RoutineModel routine, bool isActive){
     routine.isActive = isActive;
     routine.save();
